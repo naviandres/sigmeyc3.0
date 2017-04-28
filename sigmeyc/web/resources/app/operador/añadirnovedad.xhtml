@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+
+    <ui:composition template="/WEB-INF/templateAd/templateoperador.xhtml">
+        <ui:define name="title">Añadir Novedad</ui:define>
+        <ui:define name="contenido">
+            <!-- MigasDePan -->
+            <div class=" margin-top1">
+                <ol class="breadcrumb li">
+                    <li><a href="#{request.contextPath}/app/indexoperador.xhtml">Inicio</a></li>
+                    <li><strong>Añadir novedad</strong></li>
+                </ol>
+            </div>
+            <main>
+                <h1 class="novedad">NOVEDAD</h1>
+                <h:form id="enableForm" class="form-horizontal" prependId="false">
+                    <div class="form-group">
+                        <h:outputLabel id="lblCodigo" for="lblCodigo" value="Codigo:" class="col-xs-3 control-label" />
+                        <div class="col-xs-7">
+                            <!--<input type="text" class="form-control" name="codigo" maxlength="20" onkeypress="return valida(event)"  />-->
+                            <h:inputText id="txtCodigo" class="form-control" maxlength="20" p:placeholder="Codigo:"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel id="lblUnidades" for="lblUnidades" value="Unidades:" class="col-xs-3 control-label" />
+                        <div class="col-xs-7">
+                            <h:inputText id="txtUnidades" class="form-control" maxlength="20" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel id="lblDescripcion" for="lblDescripcion" value="Descripción:" class="col-xs-3 control-label" />
+                        <div class="col-xs-7">
+                            <h:inputTextarea id="txtDescripcion" class="form-control"/>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <h:outputLabel id="lblTipoNove" for="lblTipoNove" value="Tipo de Novedad:" class="col-xs-3 control-label"/>
+                        <h:selectOneMenu  id="selTNove" class="col-xs-7">
+                            <f:selectItem id="selecTN" itemLabel="Selecciones Tipo de Novedad" itemDisabled="disabled"/>
+                            <f:selectItem id="ClieteNoEsta" itemLabel="El cliente no se encuentra" itemValue="1"/>
+                            <f:selectItem id="CambioDireccion" itemLabel="Cambio de Dirección" itemValue="2"/>
+                            <f:selectItem id="ActualizarDatos" itemLabel="Rediligenciar Datos" itemValue="3"/>
+                        </h:selectOneMenu>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">                   
+                            <h:commandButton id="btnCancelar" value="Cancelar" class="btn btn-danger"/>
+                            <a>
+                                <h:commandButton type="submit" id="btnAñadir" value="Añadir" class="btn btn-success"/>
+                            </a>
+                        </div>	
+                    </div>
+                </h:form>
+            </main>
+        </ui:define>
+    </ui:composition>
+</html>
+

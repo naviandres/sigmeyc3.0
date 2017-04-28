@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">Registrar Mercancía</ui:define>
+        <ui:define name="contenido">
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image">
+
+                            <h:graphicImage library="img" name="usuario1.jpg" class="img-circle" alt="User Image"/>
+                        </div>
+                        <div class="pull-left info">
+                            <p>Facundo Ganbande</p>
+                        </div>
+                    </div>
+                    <!-- search form -->
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Buscar..."/>
+                            <span class="input-group-btn">
+                                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                    <!-- /.search form -->
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu">
+                        <li class="header">MENU DE NAVEGACION</li>
+                        <li class="active treeview">
+                            <a href="#">
+                                <i class="fa fa-dashboard"></i> <span>Inicio</span> <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+
+
+                        <li class="treeview">
+                            <a href="#{request.contextPath}/app/recepcion/registrarmercancia.xhtml">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Registrar Mercancía</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+                        <li class="treeview">
+                            <a href="#{request.contextPath}/app/recepcion/consultmercancia.xhtml">
+                                <i class="fa fa-laptop"></i>
+                                <span>Consultar Mercancía</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+                        <li class="treeview">
+                            <a href="#{request.contextPath}/app/recepcion/cotizarmercancia.xhtml">
+                                <i class="fa fa-table"></i> <span>Cotizar Mercancía</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+                        <li><a href="documentation/index.html"><i class="fa fa-book"></i> Documentación</a></li>
+
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+            <div class="container">
+
+                <h:form  id="formSol" enctype="multipart/form-data" prependId="false">
+                    <h1 id="h1EnvioP" class="text-center page-header">Envío como Persona</h1>
+                    <h1 id="h1EnvioE" class="text-center page-header" style="display: none">Envío como Empresa</h1>
+                    <h2 class="text-center page-header">Datos Personales</h2>
+                    <div align="center">
+                        <h:outputLabel id="lblChEmpr" for="lblChEmpr" value="Es empresa?"/><br/>
+                        <h:selectBooleanCheckbox class="page-header" id="seleEmpr" label="Es empresa?" onclick="mostrarDatosEmpr()"/>                   
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-lg-6">
+                            <h:outputLabel id="lblNo" for="lblNo" value="Nombres" class="sr-only"/>
+                            <h:inputText id="txtNom" class="form-control" autocomplete="on" p:placeholder="Nombres:"/>
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <h:outputLabel id="lblAp" for="lblAp" value="Apellidos" class="sr-only"/>
+                            <h:inputText id="txtApe" class="form-control" autocomplete="on" p:placeholder="Apellidos:"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel id="lblTipo" for="lblTipo" value="Tipo documento" class="sr-only"/>
+                        <h:selectOneMenu id="selTDoc" class="form-control">
+                            <f:selectItem id="opc00000" itemLabel="Selecciones Tipo de Documento" itemDisabled="disabled"/>
+                            <f:selectItem id="opc11111" itemLabel="ti" itemValue="1"/>
+                            <f:selectItem id="opc22222" itemLabel="cc" itemValue="2"/>
+                            <f:selectItem id="opc33333" itemLabel="ce" itemValue="3"/>
+                            <f:selectItem id="opc44444" itemLabel="pas" itemValue="4"/>
+                        </h:selectOneMenu>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel id="lblRazon" for="lblRazon" value="Razón Social: " class="sr-only"/>
+                        <h:inputText id="txtRazon" class="form-control" autocomplete="on" p:placeholder="Razón Social:" style="display: none"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel id="lblDocI" for="lblDocI" value="Documento de Identidad: " class="sr-only"/>
+                        <h:inputText id="txtDocI" class="form-control" autocomplete="on" p:placeholder="Documento de Identidad o NIT:"/>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <h:outputLabel id="lblTel" for="lblTel" value="Teléfono:" class="sr-only"/>
+                            <h:inputText id="txtTel" class="form-control" autocomplete="on" p:placeholder="Teléfono:"/>
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <h:outputLabel id="lblCel" for="lblCel" value="Celular:" class="sr-only"/>
+                            <h:inputText id="txtCel" class="form-control" autocomplete="on" p:placeholder="Celular:"/>
+                        </div>
+                    </div>
+
+                    <h2 class="page-header text-center">Mercancía</h2>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <h:selectOneMenu id="selTiS" class="form-control">
+                                <f:selectItem id="selectedS" itemLabel="Tipo de servicio" itemDisabled="disabled"/>
+                                <f:selectItem id="merAerS" itemLabel="Mercancia via aerea" itemValue="1"/>
+                                <f:selectItem id="merTerS" itemLabel="Mercancia via terrestre" itemValue="2"/>
+                                <f:selectItem id="menExprS" itemLabel="Mensajeria expresa" itemValue="3"/>
+                                <f:selectItem id="menMasS" itemLabel="Mensajeria masiva" itemValue="4"/>
+                            </h:selectOneMenu>  
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <h:selectOneMenu id="selTipoMerc" class="form-control">
+                                <f:selectItem id="tipoMer" itemLabel="Seleccione Tipo de Mercancía" itemDisabled="disabled"/>
+                                <f:selectItem id="conEm" itemLabel="Carga Con Embalaje" itemValue="1"/>
+                                <f:selectItem id="sinEm" itemLabel="Carga Sin Embalaje" itemValue="2"/>
+                                <f:selectItem id="Unitarizada" itemLabel="Carga Unitarizada" itemValue="3"/>
+                                <f:selectItem id="Paletizada" itemLabel="Carga Paletizada" itemValue="4"/>
+                                <f:selectItem id="Masiva" itemLabel="Carga Masiva" itemValue="5"/>
+                                <f:selectItem id="Solida" itemLabel="Carga Solida" itemValue="6"/>
+                                <f:selectItem id="Liquida" itemLabel="Carga Liquida" itemValue="7"/>
+                                <f:selectItem id="Gaseosa" itemLabel="Carga Gaseosa" itemValue="8"/>
+                                <f:selectItem id="Extradimensionada" itemLabel="Carga Extradimensionada" itemValue="10"/>
+                                <f:selectItem id="Refrigerada" itemLabel="Carga Refrigerada" itemValue="11"/>
+                                <f:selectItem id="Peligrosa" itemLabel="Carga Peligrosa" itemValue="12"/>
+                                <f:selectItem id="Delicada" itemLabel="Carga Delicada" itemValue="13"/>
+                                <f:selectItem id="Correo" itemLabel="Correo" itemValue="14"/>
+                            </h:selectOneMenu>    
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel id="lblpesoMer" for="lblpesoMer" value="Dirección de recolección: " class="sr-only"/>
+                        <h:inputText id="txtpesoMer" class="form-control" autocomplete="on" p:placeholder="Peso mercancía:(los Kg se calculan automaticamente)" maxlength="6"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel id="lblValor" for="lblValor" value="Valor declarado: " class="sr-only"/>
+                        <h:inputText id="txtValor" class="form-control" autocomplete="on" p:placeholder="Valor declarado: Sólo coloque numeros enteros, la moneda (Peso Colombiano) es calculado automaticamente" maxlength="10"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:selectOneMenu id="selPrioridad" class="form-control">
+                            <f:selectItem id="pri" itemLabel="Seleccione la Prioridad" itemDisabled="disabled"/>
+                            <f:selectItem id="Normal" itemLabel="Normal" itemValue="1"/>
+                            <f:selectItem id="Baja" itemLabel="Baja" itemValue="2"/>
+                            <f:selectItem id="Alta" itemLabel="Alta" itemValue="3"/>
+                        </h:selectOneMenu>  
+                    </div>
+
+                    <div class="form-group">
+                        <h:selectOneMenu id="selCiud" class="form-control">
+                            <f:selectItem id="ciuda" itemLabel="Seleccione Ciudad de Origen" itemDisabled="disabled"/>
+                            <f:selectItem id="Amazona" itemLabel="Amazonas" itemValue="1"/>
+                            <f:selectItem id="Antioqui" itemLabel="Antioquia" itemValue="2"/>
+                            <f:selectItem id="Arauc" itemLabel="Arauca" itemValue="3"/>
+                            <f:selectItem id="Atlantic" itemLabel="Atlantico" itemValue="4"/>
+                            <f:selectItem id="Boliva" itemLabel="Bolivar" itemValue="5"/>
+                            <f:selectItem id="Boyac" itemLabel="Boyaca" itemValue="6"/>
+                            <f:selectItem id="Calda" itemLabel="Caldas" itemValue="7"/>
+                            <f:selectItem id="Caquet" itemLabel="Caqueta" itemValue="8"/>
+                            <f:selectItem id="Casanar" itemLabel="Casanare" itemValue="9"/>
+                        </h:selectOneMenu>    
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel id="lbldirDeRecoleccion" for="lbldirDeRecoleccion" value="Dirección de recolección: " class="sr-only"/>
+                        <h:inputText id="txtdirDeRecoleccion" class="form-control" autocomplete="on" p:placeholder="Dirección de recolección:"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:selectOneMenu id="selCiudDes" class="form-control">
+                            <f:selectItem id="ciud" itemLabel="Seleccione Ciudad de Destino" itemDisabled="disabled"/>
+                            <f:selectItem id="Amazonas" itemLabel="Amazonas" itemValue="1"/>
+                            <f:selectItem id="Antioquia" itemLabel="Antioquia" itemValue="2"/>
+                            <f:selectItem id="Arauca" itemLabel="Arauca" itemValue="3"/>
+                            <f:selectItem id="Atlantico" itemLabel="Atlantico" itemValue="4"/>
+                            <f:selectItem id="Bolivar" itemLabel="Bolivar" itemValue="5"/>
+                            <f:selectItem id="Boyaca" itemLabel="Boyaca" itemValue="6"/>
+                            <f:selectItem id="Caldas" itemLabel="Caldas" itemValue="7"/>
+                            <f:selectItem id="Caqueta" itemLabel="Caqueta" itemValue="8"/>
+                            <f:selectItem id="Casanare" itemLabel="Casanare" itemValue="9"/>
+                        </h:selectOneMenu> 
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel id="lblDirEntre" for="lblDirEntre" value="Dirección de Entrega:" class="sr-only"/>
+                        <h:inputText id="txtDirEntre" class="form-control" autocomplete="on" p:placeholder="Dirección de Entrega:"/>
+                    </div>    
+
+                    <h2 class="text-center page-header">Dimensiones</h2>
+                    <div class="form-group">
+                        <h:outputLabel id="lblLargo" for="lblLargo" value="Longitud: " class="sr-only"/>
+                        <h:inputText id="txtLargo" class="form-control" autocomplete="on" p:placeholder="Logitud Max. 1875cm Sólo coloque números enteros, los cm se calculan automaticamente" maxlength="4"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel id="lblAncho" for="lblAncho" value="Ancho: " class="sr-only"/>
+                        <h:inputText id="txtAncho" class="form-control" autocomplete="on" p:placeholder="Ancho Max. 244cm Sólo coloque números enteros, los cm se calculan automaticamente" maxlength="3"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel id="lblAltura" for="lblAltura" value="Altura: " class="sr-only"/>
+                        <h:inputText id="txtAltura" class="form-control" autocomplete="on" p:placeholder="Altura Max. 270cm Sólo coloque números enteros, los cm se calculan automaticamente" maxlength="3"/>
+                    </div>
+
+                    <h2 class="text-center page-header">Datos Destinatario</h2>
+
+                    <div class="form-group">
+                        <h:outputLabel id="lblNombrers" for="lblNombrers" value="Nombre o Razón Social:" class="sr-only"/>
+                        <h:inputText id="txtNombrers" class="form-control" autocomplete="on" p:placeholder="Nombre o Razón Social:"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel id="lblTelD" for="lblTelD" value="Teléfono:" class="sr-only"/>
+                        <h:inputText id="txtTelD" class="form-control" autocomplete="on" p:placeholder="Teléfono:"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel id="lblDIN" for="lblDIN" value="Documento de Identidad o NIT:" class="sr-only"/>
+                        <h:inputText id="txtDIN" class="form-control" autocomplete="on" p:placeholder="Documento de Identidad o NIT:" maxlength="18"/>
+                    </div>   
+
+                    <h2 class="text-center page-header">Comentarios / Tratamiento Especial</h2>
+                    <div class="form-group">
+                        <h:inputTextarea id="txtMen" p:placeholder="Aqui puede especificar el nombre por quien se debe preguntar en caso de ser una Empresa."/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel id="lblArch" for="lblArch" value="Archivo"/>
+                        <h:inputFile id="filArch"/>
+                        <p class="">Máximo 50 MB</p>
+                    </div>                  
+                    <button type="button" class="btn btn-succes" id="btnSolicitarr" onclick="ocultar()">Solicitar</button>
+                    <button type="button" class="btn btn-danger" id="btnCerrarSolicitd" onclick="ocultar()">Cancelar</button>
+                </h:form>
+            </div>
+            <h:outputScript library="js" name="validar-operario.js"/>
+        </ui:define>
+    </ui:composition>
+</html>
+
+
+

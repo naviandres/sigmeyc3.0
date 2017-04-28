@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/WEB-INF/templateAd/templateoperador.xhtml">
+        <ui:define name="title">Generar guía</ui:define>
+        <ui:define name="contenido">
+            <!-- Migas de pan -->
+            <div>
+                <ol class="breadcrumb">
+                    <li><a href="#{request.contextPath}/app/indexoperador.xhtml">Inicio</a></li>
+                    <li><strong>Guías</strong></li>
+                </ol>
+            </div>
+            <!-- ++ -->
+            <main class="container">	
+                <h2 class="text-center page-header">Guías</h2>
+                <div class="box-body">
+                    <table id="tablaGuia" class="stripe" width="100%" cellspacing="0">
+                        <!--                <table data-toggle="table"
+                                               data-search="true"
+                                               data-show-refresh="true"
+                                               data-show-toggle="true"
+                                               data-show-columns="true"
+                                               data-query-params="queryParams"
+                                               data-pagination="true"
+                                               data-show-export="true">-->
+                        <thead>
+                            <tr>
+                                <th>Numero de Guía</th>
+                                <th>Dirección de envío</th>
+                                <th>Identificación conductor asignado</th>
+                                <th>Tipo de transporte</th>
+                                <th>Vehículo designado</th>
+                                <th class="text-center">Detalle</th>
+                                <th class="text-center">Estado de mercancía</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>12145</td>
+                                <td>Carr 11 15-78</td>
+                                <td>171071132</td>
+                                <td>Camion dos ejes</td>
+                                <td>asd123</td>
+                                <td class="text-center"><a href="#{request.contextPath}/app/operador/detalledeguia.xhtml"><button type="button" class="btn btn-default btn-lg">
+                                            <span class="glyphicon glyphicon-eye-open " aria-hidden="true"></span>
+                                        </button></a></td>
+                                <td class="text-center"><button type="button" class="btn btn-md btn1" data-toggle="modal" data-target="#myModal">
+                                        En vía
+                                    </button></td>
+                            </tr>
+                            <tr>
+                                <td>22894</td>
+                                <td>Calle 57 No. 8-69</td>
+                                <td>123426753</td>
+                                <td>Camion cuatro ejes</td>
+                                <td>iuu122</td>
+                                <td class="text-center"><a href="#{request.contextPath}/app/operador/detalledeguia.xhtml"><button type="button" class="btn btn-default btn-lg">
+                                            <span class="glyphicon glyphicon-eye-open " aria-hidden="true"></span>
+                                        </button></a></td>
+                                <td class="text-center"><button type="button" class="btn btn-md btn1" data-toggle="modal" data-target="#myModal">
+                                        En recepción
+                                    </button></td>
+                            </tr>
+                            <tr>
+                                <td>42394</td>
+                                <td>Calle 123 No. 8-69</td>
+                                <td>123426753</td>
+                                <td>Camion dos ejes</td>
+                                <td>asd123</td>
+                                <td class="text-center"><a href="#{request.contextPath}/app/operador/detalledeguia.xhtml"><button type="button" class="btn btn-default btn-lg">
+                                            <span class="glyphicon glyphicon-eye-open " aria-hidden="true"></span>
+                                        </button></a></td>
+                                <td class="text-center"><button type="button" class="btn btn-md btn1" data-toggle="modal" data-target="#myModal">
+                                        Planillada
+                                    </button></td>
+                            </tr>
+                            <tr>
+                                <td>21194</td>
+                                <td>Calle 47 No. 8-69</td>
+                                <td>122226752</td>
+                                <td>Moto</td>
+                                <td>asd123</td>
+                                <td class="text-center"><a href="#{request.contextPath}/app/operador/detalledeguia.xhtml"><button type="button" class="btn btn-default btn-lg">
+                                            <span class="glyphicon glyphicon-eye-open " aria-hidden="true"></span>
+                                        </button></a></td>
+                                <td class="text-center"><button type="button" class="btn btn-md btn1" data-toggle="modal" data-target="#myModal">
+                                        Planillada
+                                    </button></td>
+                            </tr>
+                            <tr>
+                                <td>27894</td>
+                                <td>Calle 57 No. 8-69</td>
+                                <td>129996753</td>
+                                <td>Camion cuatro ejes</td>
+                                <td>asd123</td>
+                                <td class="text-center"><a href="#{request.contextPath}/app/operador/detalledeguia.xhtml"><button type="button" class="btn btn-default btn-lg">
+                                            <span class="glyphicon glyphicon-eye-open " aria-hidden="true"></span>
+                                        </button></a></td>
+                                <td class="text-center"><button type="button" class="btn btn-md btn1" data-toggle="modal" data-target="#myModal">
+                                        En recepción
+                                    </button></td>
+                            </tr>
+                            <tr>
+                                <td>18945</td>
+                                <td>Carr 11 15-91</td>
+                                <td>922257654</td>
+                                <td>Vehículo turbo</td>
+                                <td>adx133</td>
+                                <td class="text-center"><a href="#{request.contextPath}/app/operador/detalledeguia.xhtml"><button type="button" class="btn btn-default btn-lg">
+                                            <span class="glyphicon glyphicon-eye-open " aria-hidden="true"></span>
+                                        </button></a></td>
+                                <td class="text-center"><button type="button" class="btn btn-md btn1" data-toggle="modal" data-target="#myModal">
+                                        Almacenada
+                                    </button></td>
+                            </tr>
+                            <tr>
+                                <td>19545</td>
+                                <td>Carr 119 15-78</td>
+                                <td>988886524</td>
+                                <td>Camion dos ejes</td>
+                                <td>akd987</td>
+                                <td class="text-center"><a href="#{request.contextPath}/app/operador/detalledeguia.xhtml"><button type="button" class="btn btn-default btn-lg">
+                                            <span class="glyphicon glyphicon-eye-open " aria-hidden="true"></span>
+                                        </button></a></td>
+                                <td class="text-center"><button type="button" class="btn btn-md btn1" data-toggle="modal" data-target="#myModal">
+                                        Planillada
+                                    </button></td>
+                            </tr>
+                            <tr>
+                                <td>12908</td>
+                                <td>Carr 9 15-78</td>
+                                <td>987609854</td>
+                                <td>Moto</td>
+                                <td>asd123</td>
+                                <td class="text-center"><a href="#{request.contextPath}/app/operador/detalledeguia.xhtml"><button type="button" class="btn btn-default btn-lg">
+                                            <span class="glyphicon glyphicon-eye-open " aria-hidden="true"></span>
+                                        </button></a></td>
+                                <td class="text-center"><button type="button" class="btn btn-md btn1" data-toggle="modal" data-target="#myModal">
+                                        En vía
+                                    </button></td>
+                            </tr>
+                            <tr>
+                                <td>11235</td>
+                                <td>Carr 123 15-78</td>
+                                <td>982227654</td>
+                                <td>Camion cuatro ejes</td>
+                                <td>asd100</td>
+                                <td class="text-center"><a href="#{request.contextPath}/app/operador/detalledeguia.xhtml"><button type="button" class="btn btn-default btn-lg">
+                                            <span class="glyphicon glyphicon-eye-open " aria-hidden="true"></span>
+                                        </button></a></td>
+                                <td class="text-center"><button type="button" class="btn btn-md btn1" data-toggle="modal" data-target="#myModal">
+                                        Entregada
+                                    </button></td>
+                            </tr>
+                            <tr>
+                                <td>12345</td>
+                                <td>Carr 11 112-78</td>
+                                <td>983333514</td>
+                                <td>Vehículo turbo</td>
+                                <td>asd123</td>
+                                <td class="text-center"><a href="#{request.contextPath}/app/operador/detalledeguia.xhtml"><button type="button" class="btn btn-default btn-lg">
+                                            <span class="glyphicon glyphicon-eye-open " aria-hidden="true"></span>
+                                        </button></a></td>
+                                <td class="text-center"><button type="button" class="btn btn-md btn1" data-toggle="modal" data-target="#myModal">
+                                        En vía
+                                    </button></td>
+                            </tr>
+                            <tr>
+                                <td>12245</td>
+                                <td>Carr 21 15-78</td>
+                                <td>127657654</td>
+                                <td>Camion dos ejes</td>
+                                <td>ñlm123</td>
+                                <td class="text-center"><a href="#{request.contextPath}/app/operador/detalledeguia.xhtml"><button type="button" class="btn btn-default btn-lg">
+                                            <span class="glyphicon glyphicon-eye-open " aria-hidden="true"></span>
+                                        </button></a></td>
+                                <td class="text-center"><button type="button" class="btn btn-md btn1" data-toggle="modal" data-target="#myModal">
+                                        Entregada
+                                    </button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-1">
+                    <a href="#{request.contextPath}/app/indexoperador.xhtml" class="btn btn-danger" role="button">Cancelar</a>
+                </div>                
+            </main>
+
+            <!-- MODAL ESTADO -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title text-center" id="myModalLabel">Acualizar estado de mercancía</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive ">
+                                <table class="table table-hover" >
+                                    <tbody>
+                                        <tr >
+                                            <th valign="bottom">Producto</th>
+                                            <td valign="bottom">Televisor</td>									
+                                        </tr>
+
+                                        <tr >
+                                            <th valign="bottom">Origen</th>
+                                            <td valign="bottom">Call 123 89-32</td>										
+                                        </tr>
+                                        <tr >
+                                            <th valign="bottom">Destino</th>
+                                            <td valign="bottom">Car 32 22-32</td>										
+                                        </tr>
+                                        <tr >
+                                            <th valign="bottom">Volumen</th>
+                                            <td valign="bottom">12mt²</td>										
+                                        </tr>
+                                        <tr >
+                                            <th valign="bottom">Peso</th>
+                                            <td valign="bottom">15Kg</td>										
+                                        </tr>
+                                        <tr>
+                                            <th>Estado</th>
+                                            <td>
+                                                <div class="col-xs-8 col-sm-9 col-md-6 col-lg-6" >
+                                                    <select class="form-control">
+                                                        <option>En recepción</option>
+                                                        <option>Registrada</option>
+                                                        <option>Almacenada</option>
+                                                        <option>Planillada</option>
+                                                        <option>Entregada</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-" data-dismiss="modal">Cancelar</button>
+                            <a href="#{request.contextPath}/app/operador/generarguia.xhtml" class="btn btn-primary" role="button">Guardar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
+

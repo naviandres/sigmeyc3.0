@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2>Nos gustaría recibir un mensaje..</h2>
+                    <br/>
+                    <h:form id="contactenos" prependId="false">
+                        <div class="form-group row">
+                            <div class="md-form col-lg-6">
+                                <i class="fa fa-user prefix"></i>
+                                <h:outputLabel id="lblNombC" for="lblNombC" value="Nombre"/>
+                                <h:inputText id="txtNombC" class="form-control" required="true" p:placeholder="Juan"/>
+
+                            </div>
+                            <div class="md-form col-lg-6">
+                                <i class="fa fa-user prefix"></i>
+                                <h:outputLabel id="lblApeeC" for="lblApeeC" value="Apellido"/>
+                                <h:inputText id="txtApeeC" class="form-control" required="true" p:placeholder="Torres"/>
+
+                            </div>
+                        </div>
+                        <div class="md-form form-group">
+                            <i class="fa fa-user prefix"></i>
+                            <h:outputLabel id="lblCorreo" for="lblCorreo" value="Correo Electronico"/>
+                            <h:inputText id="correoE" class="form-control" required="true" p:placeholder="carlos@gmail.com:"/>
+
+                        </div>
+                        <div class="md-form form-group">
+                            <i class="fa fa-pencil prefix"></i>
+                            <h:outputLabel id="lblMens" for="lblMens" value="Mensaje"/>
+                            <h:inputTextarea id="mensaje" class="form-control" required="true" p:placeholder="Mensaje:"/>
+                        </div>
+
+                        <div class="text-xs-center">
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </h:form>
+                </div>
+                <div class="col-lg-4 col-lg-offset-2 text-center">
+                    <i class="fa fa-phone fa-3x sr-contact"></i>
+                    <p>+57(1) 42 396 66</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                    <p><a href="#">envia.gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</html>
+

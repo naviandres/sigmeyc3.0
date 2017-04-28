@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateEmpresaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateEmpresaLabel_codigoEmpresa}" for="codigoEmpresa" />
+                    <h:inputText id="codigoEmpresa" value="#{empresaController.selected.codigoEmpresa}" title="#{bundle.CreateEmpresaTitle_codigoEmpresa}" required="true" requiredMessage="#{bundle.CreateEmpresaRequiredMessage_codigoEmpresa}"/>
+                    <h:outputLabel value="#{bundle.CreateEmpresaLabel_nit}" for="nit" />
+                    <h:inputText id="nit" value="#{empresaController.selected.nit}" title="#{bundle.CreateEmpresaTitle_nit}" required="true" requiredMessage="#{bundle.CreateEmpresaRequiredMessage_nit}"/>
+                    <h:outputLabel value="#{bundle.CreateEmpresaLabel_razonSocial}" for="razonSocial" />
+                    <h:inputText id="razonSocial" value="#{empresaController.selected.razonSocial}" title="#{bundle.CreateEmpresaTitle_razonSocial}" required="true" requiredMessage="#{bundle.CreateEmpresaRequiredMessage_razonSocial}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{empresaController.create}" value="#{bundle.CreateEmpresaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{empresaController.prepareList}" value="#{bundle.CreateEmpresaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateEmpresaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

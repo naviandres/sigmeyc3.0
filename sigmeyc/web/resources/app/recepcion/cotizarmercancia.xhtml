@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        
+            
+        <ui:define name="title">Cotizar Mercancía</ui:define>
+        
+        <ui:define name="contenido">
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image">
+
+                            <h:graphicImage library="img" name="usuario1.jpg" class="img-circle" alt="User Image"/>
+                        </div>
+                        <div class="pull-left info">
+                            <p>Facundo Ganbande</p>
+                        </div>
+                    </div>
+                    <!-- search form -->
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Buscar..."/>
+                            <span class="input-group-btn">
+                                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                    <!-- /.search form -->
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu">
+                        <li class="header">MENU DE NAVEGACION</li>
+                        <li class="active treeview">
+                            <a href="#">
+                                <i class="fa fa-dashboard"></i> <span>Inicio</span> <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+
+
+                        <li class="treeview">
+                            <a href="#{request.contextPath}/app/recepcion/registrarmercancia.xhtml">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Registrar Mercancía</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+                        <li class="treeview">
+                            <a href="#{request.contextPath}/app/recepcion/consultmercancia.xhtml">
+                                <i class="fa fa-laptop"></i>
+                                <span>Consultar Mercancía</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+                        <li class="treeview">
+                            <a href="#{request.contextPath}/app/recepcion/cotizarmercancia.xhtml">
+                                <i class="fa fa-table"></i> <span>Cotizar Mercancía</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+                        <li><a href="documentation/index.html"><i class="fa fa-book"></i> Documentación</a></li>
+
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+            <div class="container-fluid" >
+                    <h:form class="form-group" id="formCot" prependId="false">
+                        <h1 class="text-center page-header">Mercancía</h1>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblCantid" for="lblCantid" value="Cantidad" class="sr-only"/>
+                            <h:inputText id="txtCantid"  class="form-control" autocomplete="on" p:placeholder="Ingrese la cantidad de paquetes que desea enviar." maxlength="4" rendered="true"/>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <h:selectOneMenu id="selTipSC" class="form-control">
+                                    <f:selectItem id="selectedC" itemLabel="Tipo de servicio" itemDisabled="disabled"/>
+                                    <f:selectItem id="merAerea" itemLabel="Mercancia via aerea" itemValue="1"/>
+                                    <f:selectItem id="merTerr" itemLabel="Mercancia via terrestre" itemValue="2"/>
+                                    <f:selectItem id="menExpre" itemLabel="Mensajeria expresa" itemValue="3"/>
+                                    <f:selectItem id="menMas" itemLabel="Mensajeria masiva" itemValue="4"/>
+                                </h:selectOneMenu>  
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <h:outputLabel id="lblTip" for="lblTip" value="Tipo de Mercancía:" class="sr-only"/>
+                                <h:selectOneMenu id="selTipoMercC" class="form-control">
+                                    <f:selectItem id="tipoMerC" itemLabel="Seleccione Tipo de Mercancía" itemDisabled="disabled"/>
+                                    <f:selectItem id="conEmC" itemLabel="Carga Con Embalaje" itemValue="1"/>
+                                    <f:selectItem id="sinEmC" itemLabel="Carga Sin Embalaje" itemValue="2"/>
+                                    <f:selectItem id="UnitarizadaC" itemLabel="Carga Unitarizada" itemValue="3"/>
+                                    <f:selectItem id="PaletizadaC" itemLabel="Carga Paletizada" itemValue="4"/>
+                                    <f:selectItem id="MasivaC" itemLabel="Carga Masiva" itemValue="5"/>
+                                    <f:selectItem id="SolidaC" itemLabel="Carga Solida" itemValue="6"/>
+                                    <f:selectItem id="LiquidaC" itemLabel="Carga Liquida" itemValue="7"/>
+                                    <f:selectItem id="GaseosaC" itemLabel="Carga Gaseosa" itemValue="8"/>
+                                    <f:selectItem id="ExtradimensionadaC" itemLabel="Carga Extradimensionada" itemValue="10"/>
+                                    <f:selectItem id="RefrigeradaC" itemLabel="Carga Refrigerada" itemValue="11"/>
+                                    <f:selectItem id="PeligrosaC" itemLabel="Carga Peligrosa" itemValue="12"/>
+                                    <f:selectItem id="DelicadaC" itemLabel="Carga Delicada" itemValue="13"/>
+                                    <f:selectItem id="CorreoC" itemLabel="Correo" itemValue="14"/>
+                                </h:selectOneMenu>  
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblPesoC" for="lblPesoC" value="Peso:" class="sr-only"/>
+                            <h:inputText id="txtPesoC" class="form-control" autocomplete="on" p:placeholder="Peso: Sólo coloque numeros enteros, el kilo es calculado automaticamente" tabindex="2" maxlength="6" rendered="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblValorC" for="lblPesoC" value="Valor Declarado:" class="sr-only"/>
+                            <h:inputText id="txtValorC" class="form-control" autocomplete="on" p:placeholder="Valor declarado: Sólo coloque numeros enteros, la moneda (Peso Colombiano) es calculado automaticamente" maxlength="10" rendered="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:selectOneMenu id="selPrioridadC" class="form-control">
+                                <f:selectItem id="priC" itemLabel="Seleccione la Prioridad" itemDisabled="disabled"/>
+                                <f:selectItem id="NormalC" itemLabel="Normal" itemValue="1"/>
+                                <f:selectItem id="BajaC" itemLabel="Baja" itemValue="2"/>
+                                <f:selectItem id="AltaC" itemLabel="Alta" itemValue="3"/>
+                            </h:selectOneMenu>  
+                        </div>
+
+                        <div class="form-group">
+                            <h:selectOneMenu id="selCiudC" class="form-control">
+                                <f:selectItem id="ciudaC" itemLabel="Seleccione Ciudad de Origen" itemDisabled="disabled"/>
+                                <f:selectItem id="AmazonaC" itemLabel="Amazonas" itemValue="1"/>
+                                <f:selectItem id="AntioquiC" itemLabel="Antioquia" itemValue="2"/>
+                                <f:selectItem id="AraucC" itemLabel="Arauca" itemValue="3"/>
+                                <f:selectItem id="AtlanticC" itemLabel="Atlantico" itemValue="4"/>
+                                <f:selectItem id="BolivaC" itemLabel="Bolivar" itemValue="5"/>
+                                <f:selectItem id="BoyacC" itemLabel="Boyaca" itemValue="6"/>
+                                <f:selectItem id="CaldaC" itemLabel="Caldas" itemValue="7"/>
+                                <f:selectItem id="CaquetC" itemLabel="Caqueta" itemValue="8"/>
+                                <f:selectItem id="CasanarC" itemLabel="Casanare" itemValue="9"/>
+                            </h:selectOneMenu> 
+                        </div>
+
+                        <div class="form-group">
+                            <h:selectOneMenu id="selCiudDesC" class="form-control">
+                                <f:selectItem id="ciudC" itemLabel="Seleccione Ciudad de Destino" itemDisabled="disabled"/>
+                                <f:selectItem id="AmazonasC" itemLabel="Amazonas" itemValue="1"/>
+                                <f:selectItem id="AntioquiaC" itemLabel="Antioquia" itemValue="2"/>
+                                <f:selectItem id="AraucaC" itemLabel="Arauca" itemValue="3"/>
+                                <f:selectItem id="AtlanticoC" itemLabel="Atlantico" itemValue="4"/>
+                                <f:selectItem id="BolivarC" itemLabel="Bolivar" itemValue="5"/>
+                                <f:selectItem id="BoyacaC" itemLabel="Boyaca" itemValue="6"/>
+                                <f:selectItem id="CaldasC" itemLabel="Caldas" itemValue="7"/>
+                                <f:selectItem id="CaquetaC" itemLabel="Caqueta" itemValue="8"/>
+                                <f:selectItem id="CasanareC" itemLabel="Casanare" itemValue="9"/>
+                            </h:selectOneMenu> 
+                        </div>
+
+                        <h2 class="text-center page-header">Dimensiones</h2>
+
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblAnchoC" for="lblAnchoC" value="Ancho:" class="sr-only"/>
+                            <h:inputText id="txtAnchoC"  class="form-control" autocomplete="on" p:placeholder="Ancho Max. 244cm Sólo coloque números enteros, los cm se calculan automaticamente" maxlength="10" rendered="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblAlturaC" for="lblAlturaC" value="Alto" class="sr-only"/>
+                            <h:inputText id="txtAlturaC"  class="form-control" autocomplete="on" p:placeholder="Altura Max. 270cm Sólo coloque números enteros, los cm se calculan automaticamente" maxlength="3" rendered="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblLargoC" for="lblLargoC" value="Largo" class="sr-only"/>
+                            <h:inputText id="txtLargoC"  class="form-control" autocomplete="on" p:placeholder="Altura Max. 270cm Sólo coloque números enteros, los cm se calculan automaticamente" maxlength="3" rendered="true"/>
+                        </div>
+
+                        <button type="button" class="btn btn-success" id="btnCotizar" onclick="ocultar()">Cotizar</button>
+                        <button type="reset" class="btn btn-info" id="btnNewIntento" >Nuevo intento</button>
+
+                    </h:form>                
+            </div>
+
+                
+            <h:outputScript library="js" name="validar-operario.js"/>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">Recepción</ui:define>
+        <ui:define name="contenido">
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image">
+
+                            <h:graphicImage library="img" name="usuario1.jpg" class="img-circle" alt="User Image"/>
+                        </div>
+                        <div class="pull-left info">
+                            <p>#{sessionController.usuarioSesion.primerNombre}#{sessionController.usuarioSesion.primerApellido}</p>
+                        </div>
+                    </div>
+                    <!-- search form -->
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Buscar..."/>
+                            <span class="input-group-btn">
+                                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                    <!-- /.search form -->
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu">
+                        <li class="header">MENU DE NAVEGACION</li>
+                        <li class="active treeview">
+                            <a href="#">
+                                <i class="fa fa-dashboard"></i> <span>Inicio</span> <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+
+
+                        <li class="treeview">
+                            <a href="#{request.contextPath}/app/recepcion/registrarmercancia.xhtml">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Registrar Mercancía</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+                        <li class="treeview">
+                            <a href="#{request.contextPath}/app/recepcion/consultmercancia.xhtml">
+                                <i class="fa fa-laptop"></i>
+                                <span>Consultar Mercancía</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+                        <li class="treeview">
+                            <a href="#{request.contextPath}/app/recepcion/cotizarmercancia.xhtml">
+                                <i class="fa fa-table"></i> <span>Cotizar Mercancía</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    Bienvenido
+                    <small>Panel de Control </small>
+                </h1>
+
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <!-- Small boxes (Stat box) -->
+                <div class="row">
+
+
+
+
+                </div><!-- /.row -->
+                <!-- Main row -->
+                <div class="row">
+                    <!-- Left col -->
+                    <section class="col-lg-7 connectedSortable">
+
+
+
+
+                    </section><!-- /.Left col -->
+                    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                    <section class="col-lg-5 connectedSortable">
+
+
+
+                    </section><!-- right col -->
+                </div><!-- /.row (main row) -->
+
+            </section><!-- /.content -->
+        </ui:define>
+    </ui:composition>
+</html> 

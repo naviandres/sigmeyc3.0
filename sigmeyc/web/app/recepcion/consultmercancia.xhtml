@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">Consultar Mercancía</ui:define>
+        <ui:define name="contenido">
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image">
+
+                            <h:graphicImage library="img" name="usuario1.jpg" class="img-circle" alt="User Image"/>
+                        </div>
+                        <div class="pull-left info">
+                            <p>Facundo Ganbande</p>
+                        </div>
+                    </div>
+                    <!-- search form -->
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Buscar..."/>
+                            <span class="input-group-btn">
+                                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                    <!-- /.search form -->
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu">
+                        <li class="header">MENU DE NAVEGACION</li>
+                        <li class="active treeview">
+                            <a href="#">
+                                <i class="fa fa-dashboard"></i> <span>Inicio</span> <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+
+
+                        <li class="treeview">
+                            <a href="#{request.contextPath}/app/recepcion/registrarmercancia.xhtml">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Registrar Mercancía</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+                        <li class="treeview">
+                            <a href="#{request.contextPath}/app/recepcion/consultmercancia.xhtml">
+                                <i class="fa fa-laptop"></i>
+                                <span>Consultar Mercancía</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+                        <li class="treeview">
+                            <a href="#{request.contextPath}/app/recepcion/cotizarmercancia.xhtml">
+                                <i class="fa fa-table"></i> <span>Cotizar Mercancía</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+                     
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+            <div class="container">
+
+                <h:form class="form-group" id="formConsul" prependId="false">
+                        <h1 class="text-center page-header">Consultar Envío</h1>
+                        <h4>Código de guía</h4>
+                        <div class="input-group">
+                            <h:outputLabel id="lblCod" for="lblCod" value="Código del paquete"/> 
+                            <h:inputText id="txtCod" rendered="true"/>
+                        </div>
+                        <br/>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#consultar">
+                            Consultar
+                        </button>
+                        <button id="btnCerrarConsulta" type="button" class="btn btn-danger" onclick="ocultar()">Cerrar</button>
+                    </h:form>
+
+                </div>
+            <!-- modal de confirmacion consulta-->
+            <div class="modal fade" id="consultar" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+                <div class="modal-dialog"> 
+                    <div class="modal-content"> 
+                        <div class="modal-header"> 
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+                            <h4 class="modal-title text-center">Mi Envio</h4> 
+                        </div> 
+
+                        <div class="modal-body"> 
+                            <h:form id="loginForm" class="form-horizontal" prependId="false"> 
+                                <div class="form-group"> 
+                                    <div class="col-md-12 col-lg-12 col-sm-12"> 
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Codigo</th>
+                                                        <td>798520</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Guía</th>
+                                                        <td>7000012589313</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Tipo de Mercancía</th>
+                                                        <td>Carga masiva</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Remitente</th>
+                                                        <td>Luis Alberto Conde</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Dirección de Origen</th>
+                                                        <td>Cl 19 # 70 - 20</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Destinatario</th>
+                                                        <td>Tokoto Anime</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Dirección Entrega</th>
+                                                        <td>Cl 100 # 14  - 35</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Estado</th>
+                                                        <td>Entregado</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Medio de Pago</th>
+                                                        <td>Efectivo</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" >Aceptar</button> 
+                                    </div> 
+                                </div> 
+                            </h:form> 
+                        </div> 
+                    </div> 
+                </div> 
+            </div>
+            <h:outputScript library="js" name="validar-operario.js"/>
+        </ui:define>
+    </ui:composition>
+</html>

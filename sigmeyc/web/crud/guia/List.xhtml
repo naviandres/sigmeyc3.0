@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListGuiaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="contenido">
+            <section class="content-header">
+                <h1>
+                    Datos de las guias
+
+                </h1>
+
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Guias</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+
+                                <h:form styleClass="jsfcrud_list_form">
+                                    <h:panelGroup id="messagePanel" layout="block">
+                                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                                    </h:panelGroup>
+                                    <h:outputText escape="false" value="#{bundle.ListGuiaEmpty}" rendered="#{guiaController.items.rowCount == 0}"/>
+                                    <h:panelGroup rendered="#{guiaController.items.rowCount > 0}">
+                                        <h:outputText value="#{guiaController.pagination.pageFirstItem + 1}..#{guiaController.pagination.pageLastItem + 1}/#{guiaController.pagination.itemsCount}"/>&nbsp;
+                                        <h:commandLink action="#{guiaController.previous}" value="#{bundle.Previous} #{guiaController.pagination.pageSize}" rendered="#{guiaController.pagination.hasPreviousPage}"/>&nbsp;
+                                        <h:commandLink action="#{guiaController.next}" value="#{bundle.Next} #{guiaController.pagination.pageSize}" rendered="#{guiaController.pagination.hasNextPage}"/>&nbsp;
+                                        <h:dataTable id="example2" class="table table-bordered table-hover" value="#{guiaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListGuiaTitle_codigoBarras}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.codigoBarras}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListGuiaTitle_serial}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.serial}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListGuiaTitle_detalleMercancia}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.detalleMercancia}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListGuiaTitle_direccionDeEnvio}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.direccionDeEnvio}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListGuiaTitle_conductorAsignado}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.conductorAsignado}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListGuiaTitle_vehiculoDesignado}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.vehiculoDesignado}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListGuiaTitle_planillascodigoPlanilla1}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.planillascodigoPlanilla1}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="&nbsp;"/>
+                                                </f:facet>
+                                                <h:commandLink action="#{guiaController.prepareView}" value="#{bundle.ListGuiaViewLink}"/>
+                                                <h:outputText value=" "/>
+                                                <h:commandLink action="#{guiaController.prepareEdit}" value="#{bundle.ListGuiaEditLink}"/>
+                                                <h:outputText value=" "/>
+                                                <h:commandLink action="#{guiaController.destroy}" value="#{bundle.ListGuiaDestroyLink}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:panelGroup>
+                                    <br />
+                                    <div class="col-lg-2">
+                                        <h:commandButton class="btn btn-success" action="#{guiaController.prepareCreate}" value="Crear"></h:commandButton>
+                                    </div>
+                                    <br />
+                                    <br />
+
+                                </h:form>
+
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </ui:define>
+    </ui:composition>
+
+</html>

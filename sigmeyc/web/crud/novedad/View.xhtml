@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewNovedadTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewNovedadLabel_codigoNovedad}"/>
+                    <h:outputText value="#{novedadController.selected.codigoNovedad}" title="#{bundle.ViewNovedadTitle_codigoNovedad}"/>
+                    <h:outputText value="#{bundle.ViewNovedadLabel_detalle}"/>
+                    <h:outputText value="#{novedadController.selected.detalle}" title="#{bundle.ViewNovedadTitle_detalle}"/>
+                    <h:outputText value="#{bundle.ViewNovedadLabel_tipoNovedad}"/>
+                    <h:outputText value="#{novedadController.selected.tipoNovedad}" title="#{bundle.ViewNovedadTitle_tipoNovedad}"/>
+                    <h:outputText value="#{bundle.ViewNovedadLabel_descripcion}"/>
+                    <h:outputText value="#{novedadController.selected.descripcion}" title="#{bundle.ViewNovedadTitle_descripcion}"/>
+                    <h:outputText value="#{bundle.ViewNovedadLabel_prioridad}"/>
+                    <h:outputText value="#{novedadController.selected.prioridad}" title="#{bundle.ViewNovedadTitle_prioridad}"/>
+                    <h:outputText value="#{bundle.ViewNovedadLabel_mercanciascodigoMercancia}"/>
+                    <h:outputText value="#{novedadController.selected.mercanciascodigoMercancia}" title="#{bundle.ViewNovedadTitle_mercanciascodigoMercancia}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{novedadController.destroyAndView}" value="#{bundle.ViewNovedadDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewNovedadEditLink}"/>
+                <br />
+                <h:commandLink action="#{novedadController.prepareCreate}" value="#{bundle.ViewNovedadCreateLink}" />
+                <br />
+                <h:commandLink action="#{novedadController.prepareList}" value="#{bundle.ViewNovedadShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewNovedadIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

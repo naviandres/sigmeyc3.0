@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditSolicitudTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="contenido">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditSolicitudLabel_codigoSolicitud}" for="codigoSolicitud" />
+                    <h:inputText id="codigoSolicitud" value="#{solicitudController.selected.codigoSolicitud}" title="#{bundle.EditSolicitudTitle_codigoSolicitud}" required="true" requiredMessage="#{bundle.EditSolicitudRequiredMessage_codigoSolicitud}"/>
+                    <h:outputLabel value="#{bundle.EditSolicitudLabel_tipoServicio}" for="tipoServicio" />
+                    <h:inputText id="tipoServicio" value="#{solicitudController.selected.tipoServicio}" title="#{bundle.EditSolicitudTitle_tipoServicio}" />
+                    <h:outputLabel value="#{bundle.EditSolicitudLabel_fechaEntrega}" for="fechaEntrega" />
+                    <h:inputText id="fechaEntrega" value="#{solicitudController.selected.fechaEntrega}" title="#{bundle.EditSolicitudTitle_fechaEntrega}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditSolicitudLabel_ciudadDestino}" for="ciudadDestino" />
+                    <h:inputText id="ciudadDestino" value="#{solicitudController.selected.ciudadDestino}" title="#{bundle.EditSolicitudTitle_ciudadDestino}" />
+                    <h:outputLabel value="#{bundle.EditSolicitudLabel_direcciónDestino}" for="direcciónDestino" />
+                    <h:inputText id="direcciónDestino" value="#{solicitudController.selected.direcciónDestino}" title="#{bundle.EditSolicitudTitle_direcciónDestino}" />
+                    <h:outputLabel value="#{bundle.EditSolicitudLabel_nombreDestinatario}" for="nombreDestinatario" />
+                    <h:inputText id="nombreDestinatario" value="#{solicitudController.selected.nombreDestinatario}" title="#{bundle.EditSolicitudTitle_nombreDestinatario}" />
+                    <h:outputLabel value="#{bundle.EditSolicitudLabel_apellidoDestinatario}" for="apellidoDestinatario" />
+                    <h:inputText id="apellidoDestinatario" value="#{solicitudController.selected.apellidoDestinatario}" title="#{bundle.EditSolicitudTitle_apellidoDestinatario}" />
+                    <h:outputLabel value="#{bundle.EditSolicitudLabel_telefonoDestinatario}" for="telefonoDestinatario" />
+                    <h:inputText id="telefonoDestinatario" value="#{solicitudController.selected.telefonoDestinatario}" title="#{bundle.EditSolicitudTitle_telefonoDestinatario}" />
+                    <h:outputLabel value="#{bundle.EditSolicitudLabel_prioridad}" for="prioridad" />
+                    <h:inputText id="prioridad" value="#{solicitudController.selected.prioridad}" title="#{bundle.EditSolicitudTitle_prioridad}" />
+                    <h:outputLabel value="#{bundle.EditSolicitudLabel_tiempoEntrega}" for="tiempoEntrega" />
+                    <h:inputText id="tiempoEntrega" value="#{solicitudController.selected.tiempoEntrega}" title="#{bundle.EditSolicitudTitle_tiempoEntrega}" />
+                    <h:outputLabel value="#{bundle.EditSolicitudLabel_fechaSolicitud}" for="fechaSolicitud" />
+                    <h:inputText id="fechaSolicitud" value="#{solicitudController.selected.fechaSolicitud}" title="#{bundle.EditSolicitudTitle_fechaSolicitud}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditSolicitudLabel_origenDeMercancia}" for="origenDeMercancia" />
+                    <h:inputText id="origenDeMercancia" value="#{solicitudController.selected.origenDeMercancia}" title="#{bundle.EditSolicitudTitle_origenDeMercancia}" />
+                    <h:outputLabel value="#{bundle.EditSolicitudLabel_usuarioscodigoUsuario}" for="usuarioscodigoUsuario" />
+                    <h:selectOneMenu id="usuarioscodigoUsuario" value="#{solicitudController.selected.usuarioscodigoUsuario}" title="#{bundle.EditSolicitudTitle_usuarioscodigoUsuario}" required="true" requiredMessage="#{bundle.EditSolicitudRequiredMessage_usuarioscodigoUsuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{solicitudController.update}" value="#{bundle.EditSolicitudSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditSolicitudViewLink}"/>
+                <br />
+                <h:commandLink action="#{solicitudController.prepareList}" value="#{bundle.EditSolicitudShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditSolicitudIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

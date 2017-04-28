@@ -1,0 +1,690 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:composition template="/WEB-INF/template/template.xhtml">
+
+        <ui:define name="contenido">
+            <!-- Modal inicio sesión-->
+            <div class="modal fade" id="inicio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title text-center" id="myModalLabel" >Iniciar Sesión</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <h:form id="formInicio" prependId="false">
+                                <div style="background-color: #990000">
+                                    <h:messages globalOnly="true" showSummary="true" showDetail="true"/>
+                                </div>
+                                <div class="md-form form-group">
+                                    <i class="fa fa-envelope prefix "></i>
+                                    <h:outputLabel id="lblCorr" for="lblCorr" value="Correo Electronico"/>
+                                    <h:inputText id="txtCorreo" value="#{sessionController.correo}" class="form-control"/>
+                                </div>
+                                <div class="md-form form-group">
+                                    <i class="fa fa-lock prefix"></i>
+                                    <h:outputLabel id="lblClv" for="lblClv" value="Contraseña"/>
+                                    <h:inputSecret id="txtClv" value="#{sessionController.clave}" class="form-control"/>
+                                </div>
+                                <div class=" text-center">
+                                    <h:commandButton id="btnIngresar" action="#{sessionController.action()}" value="Ingresar" class="btn btn-primary"/> 
+                                    <br/>
+                                    <h:outputLabel id="lblRecIng" for="lblRecIng" value="Recordar "/>
+                                    <br/>
+                                    <h:selectBooleanCheckbox id="selBoolRecIng" label="Recordar" />  
+                                </div>
+                            </h:form>
+                        </div>
+                        <div class="modal-footer ">
+                            <div class="options">
+                                <p>¿No esta registrado? <a href="#registrar" data-toggle="modal" data-dismiss="modal">Registrese </a></p>
+                                <p><a href="#">¿Olvido su contraseña?</a></p>
+                            </div>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal registrarse-->
+            <div class="modal fade" id="registrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title text-center" id="myModalLabel" >Registrarse</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <h:form id="registro"  prependId="false" >
+                                <div class="form-group col-xs-offset-4 col-xs-3">
+                                    <h:outputLabel id="lblChEmpreI" for="lblChEmpreI" value="Empresa?"/><br/>
+                                    <h:selectBooleanCheckbox id="seleEmpreI" label="Es empresa?" onclick="mostrarDatosEmprI()"/>  
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel id="lblChPersI" for="lblChPersI" value="Persona?"/><br/>
+                                    <h:selectBooleanCheckbox id="selePersI" label="Es persona?" onclick="mostrarDatosPersI()"/>    
+                                </div>
+                                <div id="divRazI" class="md-form form-group" style="display: none">
+                                    <i class="fa fa-lock prefix"></i>
+                                    <h:outputLabel id="lblRazonSocI" for="lblRazonSocI" value="Razon social"/>
+                                    <h:inputText id="txtRazonSocI" class="form-control" required="true" p:placeholder="coca cola"/>
+
+                                </div>
+                                <div id="divNmbrs" class="form-group row">
+                                    <div class="md-form col-lg-6">
+                                        <i class="fa fa-user prefix"></i>
+                                        <h:outputLabel id="lblNombI" for="lblNombI" value="Nombre"/>
+                                        <h:inputText id="txtNombI" class="form-control" required="true" p:placeholder="Juan"/>
+
+                                    </div>
+                                    <div class="md-form col-lg-6">
+                                        <i class="fa fa-user prefix"></i>
+                                        <h:outputLabel id="lblApeeI" for="lblApeeI" value="Apellido"/>
+                                        <h:inputText id="txtApeeI" class="form-control" required="true" p:placeholder="Torres"/>
+
+                                    </div>
+                                </div>
+                                <div id="divContac" class="form-group row">
+                                    <div class="md-form col-lg-6">
+                                        <i class="fa fa-user prefix"></i>
+                                        <h:outputLabel id="lblTelI" for="lblTelI" value="Teléfono"/>
+                                        <h:inputText id="txtTelI" class="form-control" p:placeholder="4343434"/>
+
+                                    </div>
+                                    <div class="md-form col-lg-6">
+                                        <i class="fa fa-user prefix"></i>
+                                        <h:outputLabel id="lblCelI" for="lblCelI" value="Celular"/>
+                                        <h:inputText id="txtCelI" class="form-control" required="true" p:placeholder="3127986545"/>
+
+                                    </div>
+                                </div>
+                                <div id="divCorreo" class="md-form form-group">
+                                    <i class="fa fa-envelope prefix"></i>
+                                    <h:outputLabel id="lblCo" for="lblCo" value="Correo Electronico" />
+                                    <h:inputText id="correo" value="#{smb.correo}" class="form-control" required="true" />
+                                </div>
+                                <div id="divContr" class="md-form form-group">
+                                    <i class="fa fa-lock prefix"></i>
+                                    <h:outputLabel id="lblCont" for="lblCont" value="Contraseña"/>
+                                    <h:inputSecret id="contraseña" value="#{smb.contraseña}" class="form-control" required="true"/>
+                                </div>
+                                <div id="divRepetContra" class="md-form form-group">
+                                    <i class="fa fa-lock prefix"></i>
+                                    <h:outputLabel id="lblRecon" for="lblRecon" value="Repita su contraseña"/>
+                                    <h:inputSecret id="repetirContraseña" value="#{smb.repContraseña}" class="form-control" />
+
+                                </div>
+                                <div class="text-center">
+                                    <h:commandButton id="btnIniciar" action="#{smb.realizarAccion()}" value="Iniciar Sesión" class="btn btn-primary"/>
+                                    <br/>
+                                    <h:outputLabel id="lblRec" for="lblRec" value="Recordar "/>
+                                    <br/>
+                                    <h:selectBooleanCheckbox id="selBoolRecord" label="Recordar" />    
+                                </div>
+                            </h:form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <div class="options">
+                                <p>¿Ya tiene cuenta? <a href="#inicio" data-toggle="modal" data-dismiss="modal">Inicie Sesión</a></p>
+                            </div>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section class="bg-primary" id="about">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-7 text-center">                  
+                            <h2 class="section-heading">Misión</h2>
+                            <hr class="light"/>
+                            <p class="text-faded">Satisfacemos las necesidades y expectativas de los clientes ofreciendo soluciones logísticas en el manejo de documentos y mercancías a nivel nacional e internacional, contribuyendo al desarrollo del país. </p>                      
+                        </div>
+                        <div class="col-lg-4 col-md-7 text-center">        
+                            <h2 class="section-heading">Politica Integral</h2>
+                            <hr class="light"/>
+                            <p class="text-faded">Garantizamos la satisfacción de nuestros clientes, ofreciendo soluciones logísticas en el manejo de documentos y mercancías, con un equipo humano competente y motivado, orientado al servicio, al mejoramiento continuo, a la prevención de lesiones, enfermedades y contaminación ambiental, en un ambiente de trabajo seguro, cumpliendo con los requisitos legales.</p>
+                            <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Empezar</a>                       
+                        </div>
+                        <div class="col-lg-4 col-md-7 text-center">                                           
+                            <h2 class="section-heading">Visión</h2>
+                            <hr class="light"/>
+                            <p class="text-faded">En 2013 seremos reconocidos como la mejor empresa de país en soluciones logísticas de documentos y mercancías. </p>                       
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="services">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h2 class="section-heading">Nuestros Servicios</h2>
+                            <hr class="primary"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-7 text-center">
+                            <div class="service-box">
+                                <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
+                                <h3>Consultar Envío</h3>
+                                <p class="text-muted">
+                                    Aqui podra verificar el estado de su mercancia, documentos o paquetes previamente.
+                                </p>
+                                <h:form id="formBC" rendered="#{sessionController.activarBoton()}" prependId="false" >
+                                    <h:commandButton id="btnConsultar" value="Consultar" class="btn btn-primary"/>
+                                </h:form>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-7 text-center">
+                            <div class="service-box">
+                                <i class="fa fa-4x fa-truck text-primary sr-icons"></i>
+                                <h3>Solicitar Envío</h3>
+                                <p class="text-muted">
+                                    Aqui podra registrar su paquete o mercancia y solicitar un envio a cualquier parte de colombia.
+                                </p>
+                                <h:form id="formBS" rendered="#{sessionController.activarBoton()}" prependId="false">
+                                    <h:commandButton id="btnSolicitar" class="btn btn-primary" value="Solicitar"></h:commandButton>                                
+                                </h:form>
+
+                                <!--<h:commandButton id="btnSolicitar" value="Solicitar" class="btn btn-primary" onclick="mostrarSolicitar()" disabled="true"/>-->
+                                <!--<p:tooltip id="totSol" for="btnSolicitar" value="This tooltip tracks mouse position" trackMouse="true" />-->
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-7 text-center">
+                            <div class="service-box">
+                                <i class="fa fa-4x fa-money text-primary sr-icons"></i>
+                                <h3>Cotizar Envío</h3>
+                                <p class="text-muted">
+                                    Consulte de forma fácil y rápida la cotización para sus envíos de documentos, paquetes, entre otros, a toda Colombia.
+                                </p>
+                                <h:form id="formBCo" rendered="#{sessionController.activarBoton()}" prependId="false">
+                                    <h:commandButton id="btnCotizar" class="btn btn-primary" value="Cotizar"></h:commandButton>                                
+                                </h:form>
+
+                                <!--<h:commandButton id="btnCotiza" value="ejemplo" class="btn btn-primary" onclick="mostrarCotizar()" disabled="true"/>-->
+                                <!--<p:tooltip id="totCoti" for="btnCotiza" value="This tooltip tracks mouse position" trackMouse="true" />-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--consultar envio-->
+            <section class="no-padding" id="consulta" style="display:none">
+                <div class="container-fluid" >
+
+                    <h:form class="form-group" id="formConsul" prependId="false">
+                        <h1 class="text-center page-header">Consultar Envío</h1>
+                        <h4 class="page-header">Código de guía</h4>
+                        <div class="input-group">
+                            <h:outputLabel id="lblCod" for="lblCod" value="Código del paquete"/> 
+                            <h:inputText id="txtCod" value="#{guiaController.selected.codigoBarras}" rendered="true"/>
+                        </div>
+                        <br/>
+                        <button id="btnCerrarConsulta" type="button" class="btn btn-danger" onclick="ocultar()">Cancelar</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#consultar"> Consultar</button>
+
+                    </h:form>
+
+                </div>
+            </section>
+            <!-- modal de confirmacion consulta-->
+            <div class="modal fade" id="consultar" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+                <div class="modal-dialog"> 
+                    <div class="modal-content"> 
+                        <div class="modal-header"> 
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+                            <h4 class="modal-title text-center">Mi Envio</h4> 
+                        </div> 
+
+                        <div class="modal-body"> 
+                            <h:form id="loginForm" class="form-horizontal" prependId="false"> 
+                                <div class="form-group"> 
+                                    <div class="col-md-12 col-lg-12 col-sm-12"> 
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Codigo</th>
+                                                        <td>798520</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Guía</th>
+                                                        <td>7000012589313</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Tipo de Mercancía</th>
+                                                        <td>Carga masiva</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Remitente</th>
+                                                        <td>Luis Alberto Conde</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Dirección de Origen</th>
+                                                        <td>Cl 19 # 70 - 20</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Destinatario</th>
+                                                        <td>Tokoto Anime</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Dirección Entrega</th>
+                                                        <td>Cl 100 # 14  - 35</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Estado</th>
+                                                        <td>Entregado</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Medio de Pago</th>
+                                                        <td>Efectivo</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" >Aceptar</button> 
+                                    </div> 
+                                </div> 
+                            </h:form> 
+                        </div> 
+                    </div> 
+                </div> 
+            </div>
+
+            <section class="no-padding" id="solicitar" style="display:none">
+                <div class="container-fluid" >
+
+                    <h:form  id="formSol" enctype="multipart/form-data" prependId="false">
+                        <h1 id="h1EnvioP" class="text-center page-header">Envío como Persona</h1>
+                        <h1 id="h1EnvioE" class="text-center page-header" style="display: none">Envío como Empresa</h1>
+                        <h2 class="text-center page-header">Datos Personales</h2>
+
+
+                        <div class="row">
+                            <div class="form-group col-xs-offset-4 col-xs-3">
+                                <h:outputLabel id="lblChEmpre" for="lblChEmpre" value="Empresa?"/><br/>
+                                <h:selectBooleanCheckbox id="seleEmpre" label="Es empresa?" onclick="mostrarDatosEmpr()"/>  
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel id="lblChPers" for="lblChPers" value="Persona?"/><br/>
+                                <h:selectBooleanCheckbox id="selePers" label="Es persona?" onclick="mostrarDatosPers()"/>    
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <h:outputLabel id="lblNo" for="lblNo" value="Nombres" class="sr-only"/>
+                                <h:inputText id="txtNom" class="form-control" autocomplete="on" p:placeholder="Nombres:"/>
+                            </div>
+
+                            <div class="form-group col-lg-6">
+                                <h:outputLabel id="lblAp" for="lblAp" value="Apellidos" class="sr-only"/>
+                                <h:inputText id="txtApe" class="form-control" autocomplete="on" p:placeholder="Apellidos:"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel id="lblTipo" for="lblTipo" value="Tipo documento" class="sr-only"/>
+                            <h:selectOneMenu id="selTDoc" class="form-control">
+                                <f:selectItem id="opc00000" itemLabel="Selecciones Tipo de Documento" itemDisabled="disabled"/>
+                                <f:selectItem id="opc11111" itemLabel="ti" itemValue="1"/>
+                                <f:selectItem id="opc22222" itemLabel="cc" itemValue="2"/>
+                                <f:selectItem id="opc33333" itemLabel="ce" itemValue="3"/>
+                                <f:selectItem id="opc44444" itemLabel="pas" itemValue="4"/>
+                            </h:selectOneMenu>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblRazon" for="lblRazon" value="Razón Social: " class="sr-only"/>
+                            <h:inputText id="txtRazon" class="form-control" autocomplete="on" p:placeholder="Razón Social:" style="display: none"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblDocI" for="lblDocI" value="Documento de Identidad: " class="sr-only"/>
+                            <h:inputText id="txtDocI" class="form-control" autocomplete="on" p:placeholder="Documento de Identidad o NIT:"/>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <h:outputLabel id="lblTel" for="lblTel" value="Teléfono:" class="sr-only"/>
+                                <h:inputText id="txtTel" class="form-control" autocomplete="on" p:placeholder="Teléfono:"/>
+                            </div>
+
+                            <div class="form-group col-lg-6">
+                                <h:outputLabel id="lblCel" for="lblCel" value="Celular:" class="sr-only"/>
+                                <h:inputText id="txtCel" class="form-control" autocomplete="on" p:placeholder="Celular:"/>
+                            </div>
+                        </div>
+
+                        <h2 class="page-header text-center">Mercancía</h2>
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <h:selectOneMenu id="selTiS" class="form-control">
+                                    <f:selectItem id="selectedS" itemLabel="Tipo de servicio" itemDisabled="disabled"/>
+                                    <f:selectItem id="merAerS" itemLabel="Mercancia via aerea" itemValue="1"/>
+                                    <f:selectItem id="merTerS" itemLabel="Mercancia via terrestre" itemValue="2"/>
+                                    <f:selectItem id="menExprS" itemLabel="Mensajeria expresa" itemValue="3"/>
+                                    <f:selectItem id="menMasS" itemLabel="Mensajeria masiva" itemValue="4"/>
+                                </h:selectOneMenu>  
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <h:selectOneMenu id="selTipoMerc" class="form-control">
+                                    <f:selectItem id="tipoMer" itemLabel="Seleccione Tipo de Mercancía" itemDisabled="disabled"/>
+                                    <f:selectItem id="conEm" itemLabel="Carga Con Embalaje" itemValue="1"/>
+                                    <f:selectItem id="sinEm" itemLabel="Carga Sin Embalaje" itemValue="2"/>
+                                    <f:selectItem id="Unitarizada" itemLabel="Carga Unitarizada" itemValue="3"/>
+                                    <f:selectItem id="Paletizada" itemLabel="Carga Paletizada" itemValue="4"/>
+                                    <f:selectItem id="Masiva" itemLabel="Carga Masiva" itemValue="5"/>
+                                    <f:selectItem id="Solida" itemLabel="Carga Solida" itemValue="6"/>
+                                    <f:selectItem id="Liquida" itemLabel="Carga Liquida" itemValue="7"/>
+                                    <f:selectItem id="Gaseosa" itemLabel="Carga Gaseosa" itemValue="8"/>
+                                    <f:selectItem id="Extradimensionada" itemLabel="Carga Extradimensionada" itemValue="10"/>
+                                    <f:selectItem id="Refrigerada" itemLabel="Carga Refrigerada" itemValue="11"/>
+                                    <f:selectItem id="Peligrosa" itemLabel="Carga Peligrosa" itemValue="12"/>
+                                    <f:selectItem id="Delicada" itemLabel="Carga Delicada" itemValue="13"/>
+                                    <f:selectItem id="Correo" itemLabel="Correo" itemValue="14"/>
+                                </h:selectOneMenu>    
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel id="lblpesoMer" for="lblpesoMer" value="Dirección de recolección: " class="sr-only"/>
+                            <h:inputText id="txtpesoMer" class="form-control" autocomplete="on" p:placeholder="Peso mercancía:(los Kg se calculan automaticamente)" maxlength="6"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblValor" for="lblValor" value="Valor declarado: " class="sr-only"/>
+                            <h:inputText id="txtValor" class="form-control" autocomplete="on" p:placeholder="Valor declarado: Sólo coloque numeros enteros, la moneda (Peso Colombiano) es calculado automaticamente" maxlength="10"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:selectOneMenu id="selPrioridad" class="form-control">
+                                <f:selectItem id="pri" itemLabel="Seleccione la Prioridad" itemDisabled="disabled"/>
+                                <f:selectItem id="Normal" itemLabel="Normal" itemValue="1"/>
+                                <f:selectItem id="Baja" itemLabel="Baja" itemValue="2"/>
+                                <f:selectItem id="Alta" itemLabel="Alta" itemValue="3"/>
+                            </h:selectOneMenu>  
+                        </div>
+
+                        <div class="form-group">
+                            <h:selectOneMenu id="selCiud" class="form-control">
+                                <f:selectItem id="ciuda" itemLabel="Seleccione Ciudad de Origen" itemDisabled="disabled"/>
+                                <f:selectItem id="Amazona" itemLabel="Amazonas" itemValue="1"/>
+                                <f:selectItem id="Antioqui" itemLabel="Antioquia" itemValue="2"/>
+                                <f:selectItem id="Arauc" itemLabel="Arauca" itemValue="3"/>
+                                <f:selectItem id="Atlantic" itemLabel="Atlantico" itemValue="4"/>
+                                <f:selectItem id="Boliva" itemLabel="Bolivar" itemValue="5"/>
+                                <f:selectItem id="Boyac" itemLabel="Boyaca" itemValue="6"/>
+                                <f:selectItem id="Calda" itemLabel="Caldas" itemValue="7"/>
+                                <f:selectItem id="Caquet" itemLabel="Caqueta" itemValue="8"/>
+                                <f:selectItem id="Casanar" itemLabel="Casanare" itemValue="9"/>
+                            </h:selectOneMenu>    
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lbldirDeRecoleccion" for="lbldirDeRecoleccion" value="Dirección de recolección: " class="sr-only"/>
+                            <h:inputText id="txtdirDeRecoleccion" class="form-control" autocomplete="on" p:placeholder="Dirección de recolección:"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:selectOneMenu id="selCiudDes" class="form-control">
+                                <f:selectItem id="ciud" itemLabel="Seleccione Ciudad de Destino" itemDisabled="disabled"/>
+                                <f:selectItem id="Amazonas" itemLabel="Amazonas" itemValue="1"/>
+                                <f:selectItem id="Antioquia" itemLabel="Antioquia" itemValue="2"/>
+                                <f:selectItem id="Arauca" itemLabel="Arauca" itemValue="3"/>
+                                <f:selectItem id="Atlantico" itemLabel="Atlantico" itemValue="4"/>
+                                <f:selectItem id="Bolivar" itemLabel="Bolivar" itemValue="5"/>
+                                <f:selectItem id="Boyaca" itemLabel="Boyaca" itemValue="6"/>
+                                <f:selectItem id="Caldas" itemLabel="Caldas" itemValue="7"/>
+                                <f:selectItem id="Caqueta" itemLabel="Caqueta" itemValue="8"/>
+                                <f:selectItem id="Casanare" itemLabel="Casanare" itemValue="9"/>
+                            </h:selectOneMenu> 
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblDirEntre" for="lblDirEntre" value="Dirección de Entrega:" class="sr-only"/>
+                            <h:inputText id="txtDirEntre" class="form-control" autocomplete="on" p:placeholder="Dirección de Entrega:"/>
+                        </div>    
+
+                        <h2 class="text-center page-header">Dimensiones</h2>
+                        <div class="form-group">
+                            <h:outputLabel id="lblLargo" for="lblLargo" value="Longitud: " class="sr-only"/>
+                            <h:inputText id="txtLargo" class="form-control" autocomplete="on" p:placeholder="Logitud Max. 1875cm Sólo coloque números enteros, los cm se calculan automaticamente" maxlength="4"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblAncho" for="lblAncho" value="Ancho: " class="sr-only"/>
+                            <h:inputText id="txtAncho" class="form-control" autocomplete="on" p:placeholder="Ancho Max. 244cm Sólo coloque números enteros, los cm se calculan automaticamente" maxlength="3"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblAltura" for="lblAltura" value="Altura: " class="sr-only"/>
+                            <h:inputText id="txtAltura" class="form-control" autocomplete="on" p:placeholder="Altura Max. 270cm Sólo coloque números enteros, los cm se calculan automaticamente" maxlength="3"/>
+                        </div>
+
+                        <h2 class="text-center page-header">Datos Destinatario</h2>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblNombrers" for="lblNombrers" value="Nombre o Razón Social:" class="sr-only"/>
+                            <h:inputText id="txtNombrers" class="form-control" autocomplete="on" p:placeholder="Nombre o Razón Social:"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblTelD" for="lblTelD" value="Teléfono:" class="sr-only"/>
+                            <h:inputText id="txtTelD" class="form-control" autocomplete="on" p:placeholder="Teléfono:"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblDIN" for="lblDIN" value="Documento de Identidad o NIT:" class="sr-only"/>
+                            <h:inputText id="txtDIN" class="form-control" autocomplete="on" p:placeholder="Documento de Identidad o NIT:" maxlength="18"/>
+                        </div>   
+
+                        <h2 class="text-center page-header">Comentarios / Tratamiento Especial</h2>
+                        <div class="form-group">
+                            <h:inputTextarea id="txtMen" p:placeholder="Aqui puede especificar el nombre por quien se debe preguntar en caso de ser una Empresa."/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblArch" for="lblArch" value="Archivo"/>
+                            <h:inputFile id="filArch"/>
+                            <p class="">Máximo 50 MB</p>
+                        </div>                  
+                        <button type="button" class="btn btn-danger" id="btnCerrarSolicitd" onclick="ocultar()">Cancelar</button>
+                        <button type="button" class="btn btn-success" id="btnSolicitarr" onclick="ocultar()">Solicitar</button>
+                    </h:form>
+                </div>
+            </section>
+            <!--COTIZAR ENVIO-->
+            <section class="no-padding" id="cotizar" style="display:none">
+                <div class="container-fluid" >
+                    <h:form class="form-group" id="formCot" prependId="false">
+                        <h1 class="text-center page-header">Mercancía</h1>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblCantid" for="lblCantid" value="Cantidad" class="sr-only"/>
+                            <h:inputText id="txtCantid"  class="form-control" autocomplete="on" p:placeholder="Ingrese la cantidad de paquetes que desea enviar." maxlength="4" rendered="true"/>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <h:selectOneMenu id="selTipSC" class="form-control">
+                                    <f:selectItem id="selectedC" itemLabel="Tipo de servicio" itemDisabled="disabled"/>
+                                    <f:selectItem id="merAerea" itemLabel="Mercancia via aerea" itemValue="1"/>
+                                    <f:selectItem id="merTerr" itemLabel="Mercancia via terrestre" itemValue="2"/>
+                                    <f:selectItem id="menExpre" itemLabel="Mensajeria expresa" itemValue="3"/>
+                                    <f:selectItem id="menMas" itemLabel="Mensajeria masiva" itemValue="4"/>
+                                </h:selectOneMenu>  
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <h:outputLabel id="lblTip" for="lblTip" value="Tipo de Mercancía:" class="sr-only"/>
+                                <h:selectOneMenu id="selTipoMercC" class="form-control">
+                                    <f:selectItem id="tipoMerC" itemLabel="Seleccione Tipo de Mercancía" itemDisabled="disabled"/>
+                                    <f:selectItem id="conEmC" itemLabel="Carga Con Embalaje" itemValue="1"/>
+                                    <f:selectItem id="sinEmC" itemLabel="Carga Sin Embalaje" itemValue="2"/>
+                                    <f:selectItem id="UnitarizadaC" itemLabel="Carga Unitarizada" itemValue="3"/>
+                                    <f:selectItem id="PaletizadaC" itemLabel="Carga Paletizada" itemValue="4"/>
+                                    <f:selectItem id="MasivaC" itemLabel="Carga Masiva" itemValue="5"/>
+                                    <f:selectItem id="SolidaC" itemLabel="Carga Solida" itemValue="6"/>
+                                    <f:selectItem id="LiquidaC" itemLabel="Carga Liquida" itemValue="7"/>
+                                    <f:selectItem id="GaseosaC" itemLabel="Carga Gaseosa" itemValue="8"/>
+                                    <f:selectItem id="ExtradimensionadaC" itemLabel="Carga Extradimensionada" itemValue="10"/>
+                                    <f:selectItem id="RefrigeradaC" itemLabel="Carga Refrigerada" itemValue="11"/>
+                                    <f:selectItem id="PeligrosaC" itemLabel="Carga Peligrosa" itemValue="12"/>
+                                    <f:selectItem id="DelicadaC" itemLabel="Carga Delicada" itemValue="13"/>
+                                    <f:selectItem id="CorreoC" itemLabel="Correo" itemValue="14"/>
+                                </h:selectOneMenu>  
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblPesoC" for="lblPesoC" value="Peso:" class="sr-only"/>
+                            <h:inputText id="txtPesoC" class="form-control" autocomplete="on" p:placeholder="Peso: Sólo coloque numeros enteros, el kilo es calculado automaticamente" tabindex="2" maxlength="6" rendered="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblValorC" for="lblPesoC" value="Valor Declarado:" class="sr-only"/>
+                            <h:inputText id="txtValorC" class="form-control" autocomplete="on" p:placeholder="Valor declarado: Sólo coloque numeros enteros, la moneda (Peso Colombiano) es calculado automaticamente" maxlength="10" rendered="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:selectOneMenu id="selPrioridadC" class="form-control">
+                                <f:selectItem id="priC" itemLabel="Seleccione la Prioridad" itemDisabled="disabled"/>
+                                <f:selectItem id="NormalC" itemLabel="Normal" itemValue="1"/>
+                                <f:selectItem id="BajaC" itemLabel="Baja" itemValue="2"/>
+                                <f:selectItem id="AltaC" itemLabel="Alta" itemValue="3"/>
+                            </h:selectOneMenu>  
+                        </div>
+
+                        <div class="form-group">
+                            <h:selectOneMenu id="selCiudC" class="form-control">
+                                <f:selectItem id="ciudaC" itemLabel="Seleccione Ciudad de Origen" itemDisabled="disabled"/>
+                                <f:selectItem id="AmazonaC" itemLabel="Amazonas" itemValue="1"/>
+                                <f:selectItem id="AntioquiC" itemLabel="Antioquia" itemValue="2"/>
+                                <f:selectItem id="AraucC" itemLabel="Arauca" itemValue="3"/>
+                                <f:selectItem id="AtlanticC" itemLabel="Atlantico" itemValue="4"/>
+                                <f:selectItem id="BolivaC" itemLabel="Bolivar" itemValue="5"/>
+                                <f:selectItem id="BoyacC" itemLabel="Boyaca" itemValue="6"/>
+                                <f:selectItem id="CaldaC" itemLabel="Caldas" itemValue="7"/>
+                                <f:selectItem id="CaquetC" itemLabel="Caqueta" itemValue="8"/>
+                                <f:selectItem id="CasanarC" itemLabel="Casanare" itemValue="9"/>
+                            </h:selectOneMenu> 
+                        </div>
+
+                        <div class="form-group">
+                            <h:selectOneMenu id="selCiudDesC" class="form-control">
+                                <f:selectItem id="ciudC" itemLabel="Seleccione Ciudad de Destino" itemDisabled="disabled"/>
+                                <f:selectItem id="AmazonasC" itemLabel="Amazonas" itemValue="1"/>
+                                <f:selectItem id="AntioquiaC" itemLabel="Antioquia" itemValue="2"/>
+                                <f:selectItem id="AraucaC" itemLabel="Arauca" itemValue="3"/>
+                                <f:selectItem id="AtlanticoC" itemLabel="Atlantico" itemValue="4"/>
+                                <f:selectItem id="BolivarC" itemLabel="Bolivar" itemValue="5"/>
+                                <f:selectItem id="BoyacaC" itemLabel="Boyaca" itemValue="6"/>
+                                <f:selectItem id="CaldasC" itemLabel="Caldas" itemValue="7"/>
+                                <f:selectItem id="CaquetaC" itemLabel="Caqueta" itemValue="8"/>
+                                <f:selectItem id="CasanareC" itemLabel="Casanare" itemValue="9"/>
+                            </h:selectOneMenu> 
+                        </div>
+
+                        <h2 class="text-center page-header">Dimensiones</h2>
+
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblAnchoC" for="lblAnchoC" value="Ancho:" class="sr-only"/>
+                            <h:inputText id="txtAnchoC"  class="form-control" autocomplete="on" p:placeholder="Ancho Max. 244cm Sólo coloque números enteros, los cm se calculan automaticamente" maxlength="10" rendered="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblAlturaC" for="lblAlturaC" value="Alto" class="sr-only"/>
+                            <h:inputText id="txtAlturaC"  class="form-control" autocomplete="on" p:placeholder="Altura Max. 270cm Sólo coloque números enteros, los cm se calculan automaticamente" maxlength="3" rendered="true"/>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel id="lblLargoC" for="lblLargoC" value="Largo" class="sr-only"/>
+                            <h:inputText id="txtLargoC"  class="form-control" autocomplete="on" p:placeholder="Altura Max. 270cm Sólo coloque números enteros, los cm se calculan automaticamente" maxlength="3" rendered="true"/>
+                        </div>
+
+                        <button type="reset" class="btn btn-info" id="btnNewIntento" >Nuevo intento</button>
+                        <button type="button" class="btn btn-success" id="btnCotizar" onclick="ocultar()">Cotizar</button>
+
+                    </h:form>
+                </div>
+            </section>
+
+            <aside id="estadisticas" class="bg-dark skills">
+                <div class="content row">
+                    <div class="development-wrapper col-lg-8">
+                        <h2 class="development-title">Estadisticas</h2>
+                        <ul class="skills-bar-container">
+                            <li>
+                                <div class="progressbar-title">
+                                    <h3>Envia Colvanes</h3>
+                                    <span class="percent" id="html-pourcent"></span>
+                                </div>
+                                <div class="bar-container" data-percent="95">
+                                    <span class="progressbar" id="progress-html"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="progressbar-title">
+                                    <h3>Entrega inmediata segura S.A.S</h3>
+                                    <span class="percent" id="css-pourcent"></span>
+                                </div>
+                                <div class="bar-container" data-percent="85">
+                                    <span class="progressbar" id="progress-css"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="progressbar-title">
+                                    <h3>Servientrega S.A</h3>
+                                    <span class="percent" id="javascript-pourcent"></span>
+                                </div>
+                                <div class="bar-container" data-percent="80">
+                                    <span class="progressbar" id="progress-javascript"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="progressbar-title">
+                                    <h3>Cadena Courrier S.A.</h3>
+                                    <span class="percent" id="php-pourcent"></span>
+                                </div>
+                                <div class="bar-container" data-percent="65">
+                                    <span class="progressbar" id="progress-php"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="progressbar-title">
+                                    <h3>MC Mens. Confidencial S.A</h3>
+                                    <span class="percent" id="angular-pourcent"></span>
+                                </div>
+                                <div class="bar-container" data-percent="70">
+                                    <span class="progressbar" id="progress-angular"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tools-knowledge-wrapper" >
+                        <div class="tools-wrapper">
+                            <h2 class="title">Descripcion</h2>
+                            <ul class="tools">
+                                <li>
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    Presentamos unas estadisticas donde se evidencia el porcentaje de envios por empresa del sector postal colombiano
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </aside>
+        </ui:define>
+    </ui:composition>
+</html>
+

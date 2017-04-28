@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title" >
+            <h:outputText value="SIGMEYC | Crear Mercancia"></h:outputText>
+        </ui:define>
+        <ui:define name="contenido">
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form id="createLocalidad" class="box-body form-horizontal">
+                <div class="container">
+                    <section class="content-header">
+                        <h1>
+                            EDITAR
+                            <small>Mercancia</small>
+                        </h1>
+                    </section>
+                    <br>
+                    </br>
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="box box-primary">
+                                <div class="box-header with-border">
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+
+                                    <h3 class="box-title"></h3>
+
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                        </button>                                             
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditMercanciaLabel_codigoMercancia}" for="codigoMercancia" />
+                                        <div class="col-xs-6">
+                                            <h:inputText id="codigoMercancia" value="#{mercanciaController.selected.codigoMercancia}" title="#{bundle.EditMercanciaTitle_codigoMercancia}" required="true" requiredMessage="#{bundle.EditMercanciaRequiredMessage_codigoMercancia}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label"  value="#{bundle.EditMercanciaLabel_valorDeclarado}" for="valorDeclarado" />
+                                        <div class="col-xs-6">
+                                            <h:inputText id="valorDeclarado" value="#{mercanciaController.selected.valorDeclarado}" title="#{bundle.EditMercanciaTitle_valorDeclarado}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel  class="col-xs-3 control-label" value="#{bundle.EditMercanciaLabel_tipoMercancia}" for="tipoMercancia" />
+                                        <div class="col-xs-6">
+                                            <h:inputText id="tipoMercancia" value="#{mercanciaController.selected.tipoMercancia}" title="#{bundle.EditMercanciaTitle_tipoMercancia}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditMercanciaLabel_peso}" for="peso" />
+                                        <div class="col-xs-6">
+                                            <h:inputText id="peso" value="#{mercanciaController.selected.peso}" title="#{bundle.EditMercanciaTitle_peso}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel  class="col-xs-3 control-label" value="#{bundle.EditMercanciaLabel_longitud}" for="longitud" />
+                                        <div class="col-xs-6">
+                                            <h:inputText id="longitud" value="#{mercanciaController.selected.longitud}" title="#{bundle.EditMercanciaTitle_longitud}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditMercanciaLabel_ancho}" for="ancho" />
+                                        <div class="col-xs-6">
+                                            <h:inputText id="ancho" value="#{mercanciaController.selected.ancho}" title="#{bundle.EditMercanciaTitle_ancho}" />
+
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditMercanciaLabel_altura}" for="altura" />
+                                        <div class="col-xs-6">
+                                            <h:inputText id="altura" value="#{mercanciaController.selected.altura}" title="#{bundle.EditMercanciaTitle_altura}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditMercanciaLabel_volumen}" for="volumen" />
+                                        <div class="col-xs-6">
+                                            <h:inputText id="volumen" value="#{mercanciaController.selected.volumen}" title="#{bundle.EditMercanciaTitle_volumen}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel  class="col-xs-3 control-label" value="#{bundle.EditMercanciaLabel_cantidad}" for="cantidad" />
+                                        <div class="col-xs-6">
+                                            <h:inputText id="cantidad" value="#{mercanciaController.selected.cantidad}" title="#{bundle.EditMercanciaTitle_cantidad}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditMercanciaLabel_embalaje}" for="embalaje" />
+
+                                        <div class="col-xs-6">
+
+                                            <h:inputText id="embalaje" value="#{mercanciaController.selected.embalaje}" title="#{bundle.EditMercanciaTitle_embalaje}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditMercanciaLabel_departamentosIddepartamento}" for="departamentosIddepartamento" />
+
+                                        <div class="col-xs-6">
+
+                                            <h:selectOneMenu id="departamentosIddepartamento" value="#{mercanciaController.selected.departamentosIddepartamento}" title="#{bundle.EditMercanciaTitle_departamentosIddepartamento}" required="true" requiredMessage="#{bundle.EditMercanciaRequiredMessage_departamentosIddepartamento}">
+                                                <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditMercanciaLabel_guiacodigoBarras}" for="guiacodigoBarras" />
+
+                                        <div class="col-xs-6">
+
+                                            <h:selectOneMenu id="guiacodigoBarras" value="#{mercanciaController.selected.guiacodigoBarras}" title="#{bundle.EditMercanciaTitle_guiacodigoBarras}" required="true" requiredMessage="#{bundle.EditMercanciaRequiredMessage_guiacodigoBarras}">
+                                                <f:selectItems value="#{guiaController.itemsAvailableSelectOne}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditMercanciaLabel_solicitudescodigoSolicitud}" for="solicitudescodigoSolicitud" />
+
+                                        <div class="col-xs-6">
+
+                                            <h:selectOneMenu id="solicitudescodigoSolicitud" value="#{mercanciaController.selected.solicitudescodigoSolicitud}" title="#{bundle.EditMercanciaTitle_solicitudescodigoSolicitud}" required="true" requiredMessage="#{bundle.EditMercanciaRequiredMessage_solicitudescodigoSolicitud}">
+                                                <f:selectItems value="#{solicitudController.itemsAvailableSelectOne}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditMercanciaLabel_vehiculosplacaVehiculo}" for="vehiculosplacaVehiculo" />
+
+                                        <div class="col-xs-6">
+
+                                            <h:selectOneMenu id="vehiculosplacaVehiculo" value="#{mercanciaController.selected.vehiculosplacaVehiculo}" title="#{bundle.EditMercanciaTitle_vehiculosplacaVehiculo}" required="true" requiredMessage="#{bundle.EditMercanciaRequiredMessage_vehiculosplacaVehiculo}">
+                                                <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2 col-lg-offset-4">
+                                            <h:commandButton class="btn btn-success" action="#{mercanciaController.update}" value="Guardar"/>
+                                        </div>
+                                        <div class="col-lg-2 ">
+                                            <h:commandButton class="btn btn-instagram" action="#{mercanciaController.prepareList}" immediate="true" value="ver todos"/>
+                                        </div>                                             
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListLocalidadTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="contenido">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    Datos de los roles
+
+                </h1>
+
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">roles</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+
+                                <h:form styleClass="jsfcrud_list_form">
+                                    <h:panelGroup id="messagePanel" layout="block">
+                                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                                    </h:panelGroup>
+                                    <h:outputText escape="false" value="#{bundle.ListRolEmpty}" rendered="#{rolController.items.rowCount == 0}"/>
+                                    <h:panelGroup rendered="#{rolController.items.rowCount > 0}">
+                                        <h:outputText value="#{rolController.pagination.pageFirstItem + 1}..#{rolController.pagination.pageLastItem + 1}/#{rolController.pagination.itemsCount}"/>&nbsp;
+                                        <h:commandLink action="#{rolController.previous}" value="#{bundle.Previous} #{rolController.pagination.pageSize}" rendered="#{rolController.pagination.hasPreviousPage}"/>&nbsp;
+                                        <h:commandLink action="#{rolController.next}" value="#{bundle.Next} #{rolController.pagination.pageSize}" rendered="#{rolController.pagination.hasNextPage}"/>&nbsp;
+                                        <h:dataTable id="example2" class="table table-bordered table-hover" value="#{rolController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListRolTitle_identificadorRol}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.identificadorRol}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListRolTitle_nombreRol}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.nombreRol}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{bundle.ListRolTitle_detalleRol}"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.detalleRol}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="&nbsp;"/>
+                                                </f:facet>
+                                                <h:commandLink action="#{rolController.prepareView}" value="#{bundle.ListRolViewLink}"/>
+                                                <h:outputText value=" "/>
+                                                <h:commandLink action="#{rolController.prepareEdit}" value="#{bundle.ListRolEditLink}"/>
+                                                <h:outputText value=" "/>
+                                                <h:commandLink action="#{rolController.destroy}" value="#{bundle.ListRolDestroyLink}"/>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:panelGroup>
+                                    <br />
+                                    <div class="col-lg-2">
+                                        <h:commandButton class="btn btn-success" action="#{rolController.prepareCreate}" value="Crear"></h:commandButton>
+                                    </div>
+                                    <br />
+                                    <br />
+
+
+                                </h:form>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </ui:define>
+    </ui:composition>
+
+</html>

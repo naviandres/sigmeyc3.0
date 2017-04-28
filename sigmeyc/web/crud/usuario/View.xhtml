@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewUsuarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="contenido">
+
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <div class="container">
+                <section class="content-header">
+                    <h1>
+                        VISTA
+                        <small>Localidad</small>
+                    </h1>
+                </section>
+                <br>
+                </br>
+                <div class="container">
+                    <div class="row">
+
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+
+                                <h3 class="box-title"></h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>                                             
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <h:form id="verLocalidad" class="box-body form-horizontal">
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewUsuarioLabel_codigoUsuario}"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText class="form-control" value="#{usuarioController.selected.codigoUsuario}" title="#{bundle.ViewUsuarioTitle_codigoUsuario}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewUsuarioLabel_primerNombre}"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText class="form-control" value="#{usuarioController.selected.primerNombre}" title="#{bundle.ViewUsuarioTitle_primerNombre}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewUsuarioLabel_segundoNombre}"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText class="form-control" value="#{usuarioController.selected.segundoNombre}" title="#{bundle.ViewUsuarioTitle_segundoNombre}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewUsuarioLabel_primerApellido}"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText class="form-control" value="#{usuarioController.selected.primerApellido}" title="#{bundle.ViewUsuarioTitle_primerApellido}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewUsuarioLabel_segundoApellido}"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText class="form-control" value="#{usuarioController.selected.segundoApellido}" title="#{bundle.ViewUsuarioTitle_segundoApellido}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewUsuarioLabel_telefono}"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText class="form-control" value="#{usuarioController.selected.telefono}" title="#{bundle.ViewUsuarioTitle_telefono}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewUsuarioLabel_celular}"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText class="form-control" value="#{usuarioController.selected.celular}" title="#{bundle.ViewUsuarioTitle_celular}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewUsuarioLabel_email}"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText class="form-control" value="#{usuarioController.selected.email}" title="#{bundle.ViewUsuarioTitle_email}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewUsuarioLabel_razonSocial}"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText class="form-control" value="#{usuarioController.selected.razonSocial}" title="#{bundle.ViewUsuarioTitle_razonSocial}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewUsuarioLabel_tipoIdentificacion}"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText class="form-control" value="#{usuarioController.selected.tipoIdentificacion}" title="#{bundle.ViewUsuarioTitle_tipoIdentificacion}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewUsuarioLabel_clave}"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText class="form-control" value="#{usuarioController.selected.clave}" title="#{bundle.ViewUsuarioTitle_clave}"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2 col-lg-offset-4">
+                                            <h:commandButton class="btn btn-danger" action="#{usuarioController.destroyAndView}" value="Eliminar"></h:commandButton>
+                                        </div>
+
+                                        <div class="col-lg-2">
+                                            <h:commandButton class="btn btn-success" action="#{usuarioController.prepareCreate}" value="Crear"></h:commandButton>
+                                        </div>
+
+                                        <div class="col-lg-2">
+                                            <h:commandButton class="btn btn-instagram" action="#{usuarioController.prepareList}" value="Ver todos"></h:commandButton>
+                                        </div>
+
+                                    </div>
+
+                                </h:form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</html>

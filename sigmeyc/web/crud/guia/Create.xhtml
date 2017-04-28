@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title" >
+            <h:outputText value="SIGMEYC | Crear Guia"></h:outputText>
+        </ui:define>
+        <ui:define name="contenido">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+
+            <h:form id="createGuia" class="box-body form-horizontal">
+                <div class="container">
+                    <section class="content-header">
+                        <h1>
+                            CREAR
+                            <small>Guia</small>
+                        </h1>
+                    </section>
+                    <br>
+                    </br>
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="box box-primary">
+                                <div class="box-header with-border">
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+
+                                    <h3 class="box-title"></h3>
+
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                        </button>                                             
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.CreateGuiaLabel_codigoBarras}" for="codigoBarras" />
+                                        <div class="col-xs-6">
+                                            <h:inputText class="form-control" id="codigoBarras" value="#{guiaController.selected.codigoBarras}" title="#{bundle.CreateGuiaTitle_codigoBarras}" required="true" requiredMessage="#{bundle.CreateGuiaRequiredMessage_codigoBarras}"/>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.CreateGuiaLabel_serial}" for="serial" />
+                                        <div class="col-xs-6">
+                                            <h:inputText class="form-control" id="serial" value="#{guiaController.selected.serial}" title="#{bundle.CreateGuiaTitle_serial}" required="true" requiredMessage="#{bundle.CreateGuiaRequiredMessage_serial}"/>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.CreateGuiaLabel_detalleMercancia}" for="detalleMercancia" />
+
+                                        <div class="col-xs-6">
+                                            <h:inputText class="form-control" id="detalleMercancia" value="#{guiaController.selected.detalleMercancia}" title="#{bundle.CreateGuiaTitle_detalleMercancia}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.CreateGuiaLabel_direccionDeEnvio}" for="direccionDeEnvio" />
+
+                                        <div class="col-xs-6">
+                                            <h:inputText class="form-control" id="direccionDeEnvio" value="#{guiaController.selected.direccionDeEnvio}" title="#{bundle.CreateGuiaTitle_direccionDeEnvio}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.CreateGuiaLabel_conductorAsignado}" for="conductorAsignado" />
+
+                                        <div class="col-xs-6">
+                                            <h:inputText class="form-control" id="conductorAsignado" value="#{guiaController.selected.conductorAsignado}" title="#{bundle.CreateGuiaTitle_conductorAsignado}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.CreateGuiaLabel_vehiculoDesignado}" for="vehiculoDesignado" />
+
+                                        <div class="col-xs-6">
+                                            <h:inputText class="form-control" id="vehiculoDesignado" value="#{guiaController.selected.vehiculoDesignado}" title="#{bundle.CreateGuiaTitle_vehiculoDesignado}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel  class="col-xs-3 control-label" value="#{bundle.CreateGuiaLabel_planillascodigoPlanilla1}" for="planillascodigoPlanilla1" />
+
+                                        <div class="col-xs-6">
+                                            <h:selectOneMenu id="planillascodigoPlanilla1" value="#{guiaController.selected.planillascodigoPlanilla1}" title="#{bundle.CreateGuiaTitle_planillascodigoPlanilla1}" required="true" requiredMessage="#{bundle.CreateGuiaRequiredMessage_planillascodigoPlanilla1}">
+                                                <f:selectItems value="#{planillaController.itemsAvailableSelectOne}"/>
+                                            </h:selectOneMenu>                                        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2 col-lg-offset-4">
+                                            <h:commandButton class="btn btn-success" action="#{guiaController.create}" value="Guardar"/>
+                                        </div>
+                                        <div class="col-lg-2 ">
+                                            <h:commandButton class="btn btn-instagram" action="#{guiaController.prepareList}" immediate="true" value="ver todos"/>
+                                        </div>                                             
+                                    </div>
+                                </div>
+                                <!-- /.box-body-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

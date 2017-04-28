@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:composition template="/WEB-INF/templateAd/templateoperador.xhtml">
+        <ui:define name="title">Registrar vehículo</ui:define>
+        <ui:define name="contenido">
+            <!-- MigasDePan -->
+            <div class=" margin-top1">
+                <ol class="breadcrumb li">
+                    <li><a href="#{request.contextPath}/app/indexoperador.xhtml">Inicio</a></li>
+                    <li><strong>Registrar vehículo</strong></li>
+                </ol>
+            </div>
+
+            <main class="container cm1centrar">
+                <h:form id="vehi" class="form-horizontal">
+                    <h1 class="text-center page-header1">Registrar vehículo</h1>
+                    <div class="form-group espacio">
+                        <h:outputLabel id="lblNomCond" for="lblNomCond" value="Nombres del conductor a cargo:" class="col-xs-3 control-label" />
+                        <div class="col-xs-9 col-sm-6">
+                            <h:inputText id="txtNomCond" class="form-control" p:placeholder="Nombres del conductor a cargo"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel id="lblApeCond" for="lblApeCond" value="Apellidos del conductor a cargo:" class="col-xs-3 control-label" />
+                        <div class="col-xs-9 col-sm-6">
+                            <h:inputText id="txtApeCond" class="form-control" p:placeholder="Apellidos del cinductor a cargo"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel id="lblNumIden" for="lblNumIden" value="Numero de identificación conductor a cargo:" class="col-xs-3 control-label" />
+                        <div class="col-xs-9 col-sm-6">
+                            <h:inputText id="txtNumIden" class="form-control" p:placeholder="Numero de identificacin conductor a cargo"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel id="lblMatrVeh" for="lblMatrVeh" value="Matricula del vehículo:" class="col-xs-3 control-label" />
+                        <div class="col-xs-9 col-sm-6">
+                            <!--<input type="text" class="form-control" pattern="[A-Za-z]{3}[0-9]{3}" minlength="6" maxlength="6" name="matri" >-->
+                            <h:inputText id="txtMatrVeh" class="form-control" p:placeholder="Matricula"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-3 col-sm-3 col-md-3 col-lg-3">Tipo de vehículo:</label>
+                        <div class="col-xs-8 col-sm-9	 col-md-6 col-lg-6" >
+                            <select class="form-control">
+                                <option value=""></option>
+                                <option value="1">Vehiculo turbo</option>
+                                <option value="2">Camion dos ejes</option>
+                                <option value="3">Camion tres ejes</option>
+                                <option value="4">Camion cuatro ejes</option>
+                                <option value="5">Mini mula</option>
+                                <option value="6">Moto</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-3">Cantidad de carga:</label>
+                        <div class="col-xs-9 col-sm-6">
+                            <select class="form-control">
+                                <option value=""></option>
+                                <option value="1">4.5 Toneladas</option>
+                                <option value="2">8.5 Toneladas</option>
+                                <option value="3">17 Toneladas</option>
+                                <option value="4">24 Toneladas</option>
+                                <option value="5">20 Toneladas</option>
+                                <option value="6"> 150 kg</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                             <a href="#{request.contextPath}/app/indexoperador.html">
+                                <h:commandButton id="btnCanceVehi" value="Cancelar" class="btn btn-danger"/> 
+                            </a>
+                            <h:commandButton  id="btnGuardar_vehi" value="Guardar" class="btn btn-success"/> 
+                        </div>
+                    </div>
+                </h:form>
+            </main>
+        </ui:define>
+    </ui:composition>
+</html>
+

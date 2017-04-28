@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:composition template="/WEB-INF/templateAd/templateoperador.xhtml">
+        <ui:define name="title">Planillas</ui:define>
+        <ui:define name="contenido">
+            <!-- MigasDePan -->
+            <div class=" margin-top1">
+                <ol class="breadcrumb li">
+                    <li><a href="#{request.contextPath}/app/indexoperador.xhtml">Inicio</a></li>
+                    <li><strong>Generar Planillas</strong></li>
+                </ol>
+            </div>
+            <div id="ruta1">
+                <h:form class="form-group" id="ask">
+                    <h1 class="text-center page-header1">Planillas</h1>
+                    <h2 class="text-center page-header1">Vehículo</h2>
+                    <div class="form-group">
+                        <h:selectOneMenu id="selTVehi" class="form-control">
+                            <f:selectItem id="selT" itemLabel="Seleccionar tipo de vehículo" itemDisabled="disabled"/>
+                            <f:selectItem id="tc" itemLabel="Tractocamion" itemValue="1"/>
+                            <f:selectItem id="mt" itemLabel="Motocicleta" itemValue="2"/>
+                            <f:selectItem id="c3" itemLabel="Camion 3 ejes" itemValue="3"/>
+                            <f:selectItem id="c4" itemLabel="Camion 4 ejes" itemValue="4"/>
+                            <f:selectItem id="t600" itemLabel="Turbo 600" itemValue="5"/>
+                        </h:selectOneMenu>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel id="lblPlac" for="lblPlac" value="placa" class="sr-only"/>
+                        <h:inputText id="txtPlac" class="form-control" autocomplete="on" maxlength="10" p:placeholder="Placa Vehículo"/>
+                    </div>
+
+                    <h2 class="text-center page-header">Conductor</h2>
+                    <div class="form-group">
+                        <h:selectOneMenu id="cd" class="form-control">
+                            <f:selectItem id="delC" itemLabel="Seleccionar conductor" itemDisabled="disabled"/>
+                            <f:selectItem id="c01" itemLabel="John Dorama" itemValue="1"/>
+                            <f:selectItem id="c02" itemLabel="Frederik Castillo" itemValue="2"/>
+                            <f:selectItem id="c03" itemLabel="Gustavo Alvarez" itemValue="3"/>
+                            <f:selectItem id="c04" itemLabel="Adam Gontier" itemValue="4"/>
+                            <f:selectItem id="c05" itemLabel="Andrew Dennis Biersak" itemValue="5"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div id="cod01" class="driver">
+                        <div class="alert alert-info">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Identificación</th>
+                                        <th>Celular</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="">
+                                        <td>John</td>
+                                        <td>Dorama</td>
+                                        <td>973696975</td>
+                                        <td>3134005002</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="cod02" class="driver">
+                        <div class="alert alert-info">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Identificación</th>
+                                        <th>Celular</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="">
+                                        <td>Frederik</td>
+                                        <td>Castillo</td>
+                                        <td>932131696</td>
+                                        <td>3125625005</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="cod03" class="driver">
+                        <div class="alert alert-info">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Identificación</th>
+                                        <th>Celular</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="">
+                                        <td>Gustavo</td>
+                                        <td>Alvarez</td>
+                                        <td>463453246</td>
+                                        <td>3306216813</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="cod04" class="driver">
+                        <div class="alert alert-info">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Identificación</th>
+                                        <th>Celular</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="">
+                                        <td>Adam</td>
+                                        <td>Gontier</td>
+                                        <td>1085064652</td>
+                                        <td>3134467304</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="cod05" class="driver">
+                        <div class="alert alert-info">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Identificación</th>
+                                        <th>Celular</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="">
+                                        <td>Andrew Dennis</td>
+                                        <td>Biersak</td>
+                                        <td>1073589666</td>
+                                        <td>3106356369</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <h2 class="text-center page-header">Ruta</h2>
+                    <div class="form-group">
+                        <h:selectOneMenu id="rout" class="form-control">
+                            <f:selectItem id="rut" itemLabel="Seleccione la ruta" itemDisabled="disabled"/>
+                            <f:selectItem id="rut1" itemLabel="Ruta 1" itemValue="1"/>
+                            <f:selectItem id="rut2" itemLabel="Ruta 2" itemValue="2"/>
+                            <f:selectItem id="rut3" itemLabel="Ruta 3" itemValue="3"/>
+                            <f:selectItem id="rut4" itemLabel="Ruta 4" itemValue="4"/>
+                            <f:selectItem id="rut5" itemLabel="Ruta 5" itemValue="5"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="alert alert-success tabla" id="eventsResult"></div>
+                    <div id="tabla" class="tabla">
+                        <table id="eventsTable"
+                               data-toggle="table"
+                               data-url="https://api.github.com/users/wenzhixin/repos?type=owner&sort;=full_name&direction;=asc&per_page;=100&page;=1"
+                               data-pagination="true"
+                               data-search="true"
+                               data-show-refresh="true" 
+                               data-show-toggle="true"
+                               data-show-columns="true"
+                               data-toolbar="#toolbar">
+                            <thead>
+                                <tr>
+                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th data-field="name">Tipo de mercancía</th>
+                                    <th data-field="stargazers_count">Nombre Destinatario</th>
+                                    <th data-field="forks_count">Direccion Entrega</th>
+                                    <th data-field="description">Detalle</th>
+                                </tr>
+                            </thead>
+                        </table>	
+                    </div>
+
+                    <a type="button" class="btn btn-danger" href="#{request.contextPath}/app/indexoperador.xhtml">Cancelar</a>
+                    <button type="submit" class="btn btn-success">Imprimir</button>
+
+                </h:form>
+            </div>
+            <h:outputScript library="js" name="validar-operario.js"/>
+        </ui:define>
+    </ui:composition>
+</html>
+
