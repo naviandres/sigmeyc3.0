@@ -44,7 +44,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono")
     , @NamedQuery(name = "Usuario.findByCelular", query = "SELECT u FROM Usuario u WHERE u.celular = :celular")
     , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
-    , @NamedQuery(name = "Usuario.findByClave", query = "SELECT u FROM Usuario u WHERE u.clave = :clave")})
+    , @NamedQuery(name = "Usuario.findByClave", query = "SELECT u FROM Usuario u WHERE u.clave = :clave")
+    , @NamedQuery(name = "Usuario.findLogin", query = "SELECT u FROM Usuario u WHERE u.email = :ema AND u.clave = :clv")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -244,5 +245,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "com.sigmeyc.entities.Usuario[ codigoUsuario=" + codigoUsuario + " ]";
     }
-    
+
 }

@@ -9,6 +9,7 @@ import com.sigmeyc.entities.Usuario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -29,4 +30,14 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         super(Usuario.class);
     }
     
+     public Usuario login(String email, String clave){
+        TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.findLogin", Usuario.class);
+        q.setParameter("ema", email);
+        q.setParameter("clv", clave);
+        try{
+            return q.getSingleResult();
+        }catch(Exception e){
+            return null;
+        }
+    }
 }
