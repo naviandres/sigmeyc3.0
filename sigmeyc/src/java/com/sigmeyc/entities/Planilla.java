@@ -26,25 +26,24 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author daniel
+ * @author ivan
  */
 @Entity
 @Table(name = "planillas")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Planilla.findAll", query = "SELECT p FROM Planilla p")
-    , @NamedQuery(name = "Planilla.findByCodigoPlanilla", query = "SELECT p FROM Planilla p WHERE p.codigoPlanilla = :codigoPlanilla")
+    , @NamedQuery(name = "Planilla.findByIdPlanilla", query = "SELECT p FROM Planilla p WHERE p.idPlanilla = :idPlanilla")
     , @NamedQuery(name = "Planilla.findByRuta", query = "SELECT p FROM Planilla p WHERE p.ruta = :ruta")
-    , @NamedQuery(name = "Planilla.findByCantidadGuias", query = "SELECT p FROM Planilla p WHERE p.cantidadGuias = :cantidadGuias")
-    , @NamedQuery(name = "Planilla.findByDescripcion", query = "SELECT p FROM Planilla p WHERE p.descripcion = :descripcion")})
+    , @NamedQuery(name = "Planilla.findByCantidadGuias", query = "SELECT p FROM Planilla p WHERE p.cantidadGuias = :cantidadGuias")})
 public class Planilla implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "codigoPlanilla")
-    private Integer codigoPlanilla;
+    @Column(name = "idPlanilla")
+    private Integer idPlanilla;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -54,31 +53,28 @@ public class Planilla implements Serializable {
     @NotNull
     @Column(name = "cantidadGuias")
     private int cantidadGuias;
-    @Size(max = 45)
-    @Column(name = "descripcion")
-    private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "planillascodigoPlanilla1", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "planillasidPlanilla", fetch = FetchType.LAZY)
     private List<Guia> guiaList;
 
     public Planilla() {
     }
 
-    public Planilla(Integer codigoPlanilla) {
-        this.codigoPlanilla = codigoPlanilla;
+    public Planilla(Integer idPlanilla) {
+        this.idPlanilla = idPlanilla;
     }
 
-    public Planilla(Integer codigoPlanilla, String ruta, int cantidadGuias) {
-        this.codigoPlanilla = codigoPlanilla;
+    public Planilla(Integer idPlanilla, String ruta, int cantidadGuias) {
+        this.idPlanilla = idPlanilla;
         this.ruta = ruta;
         this.cantidadGuias = cantidadGuias;
     }
 
-    public Integer getCodigoPlanilla() {
-        return codigoPlanilla;
+    public Integer getIdPlanilla() {
+        return idPlanilla;
     }
 
-    public void setCodigoPlanilla(Integer codigoPlanilla) {
-        this.codigoPlanilla = codigoPlanilla;
+    public void setIdPlanilla(Integer idPlanilla) {
+        this.idPlanilla = idPlanilla;
     }
 
     public String getRuta() {
@@ -97,14 +93,6 @@ public class Planilla implements Serializable {
         this.cantidadGuias = cantidadGuias;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     @XmlTransient
     public List<Guia> getGuiaList() {
         return guiaList;
@@ -117,7 +105,7 @@ public class Planilla implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codigoPlanilla != null ? codigoPlanilla.hashCode() : 0);
+        hash += (idPlanilla != null ? idPlanilla.hashCode() : 0);
         return hash;
     }
 
@@ -128,7 +116,7 @@ public class Planilla implements Serializable {
             return false;
         }
         Planilla other = (Planilla) object;
-        if ((this.codigoPlanilla == null && other.codigoPlanilla != null) || (this.codigoPlanilla != null && !this.codigoPlanilla.equals(other.codigoPlanilla))) {
+        if ((this.idPlanilla == null && other.idPlanilla != null) || (this.idPlanilla != null && !this.idPlanilla.equals(other.idPlanilla))) {
             return false;
         }
         return true;
@@ -136,7 +124,7 @@ public class Planilla implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sigmeyc.entities.Planilla[ codigoPlanilla=" + codigoPlanilla + " ]";
+        return "com.sigmeyc.entities.Planilla[ idPlanilla=" + idPlanilla + " ]";
     }
     
 }

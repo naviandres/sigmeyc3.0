@@ -15,6 +15,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -27,14 +29,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author daniel
+ * @author ivan
  */
 @Entity
 @Table(name = "usuarios")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
-    , @NamedQuery(name = "Usuario.findByCodigoUsuario", query = "SELECT u FROM Usuario u WHERE u.codigoUsuario = :codigoUsuario")
+    , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
     , @NamedQuery(name = "Usuario.findByTipoIdentificacion", query = "SELECT u FROM Usuario u WHERE u.tipoIdentificacion = :tipoIdentificacion")
     , @NamedQuery(name = "Usuario.findByDocumento", query = "SELECT u FROM Usuario u WHERE u.documento = :documento")
     , @NamedQuery(name = "Usuario.findByPrimerNombre", query = "SELECT u FROM Usuario u WHERE u.primerNombre = :primerNombre")
@@ -52,9 +54,11 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "codigoUsuario")
-    private Integer codigoUsuario;
-    @Size(max = 10)
+    @Column(name = "idUsuario")
+    private Integer idUsuario;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
     @Column(name = "tipoIdentificacion")
     private String tipoIdentificacion;
     @Basic(optional = false)
@@ -74,53 +78,81 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "primerApellido")
     private String primerApellido;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
+    @Size(max = 45)
     @Column(name = "segundoApellido")
     private String segundoApellido;
     @Size(max = 15)
     @Column(name = "telefono")
     private String telefono;
-    @Size(max = 15)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "celular")
     private String celular;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "email")
-    private String email;
+    private String email; 
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "clave")
     private String clave;
-    @ManyToMany(mappedBy = "usuarioList", fetch = FetchType.LAZY)
-    private List<Rol> rolList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioscodigoUsuario", fetch = FetchType.LAZY)
+    @Column(name = "estado")
+    private int estado;
+    
+    @JoinTable(name = "usuarios_has_roles", joinColumns = {
+        @JoinColumn(name = "usuarios_idUsuario", referencedColumnName = "idUsuario")}, inverseJoinColumns = {
+        @JoinColumn(name = "roles_identificadorRol", referencedColumnName = "identificadorRol")})
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Rol> roles;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosidUsuario", fetch = FetchType.LAZY)
     private List<Solicitud> solicitudList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosidUsuario", fetch = FetchType.LAZY)
+    private List<Empresa> empresaList;
 
     public Usuario() {
     }
 
-    public Usuario(Integer codigoUsuario) {
-        this.codigoUsuario = codigoUsuario;
+    public Usuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public Usuario(Integer codigoUsuario, long documento, String primerNombre, String primerApellido, String segundoApellido, String clave) {
-        this.codigoUsuario = codigoUsuario;
+    public Usuario(Integer idUsuario, String tipoIdentificacion, long documento, String primerNombre, String primerApellido, String celular, String email, String clave) {
+        this.idUsuario = idUsuario;
+        this.tipoIdentificacion = tipoIdentificacion;
         this.documento = documento;
         this.primerNombre = primerNombre;
         this.primerApellido = primerApellido;
-        this.segundoApellido = segundoApellido;
+        this.celular = celular;
+        this.email = email;
         this.clave = clave;
     }
 
-    public Integer getCodigoUsuario() {
-        return codigoUsuario;
+    public Usuario(Integer idUsuario, String tipoIdentificacion, long documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, 
+            String telefono, String celular, String email, String clave, int estado) {
+        this.idUsuario = idUsuario;
+        this.tipoIdentificacion = tipoIdentificacion;
+        this.documento = documento;
+        this.primerNombre = primerNombre;
+        this.segundoNombre = segundoNombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.telefono = telefono;
+        this.celular = celular;
+        this.email = email;
+        this.clave = clave;
+        this.estado = estado;
     }
 
-    public void setCodigoUsuario(Integer codigoUsuario) {
-        this.codigoUsuario = codigoUsuario;
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getTipoIdentificacion() {
@@ -203,13 +235,23 @@ public class Usuario implements Serializable {
         this.clave = clave;
     }
 
-    @XmlTransient
-    public List<Rol> getRolList() {
-        return rolList;
+    public int getEstado() {
+        return estado;
     }
 
-    public void setRolList(List<Rol> rolList) {
-        this.rolList = rolList;
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+    
+    
+
+    @XmlTransient
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 
     @XmlTransient
@@ -221,10 +263,19 @@ public class Usuario implements Serializable {
         this.solicitudList = solicitudList;
     }
 
+    @XmlTransient
+    public List<Empresa> getEmpresaList() {
+        return empresaList;
+    }
+
+    public void setEmpresaList(List<Empresa> empresaList) {
+        this.empresaList = empresaList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codigoUsuario != null ? codigoUsuario.hashCode() : 0);
+        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
         return hash;
     }
 
@@ -235,7 +286,7 @@ public class Usuario implements Serializable {
             return false;
         }
         Usuario other = (Usuario) object;
-        if ((this.codigoUsuario == null && other.codigoUsuario != null) || (this.codigoUsuario != null && !this.codigoUsuario.equals(other.codigoUsuario))) {
+        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
             return false;
         }
         return true;
@@ -243,7 +294,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sigmeyc.entities.Usuario[ codigoUsuario=" + codigoUsuario + " ]";
+        return "com.sigmeyc.entities.Usuario[ idUsuario=" + idUsuario + " ]";
     }
 
 }

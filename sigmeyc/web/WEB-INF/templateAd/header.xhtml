@@ -14,19 +14,10 @@
             </a>
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-
-                    <!-- boton salir -->
-                    <!--                    <li class="dropdown notifications-menu">
-                                            <h:form>
-                                                <h:commandLink class="btn btn-danger" action="#{sessionController.cerrarSesion()}" ><i class="fa fa-sign-out" ></i> Cerrar sesión</h:commandLink>
-                                            </h:form>
-                                        </li>-->
-                    <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
                             <h:graphicImage library="img" name="usuario1.jpg" class="user-image" alt="User Image"/>
-                            <span class="hidden-xs">#{sessionController.usuarioSesion.primerNombre} #{sessionController.usuarioSesion.primerApellido}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -34,7 +25,8 @@
 
                                 <h:graphicImage library="img" name="usuario1.jpg" class="img-circle" alt="User Image"/>
                                 <p>
-                                    #{sessionController.usuarioSesion.primerNombre} #{sessionController.usuarioSesion.primerApellido} #{sessionController.usuarioSesion.rolList}<!--rol-->
+                                    #{sessionController.primerNombre} #{sessionController.primerApellido} 
+                                    <br/>#{sessionController.rol.nombreRol}<!--rol-->
                                     <small>23 de  marzo. 2017</small> <!--fecha actual-->
                                 </p>
                             </li>
@@ -42,7 +34,10 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                                    <h:form>
+                                        <h:link class="btn btn-default btn-flat" outcome="/crud/usuario/editarsesion.xhtml">Perfil</h:link>
+                                    </h:form>
+
                                 </div>
                                 <div class="pull-right">
                                     <h:form>

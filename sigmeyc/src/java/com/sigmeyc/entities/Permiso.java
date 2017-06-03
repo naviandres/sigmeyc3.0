@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -25,60 +27,87 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author daniel
+ * @author ivan
  */
 @Entity
 @Table(name = "permisos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Permiso.findAll", query = "SELECT p FROM Permiso p")
-    , @NamedQuery(name = "Permiso.findByIdentificadorPermisos", query = "SELECT p FROM Permiso p WHERE p.identificadorPermisos = :identificadorPermisos")
-    , @NamedQuery(name = "Permiso.findByDescripcion", query = "SELECT p FROM Permiso p WHERE p.descripcion = :descripcion")})
+    , @NamedQuery(name = "Permiso.findByIdPermisos", query = "SELECT p FROM Permiso p WHERE p.idPermisos = :idPermisos")
+    , @NamedQuery(name = "Permiso.findByNombre", query = "SELECT p FROM Permiso p WHERE p.nombre = :nombre")
+    , @NamedQuery(name = "Permiso.findByUrl", query = "SELECT p FROM Permiso p WHERE p.url = :url")
+    , @NamedQuery(name = "Permiso.findByIcon", query = "SELECT p FROM Permiso p WHERE p.icon = :icon")})
 public class Permiso implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idPermisos")
+    private Integer idPermisos;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "identificadorPermisos")
-    private Integer identificadorPermisos;
+    @Size(min = 1, max = 40)
+    @Column(name = "nombre")
+    private String nombre;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "descripcion")
-    private String descripcion;
+    @Size(min = 1, max = 40)
+    @Column(name = "url")
+    private String url;
+    @Size(max = 45)
+    @Column(name = "icon")
+    private String icon;
     @JoinTable(name = "roles_has_permisos", joinColumns = {
-        @JoinColumn(name = "permisos_identificador_permisos", referencedColumnName = "identificadorPermisos")}, inverseJoinColumns = {
-        @JoinColumn(name = "roles_identificador_rol", referencedColumnName = "identificadorRol")})
+        @JoinColumn(name = "permisos_idPermisos", referencedColumnName = "idPermisos")}, inverseJoinColumns = {
+        @JoinColumn(name = "roles_identificadorRol", referencedColumnName = "identificadorRol")})
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Rol> rolList;
 
     public Permiso() {
     }
 
-    public Permiso(Integer identificadorPermisos) {
-        this.identificadorPermisos = identificadorPermisos;
+    public Permiso(Integer idPermisos) {
+        this.idPermisos = idPermisos;
     }
 
-    public Permiso(Integer identificadorPermisos, String descripcion) {
-        this.identificadorPermisos = identificadorPermisos;
-        this.descripcion = descripcion;
+    public Permiso(Integer idPermisos, String nombre, String url) {
+        this.idPermisos = idPermisos;
+        this.nombre = nombre;
+        this.url = url;
     }
 
-    public Integer getIdentificadorPermisos() {
-        return identificadorPermisos;
+    public Integer getIdPermisos() {
+        return idPermisos;
     }
 
-    public void setIdentificadorPermisos(Integer identificadorPermisos) {
-        this.identificadorPermisos = identificadorPermisos;
+    public void setIdPermisos(Integer idPermisos) {
+        this.idPermisos = idPermisos;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     @XmlTransient
@@ -93,7 +122,7 @@ public class Permiso implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (identificadorPermisos != null ? identificadorPermisos.hashCode() : 0);
+        hash += (idPermisos != null ? idPermisos.hashCode() : 0);
         return hash;
     }
 
@@ -104,7 +133,7 @@ public class Permiso implements Serializable {
             return false;
         }
         Permiso other = (Permiso) object;
-        if ((this.identificadorPermisos == null && other.identificadorPermisos != null) || (this.identificadorPermisos != null && !this.identificadorPermisos.equals(other.identificadorPermisos))) {
+        if ((this.idPermisos == null && other.idPermisos != null) || (this.idPermisos != null && !this.idPermisos.equals(other.idPermisos))) {
             return false;
         }
         return true;
@@ -112,7 +141,7 @@ public class Permiso implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sigmeyc.entities.Permiso[ identificadorPermisos=" + identificadorPermisos + " ]";
+        return "com.sigmeyc.entities.Permiso[ idPermisos=" + idPermisos + " ]";
     }
     
 }

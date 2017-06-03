@@ -13,11 +13,8 @@
             <section class="content-header">
                 <h1>
                     Datos de las guias
-
                 </h1>
-
             </section>
-
             <!-- Main content -->
             <section class="content">
                 <div class="row">
@@ -33,66 +30,39 @@
                                     <h:panelGroup id="messagePanel" layout="block">
                                         <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                                     </h:panelGroup>
-                                    <h:outputText escape="false" value="#{bundle.ListGuiaEmpty}" rendered="#{guiaController.items.rowCount == 0}"/>
-                                    <h:panelGroup rendered="#{guiaController.items.rowCount > 0}">
-                                        <h:outputText value="#{guiaController.pagination.pageFirstItem + 1}..#{guiaController.pagination.pageLastItem + 1}/#{guiaController.pagination.itemsCount}"/>&nbsp;
-                                        <h:commandLink action="#{guiaController.previous}" value="#{bundle.Previous} #{guiaController.pagination.pageSize}" rendered="#{guiaController.pagination.hasPreviousPage}"/>&nbsp;
-                                        <h:commandLink action="#{guiaController.next}" value="#{bundle.Next} #{guiaController.pagination.pageSize}" rendered="#{guiaController.pagination.hasNextPage}"/>&nbsp;
-                                        <h:dataTable id="example2" class="table table-bordered table-hover" value="#{guiaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="#{bundle.ListGuiaTitle_codigoBarras}"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.codigoBarras}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="#{bundle.ListGuiaTitle_serial}"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.serial}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="#{bundle.ListGuiaTitle_detalleMercancia}"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.detalleMercancia}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="#{bundle.ListGuiaTitle_direccionDeEnvio}"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.direccionDeEnvio}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="#{bundle.ListGuiaTitle_conductorAsignado}"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.conductorAsignado}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="#{bundle.ListGuiaTitle_vehiculoDesignado}"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.vehiculoDesignado}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="#{bundle.ListGuiaTitle_planillascodigoPlanilla1}"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.planillascodigoPlanilla1}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="&nbsp;"/>
-                                                </f:facet>
-                                                <h:commandLink action="#{guiaController.prepareView}" value="#{bundle.ListGuiaViewLink}"/>
-                                                <h:outputText value=" "/>
-                                                <h:commandLink action="#{guiaController.prepareEdit}" value="#{bundle.ListGuiaEditLink}"/>
-                                                <h:outputText value=" "/>
-                                                <h:commandLink action="#{guiaController.destroy}" value="#{bundle.ListGuiaDestroyLink}"/>
-                                            </h:column>
-                                        </h:dataTable>
-                                    </h:panelGroup>
+
+                                    <h:dataTable id="example2" class="table table-bordered table-hover" value="#{guiaController.guias}" var="guia">
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="codigoBarras"/>
+                                            </f:facet>
+                                            <h:outputText value="#{guia.codigoBarras}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="detalleMercancia"/>
+                                            </f:facet>
+                                            <h:outputText value="#{guia.detalleMercancia}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="planillasidPlanilla"/>
+                                            </f:facet>
+                                            <h:outputText value="#{guia.planillasidPlanilla}">
+                                                <f:converter converterId="planillaConverter"/>
+                                            </h:outputText>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="&nbsp;"/>
+                                            </f:facet>
+                                            <h:commandLink action="#{guiaController.prepareView(guia)}"><i class="fa fa-eye fa-2x"></i></h:commandLink>
+                                            <h:outputText value=" "/>
+                                            <h:commandLink action="#{guiaController.Editar(guia)}"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></h:commandLink>
+                                            <h:outputText value=" "/>
+                                            <h:commandLink action="#{guiaController.Eliminar(guia)}"><i class="fa fa-trash fa-2x"  aria-hidden="true"></i></h:commandLink>
+                                        </h:column>
+                                    </h:dataTable>
                                     <br />
                                     <div class="col-lg-2">
                                         <h:commandButton class="btn btn-success" action="#{guiaController.prepareCreate}" value="Crear"></h:commandButton>

@@ -3,18 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.EditLocalidadTitle}"></h:outputText>
+            <h:outputText value="Editar Localidad"></h:outputText>
         </ui:define>
         <ui:define name="contenido">
             <!-- Right side column. Contains the navbar and content of the page -->
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form id="createLocalidad" class="box-body form-horizontal">
+            <h:form id="createLocalidad" class="box-body form-horizontal" prependId="false">
                 <div class="container">
                     <section class="content-header">
                         <h1>
@@ -40,21 +41,21 @@
                                 </div>
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditLocalidadLabel_idLocalidad}" for="idLocalidad" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="ID Localidad" for="idLocalidad" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="idLocalidad" value="#{localidadController.selected.idLocalidad}" title="#{bundle.EditLocalidadRequiredMessage_idLocalidad}"  required="true" requiredMessage="#{bundle.CreateLocalidadRequiredMessage_idLocalidad}"/>
+                                            <h:inputText class="form-control" id="idLocalidad" value="#{localidadController.localidad.idLocalidad}"  required="true" requiredMessage="Ingrese identificador"/>
                                         </div>
                                     </div>
                                     <div class="form-group">                  
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditLocalidadLabel_nombreLocalidad}" for="nombreLocalidad" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Nombre de la Localidad" for="nombreLocalidad" />
                                         <div class="col-xs-6">                    
-                                            <h:inputText class="form-control" id="nombreLocalidad" value="#{localidadController.selected.nombreLocalidad}" title="#{bundle.EditLocalidadTitle_nombreLocalidad}" />
+                                            <h:inputText class="form-control" id="nombreLocalidad" value="#{localidadController.localidad.nombreLocalidad}" requiredMessage="Ingrese el nombre de la localidad" />
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-4">
-                                            <h:commandButton class="btn btn-success" action="#{localidadController.update}" value="Guardar"/>
+                                            <h:commandButton class="btn btn-success" action="#{localidadController.GuardarEdicion()}" value="Guardar"/>
                                         </div>
                                         <div class="col-lg-2 ">
                                             <h:commandButton class="btn btn-instagram" action="#{localidadController.prepareList}" immediate="true" value="ver todos"/>

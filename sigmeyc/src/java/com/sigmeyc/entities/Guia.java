@@ -29,82 +29,76 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author daniel
+ * @author ivan
  */
 @Entity
-@Table(name = "guia")
+@Table(name = "guias")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Guia.findAll", query = "SELECT g FROM Guia g")
-    , @NamedQuery(name = "Guia.findByCodigoBarras", query = "SELECT g FROM Guia g WHERE g.codigoBarras = :codigoBarras")
-    , @NamedQuery(name = "Guia.findByDetalleMercancia", query = "SELECT g FROM Guia g WHERE g.detalleMercancia = :detalleMercancia")
-    , @NamedQuery(name = "Guia.findByDireccionDeEnvio", query = "SELECT g FROM Guia g WHERE g.direccionDeEnvio = :direccionDeEnvio")
-    , @NamedQuery(name = "Guia.findByConductorAsignado", query = "SELECT g FROM Guia g WHERE g.conductorAsignado = :conductorAsignado")
-    , @NamedQuery(name = "Guia.findByVehiculoDesignado", query = "SELECT g FROM Guia g WHERE g.vehiculoDesignado = :vehiculoDesignado")})
+    , @NamedQuery(name = "Guia.findByIdGuia", query = "SELECT g FROM Guia g WHERE g.idGuia = :idGuia")
+    , @NamedQuery(name = "Guia.findByDetalleMercancia", query = "SELECT g FROM Guia g WHERE g.detalleMercancia = :detalleMercancia")})
 public class Guia implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "codigoBarras")
-    private Integer codigoBarras;
+    @Column(name = "idGuia")
+    private Integer idGuia;
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 16777215)
-    @Column(name = "serial")
-    private String serial;
+    @Column(name = "codigoBarras")
+    private String codigoBarras;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "detalleMercancia")
     private String detalleMercancia;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "direccionDeEnvio")
-    private String direccionDeEnvio;
-    @Size(max = 45)
-    @Column(name = "conductorAsignado")
-    private String conductorAsignado;
-    @Size(max = 45)
-    @Column(name = "vehiculoDesignado")
-    private String vehiculoDesignado;
-    @JoinColumn(name = "planillas_codigoPlanilla1", referencedColumnName = "codigoPlanilla")
+    @JoinColumn(name = "planillas_idPlanilla", referencedColumnName = "idPlanilla")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Planilla planillascodigoPlanilla1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "guiacodigoBarras", fetch = FetchType.LAZY)
+    private Planilla planillasidPlanilla;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "guiaidGuia", fetch = FetchType.LAZY)
     private List<Mercancia> mercanciaList;
 
     public Guia() {
     }
 
-    public Guia(Integer codigoBarras) {
-        this.codigoBarras = codigoBarras;
+    public Guia(Integer idGuia) {
+        this.idGuia = idGuia;
     }
 
-    public Guia(Integer codigoBarras, String serial, String detalleMercancia, String direccionDeEnvio) {
+    public Guia(Integer idGuia, String codigoBarras, String detalleMercancia) {
+        this.idGuia = idGuia;
         this.codigoBarras = codigoBarras;
-        this.serial = serial;
         this.detalleMercancia = detalleMercancia;
-        this.direccionDeEnvio = direccionDeEnvio;
     }
 
-    public Integer getCodigoBarras() {
+    public Guia(Integer idGuia, String codigoBarras, String detalleMercancia, Planilla planillasidPlanilla) {
+        this.idGuia = idGuia;
+        this.codigoBarras = codigoBarras;
+        this.detalleMercancia = detalleMercancia;
+        this.planillasidPlanilla = planillasidPlanilla;
+    }
+    
+    
+
+    public Integer getIdGuia() {
+        return idGuia;
+    }
+
+    public void setIdGuia(Integer idGuia) {
+        this.idGuia = idGuia;
+    }
+
+    public String getCodigoBarras() {
         return codigoBarras;
     }
 
-    public void setCodigoBarras(Integer codigoBarras) {
+    public void setCodigoBarras(String codigoBarras) {
         this.codigoBarras = codigoBarras;
-    }
-
-    public String getSerial() {
-        return serial;
-    }
-
-    public void setSerial(String serial) {
-        this.serial = serial;
     }
 
     public String getDetalleMercancia() {
@@ -115,36 +109,12 @@ public class Guia implements Serializable {
         this.detalleMercancia = detalleMercancia;
     }
 
-    public String getDireccionDeEnvio() {
-        return direccionDeEnvio;
+    public Planilla getPlanillasidPlanilla() {
+        return planillasidPlanilla;
     }
 
-    public void setDireccionDeEnvio(String direccionDeEnvio) {
-        this.direccionDeEnvio = direccionDeEnvio;
-    }
-
-    public String getConductorAsignado() {
-        return conductorAsignado;
-    }
-
-    public void setConductorAsignado(String conductorAsignado) {
-        this.conductorAsignado = conductorAsignado;
-    }
-
-    public String getVehiculoDesignado() {
-        return vehiculoDesignado;
-    }
-
-    public void setVehiculoDesignado(String vehiculoDesignado) {
-        this.vehiculoDesignado = vehiculoDesignado;
-    }
-
-    public Planilla getPlanillascodigoPlanilla1() {
-        return planillascodigoPlanilla1;
-    }
-
-    public void setPlanillascodigoPlanilla1(Planilla planillascodigoPlanilla1) {
-        this.planillascodigoPlanilla1 = planillascodigoPlanilla1;
+    public void setPlanillasidPlanilla(Planilla planillasidPlanilla) {
+        this.planillasidPlanilla = planillasidPlanilla;
     }
 
     @XmlTransient
@@ -159,7 +129,7 @@ public class Guia implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codigoBarras != null ? codigoBarras.hashCode() : 0);
+        hash += (idGuia != null ? idGuia.hashCode() : 0);
         return hash;
     }
 
@@ -170,7 +140,7 @@ public class Guia implements Serializable {
             return false;
         }
         Guia other = (Guia) object;
-        if ((this.codigoBarras == null && other.codigoBarras != null) || (this.codigoBarras != null && !this.codigoBarras.equals(other.codigoBarras))) {
+        if ((this.idGuia == null && other.idGuia != null) || (this.idGuia != null && !this.idGuia.equals(other.idGuia))) {
             return false;
         }
         return true;
@@ -178,7 +148,7 @@ public class Guia implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sigmeyc.entities.Guia[ codigoBarras=" + codigoBarras + " ]";
+        return "com.sigmeyc.entities.Guia[ idGuia=" + idGuia + " ]";
     }
     
 }

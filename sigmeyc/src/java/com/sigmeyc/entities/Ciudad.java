@@ -12,6 +12,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author daniel
+ * @author ivan
  */
 @Entity
 @Table(name = "ciudades")
@@ -40,8 +42,8 @@ public class Ciudad implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idCiudades")
     private Integer idCiudades;
     @Basic(optional = false)
@@ -54,7 +56,7 @@ public class Ciudad implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "zona")
     private String zona;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudadesIdciudades", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudadesidCiudades", fetch = FetchType.LAZY)
     private List<Departamento> departamentoList;
     @JoinColumn(name = "localidad_idLocalidad", referencedColumnName = "idLocalidad")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)

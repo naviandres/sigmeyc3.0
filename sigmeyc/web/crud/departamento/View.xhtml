@@ -7,7 +7,7 @@
 
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ViewDepartamentoTitle}"></h:outputText>
+            <h:outputText value="Ver Departamento"></h:outputText>
         </ui:define>
         <ui:define name="contenido">
             <h:panelGroup id="messagePanel" layout="block">
@@ -39,28 +39,22 @@
                             <div class="box-body">
                                 <h:form id="verDepartamento" class="box-body form-horizontal">
                                     <div class="form-group">
-                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewDepartamentoLabel_idDepartamento}"/>
+                                        <h:outputText class="col-xs-3 control-label" value="idDepartamento"/>
                                         <div class="col-xs-6">
-                                            <h:outputText class="form-control" value="#{departamentoController.selected.idDepartamento}" title="#{bundle.ViewDepartamentoTitle_idDepartamento}"/>
+                                            <h:outputText class="form-control" value="#{departamentoController.departamento.idDepartamento}" />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewDepartamentoLabel_nombreDepartamento}"/>
+                                        <h:outputText class="col-xs-3 control-label" value="nombreDepartamento"/>
                                         <div class="col-xs-6">
-                                            <h:outputText class="form-control" value="#{departamentoController.selected.nombreDepartamento}" title="#{bundle.ViewDepartamentoTitle_nombreDepartamento}"/>
+                                            <h:outputText class="form-control" value="#{departamentoController.departamento.nombreDepartamento}" />
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-2 col-lg-offset-4">
-                                            <h:commandButton class="btn btn-danger" action="#{departamentoController.destroyAndView}" value="Eliminar"></h:commandButton>
-                                        </div>
+                                        
 
                                         <div class="col-lg-2">
-                                            <h:commandButton class="btn btn-success" action="#{departamentoController.prepareCreate}" value="Crear"></h:commandButton>
-                                        </div>
-
-                                        <div class="col-lg-2">
-                                            <h:commandButton class="btn btn-instagram" action="#{departamentoController.prepareList}" value="Ver todos"></h:commandButton>
+                                            <h:commandButton class="btn btn-instagram" action="#{departamentoController.prepareList()}" value="Ver todos"></h:commandButton>
                                         </div>
                                     </div>
                                 </h:form>

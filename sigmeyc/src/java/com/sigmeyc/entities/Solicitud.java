@@ -31,51 +31,49 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author daniel
+ * @author ivan
  */
 @Entity
 @Table(name = "solicitudes")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Solicitud.findAll", query = "SELECT s FROM Solicitud s")
-    , @NamedQuery(name = "Solicitud.findByCodigoSolicitud", query = "SELECT s FROM Solicitud s WHERE s.codigoSolicitud = :codigoSolicitud")
+    , @NamedQuery(name = "Solicitud.findByIdSolicitud", query = "SELECT s FROM Solicitud s WHERE s.idSolicitud = :idSolicitud")
+    , @NamedQuery(name = "Solicitud.findByTiempoEntrega", query = "SELECT s FROM Solicitud s WHERE s.tiempoEntrega = :tiempoEntrega")
     , @NamedQuery(name = "Solicitud.findByTipoServicio", query = "SELECT s FROM Solicitud s WHERE s.tipoServicio = :tipoServicio")
-    , @NamedQuery(name = "Solicitud.findByFechaEntrega", query = "SELECT s FROM Solicitud s WHERE s.fechaEntrega = :fechaEntrega")
-    , @NamedQuery(name = "Solicitud.findByCiudadDestino", query = "SELECT s FROM Solicitud s WHERE s.ciudadDestino = :ciudadDestino")
-    , @NamedQuery(name = "Solicitud.findByDirecci\u00f3nDestino", query = "SELECT s FROM Solicitud s WHERE s.direcci\u00f3nDestino = :direcci\u00f3nDestino")
+    , @NamedQuery(name = "Solicitud.findByDireccionOrigen", query = "SELECT s FROM Solicitud s WHERE s.direccionOrigen = :direccionOrigen")
+    , @NamedQuery(name = "Solicitud.findByDireccionDestino", query = "SELECT s FROM Solicitud s WHERE s.direccionDestino = :direccionDestino")
     , @NamedQuery(name = "Solicitud.findByNombreDestinatario", query = "SELECT s FROM Solicitud s WHERE s.nombreDestinatario = :nombreDestinatario")
     , @NamedQuery(name = "Solicitud.findByApellidoDestinatario", query = "SELECT s FROM Solicitud s WHERE s.apellidoDestinatario = :apellidoDestinatario")
     , @NamedQuery(name = "Solicitud.findByTelefonoDestinatario", query = "SELECT s FROM Solicitud s WHERE s.telefonoDestinatario = :telefonoDestinatario")
-    , @NamedQuery(name = "Solicitud.findByPrioridad", query = "SELECT s FROM Solicitud s WHERE s.prioridad = :prioridad")
-    , @NamedQuery(name = "Solicitud.findByTiempoEntrega", query = "SELECT s FROM Solicitud s WHERE s.tiempoEntrega = :tiempoEntrega")
-    , @NamedQuery(name = "Solicitud.findByFechaSolicitud", query = "SELECT s FROM Solicitud s WHERE s.fechaSolicitud = :fechaSolicitud")
-    , @NamedQuery(name = "Solicitud.findByOrigenDeMercancia", query = "SELECT s FROM Solicitud s WHERE s.origenDeMercancia = :origenDeMercancia")})
+    , @NamedQuery(name = "Solicitud.findByPriorizacion", query = "SELECT s FROM Solicitud s WHERE s.priorizacion = :priorizacion")
+    , @NamedQuery(name = "Solicitud.findByFechaSolicitud", query = "SELECT s FROM Solicitud s WHERE s.fechaSolicitud = :fechaSolicitud")})
 public class Solicitud implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "codigoSolicitud")
-    private Integer codigoSolicitud;
+    @Column(name = "idSolicitud")
+    private Integer idSolicitud;
+    @Size(max = 15)
+    @Column(name = "tiempoEntrega")
+    private String tiempoEntrega;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "tipoServicio")
     private String tipoServicio;
-    @Column(name = "fechaEntrega")
-    @Temporal(TemporalType.DATE)
-    private Date fechaEntrega;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "ciudadDestino")
-    private String ciudadDestino;
+    @Column(name = "direccionOrigen")
+    private String direccionOrigen;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "direcci\u00f3nDestino")
-    private String direcciónDestino;
+    @Column(name = "direccionDestino")
+    private String direccionDestino;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -92,52 +90,69 @@ public class Solicitud implements Serializable {
     @Column(name = "telefonoDestinatario")
     private String telefonoDestinatario;
     @Size(max = 20)
-    @Column(name = "prioridad")
-    private String prioridad;
-    @Size(max = 15)
-    @Column(name = "tiempoEntrega")
-    private String tiempoEntrega;
+    @Column(name = "priorizacion")
+    private String priorizacion;
     @Column(name = "fechaSolicitud")
     @Temporal(TemporalType.DATE)
     private Date fechaSolicitud;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "origenDeMercancia")
-    private String origenDeMercancia;
-    @JoinColumn(name = "empresas_codigoEmpresa", referencedColumnName = "codigoEmpresa")
+    @JoinColumn(name = "empresas_idEmpresa", referencedColumnName = "idEmpresa")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Empresa empresascodigoEmpresa;
-    @JoinColumn(name = "usuarios_codigoUsuario", referencedColumnName = "codigoUsuario")
+    private Empresa empresasidEmpresa;
+    @JoinColumn(name = "usuarios_idUsuario", referencedColumnName = "idUsuario")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Usuario usuarioscodigoUsuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudescodigoSolicitud", fetch = FetchType.LAZY)
+    private Usuario usuariosidUsuario;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudesidSolicitud", fetch = FetchType.LAZY)
     private List<Mercancia> mercanciaList;
 
     public Solicitud() {
     }
 
-    public Solicitud(Integer codigoSolicitud) {
-        this.codigoSolicitud = codigoSolicitud;
+    public Solicitud(Integer idSolicitud) {
+        this.idSolicitud = idSolicitud;
     }
 
-    public Solicitud(Integer codigoSolicitud, String tipoServicio, String ciudadDestino, String direcciónDestino, String nombreDestinatario, String apellidoDestinatario, String telefonoDestinatario, String origenDeMercancia) {
-        this.codigoSolicitud = codigoSolicitud;
+    public Solicitud(Integer idSolicitud, String tipoServicio, String direccionOrigen, String direccionDestino, String nombreDestinatario, String apellidoDestinatario, String telefonoDestinatario) {
+        this.idSolicitud = idSolicitud;
         this.tipoServicio = tipoServicio;
-        this.ciudadDestino = ciudadDestino;
-        this.direcciónDestino = direcciónDestino;
+        this.direccionOrigen = direccionOrigen;
+        this.direccionDestino = direccionDestino;
         this.nombreDestinatario = nombreDestinatario;
         this.apellidoDestinatario = apellidoDestinatario;
         this.telefonoDestinatario = telefonoDestinatario;
-        this.origenDeMercancia = origenDeMercancia;
     }
 
-    public Integer getCodigoSolicitud() {
-        return codigoSolicitud;
+    public Solicitud(Integer idSolicitud, String tiempoEntrega, String tipoServicio, String direccionOrigen, String direccionDestino, String nombreDestinatario, String apellidoDestinatario, String telefonoDestinatario, String priorizacion, Date fechaSolicitud, Empresa empresasidEmpresa, Usuario usuariosidUsuario) {
+        this.idSolicitud = idSolicitud;
+        this.tiempoEntrega = tiempoEntrega;
+        this.tipoServicio = tipoServicio;
+        this.direccionOrigen = direccionOrigen;
+        this.direccionDestino = direccionDestino;
+        this.nombreDestinatario = nombreDestinatario;
+        this.apellidoDestinatario = apellidoDestinatario;
+        this.telefonoDestinatario = telefonoDestinatario;
+        this.priorizacion = priorizacion;
+        this.fechaSolicitud = fechaSolicitud;
+        this.empresasidEmpresa = empresasidEmpresa;
+        this.usuariosidUsuario = usuariosidUsuario;
     }
 
-    public void setCodigoSolicitud(Integer codigoSolicitud) {
-        this.codigoSolicitud = codigoSolicitud;
+    
+
+    
+    public Integer getIdSolicitud() {
+        return idSolicitud;
+    }
+
+    public void setIdSolicitud(Integer idSolicitud) {
+        this.idSolicitud = idSolicitud;
+    }
+
+    public String getTiempoEntrega() {
+        return tiempoEntrega;
+    }
+
+    public void setTiempoEntrega(String tiempoEntrega) {
+        this.tiempoEntrega = tiempoEntrega;
     }
 
     public String getTipoServicio() {
@@ -148,28 +163,20 @@ public class Solicitud implements Serializable {
         this.tipoServicio = tipoServicio;
     }
 
-    public Date getFechaEntrega() {
-        return fechaEntrega;
+    public String getDireccionOrigen() {
+        return direccionOrigen;
     }
 
-    public void setFechaEntrega(Date fechaEntrega) {
-        this.fechaEntrega = fechaEntrega;
+    public void setDireccionOrigen(String direccionOrigen) {
+        this.direccionOrigen = direccionOrigen;
     }
 
-    public String getCiudadDestino() {
-        return ciudadDestino;
+    public String getDireccionDestino() {
+        return direccionDestino;
     }
 
-    public void setCiudadDestino(String ciudadDestino) {
-        this.ciudadDestino = ciudadDestino;
-    }
-
-    public String getDirecciónDestino() {
-        return direcciónDestino;
-    }
-
-    public void setDirecciónDestino(String direcciónDestino) {
-        this.direcciónDestino = direcciónDestino;
+    public void setDireccionDestino(String direccionDestino) {
+        this.direccionDestino = direccionDestino;
     }
 
     public String getNombreDestinatario() {
@@ -196,20 +203,12 @@ public class Solicitud implements Serializable {
         this.telefonoDestinatario = telefonoDestinatario;
     }
 
-    public String getPrioridad() {
-        return prioridad;
+    public String getPriorizacion() {
+        return priorizacion;
     }
 
-    public void setPrioridad(String prioridad) {
-        this.prioridad = prioridad;
-    }
-
-    public String getTiempoEntrega() {
-        return tiempoEntrega;
-    }
-
-    public void setTiempoEntrega(String tiempoEntrega) {
-        this.tiempoEntrega = tiempoEntrega;
+    public void setPriorizacion(String priorizacion) {
+        this.priorizacion = priorizacion;
     }
 
     public Date getFechaSolicitud() {
@@ -220,28 +219,20 @@ public class Solicitud implements Serializable {
         this.fechaSolicitud = fechaSolicitud;
     }
 
-    public String getOrigenDeMercancia() {
-        return origenDeMercancia;
+    public Empresa getEmpresasidEmpresa() {
+        return empresasidEmpresa;
     }
 
-    public void setOrigenDeMercancia(String origenDeMercancia) {
-        this.origenDeMercancia = origenDeMercancia;
+    public void setEmpresasidEmpresa(Empresa empresasidEmpresa) {
+        this.empresasidEmpresa = empresasidEmpresa;
     }
 
-    public Empresa getEmpresascodigoEmpresa() {
-        return empresascodigoEmpresa;
+    public Usuario getUsuariosidUsuario() {
+        return usuariosidUsuario;
     }
 
-    public void setEmpresascodigoEmpresa(Empresa empresascodigoEmpresa) {
-        this.empresascodigoEmpresa = empresascodigoEmpresa;
-    }
-
-    public Usuario getUsuarioscodigoUsuario() {
-        return usuarioscodigoUsuario;
-    }
-
-    public void setUsuarioscodigoUsuario(Usuario usuarioscodigoUsuario) {
-        this.usuarioscodigoUsuario = usuarioscodigoUsuario;
+    public void setUsuariosidUsuario(Usuario usuariosidUsuario) {
+        this.usuariosidUsuario = usuariosidUsuario;
     }
 
     @XmlTransient
@@ -256,7 +247,7 @@ public class Solicitud implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codigoSolicitud != null ? codigoSolicitud.hashCode() : 0);
+        hash += (idSolicitud != null ? idSolicitud.hashCode() : 0);
         return hash;
     }
 
@@ -267,7 +258,7 @@ public class Solicitud implements Serializable {
             return false;
         }
         Solicitud other = (Solicitud) object;
-        if ((this.codigoSolicitud == null && other.codigoSolicitud != null) || (this.codigoSolicitud != null && !this.codigoSolicitud.equals(other.codigoSolicitud))) {
+        if ((this.idSolicitud == null && other.idSolicitud != null) || (this.idSolicitud != null && !this.idSolicitud.equals(other.idSolicitud))) {
             return false;
         }
         return true;
@@ -275,7 +266,7 @@ public class Solicitud implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sigmeyc.entities.Solicitud[ codigoSolicitud=" + codigoSolicitud + " ]";
+        return "com.sigmeyc.entities.Solicitud[ idSolicitud=" + idSolicitud + " ]";
     }
     
 }

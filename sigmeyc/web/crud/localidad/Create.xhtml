@@ -15,7 +15,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
 
-            <h:form id="createLocalidad" class="box-body form-horizontal">
+            <h:form id="createLocalidad" class="box-body form-horizontal" prependId="false">
                 <div class="container">
                     <section class="content-header">
                         <h1>
@@ -41,29 +41,28 @@
                                 </div>
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.CreateLocalidadLabel_idLocalidad}" for="idLocalidad" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="idLocalidad" for="idLocalidad" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="idLocalidad" value="#{localidadController.selected.idLocalidad}" title="#{bundle.CreateLocalidadTitle_idLocalidad}" required="true" requiredMessage="#{bundle.CreateLocalidadRequiredMessage_idLocalidad}"/>
+                                            <h:inputText class="form-control" id="idLocalidad" value="#{localidadController.localidad.idLocalidad}"  required="true" requiredMessage="Ingrese el identificador de la localidad"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.CreateLocalidadLabel_nombreLocalidad}" for="nombreLocalidad" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="nombreLocalidad" for="nombreLocalidad" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="nombreLocalidad" value="#{localidadController.selected.nombreLocalidad}" title="#{bundle.CreateLocalidadTitle_nombreLocalidad}" />
+                                            <h:inputText class="form-control" id="nombreLocalidad" value="#{localidadController.localidad.nombreLocalidad}" requiredMessage="Ingrese el nombre de la localidad" />
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-4">
-                                            <h:commandButton class="btn btn-success" action="#{localidadController.create}" value="Guardar"/>
+                                            <h:commandButton class="btn btn-success" action="#{localidadController.guardar()}" value="Guardar"/>
                                         </div>
                                         <div class="col-lg-2 ">
-                                            <h:commandButton class="btn btn-instagram" action="#{localidadController.prepareList}" immediate="true" value="ver todos"/>
+                                            <h:commandButton class="btn btn-instagram" action="#{localidadController.prepareList()}" immediate="true" value="ver todos"/>
                                         </div>                                             
                                     </div>
                                 </div>
                                 <!-- /.box-body-->
                             </div>
-<!--                                    <h:link outcome="/index" value="#{bundle.CreateLocalidadIndexLink}"/>-->
 
                         </div>
                     </div>

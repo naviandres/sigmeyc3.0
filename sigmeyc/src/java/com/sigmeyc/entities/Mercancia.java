@@ -28,14 +28,14 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author daniel
+ * @author ivan
  */
 @Entity
 @Table(name = "mercancias")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Mercancia.findAll", query = "SELECT m FROM Mercancia m")
-    , @NamedQuery(name = "Mercancia.findByCodigoMercancia", query = "SELECT m FROM Mercancia m WHERE m.codigoMercancia = :codigoMercancia")
+    , @NamedQuery(name = "Mercancia.findByIdMercancia", query = "SELECT m FROM Mercancia m WHERE m.idMercancia = :idMercancia")
     , @NamedQuery(name = "Mercancia.findByValorDeclarado", query = "SELECT m FROM Mercancia m WHERE m.valorDeclarado = :valorDeclarado")
     , @NamedQuery(name = "Mercancia.findByTipoMercancia", query = "SELECT m FROM Mercancia m WHERE m.tipoMercancia = :tipoMercancia")
     , @NamedQuery(name = "Mercancia.findByPeso", query = "SELECT m FROM Mercancia m WHERE m.peso = :peso")
@@ -51,8 +51,8 @@ public class Mercancia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "codigoMercancia")
-    private Integer codigoMercancia;
+    @Column(name = "idMercancia")
+    private Integer idMercancia;
     @Basic(optional = false)
     @NotNull
     @Column(name = "valorDeclarado")
@@ -91,30 +91,30 @@ public class Mercancia implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "embalaje")
     private String embalaje;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mercanciascodigoMercancia", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mercanciasidMercancia", fetch = FetchType.LAZY)
     private List<Novedad> novedadList;
-    @JoinColumn(name = "departamentos_iddepartamento", referencedColumnName = "idDepartamento")
+    @JoinColumn(name = "departamentos_idDepartamento", referencedColumnName = "idDepartamento")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Departamento departamentosIddepartamento;
-    @JoinColumn(name = "guia_codigoBarras", referencedColumnName = "codigoBarras")
+    private Departamento departamentosidDepartamento;
+    @JoinColumn(name = "guia_idGuia", referencedColumnName = "idGuia")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Guia guiacodigoBarras;
-    @JoinColumn(name = "solicitudes_codigoSolicitud", referencedColumnName = "codigoSolicitud")
+    private Guia guiaidGuia;
+    @JoinColumn(name = "solicitudes_idSolicitud", referencedColumnName = "idSolicitud")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Solicitud solicitudescodigoSolicitud;
-    @JoinColumn(name = "vehiculos_placaVehiculo", referencedColumnName = "placaVehiculo")
+    private Solicitud solicitudesidSolicitud;
+    @JoinColumn(name = "vehiculos_idVehiculo", referencedColumnName = "idVehiculo")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Vehiculo vehiculosplacaVehiculo;
+    private Vehiculo vehiculosidVehiculo;
 
     public Mercancia() {
     }
 
-    public Mercancia(Integer codigoMercancia) {
-        this.codigoMercancia = codigoMercancia;
+    public Mercancia(Integer idMercancia) {
+        this.idMercancia = idMercancia;
     }
 
-    public Mercancia(Integer codigoMercancia, double valorDeclarado, String tipoMercancia, double peso, double longitud, double ancho, double altura, double volumen, int cantidad, String embalaje) {
-        this.codigoMercancia = codigoMercancia;
+    public Mercancia(Integer idMercancia, double valorDeclarado, String tipoMercancia, double peso, double longitud, double ancho, double altura, double volumen, int cantidad, String embalaje) {
+        this.idMercancia = idMercancia;
         this.valorDeclarado = valorDeclarado;
         this.tipoMercancia = tipoMercancia;
         this.peso = peso;
@@ -126,12 +126,12 @@ public class Mercancia implements Serializable {
         this.embalaje = embalaje;
     }
 
-    public Integer getCodigoMercancia() {
-        return codigoMercancia;
+    public Integer getIdMercancia() {
+        return idMercancia;
     }
 
-    public void setCodigoMercancia(Integer codigoMercancia) {
-        this.codigoMercancia = codigoMercancia;
+    public void setIdMercancia(Integer idMercancia) {
+        this.idMercancia = idMercancia;
     }
 
     public double getValorDeclarado() {
@@ -215,42 +215,42 @@ public class Mercancia implements Serializable {
         this.novedadList = novedadList;
     }
 
-    public Departamento getDepartamentosIddepartamento() {
-        return departamentosIddepartamento;
+    public Departamento getDepartamentosidDepartamento() {
+        return departamentosidDepartamento;
     }
 
-    public void setDepartamentosIddepartamento(Departamento departamentosIddepartamento) {
-        this.departamentosIddepartamento = departamentosIddepartamento;
+    public void setDepartamentosidDepartamento(Departamento departamentosidDepartamento) {
+        this.departamentosidDepartamento = departamentosidDepartamento;
     }
 
-    public Guia getGuiacodigoBarras() {
-        return guiacodigoBarras;
+    public Guia getGuiaidGuia() {
+        return guiaidGuia;
     }
 
-    public void setGuiacodigoBarras(Guia guiacodigoBarras) {
-        this.guiacodigoBarras = guiacodigoBarras;
+    public void setGuiaidGuia(Guia guiaidGuia) {
+        this.guiaidGuia = guiaidGuia;
     }
 
-    public Solicitud getSolicitudescodigoSolicitud() {
-        return solicitudescodigoSolicitud;
+    public Solicitud getSolicitudesidSolicitud() {
+        return solicitudesidSolicitud;
     }
 
-    public void setSolicitudescodigoSolicitud(Solicitud solicitudescodigoSolicitud) {
-        this.solicitudescodigoSolicitud = solicitudescodigoSolicitud;
+    public void setSolicitudesidSolicitud(Solicitud solicitudesidSolicitud) {
+        this.solicitudesidSolicitud = solicitudesidSolicitud;
     }
 
-    public Vehiculo getVehiculosplacaVehiculo() {
-        return vehiculosplacaVehiculo;
+    public Vehiculo getVehiculosidVehiculo() {
+        return vehiculosidVehiculo;
     }
 
-    public void setVehiculosplacaVehiculo(Vehiculo vehiculosplacaVehiculo) {
-        this.vehiculosplacaVehiculo = vehiculosplacaVehiculo;
+    public void setVehiculosidVehiculo(Vehiculo vehiculosidVehiculo) {
+        this.vehiculosidVehiculo = vehiculosidVehiculo;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codigoMercancia != null ? codigoMercancia.hashCode() : 0);
+        hash += (idMercancia != null ? idMercancia.hashCode() : 0);
         return hash;
     }
 
@@ -261,7 +261,7 @@ public class Mercancia implements Serializable {
             return false;
         }
         Mercancia other = (Mercancia) object;
-        if ((this.codigoMercancia == null && other.codigoMercancia != null) || (this.codigoMercancia != null && !this.codigoMercancia.equals(other.codigoMercancia))) {
+        if ((this.idMercancia == null && other.idMercancia != null) || (this.idMercancia != null && !this.idMercancia.equals(other.idMercancia))) {
             return false;
         }
         return true;
@@ -269,7 +269,7 @@ public class Mercancia implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sigmeyc.entities.Mercancia[ codigoMercancia=" + codigoMercancia + " ]";
+        return "com.sigmeyc.entities.Mercancia[ idMercancia=" + idMercancia + " ]";
     }
     
 }

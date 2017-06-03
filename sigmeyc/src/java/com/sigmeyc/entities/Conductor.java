@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,13 +24,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author daniel
+ * @author ivan
  */
 @Entity
 @Table(name = "conductores")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Conductor.findAll", query = "SELECT c FROM Conductor c")
+    , @NamedQuery(name = "Conductor.findByIdConductor", query = "SELECT c FROM Conductor c WHERE c.idConductor = :idConductor")
     , @NamedQuery(name = "Conductor.findByIdentificacionConductor", query = "SELECT c FROM Conductor c WHERE c.identificacionConductor = :identificacionConductor")
     , @NamedQuery(name = "Conductor.findByTipoLicencia", query = "SELECT c FROM Conductor c WHERE c.tipoLicencia = :tipoLicencia")
     , @NamedQuery(name = "Conductor.findByNumeroLicencia", query = "SELECT c FROM Conductor c WHERE c.numeroLicencia = :numeroLicencia")})
@@ -36,10 +39,14 @@ public class Conductor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idConductor")
+    private Integer idConductor;
     @Basic(optional = false)
     @NotNull
     @Column(name = "identificacionConductor")
-    private Integer identificacionConductor;
+    private long identificacionConductor;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 5)
@@ -49,28 +56,37 @@ public class Conductor implements Serializable {
     @NotNull
     @Column(name = "numeroLicencia")
     private long numeroLicencia;
-    @JoinColumn(name = "vehiculos_placaVehiculo", referencedColumnName = "placaVehiculo")
+    @JoinColumn(name = "vehiculos_idVehiculo", referencedColumnName = "idVehiculo")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Vehiculo vehiculosplacaVehiculo;
+    private Vehiculo vehiculosidVehiculo;
 
     public Conductor() {
     }
 
-    public Conductor(Integer identificacionConductor) {
-        this.identificacionConductor = identificacionConductor;
+    public Conductor(Integer idConductor) {
+        this.idConductor = idConductor;
     }
 
-    public Conductor(Integer identificacionConductor, String tipoLicencia, long numeroLicencia) {
+    public Conductor(Integer idConductor, long identificacionConductor, String tipoLicencia, long numeroLicencia) {
+        this.idConductor = idConductor;
         this.identificacionConductor = identificacionConductor;
         this.tipoLicencia = tipoLicencia;
         this.numeroLicencia = numeroLicencia;
     }
 
-    public Integer getIdentificacionConductor() {
+    public Integer getIdConductor() {
+        return idConductor;
+    }
+
+    public void setIdConductor(Integer idConductor) {
+        this.idConductor = idConductor;
+    }
+
+    public long getIdentificacionConductor() {
         return identificacionConductor;
     }
 
-    public void setIdentificacionConductor(Integer identificacionConductor) {
+    public void setIdentificacionConductor(long identificacionConductor) {
         this.identificacionConductor = identificacionConductor;
     }
 
@@ -90,18 +106,18 @@ public class Conductor implements Serializable {
         this.numeroLicencia = numeroLicencia;
     }
 
-    public Vehiculo getVehiculosplacaVehiculo() {
-        return vehiculosplacaVehiculo;
+    public Vehiculo getVehiculosidVehiculo() {
+        return vehiculosidVehiculo;
     }
 
-    public void setVehiculosplacaVehiculo(Vehiculo vehiculosplacaVehiculo) {
-        this.vehiculosplacaVehiculo = vehiculosplacaVehiculo;
+    public void setVehiculosidVehiculo(Vehiculo vehiculosidVehiculo) {
+        this.vehiculosidVehiculo = vehiculosidVehiculo;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (identificacionConductor != null ? identificacionConductor.hashCode() : 0);
+        hash += (idConductor != null ? idConductor.hashCode() : 0);
         return hash;
     }
 
@@ -112,7 +128,7 @@ public class Conductor implements Serializable {
             return false;
         }
         Conductor other = (Conductor) object;
-        if ((this.identificacionConductor == null && other.identificacionConductor != null) || (this.identificacionConductor != null && !this.identificacionConductor.equals(other.identificacionConductor))) {
+        if ((this.idConductor == null && other.idConductor != null) || (this.idConductor != null && !this.idConductor.equals(other.idConductor))) {
             return false;
         }
         return true;
@@ -120,7 +136,7 @@ public class Conductor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sigmeyc.entities.Conductor[ identificacionConductor=" + identificacionConductor + " ]";
+        return "com.sigmeyc.entities.Conductor[ idConductor=" + idConductor + " ]";
     }
     
 }

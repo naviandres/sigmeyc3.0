@@ -29,14 +29,15 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     public UsuarioFacade() {
         super(Usuario.class);
     }
-    
-     public Usuario login(String email, String clave){
-        TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.findLogin", Usuario.class);
-        q.setParameter("ema", email);
-        q.setParameter("clv", clave);
-        try{
+
+    public Usuario login(String email, String clave) {
+        try {
+            getEntityManager().getEntityManagerFactory().getCache().evictAll();
+            TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.findLogin", Usuario.class);
+            q.setParameter("ema", email);
+            q.setParameter("clv", clave);
             return q.getSingleResult();
-        }catch(Exception e){
+        } catch (Exception e) {
             return null;
         }
     }

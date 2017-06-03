@@ -192,44 +192,44 @@ public class PermisoController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Permiso.class)
-    public static class PermisoControllerConverter implements Converter {
-
-        @Override
-        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-            if (value == null || value.length() == 0) {
-                return null;
-            }
-            PermisoController controller = (PermisoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "permisoController");
-            return controller.getPermiso(getKey(value));
-        }
-
-        java.lang.Integer getKey(String value) {
-            java.lang.Integer key;
-            key = Integer.valueOf(value);
-            return key;
-        }
-
-        String getStringKey(java.lang.Integer value) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(value);
-            return sb.toString();
-        }
-
-        @Override
-        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
-            if (object == null) {
-                return null;
-            }
-            if (object instanceof Permiso) {
-                Permiso o = (Permiso) object;
-                return getStringKey(o.getIdentificadorPermisos());
-            } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Permiso.class.getName());
-            }
-        }
-
-    }
+//    @FacesConverter(forClass = Permiso.class)
+//    public static class PermisoControllerConverter implements Converter {
+//
+//        @Override
+//        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
+//            if (value == null || value.length() == 0) {
+//                return null;
+//            }
+//            PermisoController controller = (PermisoController) facesContext.getApplication().getELResolver().
+//                    getValue(facesContext.getELContext(), null, "permisoController");
+//            return controller.getPermiso(getKey(value));
+//        }
+//
+//        java.lang.Integer getKey(String value) {
+//            java.lang.Integer key;
+//            key = Integer.valueOf(value);
+//            return key;
+//        }
+//
+//        String getStringKey(java.lang.Integer value) {
+//            StringBuilder sb = new StringBuilder();
+//            sb.append(value);
+//            return sb.toString();
+//        }
+//
+//        @Override
+//        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
+//            if (object == null) {
+//                return null;
+//            }
+//            if (object instanceof Permiso) {
+//                Permiso o = (Permiso) object;
+//                return getStringKey(o.getIdentificadorPermisos());
+//            } else {
+//                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Permiso.class.getName());
+//            }
+//        }
+//
+//    }
 
 }

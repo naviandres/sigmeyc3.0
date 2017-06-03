@@ -14,7 +14,7 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
 
-            <h:form id="createGuia" class="box-body form-horizontal">
+            <h:form id="createGuia" class="box-body form-horizontal" prependId="false">
                 <div class="container">
                     <section class="content-header">
                         <h1>
@@ -40,68 +40,38 @@
                                 </div>
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.CreateGuiaLabel_codigoBarras}" for="codigoBarras" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="codigoBarras" for="codigoBarras" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="codigoBarras" value="#{guiaController.selected.codigoBarras}" title="#{bundle.CreateGuiaTitle_codigoBarras}" required="true" requiredMessage="#{bundle.CreateGuiaRequiredMessage_codigoBarras}"/>
-
+                                            <h:inputText class="form-control" id="codigoBarras" value="#{guiaController.guia.codigoBarras}" required="true" requiredMessage="Ingrese codigoBarras"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.CreateGuiaLabel_serial}" for="serial" />
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="serial" value="#{guiaController.selected.serial}" title="#{bundle.CreateGuiaTitle_serial}" required="true" requiredMessage="#{bundle.CreateGuiaRequiredMessage_serial}"/>
+                                        <h:outputLabel class="col-xs-3 control-label" value="detalleMercancia" for="detalleMercancia" />
 
+                                        <div class="col-xs-6">
+                                            <h:inputText class="form-control" id="detalleMercancia" value="#{guiaController.guia.detalleMercancia}" required="true" requiredMessage="Ingrese detalle"/>
                                         </div>
-                                    </div>
+                                    </div>                                 
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.CreateGuiaLabel_detalleMercancia}" for="detalleMercancia" />
-
+                                        <h:outputLabel  class="col-xs-3 control-label" value="planillascodigoPlanilla1 " for="planillascodigoPlanilla1" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="detalleMercancia" value="#{guiaController.selected.detalleMercancia}" title="#{bundle.CreateGuiaTitle_detalleMercancia}" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.CreateGuiaLabel_direccionDeEnvio}" for="direccionDeEnvio" />
-
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="direccionDeEnvio" value="#{guiaController.selected.direccionDeEnvio}" title="#{bundle.CreateGuiaTitle_direccionDeEnvio}" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.CreateGuiaLabel_conductorAsignado}" for="conductorAsignado" />
-
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="conductorAsignado" value="#{guiaController.selected.conductorAsignado}" title="#{bundle.CreateGuiaTitle_conductorAsignado}" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.CreateGuiaLabel_vehiculoDesignado}" for="vehiculoDesignado" />
-
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="vehiculoDesignado" value="#{guiaController.selected.vehiculoDesignado}" title="#{bundle.CreateGuiaTitle_vehiculoDesignado}" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel  class="col-xs-3 control-label" value="#{bundle.CreateGuiaLabel_planillascodigoPlanilla1}" for="planillascodigoPlanilla1" />
-
-                                        <div class="col-xs-6">
-                                            <h:selectOneMenu id="planillascodigoPlanilla1" value="#{guiaController.selected.planillascodigoPlanilla1}" title="#{bundle.CreateGuiaTitle_planillascodigoPlanilla1}" required="true" requiredMessage="#{bundle.CreateGuiaRequiredMessage_planillascodigoPlanilla1}">
-                                                <f:selectItems value="#{planillaController.itemsAvailableSelectOne}"/>
+                                            <h:selectOneMenu id="planillascodigoPlanilla1" value="#{guiaController.guia.planillasidPlanilla}" required="true">
+                                                <f:selectItems value="#{planillaController.planillas}" var="p" itemLabel="#{p.idPlanilla}"/>
+                                                <f:converter converterId="planillaConverter"/>
                                             </h:selectOneMenu>                                        
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-4">
-                                            <h:commandButton class="btn btn-success" action="#{guiaController.create}" value="Guardar"/>
+                                            <h:commandButton class="btn btn-success" action="#{guiaController.guardar()}" value="Guardar"/>
                                         </div>
                                         <div class="col-lg-2 ">
-                                            <h:commandButton class="btn btn-instagram" action="#{guiaController.prepareList}" immediate="true" value="ver todos"/>
+                                            <h:link styleClass="btn btn-instagram" outcome="/crud/guia/List.xhtml" value="ver todos"/>
                                         </div>                                             
                                     </div>
                                 </div>
                                 <!-- /.box-body-->
                             </div>
-
                         </div>
                     </div>
                 </div>

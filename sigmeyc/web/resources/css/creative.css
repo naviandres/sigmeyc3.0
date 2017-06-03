@@ -62,7 +62,7 @@ section {
 aside {
     padding: 50px 0;
     position: relative;
-  width: 100%;
+    width: 100%;
 }
 .no-padding {
     padding: 0;
@@ -486,6 +486,23 @@ body {
     box-shadow: 0px 10px 25px #888888;
     margin-bottom:  30px;
 }
+/*EDITAR USUARIO EN SESION*/
+#editarUsuarioSesion {
+    width: 60%;
+    height: 80% auto;
+    margin: auto;
+    padding: 1%;
+    /*background-color: rgba(0,40,100,0.6);*/
+    background-color: #f4f4f4;
+    overflow: hidden;
+    border: 2px solid rgba(255,0,0,0.9);
+    border-radius: 30px;
+    box-shadow: 0px 10px 25px #888888;
+    margin-bottom:  30px;
+    margin-top: 5%;
+}
+
+
 
 /*##### ESTADISTICAS SECTOR POSTAL #####*/
 .skills {
@@ -561,4 +578,10 @@ body {
 .skills .content .tools-knowledge-wrapper .tools-wrapper ul li i,
 .skills .content .tools-knowledge-wrapper .knowledge-wrapper ul li i {
     color: #27ae60;
+}
+
+/*estilod de contraseña*/
+.password-progress {
+    margin-top: 10px;
+    margin-bottom: 0;
 }

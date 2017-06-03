@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,26 +24,31 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author daniel
+ * @author ivan
  */
 @Entity
 @Table(name = "novedades")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Novedad.findAll", query = "SELECT n FROM Novedad n")
-    , @NamedQuery(name = "Novedad.findByCodigoNovedad", query = "SELECT n FROM Novedad n WHERE n.codigoNovedad = :codigoNovedad")
-    , @NamedQuery(name = "Novedad.findByDetalle", query = "SELECT n FROM Novedad n WHERE n.detalle = :detalle")
+    , @NamedQuery(name = "Novedad.findByIdNovedad", query = "SELECT n FROM Novedad n WHERE n.idNovedad = :idNovedad")
     , @NamedQuery(name = "Novedad.findByTipoNovedad", query = "SELECT n FROM Novedad n WHERE n.tipoNovedad = :tipoNovedad")
-    , @NamedQuery(name = "Novedad.findByDescripcion", query = "SELECT n FROM Novedad n WHERE n.descripcion = :descripcion")
-    , @NamedQuery(name = "Novedad.findByPrioridad", query = "SELECT n FROM Novedad n WHERE n.prioridad = :prioridad")})
+    , @NamedQuery(name = "Novedad.findByDetalle", query = "SELECT n FROM Novedad n WHERE n.detalle = :detalle")
+    , @NamedQuery(name = "Novedad.findByPrioridad", query = "SELECT n FROM Novedad n WHERE n.prioridad = :prioridad")
+    , @NamedQuery(name = "Novedad.findByDescripcion", query = "SELECT n FROM Novedad n WHERE n.descripcion = :descripcion")})
 public class Novedad implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idNovedad")
+    private Integer idNovedad;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "codigoNovedad")
-    private Integer codigoNovedad;
+    @Size(min = 1, max = 20)
+    @Column(name = "tipoNovedad")
+    private String tipoNovedad;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
@@ -49,49 +56,36 @@ public class Novedad implements Serializable {
     private String detalle;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "tipoNovedad")
-    private String tipoNovedad;
-    @Size(max = 45)
-    @Column(name = "descripcion")
-    private String descripcion;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "prioridad")
     private String prioridad;
-    @JoinColumn(name = "mercancias_codigoMercancia", referencedColumnName = "codigoMercancia")
+    @Size(max = 45)
+    @Column(name = "descripcion")
+    private String descripcion;
+    @JoinColumn(name = "mercancias_idMercancia", referencedColumnName = "idMercancia")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Mercancia mercanciascodigoMercancia;
+    private Mercancia mercanciasidMercancia;
 
     public Novedad() {
     }
 
-    public Novedad(Integer codigoNovedad) {
-        this.codigoNovedad = codigoNovedad;
+    public Novedad(Integer idNovedad) {
+        this.idNovedad = idNovedad;
     }
 
-    public Novedad(Integer codigoNovedad, String detalle, String tipoNovedad, String prioridad) {
-        this.codigoNovedad = codigoNovedad;
-        this.detalle = detalle;
+    public Novedad(Integer idNovedad, String tipoNovedad, String detalle, String prioridad) {
+        this.idNovedad = idNovedad;
         this.tipoNovedad = tipoNovedad;
+        this.detalle = detalle;
         this.prioridad = prioridad;
     }
 
-    public Integer getCodigoNovedad() {
-        return codigoNovedad;
+    public Integer getIdNovedad() {
+        return idNovedad;
     }
 
-    public void setCodigoNovedad(Integer codigoNovedad) {
-        this.codigoNovedad = codigoNovedad;
-    }
-
-    public String getDetalle() {
-        return detalle;
-    }
-
-    public void setDetalle(String detalle) {
-        this.detalle = detalle;
+    public void setIdNovedad(Integer idNovedad) {
+        this.idNovedad = idNovedad;
     }
 
     public String getTipoNovedad() {
@@ -102,12 +96,12 @@ public class Novedad implements Serializable {
         this.tipoNovedad = tipoNovedad;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDetalle() {
+        return detalle;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
     }
 
     public String getPrioridad() {
@@ -118,18 +112,26 @@ public class Novedad implements Serializable {
         this.prioridad = prioridad;
     }
 
-    public Mercancia getMercanciascodigoMercancia() {
-        return mercanciascodigoMercancia;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setMercanciascodigoMercancia(Mercancia mercanciascodigoMercancia) {
-        this.mercanciascodigoMercancia = mercanciascodigoMercancia;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Mercancia getMercanciasidMercancia() {
+        return mercanciasidMercancia;
+    }
+
+    public void setMercanciasidMercancia(Mercancia mercanciasidMercancia) {
+        this.mercanciasidMercancia = mercanciasidMercancia;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codigoNovedad != null ? codigoNovedad.hashCode() : 0);
+        hash += (idNovedad != null ? idNovedad.hashCode() : 0);
         return hash;
     }
 
@@ -140,7 +142,7 @@ public class Novedad implements Serializable {
             return false;
         }
         Novedad other = (Novedad) object;
-        if ((this.codigoNovedad == null && other.codigoNovedad != null) || (this.codigoNovedad != null && !this.codigoNovedad.equals(other.codigoNovedad))) {
+        if ((this.idNovedad == null && other.idNovedad != null) || (this.idNovedad != null && !this.idNovedad.equals(other.idNovedad))) {
             return false;
         }
         return true;
@@ -148,7 +150,7 @@ public class Novedad implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sigmeyc.entities.Novedad[ codigoNovedad=" + codigoNovedad + " ]";
+        return "com.sigmeyc.entities.Novedad[ idNovedad=" + idNovedad + " ]";
     }
     
 }

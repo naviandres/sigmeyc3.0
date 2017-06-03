@@ -7,7 +7,7 @@
 
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title" >
-            <h:outputText value="SIGMEYC | Crear Ciudad"></h:outputText>
+            <h:outputText value="SIGMEYC | editar Ciudad"></h:outputText>
         </ui:define>
         <ui:define name="contenido">
             <!-- Right side column. Contains the navbar and content of the page -->
@@ -40,34 +40,34 @@
                                 </div>
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <h:outputLabel  class="col-xs-3 control-label" value="#{bundle.EditCiudadLabel_idCiudades}" for="idCiudades" />
+                                        <h:outputLabel  class="col-xs-3 control-label" value="idCiudades" for="idCiudades" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="idCiudades" value="#{ciudadController.selected.idCiudades}" title="#{bundle.EditCiudadTitle_idCiudades}" required="true" requiredMessage="#{bundle.EditCiudadRequiredMessage_idCiudades}"/>
+                                            <h:inputText class="form-control" id="idCiudades" value="#{ciudadController.ciudad.idCiudades}"   required="true" requiredMessage="#{bundle.EditCiudadRequiredMessage_idCiudades}"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditCiudadLabel_nombreCiudad}" for="nombreCiudad" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="nombreCiudad" for="nombreCiudad" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="nombreCiudad" value="#{ciudadController.selected.nombreCiudad}" title="#{bundle.EditCiudadTitle_nombreCiudad}" />
+                                            <h:inputText class="form-control" id="nombreCiudad" value="#{ciudadController.ciudad.nombreCiudad}"  />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditCiudadLabel_zona}" for="zona" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="zona" for="zona" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="zona" value="#{ciudadController.selected.zona}" title="#{bundle.EditCiudadTitle_zona}" />
+                                            <h:inputText class="form-control" id="zona" value="#{ciudadController.ciudad.zona}"   />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditCiudadLabel_localidadidLocalidad}" for="localidadidLocalidad" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="idLocalidad" for="localidadidLocalidad" />
                                         <div class="col-xs-6">
-                                            <h:selectOneMenu id="localidadidLocalidad" value="#{ciudadController.selected.localidadidLocalidad}" title="#{bundle.EditCiudadTitle_localidadidLocalidad}" required="true" requiredMessage="#{bundle.EditCiudadRequiredMessage_localidadidLocalidad}">
-                                                <f:selectItems value="#{localidadController.itemsAvailableSelectOne}"/>
+                                            <h:selectOneMenu id="localidadidLocalidad" value="#{ciudadController.ciudad.localidadidLocalidad}"  required="true" requiredMessage="#{bundle.EditCiudadRequiredMessage_localidadidLocalidad}">
+                                                <f:selectItems value="#{localidadController.localidad.idLocalidad}"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-4">
-                                            <h:commandButton class="btn btn-success" action="#{ciudadController.update}" value="Guardar"/>
+                                            <h:commandButton class="btn btn-success" action="#{ciudadController.guardar()}" value="Guardar"/>
                                         </div>
                                         <div class="col-lg-2 ">
                                             <h:commandButton class="btn btn-instagram" action="#{ciudadController.prepareList}" immediate="true" value="ver todos"/>

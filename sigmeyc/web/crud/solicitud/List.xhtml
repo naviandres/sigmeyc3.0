@@ -7,119 +7,98 @@
 
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListSolicitudTitle}"></h:outputText>
+            <h:outputText value="Lista solicitudes"></h:outputText>
         </ui:define>
         <ui:define name="contenido">
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListSolicitudEmpty}" rendered="#{solicitudController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{solicitudController.items.rowCount > 0}">
-                    <h:outputText value="#{solicitudController.pagination.pageFirstItem + 1}..#{solicitudController.pagination.pageLastItem + 1}/#{solicitudController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{solicitudController.previous}" value="#{bundle.Previous} #{solicitudController.pagination.pageSize}" rendered="#{solicitudController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{solicitudController.next}" value="#{bundle.Next} #{solicitudController.pagination.pageSize}" rendered="#{solicitudController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{solicitudController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSolicitudTitle_codigoSolicitud}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.codigoSolicitud}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSolicitudTitle_tipoServicio}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tipoServicio}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSolicitudTitle_fechaEntrega}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fechaEntrega}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSolicitudTitle_ciudadDestino}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.ciudadDestino}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSolicitudTitle_direcciónDestino}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.direcciónDestino}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSolicitudTitle_nombreDestinatario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombreDestinatario}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSolicitudTitle_apellidoDestinatario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.apellidoDestinatario}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSolicitudTitle_telefonoDestinatario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.telefonoDestinatario}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSolicitudTitle_prioridad}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.prioridad}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSolicitudTitle_tiempoEntrega}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.tiempoEntrega}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSolicitudTitle_fechaSolicitud}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fechaSolicitud}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSolicitudTitle_origenDeMercancia}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.origenDeMercancia}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSolicitudTitle_usuarioscodigoUsuario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usuarioscodigoUsuario}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
-                            </f:facet>
-                            <h:commandLink action="#{solicitudController.prepareView}" value="#{bundle.ListSolicitudViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{solicitudController.prepareEdit}" value="#{bundle.ListSolicitudEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{solicitudController.destroy}" value="#{bundle.ListSolicitudDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{solicitudController.prepareCreate}" value="#{bundle.ListSolicitudCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListSolicitudIndexLink}"/>
-            </h:form>
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    Datos de solicitudes
+                </h1>
+
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Solicitudes</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <h:form styleClass="jsfcrud_list_form">
+                                    <h:panelGroup id="messagePanel" layout="block">
+                                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                                    </h:panelGroup>
+
+                                    <h:dataTable id="example2" class="table table-bordered table-hover" value="#{solicitudController.solicitudes}" var="solicitud" >
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="tipoServicio"/>
+                                            </f:facet>
+                                            <h:outputText value="#{solicitud.tipoServicio}"/>
+                                        </h:column>                                     
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="direccionOrigen"/>
+                                            </f:facet>
+                                            <h:outputText value="#{solicitud.direccionOrigen}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="direccionDestino"/>
+                                            </f:facet>
+                                            <h:outputText value="#{solicitud.direccionDestino}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="#nombreDestinatario"/>
+                                            </f:facet>
+                                            <h:outputText value="#{solicitud.nombreDestinatario}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="apellidoDestinatario"/>
+                                            </f:facet>
+                                            <h:outputText value="#{solicitud.apellidoDestinatario}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="telefonoDestinatario"/>
+                                            </f:facet>
+                                            <h:outputText value="#{solicitud.telefonoDestinatario}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="priorizacion"/>
+                                            </f:facet>
+                                            <h:outputText value="#{solicitud.priorizacion}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="&nbsp;"/>
+                                            </f:facet>
+                                            <h:commandLink action="#{solicitudController.prepareView(solicitud)}"><i class="fa fa-eye fa-2x"></i></h:commandLink>
+                                            <h:outputText value=" "/>
+                                            <h:commandLink action="#{solicitudController.Editar(solicitud)}"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></h:commandLink>
+                                            <h:outputText value=" "/>
+                                            <h:commandLink action="#{solicitudController.Eliminar(solicitud)}"><i class="fa fa-trash fa-2x"  aria-hidden="true"></i></h:commandLink>
+                                        </h:column>
+                                    </h:dataTable>
+                                    <br />
+                                    <div class="col-lg-2">
+                                        <h:commandButton class="btn btn-success" action="#{solicitudController.prepareCreate()}" value="Crear"></h:commandButton>
+                                    </div> 
+                                    <br />
+                                    <br />
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </ui:define>
     </ui:composition>
 

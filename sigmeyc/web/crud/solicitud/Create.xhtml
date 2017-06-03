@@ -7,55 +7,129 @@
 
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.CreateSolicitudTitle}"></h:outputText>
+            <h:outputText value="crear Solicitud"></h:outputText>
         </ui:define>
         <ui:define name="contenido">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateSolicitudLabel_codigoSolicitud}" for="codigoSolicitud" />
-                    <h:inputText id="codigoSolicitud" value="#{solicitudController.selected.codigoSolicitud}" title="#{bundle.CreateSolicitudTitle_codigoSolicitud}" required="true" requiredMessage="#{bundle.CreateSolicitudRequiredMessage_codigoSolicitud}"/>
-                    <h:outputLabel value="#{bundle.CreateSolicitudLabel_tipoServicio}" for="tipoServicio" />
-                    <h:inputText id="tipoServicio" value="#{solicitudController.selected.tipoServicio}" title="#{bundle.CreateSolicitudTitle_tipoServicio}" />
-                    <h:outputLabel value="#{bundle.CreateSolicitudLabel_fechaEntrega}" for="fechaEntrega" />
-                    <h:inputText id="fechaEntrega" value="#{solicitudController.selected.fechaEntrega}" title="#{bundle.CreateSolicitudTitle_fechaEntrega}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateSolicitudLabel_ciudadDestino}" for="ciudadDestino" />
-                    <h:inputText id="ciudadDestino" value="#{solicitudController.selected.ciudadDestino}" title="#{bundle.CreateSolicitudTitle_ciudadDestino}" />
-                    <h:outputLabel value="#{bundle.CreateSolicitudLabel_direcciónDestino}" for="direcciónDestino" />
-                    <h:inputText id="direcciónDestino" value="#{solicitudController.selected.direcciónDestino}" title="#{bundle.CreateSolicitudTitle_direcciónDestino}" />
-                    <h:outputLabel value="#{bundle.CreateSolicitudLabel_nombreDestinatario}" for="nombreDestinatario" />
-                    <h:inputText id="nombreDestinatario" value="#{solicitudController.selected.nombreDestinatario}" title="#{bundle.CreateSolicitudTitle_nombreDestinatario}" />
-                    <h:outputLabel value="#{bundle.CreateSolicitudLabel_apellidoDestinatario}" for="apellidoDestinatario" />
-                    <h:inputText id="apellidoDestinatario" value="#{solicitudController.selected.apellidoDestinatario}" title="#{bundle.CreateSolicitudTitle_apellidoDestinatario}" />
-                    <h:outputLabel value="#{bundle.CreateSolicitudLabel_telefonoDestinatario}" for="telefonoDestinatario" />
-                    <h:inputText id="telefonoDestinatario" value="#{solicitudController.selected.telefonoDestinatario}" title="#{bundle.CreateSolicitudTitle_telefonoDestinatario}" />
-                    <h:outputLabel value="#{bundle.CreateSolicitudLabel_prioridad}" for="prioridad" />
-                    <h:inputText id="prioridad" value="#{solicitudController.selected.prioridad}" title="#{bundle.CreateSolicitudTitle_prioridad}" />
-                    <h:outputLabel value="#{bundle.CreateSolicitudLabel_tiempoEntrega}" for="tiempoEntrega" />
-                    <h:inputText id="tiempoEntrega" value="#{solicitudController.selected.tiempoEntrega}" title="#{bundle.CreateSolicitudTitle_tiempoEntrega}" />
-                    <h:outputLabel value="#{bundle.CreateSolicitudLabel_fechaSolicitud}" for="fechaSolicitud" />
-                    <h:inputText id="fechaSolicitud" value="#{solicitudController.selected.fechaSolicitud}" title="#{bundle.CreateSolicitudTitle_fechaSolicitud}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateSolicitudLabel_origenDeMercancia}" for="origenDeMercancia" />
-                    <h:inputText id="origenDeMercancia" value="#{solicitudController.selected.origenDeMercancia}" title="#{bundle.CreateSolicitudTitle_origenDeMercancia}" />
-                    <h:outputLabel value="#{bundle.CreateSolicitudLabel_usuarioscodigoUsuario}" for="usuarioscodigoUsuario" />
-                    <h:selectOneMenu id="usuarioscodigoUsuario" value="#{solicitudController.selected.usuarioscodigoUsuario}" title="#{bundle.CreateSolicitudTitle_usuarioscodigoUsuario}" required="true" requiredMessage="#{bundle.CreateSolicitudRequiredMessage_usuarioscodigoUsuario}">
-                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{solicitudController.create}" value="#{bundle.CreateSolicitudSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{solicitudController.prepareList}" value="#{bundle.CreateSolicitudShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateSolicitudIndexLink}"/>
+            <h:form id="createSolici" class="box-body form-horizontal">
+                <section class="content-header">
+                    <h1>
+                        CREAR
+                        <small>Solicitud</small>
+                    </h1>
+                </section>
+                <br>
+                </br>
+                <div class="container">
+                    <div class="row">
+
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+
+                                <h3 class="box-title"></h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>                                             
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <h:outputLabel id="lblSelTipoIden" class="col-xs-3 control-label" for="selTipoIden" value="tipoServicio"/>
+                                    <div class="col-xs-6">
+                                        <h:selectOneMenu id="selTipoIden" class="form-control" value="#{solicitudController.solicitud.tipoServicio}">
+                                            <f:selectItem id="selTipoServi" itemLabel="Seleccione tipo de servicio" itemDisabled="disabled"/>
+                                            <f:selectItem id="me" itemLabel="Mensajeria expresa" itemValue="Mensajeria expresa"/>
+                                            <f:selectItem id="mt" itemLabel="Mercancia via terrestre" itemValue="Mercancia terrestre"/>
+                                            <f:selectItem id="mm" itemLabel="Mensajeria masiva" itemValue="Mensajeria masiva"/>
+                                            <f:selectItem id="pa" itemLabel="General" itemValue="General"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="col-xs-3 control-label" value="tiempoEntrega" for="tiempoEntrega" />
+                                    <div class="col-xs-6">
+                                        <h:inputText class="form-control" id="tiempoEntrega" value="#{solicitudController.solicitud.tiempoEntrega}" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="col-xs-3 control-label" value="direccionOrigen" for="direccionOrigen" />
+                                    <div class="col-xs-6">
+                                        <h:inputText class="form-control" id="direccionOrigen" value="#{solicitudController.solicitud.direccionOrigen}" required="true"/>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <h:outputLabel class="col-xs-3 control-label" value="direccionDestino" for="direccionDestino" />
+                                    <div class="col-xs-6">
+                                        <h:inputText class="form-control" id="direccionDestino" value="#{solicitudController.solicitud.direccionDestino}" required="true"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="col-xs-3 control-label" value="nombreDestinatario" for="nombreDestinatario" />
+                                    <div class="col-xs-6">
+                                        <h:inputText class="form-control" id="nombreDestinatario" value="#{solicitudController.solicitud.nombreDestinatario}" required="true" requiredMessage="Ingrese nombre destino" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="col-xs-3 control-label" value="apellidoDestinatario" for="apellidoDestinatario" />
+                                    <div class="col-xs-6">
+                                        <h:inputText class="form-control" id="apellidoDestinatario" value="#{solicitudController.solicitud.apellidoDestinatario}" required="true" requiredMessage="Ingrese apellido"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="col-xs-3 control-label" value="telefonoDestinatario" for="telefonoDestinatario" />
+                                    <div class="col-xs-6">
+                                        <h:inputText class="form-control" id="telefonoDestinatario" value="#{solicitudController.solicitud.telefonoDestinatario}" required="true" requiredMessage="Ingrese telefono"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="col-xs-3 control-label" value="priorizacion" for="priorizacion" />
+                                    <div class="col-xs-6">
+                                        <h:inputText class="form-control" id="priorizacion" value="#{solicitudController.solicitud.priorizacion}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel  class="col-xs-3 control-label" value="fechaSolicitud" for="fechaSolicitud" />
+                                    <div class="col-xs-6">
+                                        <h:inputText class="form-control" id="fechaSolicitud" value="#{solicitudController.solicitud.fechaSolicitud}" required="true">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:inputText>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="col-xs-3 control-label" value="empresascodigoEmpresa" for="empresascodigoEmpresa" />
+                                    <div class="col-xs-6">
+                                        <h:selectOneMenu id="empresascodigoEmpresa" value="#{solicitudController.solicitud.empresasidEmpresa}">
+                                            <f:selectItems value="#{empresaControlle.empresas}" var="e" itemLabel="#{e.idEmpresa}"/>
+                                            <f:converter converterId="empresaConverter"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel class="col-xs-3 control-label" value="usuarioscodigoUsuario" for="usuarioscodigoUsuario" />
+                                    <div class="col-xs-6">
+                                        <h:selectOneMenu id="usuarioscodigoUsuario" value="#{solicitudController.solicitud.usuariosidUsuario}" required="true">
+                                            <f:selectItems value="#{usuarioController.usuarios}" var="u" itemLabel="#{u.idUsuario}"/>
+                                            <f:converter converterId="usuarioConverter"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-2 col-lg-offset-4">
+                                        <h:commandButton class="btn btn-success" action="#{solicitudController.guardar()}" value="Guardar"/>
+                                    </div>
+                                    <div class="col-lg-2 ">
+                                        <h:link styleClass="btn btn-instagram" outcome="/crud/solicitud/List.xhtml" value="Ver todos"/>
+                                    </div>                                             
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </h:form>
         </ui:define>
     </ui:composition>

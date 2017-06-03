@@ -192,44 +192,44 @@ public class EmpresaController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Empresa.class)
-    public static class EmpresaControllerConverter implements Converter {
-
-        @Override
-        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
-            if (value == null || value.length() == 0) {
-                return null;
-            }
-            EmpresaController controller = (EmpresaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "empresaController");
-            return controller.getEmpresa(getKey(value));
-        }
-
-        java.lang.String getKey(String value) {
-            java.lang.String key;
-            key = value;
-            return key;
-        }
-
-        String getStringKey(java.lang.String value) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(value);
-            return sb.toString();
-        }
-
-        @Override
-        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
-            if (object == null) {
-                return null;
-            }
-            if (object instanceof Empresa) {
-                Empresa o = (Empresa) object;
-                return getStringKey(o.getCodigoEmpresa());
-            } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Empresa.class.getName());
-            }
-        }
-
-    }
+//    @FacesConverter(forClass = Empresa.class)
+//    public static class EmpresaControllerConverter implements Converter {
+//
+//        @Override
+//        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
+//            if (value == null || value.length() == 0) {
+//                return null;
+//            }
+//            EmpresaController controller = (EmpresaController) facesContext.getApplication().getELResolver().
+//                    getValue(facesContext.getELContext(), null, "empresaController");
+//            return controller.getEmpresa(getKey(value));
+//        }
+//
+//        java.lang.String getKey(String value) {
+//            java.lang.String key;
+//            key = value;
+//            return key;
+//        }
+//
+//        String getStringKey(java.lang.String value) {
+//            StringBuilder sb = new StringBuilder();
+//            sb.append(value);
+//            return sb.toString();
+//        }
+//
+//        @Override
+//        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
+//            if (object == null) {
+//                return null;
+//            }
+//            if (object instanceof Empresa) {
+//                Empresa o = (Empresa) object;
+//                return getStringKey(o.getCodigoEmpresa());
+//            } else {
+//                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Empresa.class.getName());
+//            }
+//        }
+//
+//    }
 
 }

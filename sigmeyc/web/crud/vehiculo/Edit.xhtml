@@ -7,13 +7,13 @@
 
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.EditVehiculoTitle}"></h:outputText>
+            <h:outputText value="Editar vehiculo"></h:outputText>
         </ui:define>
         <ui:define name="contenido">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form id="createLocalidad" class="box-body form-horizontal">
+            <h:form id="editarVehiculo" class="box-body form-horizontal" prependId="false">
                 <div class="container">
                     <section class="content-header">
                         <h1>
@@ -38,49 +38,63 @@
                                     </div>
                                 </div>
                                 <div class="box-body">
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditVehiculoLabel_placaVehiculo}" for="placaVehiculo" />
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="placaVehiculo" value="#{vehiculoController.selected.placaVehiculo}" title="#{bundle.EditVehiculoTitle_placaVehiculo}" required="true" requiredMessage="#{bundle.EditVehiculoRequiredMessage_placaVehiculo}"/>
+                                  
+                                        <div class="form-group">
+                                            <h:outputLabel class="col-xs-3 control-label" value="placaVehiculo" for="placaVehiculo" />
+                                            <div class="col-xs-6">
+                                                <h:inputText class="form-control" id="placaVehiculo" value="#{vehiculoController.placaVehiculo}" required="true" requiredMessage="Ingrese placa vehiculo"/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditVehiculoLabel_modelo}" for="modelo" />
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="modelo" value="#{vehiculoController.selected.modelo}" title="#{bundle.EditVehiculoTitle_modelo}" />
+                                        <div class="form-group">
+                                            <h:outputLabel class="col-xs-3 control-label" value="modelo" for="modelo" />
+                                            <div class="col-xs-6">
+                                                <h:inputText class="form-control" id="modelo" value="#{vehiculoController.modelo}" required="true" requiredMessage="Ingrese modelo"/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditVehiculoLabel_tipoVehiculo}" for="tipoVehiculo" />
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="tipoVehiculo" value="#{vehiculoController.selected.tipoVehiculo}" title="#{bundle.EditVehiculoTitle_tipoVehiculo}" />
+                                        <div class="form-group">
+                                            <h:outputLabel id="lblTipoVehi" for="lblTipoVehi" value="Tipo de vehiculo:" class="col-xs-3 control-label"/>
+                                            <div class="col-xs-6" >
+                                                <h:selectOneMenu id="selTipoVehi" class="form-control" value="#{vehiculoController.tipoVehiculo}">
+                                                    <f:selectItem id="opcSele" itemLabel="Seleccione Tipo De Vehiculo" itemDisabled="disabled"/>
+                                                    <f:selectItem id="vehicTu" itemLabel="Vehiculo turbo" itemValue="Vehiculo turbo"/>
+                                                    <f:selectItem id="dosEje" itemLabel="Camion dos ejes" itemValue="Camion dos ejes"/>
+                                                    <f:selectItem id="tresEje" itemLabel="Camion tres ejes" itemValue="Camion tres ejes"/>
+                                                    <f:selectItem id="CuatroEje" itemLabel="Camion cuatro ejes" itemValue="Camion cuatro ejes"/>
+                                                    <f:selectItem id="miniMul" itemLabel="Mini mula" itemValue="Mini mula"/>
+                                                    <f:selectItem id="moto" itemLabel="Moto" itemValue="Moto"/>
+                                                </h:selectOneMenu>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditVehiculoLabel_marca}" for="marca" />
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="marca" value="#{vehiculoController.selected.marca}" title="#{bundle.EditVehiculoTitle_marca}" />
+                                        <div class="form-group">
+                                            <h:outputLabel class="col-xs-3 control-label" value="marca" for="marca" />
+                                            <div class="col-xs-6">
+                                                <h:inputText class="form-control" id="marca" value="#{vehiculoController.marca}" required="true" requiredMessage="Ingrese marca" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditVehiculoLabel_capacidadCarga}" for="capacidadCarga" />
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="capacidadCarga" value="#{vehiculoController.selected.capacidadCarga}" title="#{bundle.EditVehiculoTitle_capacidadCarga}" />
+                                        <div class="form-group">
+                                            <h:outputLabel id="lblCapCarg" for="lblCapCarg" value="Capacidad de carga:" class="col-xs-3 control-label"/>
+                                            <div class="col-xs-6">
+                                                <h:selectOneMenu id="selCapCarg" class="form-control" value="#{vehiculoController.capacidadCarga}">
+                                                    <f:selectItem id="opcSeleC" itemLabel="Seleccione Capacidad de Carga" itemDisabled="disabled"/>
+                                                    <f:selectItem id="t1" itemLabel="4.5 Toneladas" itemValue="4.5 Toneladas"/>
+                                                    <f:selectItem id="t2" itemLabel="8.5 Toneladas" itemValue="8.5 Toneladas"/>
+                                                    <f:selectItem id="t3" itemLabel="17 Toneladas" itemValue="17 Toneladas"/>
+                                                    <f:selectItem id="t4" itemLabel="24 Toneladas" itemValue="24 Toneladas"/>
+                                                    <f:selectItem id="t5" itemLabel="20 Toneladas" itemValue="20 Toneladas"/>
+                                                    <f:selectItem id="kg" itemLabel="150 kg" itemValue="150 kg"/>
+                                                </h:selectOneMenu>  
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="#{bundle.EditVehiculoLabel_estadoVehiculo}" for="estadoVehiculo" />
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="estadoVehiculo" value="#{vehiculoController.selected.estadoVehiculo}" title="#{bundle.EditVehiculoTitle_estadoVehiculo}" />
-                                        </div>
-                                    </div>
+                                    
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-4">
-                                            <h:commandButton class="btn btn-success" action="#{vehiculoController.update}" value="Guardar"/>
+                                            <h:commandButton class="btn btn-success" action="#{vehiculoController.GuardarEdicion(vehiculoController.vehiculo.idVehiculo)}" value="Guardar">
+                                                <!--<f:setPropertyActionListener value="ff" target=""/>-->
+                                            </h:commandButton>
                                         </div>
                                         <div class="col-lg-2 ">
                                             <h:commandButton class="btn btn-instagram" action="#{vehiculoController.prepareList}" immediate="true" value="ver todos"/>
-                                        </div>                                             
+                                        </div>                                            
                                     </div>
                                 </div>
                             </div>

@@ -2,12 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="#{bundle.ViewVehiculoTitle}"></h:outputText>
+            <h:outputText value="Ver vehiculo"></h:outputText>
         </ui:define>
         <ui:define name="contenido">
 
@@ -38,60 +37,50 @@
                                 </div>
                             </div>
                             <div class="box-body">
-                                <h:form id="verVehiculo" class="box-body form-horizontal">
+                                <h:form id="verVehiculo" class="box-body form-horizontal" >
                                     <div class="form-group">
-                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewVehiculoLabel_placaVehiculo}"/>
+                                        <h:outputText class="col-xs-3 control-label" value="placaVehiculo"/>
                                         <div class="col-xs-6">
-                                            <h:outputText class="form-control" value="#{vehiculoController.selected.placaVehiculo}" title="#{bundle.ViewVehiculoTitle_placaVehiculo}"/>
+                                            <h:outputText class="form-control" value="#{vehiculoController.placaVehiculo}"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewVehiculoLabel_modelo}"/>
+                                        <h:outputText class="col-xs-3 control-label" value="modelo"/>
                                         <div class="col-xs-6">
-                                            <h:outputText class="form-control" value="#{vehiculoController.selected.modelo}" title="#{bundle.ViewVehiculoTitle_modelo}"/>
+                                            <h:outputText class="form-control" value="#{vehiculoController.modelo}"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewVehiculoLabel_tipoVehiculo}"/>
+                                        <h:outputText class="col-xs-3 control-label" value="tipoVehiculo"/>
                                         <div class="col-xs-6">
-                                            <h:outputText class="form-control" value="#{vehiculoController.selected.tipoVehiculo}" title="#{bundle.ViewVehiculoTitle_tipoVehiculo}"/>
+                                            <h:outputText class="form-control" value="#{vehiculoController.tipoVehiculo}"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewVehiculoLabel_marca}"/>
+                                        <h:outputText class="col-xs-3 control-label" value="marca"/>
                                         <div class="col-xs-6">
-                                            <h:outputText class="form-control" value="#{vehiculoController.selected.marca}" title="#{bundle.ViewVehiculoTitle_marca}"/>
+                                            <h:outputText class="form-control" value="#{vehiculoController.marca}"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewVehiculoLabel_capacidadCarga}"/>
+                                        <h:outputText class="col-xs-3 control-label" value="capacidadCarga"/>
                                         <div class="col-xs-6">
-                                            <h:outputText class="form-control" value="#{vehiculoController.selected.capacidadCarga}" title="#{bundle.ViewVehiculoTitle_capacidadCarga}"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputText class="col-xs-3 control-label" value="#{bundle.ViewVehiculoLabel_estadoVehiculo}"/>
-                                        <div class="col-xs-6">
-                                            <h:outputText class="form-control" value="#{vehiculoController.selected.estadoVehiculo}" title="#{bundle.ViewVehiculoTitle_estadoVehiculo}"/>
+                                            <h:outputText class="form-control" value="#{vehiculoController.capacidadCarga}"/>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-4">
-                                            <h:commandButton class="btn btn-danger" action="#{vehiculoController.destroyAndView}" value="Eliminar"></h:commandButton>
+                                            <h:commandButton class="btn btn-danger" action="#{vehiculoController.Eliminar(vehiculoController.placaVehiculo)}" value="Eliminar"></h:commandButton>
                                         </div>
-
                                         <div class="col-lg-2">
                                             <h:commandButton class="btn btn-success" action="#{vehiculoController.prepareCreate}" value="Crear"></h:commandButton>
                                         </div>
-
                                         <div class="col-lg-2">
                                             <h:commandButton class="btn btn-instagram" action="#{vehiculoController.prepareList}" value="Ver todos"></h:commandButton>
                                         </div>
-
                                     </div>
                                 </h:form>
                             </div>
-
                         </div>
                     </div>
                 </div>

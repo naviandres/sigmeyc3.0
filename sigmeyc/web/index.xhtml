@@ -9,6 +9,27 @@
     <ui:composition template="/WEB-INF/template/template.xhtml">
 
         <ui:define name="contenido">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.3.0/zxcvbn.js"></script>
+            <header>        
+                <!--<h:graphicImage library="img" name="header.jpg"/>-->
+                <div class="header-content">
+                    <div class="header-content-inner">
+                        <h1 id="homeHeading">BIENVENIDO A SIGMEYC</h1>
+                        <hr/>
+                        <p>Gracias por escoger nuestro servicio</p>
+
+                        <!--<a href="#about" class="btn btn-primary btn-xl page-scroll">Iniciar Sesión</a>-->
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#inicio">
+                            Iniciar Sesión
+                        </button>
+                        <button type="button" id="btnRgis" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registrar">
+                            Registrarse
+                        </button>
+                    </div>
+                </div>
+            </header>
             <!-- Modal inicio sesión-->
             <div class="modal fade" id="inicio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
@@ -20,13 +41,14 @@
                         <div class="modal-body">
 
                             <h:form id="formInicio" prependId="false">
-                                <div style="background-color: #990000">
-                                    <h:messages globalOnly="true" showSummary="true" showDetail="true"/>
+
+                                <div id="mensaj">
+                                    <h:messages class="alert alert-danger" id="mensa" globalOnly="true" showSummary="true" showDetail="true"/>
                                 </div>
                                 <div class="md-form form-group">
                                     <i class="fa fa-envelope prefix "></i>
                                     <h:outputLabel id="lblCorr" for="lblCorr" value="Correo Electronico"/>
-                                    <h:inputText id="txtCorreo" value="#{sessionController.correo}" class="form-control"/>
+                                    <h:inputText id="txtCorreo" value="#{sessionController.email}" class="form-control"/>
                                 </div>
                                 <div class="md-form form-group">
                                     <i class="fa fa-lock prefix"></i>
@@ -34,7 +56,7 @@
                                     <h:inputSecret id="txtClv" value="#{sessionController.clave}" class="form-control"/>
                                 </div>
                                 <div class=" text-center">
-                                    <h:commandButton id="btnIngresar" action="#{sessionController.action()}" value="Ingresar" class="btn btn-primary"/> 
+                                    <h:commandButton id="btnIngresar" action="#{sessionController.iniciarSession()}" value="Ingresar" class="btn btn-primary"/> 
                                     <br/>
                                     <h:outputLabel id="lblRecIng" for="lblRecIng" value="Recordar "/>
                                     <br/>
@@ -61,8 +83,7 @@
                             <h4 class="modal-title text-center" id="myModalLabel" >Registrarse</h4>
                         </div>
                         <div class="modal-body">
-
-                            <h:form id="registro"  prependId="false" >
+                            <h:form id="registro" prependId="false">
                                 <div class="form-group col-xs-offset-4 col-xs-3">
                                     <h:outputLabel id="lblChEmpreI" for="lblChEmpreI" value="Empresa?"/><br/>
                                     <h:selectBooleanCheckbox id="seleEmpreI" label="Es empresa?" onclick="mostrarDatosEmprI()"/>  
@@ -71,65 +92,109 @@
                                     <h:outputLabel id="lblChPersI" for="lblChPersI" value="Persona?"/><br/>
                                     <h:selectBooleanCheckbox id="selePersI" label="Es persona?" onclick="mostrarDatosPersI()"/>    
                                 </div>
-                                <div id="divRazI" class="md-form form-group" style="display: none">
-                                    <i class="fa fa-lock prefix"></i>
-                                    <h:outputLabel id="lblRazonSocI" for="lblRazonSocI" value="Razon social"/>
-                                    <h:inputText id="txtRazonSocI" class="form-control" required="true" p:placeholder="coca cola"/>
-
+                                <div id="divNit" class="md-form form-group" style="display: none">    
+                                    <h:outputLabel value="nit" for="nit" />
+                                    <h:inputText id="nit" disabled="true" class="form-control" value="#{empresaControlle.nit}"/>
                                 </div>
+                                <div id="divRazI" class="md-form form-group" style="display: none" >    
+                                    <h:outputLabel value="razonSocial" for="txtRazonS" />
+                                    <h:inputText disabled="true" class="form-control" id="txtRazonS" value="#{empresaControlle.razonSocial}" />
+                                </div>
+
                                 <div id="divNmbrs" class="form-group row">
-                                    <div class="md-form col-lg-6">
-                                        <i class="fa fa-user prefix"></i>
-                                        <h:outputLabel id="lblNombI" for="lblNombI" value="Nombre"/>
-                                        <h:inputText id="txtNombI" class="form-control" required="true" p:placeholder="Juan"/>
-
+                                    <div class="md-form col-lg-6">    
+                                        <h:outputLabel value="primerNombre" id="lblNombI" for="txtNombI"/>
+                                        <h:inputText class="form-control" id="txtNombI" value="#{usuarioController.usuario.primerNombre}" />
                                     </div>
-                                    <div class="md-form col-lg-6">
-                                        <i class="fa fa-user prefix"></i>
-                                        <h:outputLabel id="lblApeeI" for="lblApeeI" value="Apellido"/>
-                                        <h:inputText id="txtApeeI" class="form-control" required="true" p:placeholder="Torres"/>
-
+                                    <div class="form-group col-lg-6" >    
+                                        <h:outputLabel value="segundoNombre" for="segundoNombre" />
+                                        <h:inputText class="form-control" id="segundoNombre" value="#{usuarioController.usuario.segundoNombre}"/>
                                     </div>
                                 </div>
-                                <div id="divContac" class="form-group row">
-                                    <div class="md-form col-lg-6">
-                                        <i class="fa fa-user prefix"></i>
-                                        <h:outputLabel id="lblTelI" for="lblTelI" value="Teléfono"/>
-                                        <h:inputText id="txtTelI" class="form-control" p:placeholder="4343434"/>
-
+                                <div id="divApell" class="form-group row">
+                                    <div class="md-form col-lg-6">    
+                                        <h:outputLabel value="primerApellido" id="lblApeeI" for="txtApeeI" />                  
+                                        <h:inputText class="form-control" id="txtApeeI" value="#{usuarioController.usuario.primerApellido}"/>
                                     </div>
-                                    <div class="md-form col-lg-6">
-                                        <i class="fa fa-user prefix"></i>
-                                        <h:outputLabel id="lblCelI" for="lblCelI" value="Celular"/>
-                                        <h:inputText id="txtCelI" class="form-control" required="true" p:placeholder="3127986545"/>
-
+                                    <div class="form-group col-lg-6">    
+                                        <h:outputLabel value="segundoApellido" for="segundoApellido" />                       
+                                        <h:inputText class="form-control" id="segundoApellido" value="#{usuarioController.usuario.segundoApellido}" />
                                     </div>
                                 </div>
-                                <div id="divCorreo" class="md-form form-group">
-                                    <i class="fa fa-envelope prefix"></i>
-                                    <h:outputLabel id="lblCo" for="lblCo" value="Correo Electronico" />
-                                    <h:inputText id="correo" value="#{smb.correo}" class="form-control" required="true" />
+                                <!--numeros de contacto cliente-->
+                                <div id="divContac" class="form-group row"> 
+                                    <div class="md-form col-lg-6"> 
+                                        <h:outputLabel value="telefóno" id="lblTelefono" for="telefono" />
+                                        <h:inputText class="form-control" id="telefono" value="#{usuarioController.usuario.telefono}"/>
+                                    </div>
+                                    <div class="md-form col-lg-6"> 
+                                        <h:outputLabel value="celular" id="lblCelI" for="txtCelI" />
+                                        <h:inputText class="form-control" id="txtCelI" value="#{usuarioController.usuario.celular}"/>
+                                    </div>
+                                </div>        
+                                <!--numeros de contacto empresa-->
+                                <div id="divContaEmpre" class="form-group row" disabled="true" style="display: none"> 
+                                    <div class="md-form col-lg-6"> 
+                                        <h:outputLabel value="telefóno" id="lblTelefonoEmpre" for="telefonoEmpre" />
+                                        <h:inputText class="form-control"  id="telefonoEmpre" value="#{empresaControlle.telefono}"/>
+                                    </div>
+                                    <div class="md-form col-lg-6"> 
+                                        <h:outputLabel value="celular" id="lblCelEmpre" for="txtCelEmpre" />
+                                        <h:inputText class="form-control" id="txtCelEmpre" value="#{empresaControlle.celular}"/>
+                                    </div>
                                 </div>
-                                <div id="divContr" class="md-form form-group">
-                                    <i class="fa fa-lock prefix"></i>
-                                    <h:outputLabel id="lblCont" for="lblCont" value="Contraseña"/>
-                                    <h:inputSecret id="contraseña" value="#{smb.contraseña}" class="form-control" required="true"/>
+                                <div id="divTipoIde" class="form-group">    
+                                    <h:outputLabel id="tipoIdentificacion" for="tipoIdentificacion" value="tipoIdentificacion"/>
+                                    <h:selectOneMenu id="selTipoIden" class="form-control" value="#{usuarioController.usuario.tipoIdentificacion}">
+                                        <f:selectItem id="selTipoDocum" itemLabel="Seleccione tipo de documento" itemDisabled="disabled"/>
+                                        <f:selectItem id="cc" itemLabel="Cédula de ciudadanía" itemValue="CC"/>
+                                        <f:selectItem id="ti" itemLabel="Targeta de identidad" itemValue="TI"/>
+                                        <f:selectItem id="ce" itemLabel="Céluda extrangería" itemValue="CE"/>
+                                        <f:selectItem id="pa" itemLabel="Pasaporte" itemValue="PAS"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div id="divDocume" class="md-form form-group">    
+                                    <h:outputLabel value="documento" id="lblDocume" for="txtDocume" />
+                                    <h:inputText id="txtDocume" class="form-control" value="#{usuarioController.usuario.documento}"/>
+                                </div>
+                                <!--email y clave cliente comun-->
+                                <div id="divEmailUsuari" class="form-group">     
+                                    <h:outputLabel value="email" id="lblCorre" for="correo" />
+                                    <h:inputText class="form-control" id="correo" value="#{usuarioController.usuario.email}"/>
+                                </div>     
+                                <div id="divClaveUsau" class="form-group">    
+                                    <h:outputLabel value="clave" id="lblClave" for="clave" />
+                                    <h:inputSecret class="form-control" id="clave" value="#{usuarioController.usuario.clave}"/>
+                                    <div class="progress password-progress">
+                                        <div id="strengthBar" class="progress-bar" role="progressbar" style="width: 0;"></div>
+                                    </div>
+                                </div>
+                                <!--email y clave para empresa-->
+                                <div id="divEmailEmpre" class="form-group" style="display: none">     
+                                    <h:outputLabel value="email" id="lblCorreEmpre" for="correoEmpre" />
+                                    <h:inputText class="form-control" disabled="true" id="correoEmpre" value="#{empresaControlle.email}"/>
+                                </div>
+                                <div id="divClaveEmpre" class="form-group" style="display: none">    
+                                    <h:outputLabel value="clave" id="lblClaveEmpre" for="claveEmpre" />
+                                    <h:inputSecret class="form-control" disabled="true" id="claveEmpre" value="#{empresaControlle.clave}"/>
+                                    <div class="progress password-progress">
+                                        <div id="strengthBar" class="progress-bar" role="progressbar" style="width: 0;"></div>
+                                    </div>
                                 </div>
                                 <div id="divRepetContra" class="md-form form-group">
                                     <i class="fa fa-lock prefix"></i>
-                                    <h:outputLabel id="lblRecon" for="lblRecon" value="Repita su contraseña"/>
-                                    <h:inputSecret id="repetirContraseña" value="#{smb.repContraseña}" class="form-control" />
-
+                                    <h:outputLabel id="lblRecon" for="repetirContraseña" value="Repita clave"/>
+                                    <h:inputSecret id="repetirContraseña" class="form-control" />
                                 </div>
-                                <div class="text-center">
-                                    <h:commandButton id="btnIniciar" action="#{smb.realizarAccion()}" value="Iniciar Sesión" class="btn btn-primary"/>
+                                <div class="text-center">                               
+                                    <h:commandButton class="btn btn-success" action="#{usuarioController.guardar}" value="Registrarse"/>
+                                    <h:commandButton class="btn btn-primary " action="#{empresaControlle.guardar}" value="Regisrse"/>
                                     <br/>
                                     <h:outputLabel id="lblRec" for="lblRec" value="Recordar "/>
                                     <br/>
                                     <h:selectBooleanCheckbox id="selBoolRecord" label="Recordar" />    
                                 </div>
                             </h:form>
-
                         </div>
                         <div class="modal-footer">
                             <div class="options">
@@ -228,7 +293,7 @@
                         <h4 class="page-header">Código de guía</h4>
                         <div class="input-group">
                             <h:outputLabel id="lblCod" for="lblCod" value="Código del paquete"/> 
-                            <h:inputText id="txtCod" value="#{guiaController.selected.codigoBarras}" rendered="true"/>
+                            <h:inputText id="txtCod" value="#{guiaController.guia.codigoBarras}" rendered="true"/>
                         </div>
                         <br/>
                         <button id="btnCerrarConsulta" type="button" class="btn btn-danger" onclick="ocultar()">Cancelar</button>

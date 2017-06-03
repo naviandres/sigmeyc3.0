@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -25,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author daniel
+ * @author ivan
  */
 @Entity
 @Table(name = "roles")
@@ -39,8 +41,8 @@ public class Rol implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "identificadorRol")
     private Integer identificadorRol;
     @Basic(optional = false)
@@ -54,12 +56,10 @@ public class Rol implements Serializable {
     @Column(name = "detalleRol")
     private String detalleRol;
     @ManyToMany(mappedBy = "rolList", fetch = FetchType.LAZY)
-    private List<Permiso> permisoList;
-    @JoinTable(name = "usuario_has_roles", joinColumns = {
-        @JoinColumn(name = "roles_identificador_rol", referencedColumnName = "identificadorRol")}, inverseJoinColumns = {
-        @JoinColumn(name = "usuarios_codigo_usuario", referencedColumnName = "codigoUsuario")})
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Usuario> usuarioList;
+    private List<Permiso> permisos;
+    
+    @ManyToMany(mappedBy="roles", fetch = FetchType.LAZY)
+    private List<Usuario> usuarios;
 
     public Rol() {
     }
@@ -99,21 +99,21 @@ public class Rol implements Serializable {
     }
 
     @XmlTransient
-    public List<Permiso> getPermisoList() {
-        return permisoList;
+    public List<Permiso> getPermisos() {
+        return permisos;
     }
 
-    public void setPermisoList(List<Permiso> permisoList) {
-        this.permisoList = permisoList;
+    public void setPermisos(List<Permiso> permisos) {
+        this.permisos = permisos;
     }
 
     @XmlTransient
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
+    public List<Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     @Override
