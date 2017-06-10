@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ivan
+ * @author juanc
  */
 @Entity
 @Table(name = "solicitudes")
@@ -47,7 +47,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Solicitud.findByApellidoDestinatario", query = "SELECT s FROM Solicitud s WHERE s.apellidoDestinatario = :apellidoDestinatario")
     , @NamedQuery(name = "Solicitud.findByTelefonoDestinatario", query = "SELECT s FROM Solicitud s WHERE s.telefonoDestinatario = :telefonoDestinatario")
     , @NamedQuery(name = "Solicitud.findByPriorizacion", query = "SELECT s FROM Solicitud s WHERE s.priorizacion = :priorizacion")
-    , @NamedQuery(name = "Solicitud.findByFechaSolicitud", query = "SELECT s FROM Solicitud s WHERE s.fechaSolicitud = :fechaSolicitud")})
+    , @NamedQuery(name = "Solicitud.findByFechaSolicitud", query = "SELECT s FROM Solicitud s WHERE s.fechaSolicitud = :fechaSolicitud")
+    , @NamedQuery(name = "Solicitud.findByHora", query = "SELECT s FROM Solicitud s WHERE s.hora = :hora")})
 public class Solicitud implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -95,12 +96,14 @@ public class Solicitud implements Serializable {
     @Column(name = "fechaSolicitud")
     @Temporal(TemporalType.DATE)
     private Date fechaSolicitud;
-    @JoinColumn(name = "empresas_idEmpresa", referencedColumnName = "idEmpresa")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "hora")
+    private String hora;
+    @JoinColumn(name = "usuarios_documento", referencedColumnName = "documento")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Empresa empresasidEmpresa;
-    @JoinColumn(name = "usuarios_idUsuario", referencedColumnName = "idUsuario")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Usuario usuariosidUsuario;
+    private Usuario usuariosDocumento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "solicitudesidSolicitud", fetch = FetchType.LAZY)
     private List<Mercancia> mercanciaList;
 
@@ -111,7 +114,7 @@ public class Solicitud implements Serializable {
         this.idSolicitud = idSolicitud;
     }
 
-    public Solicitud(Integer idSolicitud, String tipoServicio, String direccionOrigen, String direccionDestino, String nombreDestinatario, String apellidoDestinatario, String telefonoDestinatario) {
+    public Solicitud(Integer idSolicitud, String tipoServicio, String direccionOrigen, String direccionDestino, String nombreDestinatario, String apellidoDestinatario, String telefonoDestinatario, String hora) {
         this.idSolicitud = idSolicitud;
         this.tipoServicio = tipoServicio;
         this.direccionOrigen = direccionOrigen;
@@ -119,26 +122,9 @@ public class Solicitud implements Serializable {
         this.nombreDestinatario = nombreDestinatario;
         this.apellidoDestinatario = apellidoDestinatario;
         this.telefonoDestinatario = telefonoDestinatario;
+        this.hora = hora;
     }
 
-    public Solicitud(Integer idSolicitud, String tiempoEntrega, String tipoServicio, String direccionOrigen, String direccionDestino, String nombreDestinatario, String apellidoDestinatario, String telefonoDestinatario, String priorizacion, Date fechaSolicitud, Empresa empresasidEmpresa, Usuario usuariosidUsuario) {
-        this.idSolicitud = idSolicitud;
-        this.tiempoEntrega = tiempoEntrega;
-        this.tipoServicio = tipoServicio;
-        this.direccionOrigen = direccionOrigen;
-        this.direccionDestino = direccionDestino;
-        this.nombreDestinatario = nombreDestinatario;
-        this.apellidoDestinatario = apellidoDestinatario;
-        this.telefonoDestinatario = telefonoDestinatario;
-        this.priorizacion = priorizacion;
-        this.fechaSolicitud = fechaSolicitud;
-        this.empresasidEmpresa = empresasidEmpresa;
-        this.usuariosidUsuario = usuariosidUsuario;
-    }
-
-    
-
-    
     public Integer getIdSolicitud() {
         return idSolicitud;
     }
@@ -219,20 +205,20 @@ public class Solicitud implements Serializable {
         this.fechaSolicitud = fechaSolicitud;
     }
 
-    public Empresa getEmpresasidEmpresa() {
-        return empresasidEmpresa;
+    public String getHora() {
+        return hora;
     }
 
-    public void setEmpresasidEmpresa(Empresa empresasidEmpresa) {
-        this.empresasidEmpresa = empresasidEmpresa;
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
-    public Usuario getUsuariosidUsuario() {
-        return usuariosidUsuario;
+    public Usuario getUsuariosDocumento() {
+        return usuariosDocumento;
     }
 
-    public void setUsuariosidUsuario(Usuario usuariosidUsuario) {
-        this.usuariosidUsuario = usuariosidUsuario;
+    public void setUsuariosDocumento(Usuario usuariosDocumento) {
+        this.usuariosDocumento = usuariosDocumento;
     }
 
     @XmlTransient

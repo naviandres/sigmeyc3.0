@@ -6,7 +6,6 @@
 package com.sigmeyc.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,16 +18,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ivan
+ * @author juanc
  */
 @Entity
 @Table(name = "mercancias")
@@ -44,7 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Mercancia.findByAltura", query = "SELECT m FROM Mercancia m WHERE m.altura = :altura")
     , @NamedQuery(name = "Mercancia.findByVolumen", query = "SELECT m FROM Mercancia m WHERE m.volumen = :volumen")
     , @NamedQuery(name = "Mercancia.findByCantidad", query = "SELECT m FROM Mercancia m WHERE m.cantidad = :cantidad")
-    , @NamedQuery(name = "Mercancia.findByEmbalaje", query = "SELECT m FROM Mercancia m WHERE m.embalaje = :embalaje")})
+    , @NamedQuery(name = "Mercancia.findByEmbalaje", query = "SELECT m FROM Mercancia m WHERE m.embalaje = :embalaje")
+    , @NamedQuery(name = "Mercancia.findByEstadoMercancia", query = "SELECT m FROM Mercancia m WHERE m.estadoMercancia = :estadoMercancia")})
 public class Mercancia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -91,14 +90,22 @@ public class Mercancia implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "embalaje")
     private String embalaje;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mercanciasidMercancia", fetch = FetchType.LAZY)
-    private List<Novedad> novedadList;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "estadoMercancia")
+    private String estadoMercancia;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "mercancia", fetch = FetchType.LAZY)
+    private Novedad novedad;
     @JoinColumn(name = "departamentos_idDepartamento", referencedColumnName = "idDepartamento")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Departamento departamentosidDepartamento;
     @JoinColumn(name = "guia_idGuia", referencedColumnName = "idGuia")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Guia guiaidGuia;
+    @JoinColumn(name = "precios_idprecios", referencedColumnName = "idprecios")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Precio preciosIdprecios;
     @JoinColumn(name = "solicitudes_idSolicitud", referencedColumnName = "idSolicitud")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Solicitud solicitudesidSolicitud;
@@ -113,7 +120,7 @@ public class Mercancia implements Serializable {
         this.idMercancia = idMercancia;
     }
 
-    public Mercancia(Integer idMercancia, double valorDeclarado, String tipoMercancia, double peso, double longitud, double ancho, double altura, double volumen, int cantidad, String embalaje) {
+    public Mercancia(Integer idMercancia, double valorDeclarado, String tipoMercancia, double peso, double longitud, double ancho, double altura, double volumen, int cantidad, String embalaje, String estadoMercancia) {
         this.idMercancia = idMercancia;
         this.valorDeclarado = valorDeclarado;
         this.tipoMercancia = tipoMercancia;
@@ -124,6 +131,7 @@ public class Mercancia implements Serializable {
         this.volumen = volumen;
         this.cantidad = cantidad;
         this.embalaje = embalaje;
+        this.estadoMercancia = estadoMercancia;
     }
 
     public Integer getIdMercancia() {
@@ -206,13 +214,20 @@ public class Mercancia implements Serializable {
         this.embalaje = embalaje;
     }
 
-    @XmlTransient
-    public List<Novedad> getNovedadList() {
-        return novedadList;
+    public String getEstadoMercancia() {
+        return estadoMercancia;
     }
 
-    public void setNovedadList(List<Novedad> novedadList) {
-        this.novedadList = novedadList;
+    public void setEstadoMercancia(String estadoMercancia) {
+        this.estadoMercancia = estadoMercancia;
+    }
+
+    public Novedad getNovedad() {
+        return novedad;
+    }
+
+    public void setNovedad(Novedad novedad) {
+        this.novedad = novedad;
     }
 
     public Departamento getDepartamentosidDepartamento() {
@@ -229,6 +244,14 @@ public class Mercancia implements Serializable {
 
     public void setGuiaidGuia(Guia guiaidGuia) {
         this.guiaidGuia = guiaidGuia;
+    }
+
+    public Precio getPreciosIdprecios() {
+        return preciosIdprecios;
+    }
+
+    public void setPreciosIdprecios(Precio preciosIdprecios) {
+        this.preciosIdprecios = preciosIdprecios;
     }
 
     public Solicitud getSolicitudesidSolicitud() {

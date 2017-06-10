@@ -44,20 +44,20 @@ public class LocalidadController implements Serializable {
  public String guardar() {
         this.LocalidadFacade.create(localidad);
         init();
-        return "/crud/localidad/Create.xthml?faces-redirect=true";
+        return "/app/crud/localidad/Create.xthml?faces-redirect=true";
     }
     
     public String prepareCreate() {
-        return "/crud/localidad/Create.xthml?faces-redirect=true";
+        return "/app/crud/localidad/Create.xthml?faces-redirect=true";
     }
     
     public String prepareView(Localidad l) {
         this.localidad = l;
-        return "/crud/localidad/View.xthml?faces-redirect=true";
+        return "/app/crud/localidad/View.xthml?faces-redirect=true";
     }
 
     public String prepareList() {
-        return "/crud/localidad/List.xthml?faces-redirect=true";
+        return "/app/crud/localidad/List.xthml?faces-redirect=true";
     }
 
     public List<Localidad> getLocalidades() {
@@ -66,16 +66,16 @@ public class LocalidadController implements Serializable {
 
     public String Eliminar(Localidad l) {
         this.LocalidadFacade.remove(l);
-        return "/crud/localidad/List.xthml?faces-redirect=true";
+        return "/app/crud/localidad/List.xthml?faces-redirect=true";
     }
     public String Editar(Localidad l) {
         setLocalidad(l);
-        return "/crud/localidad/Edit.xthml?faces-redirect=true";
+        return "/app/crud/localidad/Edit.xthml?faces-redirect=true";
     }
 
     public String GuardarEdicion() {
         LocalidadFacade.edit(localidad);
-        return "/crud/localidad/List.xthml?faces-redirect=true";
+        return "/app/crud/localidad/List.xthml?faces-redirect=true";
     }
    
 

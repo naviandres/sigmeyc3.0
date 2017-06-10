@@ -17,8 +17,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ivan
+ * @author juanc
  */
 @Entity
 @Table(name = "permisos")
@@ -64,6 +66,11 @@ public class Permiso implements Serializable {
         @JoinColumn(name = "roles_identificadorRol", referencedColumnName = "identificadorRol")})
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Rol> rolList;
+    @OneToMany(mappedBy = "permisoPadre", fetch = FetchType.LAZY)
+    private List<Permiso> subPermisos;
+    @JoinColumn(name = "permiso_padre", referencedColumnName = "idPermisos")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Permiso permisoPadre;
 
     public Permiso() {
     }
@@ -117,6 +124,23 @@ public class Permiso implements Serializable {
 
     public void setRolList(List<Rol> rolList) {
         this.rolList = rolList;
+    }
+
+    @XmlTransient
+    public List<Permiso> getSubPermisos() {
+        return subPermisos;
+    }
+
+    public void setSubPermisos(List<Permiso> subPermisos) {
+        this.subPermisos = subPermisos;
+    }
+
+    public Permiso getPermisoPadre() {
+        return permisoPadre;
+    }
+
+    public void setPermisoPadre(Permiso permisoPadre) {
+        this.permisoPadre = permisoPadre;
     }
 
     @Override

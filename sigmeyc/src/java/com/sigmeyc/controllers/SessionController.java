@@ -49,7 +49,7 @@ public class SessionController implements Serializable {
     private String celular;
 
     private Rol rol;
-    private Usuario usuario = new Usuario();
+    private Usuario usuario ;
 
     ;
 
@@ -57,10 +57,10 @@ public class SessionController implements Serializable {
 
     }
 
-//    @PostConstruct
-//    public void init() {
-//        usuario = new Usuario();
-//    }
+    @PostConstruct
+    public void init() {
+        usuario = new Usuario();
+    }
     public String getEmail() {
         return email;
     }

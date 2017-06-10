@@ -44,20 +44,20 @@ public class conductorController implements Serializable {
  public String guardar() {
         this.ConductorFacade.create(conductor);
         init();
-        return "/crud/conductor/Create.xthml?faces-redirect=true";
+        return "/app/crud/conductor/Create.xthml?faces-redirect=true";
     }
     
     public String prepareCreate() {
-        return "/crud/conductor/Create.xthml?faces-redirect=true";
+        return "/app/crud/conductor/Create.xthml?faces-redirect=true";
     }
     
     public String prepareView(Conductor l) {
         this.conductor = l;
-        return "/crud/conductor/View.xthml?faces-redirect=true";
+        return "/app/crud/conductor/View.xthml?faces-redirect=true";
     }
 
     public String prepareList() {
-        return "/crud/conductor/List.xthml?faces-redirect=true";
+        return "/app/crud/conductor/List.xthml?faces-redirect=true";
     }
 
     public List<Conductor> getConductores() {
@@ -66,16 +66,16 @@ public class conductorController implements Serializable {
 
     public String Eliminar(Conductor l) {
         this.ConductorFacade.remove(l);
-        return "/crud/conductor/List.xthml?faces-redirect=true";
+        return "/app/crud/conductor/List.xthml?faces-redirect=true";
     }
     public String Editar(Conductor l) {
         setConductor(l);
-        return "/crud/conductor/Edit.xthml?faces-redirect=true";
+        return "/app/crud/conductor/Edit.xthml?faces-redirect=true";
     }
 
     public String GuardarEdicion() {
         ConductorFacade.edit(conductor);
-        return "/crud/conductor/List.xthml?faces-redirect=true";
+        return "/app/crud/conductor/List.xthml?faces-redirect=true";
     }
    
 

@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ivan
+ * @author juanc
  */
 @Entity
 @Table(name = "vehiculos")
@@ -35,9 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Vehiculo.findAll", query = "SELECT v FROM Vehiculo v")
     , @NamedQuery(name = "Vehiculo.findByIdVehiculo", query = "SELECT v FROM Vehiculo v WHERE v.idVehiculo = :idVehiculo")
     , @NamedQuery(name = "Vehiculo.findByPlacaVehiculo", query = "SELECT v FROM Vehiculo v WHERE v.placaVehiculo = :placaVehiculo")
-    , @NamedQuery(name = "Vehiculo.findByModelo", query = "SELECT v FROM Vehiculo v WHERE v.modelo = :modelo")
     , @NamedQuery(name = "Vehiculo.findByTipoVehiculo", query = "SELECT v FROM Vehiculo v WHERE v.tipoVehiculo = :tipoVehiculo")
-    , @NamedQuery(name = "Vehiculo.findByMarca", query = "SELECT v FROM Vehiculo v WHERE v.marca = :marca")
     , @NamedQuery(name = "Vehiculo.findByCapacidadCarga", query = "SELECT v FROM Vehiculo v WHERE v.capacidadCarga = :capacidadCarga")})
 public class Vehiculo implements Serializable {
 
@@ -55,18 +54,8 @@ public class Vehiculo implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "modelo")
-    private String modelo;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
     @Column(name = "tipoVehiculo")
     private String tipoVehiculo;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "marca")
-    private String marca;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -76,6 +65,8 @@ public class Vehiculo implements Serializable {
     private List<Conductor> conductorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculosidVehiculo", fetch = FetchType.LAZY)
     private List<Mercancia> mercanciaList;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "vehiculo", fetch = FetchType.LAZY)
+    private Marca marca;
 
     public Vehiculo() {
     }
@@ -84,12 +75,10 @@ public class Vehiculo implements Serializable {
         this.idVehiculo = idVehiculo;
     }
 
-    public Vehiculo(Integer idVehiculo, String placaVehiculo, String modelo, String tipoVehiculo, String marca, String capacidadCarga) {
+    public Vehiculo(Integer idVehiculo, String placaVehiculo, String tipoVehiculo, String capacidadCarga) {
         this.idVehiculo = idVehiculo;
         this.placaVehiculo = placaVehiculo;
-        this.modelo = modelo;
         this.tipoVehiculo = tipoVehiculo;
-        this.marca = marca;
         this.capacidadCarga = capacidadCarga;
     }
 
@@ -109,28 +98,12 @@ public class Vehiculo implements Serializable {
         this.placaVehiculo = placaVehiculo;
     }
 
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
     public String getTipoVehiculo() {
         return tipoVehiculo;
     }
 
     public void setTipoVehiculo(String tipoVehiculo) {
         this.tipoVehiculo = tipoVehiculo;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
     }
 
     public String getCapacidadCarga() {
@@ -157,6 +130,14 @@ public class Vehiculo implements Serializable {
 
     public void setMercanciaList(List<Mercancia> mercanciaList) {
         this.mercanciaList = mercanciaList;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
     }
 
     @Override

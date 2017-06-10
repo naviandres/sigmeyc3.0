@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ivan
+ * @author juanc
  */
 @Entity
 @Table(name = "guias")
@@ -75,15 +75,6 @@ public class Guia implements Serializable {
         this.codigoBarras = codigoBarras;
         this.detalleMercancia = detalleMercancia;
     }
-
-    public Guia(Integer idGuia, String codigoBarras, String detalleMercancia, Planilla planillasidPlanilla) {
-        this.idGuia = idGuia;
-        this.codigoBarras = codigoBarras;
-        this.detalleMercancia = detalleMercancia;
-        this.planillasidPlanilla = planillasidPlanilla;
-    }
-    
-    
 
     public Integer getIdGuia() {
         return idGuia;

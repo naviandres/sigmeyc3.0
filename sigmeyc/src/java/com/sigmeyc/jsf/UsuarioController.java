@@ -1,23 +1,33 @@
 package com.sigmeyc.jsf;
 
+import com.sigmeyc.beans.RolFacade;
 import com.sigmeyc.beans.UsuarioFacade;
+import com.sigmeyc.controllers.SessionController;
+import com.sigmeyc.entities.Rol;
 import com.sigmeyc.entities.Usuario;
+import com.sigmeyc.jsf.util.MessageUtil;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 @Named("usuarioController")
 @SessionScoped
 public class UsuarioController implements Serializable {
+    
+    @Inject
+    private SessionController sc;
 
     @EJB
-    private UsuarioFacade UsuarioFacade;
+    private UsuarioFacade usuarioFacade;
+    @EJB
+    private RolFacade rolFacade;
+
     private Usuario usuario;
 
     public UsuarioController() {
@@ -26,7 +36,6 @@ public class UsuarioController implements Serializable {
     @PostConstruct
     public void init() {
         usuario = new Usuario();
-
     }
 
     public Usuario getUsuario() {
@@ -37,42 +46,64 @@ public class UsuarioController implements Serializable {
         this.usuario = usuario;
     }
 
-    public String guardar() {
-        this.UsuarioFacade.create(usuario);
-        init();
-        return "/crud/usuario/Create.xthml?faces-redirect=true";
+    public void guardar() {
+        try {
+            if (usuario != null) {
+                
+                usuario.setRoles(new ArrayList<Rol>());
+                usuario.getRoles().add(rolFacade.find(1));
+                usuario.setEstado(1);
+                usuarioFacade.create(usuario);
+                init();
+                MessageUtil.enviarMensajeInformacion("createUsuario", "Registro satisfactorio", "El usuario se registro correctamente");
+            } else {
+                MessageUtil.enviarMensajeError("createUsuario", "No se han dilingenciado los campos", "Complete campos");
+            }
+        } catch (Exception e) {
+            MessageUtil.enviarMensajeError("createUsuario", "Documento no se puede registrar", "El documento debe ser unico");
+        }
     }
 
     public String prepareCreate() {
-        return "/crud/usuario/Create.xthml?faces-redirect=true";
+        return "/app/crud/usuario/Create.xhtml?faces-redirect=true";
     }
 
-    public String prepareView(Usuario l) {
-        this.usuario = l;
-        return "/crud/usuario/View.xthml?faces-redirect=true";
+    public String prepareView(Usuario u) {
+        this.usuario = u;
+        return "/app/crud/usuario/View.xhtml?faces-redirect=true";
     }
 
     public String prepareList() {
-        return "/crud/usuario/List.xthml?faces-redirect=true";
+        return "/app/crud/usuario/List.xhtml?faces-redirect=true";
     }
 
     public List<Usuario> getUsuarios() {
-        return this.UsuarioFacade.findAll();
+        return this.usuarioFacade.findAll();
     }
 
-    public String Eliminar(Usuario l) {
-        this.UsuarioFacade.remove(l);
-        return "/crud/usuario/List.xthml?faces-redirect=true";
+    public String eliminar(){
+        Usuario u = sc.getUsuarioSesion();
+        System.out.println("Usuario inicio"+u.getPrimerNombre());
+        System.out.println("Eliminar"+usuario.getPrimerNombre());
+        if (u.getDocumento().intValue() != usuario.getDocumento()) {
+            usuarioFacade.remove(usuario);
+        }else{
+            MessageUtil.enviarMensajeError(null, "Error al eliminar", "No puede eliminarse ud mismo");
+        }
+        return "/app/crud/usuario/List.xhtml?faces-redirect=true";
     }
 
-    public String Editar(Usuario l) {
-        setUsuario(l);
-        return "/crud/usuario/Edit.xthml?faces-redirect=true";
+    public String editar(Usuario u) {
+        setUsuario(u);
+        return "/app/crud/usuario/Edit.xhtml?faces-redirect=true";
     }
 
-    public String GuardarEdicion() {
-        UsuarioFacade.edit(usuario);
-        return "/crud/usuario/List.xthml?faces-redirect=true";
+    public void guardarEdicion() {
+        try {
+            this.usuarioFacade.edit(usuario);
+//            MessageUtil.enviarMensajeInformacion(idClient, summary, detail);
+        } catch (Exception e) {
+//            MessageUtil.enviarMensajeErrorGlobal(summary, detail);
+        }
     }
-
 }

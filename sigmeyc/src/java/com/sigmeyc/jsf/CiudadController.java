@@ -40,20 +40,20 @@ public class CiudadController implements Serializable {
     public String guardar() {
         this.CiudadFacade.create(ciudad);
         init();
-        return "/crud/ciudad/Create.xthml?faces-redirect=true";
+        return "/app/crud/ciudad/Create.xthml?faces-redirect=true";
     }
 
     public String prepareCreate() {
-        return "/crud/ciudad/Create.xthml?faces-redirect=true";
+        return "/app/crud/ciudad/Create.xthml?faces-redirect=true";
     }
 
     public String prepareView(Ciudad l) {
         this.ciudad = l;
-        return "/crud/ciudad/View.xthml?faces-redirect=true";
+        return "/app/crud/ciudad/View.xthml?faces-redirect=true";
     }
 
     public String prepareList() {
-        return "/crud/ciudad/List.xthml?faces-redirect=true";
+        return "/app/crud/ciudad/List.xthml?faces-redirect=true";
     }
 
     public List<Ciudad> getCiudades() {
@@ -62,17 +62,17 @@ public class CiudadController implements Serializable {
 
     public String Eliminar(Ciudad l) {
         this.CiudadFacade.remove(l);
-        return "/crud/ciudad/List.xthml?faces-redirect=true";
+        return "/app/crud/ciudad/List.xthml?faces-redirect=true";
     }
 
     public String Editar(Ciudad l) {
         setCiudad(l);
-        return "/crud/ciudad/Edit.xthml?faces-redirect=true";
+        return "/app/crud/ciudad/Edit.xthml?faces-redirect=true";
     }
 
     public String GuardarEdicion() {
         CiudadFacade.edit(ciudad);
-        return "/crud/ciudad/List.xthml?faces-redirect=true";
+        return "/app/crud/ciudad/List.xthml?faces-redirect=true";
     }
 
 }

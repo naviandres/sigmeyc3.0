@@ -12,8 +12,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -21,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -29,16 +28,15 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ivan
+ * @author juanc
  */
 @Entity
 @Table(name = "usuarios")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
-    , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
-    , @NamedQuery(name = "Usuario.findByTipoIdentificacion", query = "SELECT u FROM Usuario u WHERE u.tipoIdentificacion = :tipoIdentificacion")
     , @NamedQuery(name = "Usuario.findByDocumento", query = "SELECT u FROM Usuario u WHERE u.documento = :documento")
+    , @NamedQuery(name = "Usuario.findByTipoIdentificacion", query = "SELECT u FROM Usuario u WHERE u.tipoIdentificacion = :tipoIdentificacion")
     , @NamedQuery(name = "Usuario.findByPrimerNombre", query = "SELECT u FROM Usuario u WHERE u.primerNombre = :primerNombre")
     , @NamedQuery(name = "Usuario.findBySegundoNombre", query = "SELECT u FROM Usuario u WHERE u.segundoNombre = :segundoNombre")
     , @NamedQuery(name = "Usuario.findByPrimerApellido", query = "SELECT u FROM Usuario u WHERE u.primerApellido = :primerApellido")
@@ -47,24 +45,21 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByCelular", query = "SELECT u FROM Usuario u WHERE u.celular = :celular")
     , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
     , @NamedQuery(name = "Usuario.findByClave", query = "SELECT u FROM Usuario u WHERE u.clave = :clave")
+    , @NamedQuery(name = "Usuario.findByEstado", query = "SELECT u FROM Usuario u WHERE u.estado = :estado")
     , @NamedQuery(name = "Usuario.findLogin", query = "SELECT u FROM Usuario u WHERE u.email = :ema AND u.clave = :clv")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idUsuario")
-    private Integer idUsuario;
+    @NotNull
+    @Column(name = "documento")
+    private Long documento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "tipoIdentificacion")
     private String tipoIdentificacion;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "documento")
-    private long documento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -94,36 +89,39 @@ public class Usuario implements Serializable {
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "email")
-    private String email; 
+    private String email;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "clave")
     private String clave;
     @Column(name = "estado")
-    private int estado;
-    
+    private Integer estado;
     @JoinTable(name = "usuarios_has_roles", joinColumns = {
-        @JoinColumn(name = "usuarios_idUsuario", referencedColumnName = "idUsuario")}, inverseJoinColumns = {
+        @JoinColumn(name = "usuarios_documento", referencedColumnName = "documento")}, inverseJoinColumns = {
         @JoinColumn(name = "roles_identificadorRol", referencedColumnName = "identificadorRol")})
-    @ManyToMany(fetch = FetchType.EAGER)
+    
+    @ManyToMany( fetch = FetchType.LAZY)
     private List<Rol> roles;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosidUsuario", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosDocumento", fetch = FetchType.LAZY)
     private List<Solicitud> solicitudList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosidUsuario", fetch = FetchType.LAZY)
-    private List<Empresa> empresaList;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.LAZY)
+    private Conductor conductor;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuariosDocumento", fetch = FetchType.LAZY)
+    private List<Cotizacion> cotizacionList;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario", fetch = FetchType.LAZY)
+    private Empresa empresa;
 
     public Usuario() {
     }
 
-    public Usuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public Usuario(Long documento) {
+        this.documento = documento;
     }
 
-    public Usuario(Integer idUsuario, String tipoIdentificacion, long documento, String primerNombre, String primerApellido, String celular, String email, String clave) {
-        this.idUsuario = idUsuario;
-        this.tipoIdentificacion = tipoIdentificacion;
+    public Usuario(Long documento, String tipoIdentificacion, String primerNombre, String primerApellido, String celular, String email, String clave) {
         this.documento = documento;
+        this.tipoIdentificacion = tipoIdentificacion;
         this.primerNombre = primerNombre;
         this.primerApellido = primerApellido;
         this.celular = celular;
@@ -131,28 +129,12 @@ public class Usuario implements Serializable {
         this.clave = clave;
     }
 
-    public Usuario(Integer idUsuario, String tipoIdentificacion, long documento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, 
-            String telefono, String celular, String email, String clave, int estado) {
-        this.idUsuario = idUsuario;
-        this.tipoIdentificacion = tipoIdentificacion;
+    public Long getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(Long documento) {
         this.documento = documento;
-        this.primerNombre = primerNombre;
-        this.segundoNombre = segundoNombre;
-        this.primerApellido = primerApellido;
-        this.segundoApellido = segundoApellido;
-        this.telefono = telefono;
-        this.celular = celular;
-        this.email = email;
-        this.clave = clave;
-        this.estado = estado;
-    }
-
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
     }
 
     public String getTipoIdentificacion() {
@@ -161,14 +143,6 @@ public class Usuario implements Serializable {
 
     public void setTipoIdentificacion(String tipoIdentificacion) {
         this.tipoIdentificacion = tipoIdentificacion;
-    }
-
-    public long getDocumento() {
-        return documento;
-    }
-
-    public void setDocumento(long documento) {
-        this.documento = documento;
     }
 
     public String getPrimerNombre() {
@@ -235,15 +209,13 @@ public class Usuario implements Serializable {
         this.clave = clave;
     }
 
-    public int getEstado() {
+    public Integer getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(Integer estado) {
         this.estado = estado;
     }
-    
-    
 
     @XmlTransient
     public List<Rol> getRoles() {
@@ -263,19 +235,35 @@ public class Usuario implements Serializable {
         this.solicitudList = solicitudList;
     }
 
-    @XmlTransient
-    public List<Empresa> getEmpresaList() {
-        return empresaList;
+    public Conductor getConductor() {
+        return conductor;
     }
 
-    public void setEmpresaList(List<Empresa> empresaList) {
-        this.empresaList = empresaList;
+    public void setConductor(Conductor conductor) {
+        this.conductor = conductor;
+    }
+
+    @XmlTransient
+    public List<Cotizacion> getCotizacionList() {
+        return cotizacionList;
+    }
+
+    public void setCotizacionList(List<Cotizacion> cotizacionList) {
+        this.cotizacionList = cotizacionList;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
+        hash += (documento != null ? documento.hashCode() : 0);
         return hash;
     }
 
@@ -286,7 +274,7 @@ public class Usuario implements Serializable {
             return false;
         }
         Usuario other = (Usuario) object;
-        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
+        if ((this.documento == null && other.documento != null) || (this.documento != null && !this.documento.equals(other.documento))) {
             return false;
         }
         return true;
@@ -294,7 +282,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sigmeyc.entities.Usuario[ idUsuario=" + idUsuario + " ]";
+        return "com.sigmeyc.entities.Usuario[ documento=" + documento + " ]";
     }
-
+    
 }

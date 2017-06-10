@@ -10,13 +10,12 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,29 +23,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ivan
+ * @author juanc
  */
 @Entity
 @Table(name = "conductores")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Conductor.findAll", query = "SELECT c FROM Conductor c")
-    , @NamedQuery(name = "Conductor.findByIdConductor", query = "SELECT c FROM Conductor c WHERE c.idConductor = :idConductor")
-    , @NamedQuery(name = "Conductor.findByIdentificacionConductor", query = "SELECT c FROM Conductor c WHERE c.identificacionConductor = :identificacionConductor")
+    , @NamedQuery(name = "Conductor.findByDocumento", query = "SELECT c FROM Conductor c WHERE c.documento = :documento")
     , @NamedQuery(name = "Conductor.findByTipoLicencia", query = "SELECT c FROM Conductor c WHERE c.tipoLicencia = :tipoLicencia")
     , @NamedQuery(name = "Conductor.findByNumeroLicencia", query = "SELECT c FROM Conductor c WHERE c.numeroLicencia = :numeroLicencia")})
 public class Conductor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "idConductor")
-    private Integer idConductor;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "identificacionConductor")
-    private long identificacionConductor;
+    @Column(name = "documento")
+    private Long documento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 5)
@@ -56,6 +50,9 @@ public class Conductor implements Serializable {
     @NotNull
     @Column(name = "numeroLicencia")
     private long numeroLicencia;
+    @JoinColumn(name = "documento", referencedColumnName = "documento", insertable = false, updatable = false)
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
+    private Usuario usuario;
     @JoinColumn(name = "vehiculos_idVehiculo", referencedColumnName = "idVehiculo")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Vehiculo vehiculosidVehiculo;
@@ -63,31 +60,22 @@ public class Conductor implements Serializable {
     public Conductor() {
     }
 
-    public Conductor(Integer idConductor) {
-        this.idConductor = idConductor;
+    public Conductor(Long documento) {
+        this.documento = documento;
     }
 
-    public Conductor(Integer idConductor, long identificacionConductor, String tipoLicencia, long numeroLicencia) {
-        this.idConductor = idConductor;
-        this.identificacionConductor = identificacionConductor;
+    public Conductor(Long documento, String tipoLicencia, long numeroLicencia) {
+        this.documento = documento;
         this.tipoLicencia = tipoLicencia;
         this.numeroLicencia = numeroLicencia;
     }
 
-    public Integer getIdConductor() {
-        return idConductor;
+    public Long getDocumento() {
+        return documento;
     }
 
-    public void setIdConductor(Integer idConductor) {
-        this.idConductor = idConductor;
-    }
-
-    public long getIdentificacionConductor() {
-        return identificacionConductor;
-    }
-
-    public void setIdentificacionConductor(long identificacionConductor) {
-        this.identificacionConductor = identificacionConductor;
+    public void setDocumento(Long documento) {
+        this.documento = documento;
     }
 
     public String getTipoLicencia() {
@@ -106,6 +94,14 @@ public class Conductor implements Serializable {
         this.numeroLicencia = numeroLicencia;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public Vehiculo getVehiculosidVehiculo() {
         return vehiculosidVehiculo;
     }
@@ -117,7 +113,7 @@ public class Conductor implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idConductor != null ? idConductor.hashCode() : 0);
+        hash += (documento != null ? documento.hashCode() : 0);
         return hash;
     }
 
@@ -128,7 +124,7 @@ public class Conductor implements Serializable {
             return false;
         }
         Conductor other = (Conductor) object;
-        if ((this.idConductor == null && other.idConductor != null) || (this.idConductor != null && !this.idConductor.equals(other.idConductor))) {
+        if ((this.documento == null && other.documento != null) || (this.documento != null && !this.documento.equals(other.documento))) {
             return false;
         }
         return true;
@@ -136,7 +132,7 @@ public class Conductor implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sigmeyc.entities.Conductor[ idConductor=" + idConductor + " ]";
+        return "com.sigmeyc.entities.Conductor[ documento=" + documento + " ]";
     }
     
 }

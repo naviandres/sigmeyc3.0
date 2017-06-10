@@ -40,7 +40,7 @@ public class UsuarioConverter implements Converter {
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if (value != null && value instanceof Usuario) {
             Usuario p = (Usuario) value;
-            return p.getIdUsuario().toString();
+            return p.getDocumento().toString();
         }
         return null;
     }

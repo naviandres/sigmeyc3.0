@@ -10,13 +10,11 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,14 +22,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ivan
+ * @author juanc
  */
 @Entity
 @Table(name = "novedades")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Novedad.findAll", query = "SELECT n FROM Novedad n")
-    , @NamedQuery(name = "Novedad.findByIdNovedad", query = "SELECT n FROM Novedad n WHERE n.idNovedad = :idNovedad")
+    , @NamedQuery(name = "Novedad.findByIdMercancia", query = "SELECT n FROM Novedad n WHERE n.idMercancia = :idMercancia")
     , @NamedQuery(name = "Novedad.findByTipoNovedad", query = "SELECT n FROM Novedad n WHERE n.tipoNovedad = :tipoNovedad")
     , @NamedQuery(name = "Novedad.findByDetalle", query = "SELECT n FROM Novedad n WHERE n.detalle = :detalle")
     , @NamedQuery(name = "Novedad.findByPrioridad", query = "SELECT n FROM Novedad n WHERE n.prioridad = :prioridad")
@@ -40,10 +38,10 @@ public class Novedad implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idNovedad")
-    private Integer idNovedad;
+    @NotNull
+    @Column(name = "idMercancia")
+    private Integer idMercancia;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -62,30 +60,30 @@ public class Novedad implements Serializable {
     @Size(max = 45)
     @Column(name = "descripcion")
     private String descripcion;
-    @JoinColumn(name = "mercancias_idMercancia", referencedColumnName = "idMercancia")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Mercancia mercanciasidMercancia;
+    @JoinColumn(name = "idMercancia", referencedColumnName = "idMercancia", insertable = false, updatable = false)
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
+    private Mercancia mercancia;
 
     public Novedad() {
     }
 
-    public Novedad(Integer idNovedad) {
-        this.idNovedad = idNovedad;
+    public Novedad(Integer idMercancia) {
+        this.idMercancia = idMercancia;
     }
 
-    public Novedad(Integer idNovedad, String tipoNovedad, String detalle, String prioridad) {
-        this.idNovedad = idNovedad;
+    public Novedad(Integer idMercancia, String tipoNovedad, String detalle, String prioridad) {
+        this.idMercancia = idMercancia;
         this.tipoNovedad = tipoNovedad;
         this.detalle = detalle;
         this.prioridad = prioridad;
     }
 
-    public Integer getIdNovedad() {
-        return idNovedad;
+    public Integer getIdMercancia() {
+        return idMercancia;
     }
 
-    public void setIdNovedad(Integer idNovedad) {
-        this.idNovedad = idNovedad;
+    public void setIdMercancia(Integer idMercancia) {
+        this.idMercancia = idMercancia;
     }
 
     public String getTipoNovedad() {
@@ -120,18 +118,18 @@ public class Novedad implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Mercancia getMercanciasidMercancia() {
-        return mercanciasidMercancia;
+    public Mercancia getMercancia() {
+        return mercancia;
     }
 
-    public void setMercanciasidMercancia(Mercancia mercanciasidMercancia) {
-        this.mercanciasidMercancia = mercanciasidMercancia;
+    public void setMercancia(Mercancia mercancia) {
+        this.mercancia = mercancia;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idNovedad != null ? idNovedad.hashCode() : 0);
+        hash += (idMercancia != null ? idMercancia.hashCode() : 0);
         return hash;
     }
 
@@ -142,7 +140,7 @@ public class Novedad implements Serializable {
             return false;
         }
         Novedad other = (Novedad) object;
-        if ((this.idNovedad == null && other.idNovedad != null) || (this.idNovedad != null && !this.idNovedad.equals(other.idNovedad))) {
+        if ((this.idMercancia == null && other.idMercancia != null) || (this.idMercancia != null && !this.idMercancia.equals(other.idMercancia))) {
             return false;
         }
         return true;
@@ -150,7 +148,7 @@ public class Novedad implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sigmeyc.entities.Novedad[ idNovedad=" + idNovedad + " ]";
+        return "com.sigmeyc.entities.Novedad[ idMercancia=" + idMercancia + " ]";
     }
     
 }

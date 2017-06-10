@@ -40,7 +40,7 @@ public class EmpresaConverter implements Converter {
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if (value != null && value instanceof Empresa) {
             Empresa e = (Empresa) value;
-            return e.getIdEmpresa().toString();
+            return e.getNit().toString();
         }
         return null;
     }

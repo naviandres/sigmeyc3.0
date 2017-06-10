@@ -1,11 +1,16 @@
 package com.sigmeyc.jsf;
 
 import com.sigmeyc.beans.SolicitudFacade;
+import com.sigmeyc.controllers.SessionController;
 import com.sigmeyc.entities.Empresa;
 import com.sigmeyc.entities.Usuario;
 import com.sigmeyc.entities.Solicitud;
+import com.sigmeyc.jsf.util.MessageUtil;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -20,14 +25,16 @@ public class SolicitudController implements Serializable {
 
     @EJB
     private SolicitudFacade solicitudFacade;
-    
+
     private Solicitud solicitud;
+
+    private SessionController sc = new SessionController();
 
     public SolicitudController() {
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         solicitud = new Solicitud();
     }
 
@@ -38,10 +45,39 @@ public class SolicitudController implements Serializable {
     public void setSolicitud(Solicitud solicitud) {
         this.solicitud = solicitud;
     }
-    
+
     public String guardar() {
-        this.solicitudFacade.create(solicitud);
-        init();
+        try {
+            Date fechaActual = new Date();
+            DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+
+            String hora1 = "00:00:00";
+            String hora2 = "13:00:00";
+            String horaNueva = dateFormat.format(fechaActual);
+            Date date1, date2, dateNueva;
+            date1 = dateFormat.parse(hora1);
+            date2 = dateFormat.parse(hora2);
+            dateNueva = dateFormat.parse(horaNueva);
+            //anotadion: si el valor de la cadena es es menor que el valor 
+//            de la cadena pasado como parametro retorna valor negativo y si es al contrario(valor
+//de la cadena es mayor que el parametro retorna valor positivo.si son iguales el valor es 0
+            if ((date1.compareTo(dateNueva) <= 0) && (date2.compareTo(dateNueva) >= 0)) {
+                Usuario us = sc.getUsuarioSesion();
+                solicitud.setUsuariosDocumento(us);
+                System.out.println("dfdf"+horaNueva);
+                solicitud.setHora(horaNueva);
+                solicitud.setFechaSolicitud(fechaActual);
+                this.solicitudFacade.create(solicitud);
+                init();
+                return "/crud/solicitud/List.xhtml?faces-redirect=true";
+            } else {
+                System.out.println("Tiene que realizar la solicitud antes de" + hora2);
+//                MessageUtil.enviarMensajeErrorGlobal("No puede realizar la solicitud","Tiene que realizar la solicitud antes de" + hora2);
+                MessageUtil.enviarMensajeError("createSolici", "No puede realizar la solicitud", "Tiene que realizar la solicitud antes de" + hora2);
+            }
+        } catch (ParseException parseException) {
+            parseException.printStackTrace();
+        }
         return "/crud/solicitud/Create.xhtml?faces-redirect=true";
     }
 
@@ -51,16 +87,16 @@ public class SolicitudController implements Serializable {
 //        usuarioscodigoUsuario = (Usuario) uc.getUsuarios();
 //    }
     public String prepareCreate() {
-        return "/crud/solicitud/Create.xhtml?faces-redirect=true";
+        return "/app/crud/solicitud/Create.xhtml?faces-redirect=true";
     }
 
     public String prepareView(Solicitud s) {
         this.solicitud = s;
-        return "/crud/solicitud/View.xhtml?faces-redirect=true";
+        return "/app/crud/solicitud/View.xhtml?faces-redirect=true";
     }
 
     public String prepareList() {
-        return "/crud/solicitud/List.xhtml?faces-redirect=true";
+        return "/app/crud/solicitud/List.xhtml?faces-redirect=true";
     }
 
     public List<Solicitud> getSolicitudes() {
@@ -69,22 +105,22 @@ public class SolicitudController implements Serializable {
 
     public String eliminar(Solicitud s) {
         this.solicitudFacade.remove(s);
-        return "/crud/solicitud/List.xhtml?faces-redirect=true";
+        return "/app/crud/solicitud/List.xhtml?faces-redirect=true";
     }
 
     public String editar(Solicitud s) {
         setSolicitud(s);
-        return "/crud/solicitud/Edit.xhtml?faces-redirect=true";
+        return "/app/crud/solicitud/Edit.xhtml?faces-redirect=true";
     }
 
     public String guardarEdicion() {
         this.solicitudFacade.edit(solicitud);
-        return "/crud/solicitud/Edit.xhtml?faces-redirect=true";
+        return "/app/crud/solicitud/Edit.xhtml?faces-redirect=true";
     }
 
     public String destruirVer(Integer idSolicitud) {
 
-        return "/crud/solicitud/List.xhtml?faces-redirect=true";
+        return "/app/crud/solicitud/List.xhtml?faces-redirect=true";
     }
 
 }

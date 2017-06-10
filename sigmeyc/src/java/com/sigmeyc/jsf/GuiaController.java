@@ -87,7 +87,7 @@ public class GuiaController implements Serializable {
     public String guardar() {
         this.guiaFacade.create(guia);
         init();
-        return "/crud/guia/Create.xhtml?faces-redirect=true";
+        return "/app/crud/guia/Create.xhtml?faces-redirect=true";
     }
 
 //    public void foraneaGuia() {
@@ -95,16 +95,16 @@ public class GuiaController implements Serializable {
 //
 //    }
     public String prepareCreate() {
-        return "/crud/guia/Create.xhtml?faces-redirect=true";
+        return "/app/crud/guia/Create.xhtml?faces-redirect=true";
     }
 
     public String prepareView(Guia g) {
         this.guia = g;
-        return "/crud/guia/View.xhtml?faces-redirect=true";
+        return "/app/crud/guia/View.xhtml?faces-redirect=true";
     }
 
     public String prepareList() {
-        return "/crud/guia/List.xhtml?faces-redirect=true";
+        return "/app/crud/guia/List.xhtml?faces-redirect=true";
     }
 
     public List<Guia> getGuias() {
@@ -113,22 +113,22 @@ public class GuiaController implements Serializable {
 
     public String Eliminar(Guia g) {
         this.guiaFacade.remove(g);
-        return "/crud/guia/List.xhtml?faces-redirect=true";
+        return "/app/crud/guia/List.xhtml?faces-redirect=true";
     }
 
     public String Editar(Guia g) {
         setGuia(g);
-        return "/crud/guia/Edit.xhtml?faces-redirect=true";
+        return "/app/crud/guia/Edit.xhtml?faces-redirect=true";
     }
 
     public String GuardarEdicion() {
         guiaFacade.edit(guia);
-        return "/crud/guia/Edit.xhtml?faces-redirect=true";
+        return "/app/crud/guia/Edit.xhtml?faces-redirect=true";
     }
 
     public String DestruirVer(Guia g) {
         this.guiaFacade.remove(g);
-        return "/crud/guia/List.xhtml?faces-redirect=true";
+        return "/app/crud/guia/List.xhtml?faces-redirect=true";
     }
 
 }

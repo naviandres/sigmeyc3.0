@@ -47,20 +47,20 @@ public class mercanciaController implements Serializable {
     public String guardar() {
         this.MercanciaFacade.create(mercancia);
         init();
-        return "/crud/mercancia/Create.xthml?faces-redirect=true";
+        return "/app/crud/mercancia/Create.xthml?faces-redirect=true";
     }
 
     public String prepareCreate() {
-        return "/crud/mercancia/Create.xthml?faces-redirect=true";
+        return "/app/crud/mercancia/Create.xthml?faces-redirect=true";
     }
 
     public String prepareView(Mercancia l) {
         this.mercancia = l;
-        return "/crud/mercancia/View.xthml?faces-redirect=true";
+        return "/app/crud/mercancia/View.xthml?faces-redirect=true";
     }
 
     public String prepareList() {
-        return "/crud/mercancia/List.xthml?faces-redirect=true";
+        return "/app/crud/mercancia/List.xthml?faces-redirect=true";
     }
 
     public List<Mercancia> getMercancias() {
@@ -69,17 +69,17 @@ public class mercanciaController implements Serializable {
 
     public String Eliminar(Mercancia l) {
         this.MercanciaFacade.remove(l);
-        return "/crud/mercancia/List.xthml?faces-redirect=true";
+        return "/app/crud/mercancia/List.xthml?faces-redirect=true";
     }
 
     public String Editar(Mercancia l) {
         setMercancia(l);
-        return "/crud/mercancia/Edit.xthml?faces-redirect=true";
+        return "/app/crud/mercancia/Edit.xthml?faces-redirect=true";
     }
 
     public String GuardarEdicion() {
         MercanciaFacade.edit(mercancia);
-        return "/crud/mercancia/List.xthml?faces-redirect=true";
+        return "/app/crud/mercancia/List.xthml?faces-redirect=true";
     }
 
 }
