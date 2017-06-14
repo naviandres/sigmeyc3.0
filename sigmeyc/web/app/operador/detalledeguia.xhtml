@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title">Detalle de Guía</ui:define>
         <ui:define name="contenido">
@@ -17,106 +18,34 @@
                 <h2 class="text-center page-header">Detalle de Guía</h2>
                 <h3 class="text-center">23123</h3>
                 <div class="box-body">		
-                    <!--                    <table id="table"
-                                               data-toggle="table"
-                                               data-show-export="true"
-                                               data-click-to-select="true"
-                                               data-toolbar="#toolbar"
-                                               >-->
-                    <table id="tablaGuia" class="table table-striped table-bordered table-hover" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>					
-                                <th >Categoría</th>
-                                <th>Detalle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr >
-                                <td><strong>Producto</strong></td>
-                                <td>Televisor</td>										
-                            </tr>
-                            <tr >
-                                <td><strong>Valor declarado</strong></td>
-                                <td>12,212</td>										
-                            </tr>
-                            <tr >
-                                <td><strong>Tipo de mercancía</strong></td>
-                                <td>Correspondencia</td>						
-                            </tr>
-                            <tr >
-                                <td><strong>Embalaje</strong></td>
-                                <td>Caja de cartón</td>						
-                            </tr>
-                            <tr >
-                                <td><strong>Tipo de estado</strong></td>
-                                <td>Almacenada</td>						
-                            </tr>
-                            <tr >
-                                <td><strong>Peso</strong></td>
-                                <td>100Kg</td>						
-                            </tr>
-                            <tr >
-                                <td><strong>Longitud</strong></td>
-                                <td>12 mt</td>						
-                            </tr>
-                            <tr >
-                                <td><strong>Ancho</strong></td>
-                                <td>10 mt</td>						
-                            </tr>
-                            <tr >
-                                <td><strong>Altura</strong></td>
-                                <td>15 mt</td>						
-                            </tr>
-                            <tr >
-                                <td><strong>Volumen</strong></td>
-                                <td>12mt³</td>						
-                            </tr>
-                            <tr >
-                                <td><strong>Cantidad</strong></td>
-                                <td>2</td>						
-                            </tr>				
-                            <!-- <tr >
-                                    <td><strong>Origen</strong></td>
-                                    <td>Bogotá</td>										
-                            </tr>
-                            <tr >
-                                    <td><strong>Nombres del destinatario</strong></td>
-                                    <td>Ivan Dario</td>										
-                            </tr>
-                            <tr >
-                                    <td><strong>Apellidos del destinatario</strong></td>
-                                    <td>Forero Martines</td>										
-                            </tr>
-                            <tr >
-                                    <td><strong>Teléfono destinatario</strong></td>
-                                    <td>784469-58</td>										
-                            </tr>
-                            <tr >
-                                    <td><strong>Departamento destino</strong></td>
-                                    <td>Cundinamarca</td>										
-                            </tr>
-                            <tr >
-                                    <td><strong>Municipio destino</strong></td>
-                                    <td>Cundinamarca</td>										
-                            </tr>
-                            <tr >			
-                                    <td><strong>Dirección destino</strong></td>
-                                    <td>Cll-4 Crr-8</td>										
-                            </tr>
-                            <tr >				
-                                    <td><strong>Volumen</strong></td>
-                                    <td>12mt²</td>										
-                            </tr>
-                            <tr >			
-                                    <td><strong>Peso</strong></td>
-                                    <td>15Kg</td>										
-                            </tr>
-                            <tr >			
-                                    <td><strong>Prioridad</strong></td>
-                                    <td>Alta</td>										
-                            </tr> -->
-                        </tbody>
-                    </table>
+                    <h:form prependId="false">
+                        <h:dataTable id="tablaGuia" class="stripe" value="#{mercanciaController.mercancia}" var="mer">
+                            <h:column class="col-md-6">
+                                <f:facet name="header">
+                                    <h:outputText value="Items"/>
+                                </f:facet>
+                                <h:outputText value="Numero guía"/>
+                                <br/>
+                                <h:outputText value="Dirección destino"/>
+                                <br/>
+                                <h:outputText value="Tipo vehiculo"/>
+                                <br/>
+                                <h:outputText value="Estado mercancía"/>
+                            </h:column>
+                            <h:column class="col-md-6">
+                                <f:facet name="header">
+                                    <h:outputText value="Datos"/>
+                                </f:facet>
+                                <h:outputText value="#{mer.guiaidGuia.nueroGuia}"/>
+                                <br/>
+                                <h:outputText value="#{mer.solicitudesidSolicitud.direccionDestino}"/>
+                                <br/>
+                                <h:outputText value="#{mer.vehiculosidVehiculo.tipoVehiculo}"/>
+                                <br/>
+                                <h:outputText value="#{mer.estadoMercancia}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
                 </div>
                 <div class="col-xs-1">
                     <a href="#{request.contextPath}/app/operador/generarguia.xhtml" class="btn btn-danger active float" role="button">Regresar</a>
