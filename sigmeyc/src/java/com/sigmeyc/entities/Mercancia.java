@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author juanc
+ * @author ivan
  */
 @Entity
 @Table(name = "mercancias")
@@ -97,12 +97,12 @@ public class Mercancia implements Serializable {
     private String estadoMercancia;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "mercancia", fetch = FetchType.LAZY)
     private Novedad novedad;
-    @JoinColumn(name = "departamentos_idDepartamento", referencedColumnName = "idDepartamento")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Departamento departamentosidDepartamento;
     @JoinColumn(name = "guia_idGuia", referencedColumnName = "idGuia")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Guia guiaidGuia;
+    @JoinColumn(name = "localidades_idLocalidad", referencedColumnName = "idLocalidad")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Localidad localidadesidLocalidad;
     @JoinColumn(name = "precios_idprecios", referencedColumnName = "idprecios")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Precio preciosIdprecios;
@@ -230,20 +230,20 @@ public class Mercancia implements Serializable {
         this.novedad = novedad;
     }
 
-    public Departamento getDepartamentosidDepartamento() {
-        return departamentosidDepartamento;
-    }
-
-    public void setDepartamentosidDepartamento(Departamento departamentosidDepartamento) {
-        this.departamentosidDepartamento = departamentosidDepartamento;
-    }
-
     public Guia getGuiaidGuia() {
         return guiaidGuia;
     }
 
     public void setGuiaidGuia(Guia guiaidGuia) {
         this.guiaidGuia = guiaidGuia;
+    }
+
+    public Localidad getLocalidadesidLocalidad() {
+        return localidadesidLocalidad;
+    }
+
+    public void setLocalidadesidLocalidad(Localidad localidadesidLocalidad) {
+        this.localidadesidLocalidad = localidadesidLocalidad;
     }
 
     public Precio getPreciosIdprecios() {

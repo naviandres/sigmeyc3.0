@@ -44,7 +44,7 @@
                                     <div class="form-group">
                                         <h:outputText value="codigoMercancia"/>
                                         <div class="col-xs-6">
-                                            <h:outputText value="#{mercanciaController.mercancia.codigoMercancia}" />
+                                            <h:outputText value="#{mercanciaController.mercancia.idMercancia}" />
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -117,16 +117,7 @@
 
                                         <div class="col-xs-6">
 
-                                            <h:outputText value="#{mercanciaController.mercancia.departamentosidDepartamento}" />
-
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputText value="codigoBarras"/>
-
-                                        <div class="col-xs-6">
-
-                                            <h:outputText value="#{mercanciaController.mercancia.guiaidGuia}" />
+                                            <h:outputText value="#{mercanciaController.mercancia.localidadesidLocalidad.nombreLocalidad}" />
 
                                         </div>
                                     </div>
@@ -135,7 +126,7 @@
 
                                         <div class="col-xs-6">
 
-                                            <h:outputText value="#{mercanciaController.solicitudescodigoSolicitud}" />
+                                            <h:outputText value="#{mercanciaController.mercancia.solicitudesidSolicitud.idSolicitud}" />
 
                                         </div>
                                     </div>
@@ -143,14 +134,10 @@
                                         <h:outputText value="placaVehiculo"/>
 
                                         <div class="col-xs-6">
-
-                                            <h:outputText value="#{mercanciaController.mercancia.vehiculosidVehiculo}" />
-
+                                            <h:outputText value="#{mercanciaController.mercancia.vehiculosidVehiculo.placaVehiculo}" />
                                         </div>
                                     </div>
                                     <div class="row">
-                                        
-
                                         <div class="col-lg-2">
                                             <h:commandButton class="btn btn-instagram" action="#{mercanciaController.prepareList()}" value="Ver todos"></h:commandButton>
                                         </div>

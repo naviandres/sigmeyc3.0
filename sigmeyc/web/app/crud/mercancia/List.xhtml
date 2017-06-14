@@ -47,7 +47,7 @@
                                         </h:panelGroup>
 
 
-                                        <p:dataTable id="example2" class="table table-bordered table-hover" value="#{mercanciaController.mercancias}" var="mer"  >
+                                        <p:dataTable id="example2" class="table table-bordered table-hover" value="#{mercanciaController.mercancias}" var="mer">
                                             <p:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="codigoMercancia"/>
@@ -104,33 +104,27 @@
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="embalaje"/>
+                                                    <h:outputText value="estado"/>
                                                 </f:facet>
-                                                <h:outputText value="#{mer.embalaje}"/>
+                                                <h:outputText value="#{mer.estadoMercancia}"/>
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="idDepartamento"/>
                                                 </f:facet>
-                                                <h:outputText value="#{mer.departamentosidDepartamento}"/>
+                                                <h:outputText value="#{mer.localidadesidLocalidad.nombreLocalidad}"/>
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="codigoBarras"/>
                                                 </f:facet>
-                                                <h:outputText value="#{mer.guiaidGuia}"/>
+                                                <h:outputText value="#{mer.guiaidGuia.nueroGuia}"/>
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="codigoSolicitud"/>
                                                 </f:facet>
                                                 <h:outputText value="#{mer.solicitudesidSolicitud}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="placaVehiculo"/>
-                                                </f:facet>
-                                                <h:outputText value="#{mer.vehiculosidVehiculo}"/>
                                             </p:column>
                                             <p:column exportable="false">
                                                 <f:facet name="header">

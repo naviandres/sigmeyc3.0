@@ -16,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -29,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juanc
+ * @author ivan
  */
 @Entity
 @Table(name = "guias")
@@ -37,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Guia.findAll", query = "SELECT g FROM Guia g")
     , @NamedQuery(name = "Guia.findByIdGuia", query = "SELECT g FROM Guia g WHERE g.idGuia = :idGuia")
+    , @NamedQuery(name = "Guia.findByNueroGuia", query = "SELECT g FROM Guia g WHERE g.nueroGuia = :nueroGuia")
     , @NamedQuery(name = "Guia.findByDetalleMercancia", query = "SELECT g FROM Guia g WHERE g.detalleMercancia = :detalleMercancia")})
 public class Guia implements Serializable {
 
@@ -48,10 +48,9 @@ public class Guia implements Serializable {
     private Integer idGuia;
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Size(min = 1, max = 16777215)
-    @Column(name = "codigoBarras")
-    private String codigoBarras;
+    @Size(min = 1, max = 10)
+    @Column(name = "nueroGuia")
+    private String nueroGuia;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -70,9 +69,9 @@ public class Guia implements Serializable {
         this.idGuia = idGuia;
     }
 
-    public Guia(Integer idGuia, String codigoBarras, String detalleMercancia) {
+    public Guia(Integer idGuia, String nueroGuia, String detalleMercancia) {
         this.idGuia = idGuia;
-        this.codigoBarras = codigoBarras;
+        this.nueroGuia = nueroGuia;
         this.detalleMercancia = detalleMercancia;
     }
 
@@ -84,12 +83,12 @@ public class Guia implements Serializable {
         this.idGuia = idGuia;
     }
 
-    public String getCodigoBarras() {
-        return codigoBarras;
+    public String getNueroGuia() {
+        return nueroGuia;
     }
 
-    public void setCodigoBarras(String codigoBarras) {
-        this.codigoBarras = codigoBarras;
+    public void setNueroGuia(String nueroGuia) {
+        this.nueroGuia = nueroGuia;
     }
 
     public String getDetalleMercancia() {

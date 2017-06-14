@@ -15,6 +15,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -26,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juanc
+ * @author ivan
  */
 @Entity
 @Table(name = "localidades")
@@ -48,8 +50,11 @@ public class Localidad implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombreLocalidad")
     private String nombreLocalidad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "localidadidLocalidad", fetch = FetchType.LAZY)
-    private List<Ciudad> ciudadList;
+    @JoinColumn(name = "ciudades_idCiudades", referencedColumnName = "idCiudades")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Ciudad ciudadesidCiudades;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "localidadesidLocalidad", fetch = FetchType.LAZY)
+    private List<Mercancia> mercanciaList;
 
     public Localidad() {
     }
@@ -79,13 +84,21 @@ public class Localidad implements Serializable {
         this.nombreLocalidad = nombreLocalidad;
     }
 
-    @XmlTransient
-    public List<Ciudad> getCiudadList() {
-        return ciudadList;
+    public Ciudad getCiudadesidCiudades() {
+        return ciudadesidCiudades;
     }
 
-    public void setCiudadList(List<Ciudad> ciudadList) {
-        this.ciudadList = ciudadList;
+    public void setCiudadesidCiudades(Ciudad ciudadesidCiudades) {
+        this.ciudadesidCiudades = ciudadesidCiudades;
+    }
+
+    @XmlTransient
+    public List<Mercancia> getMercanciaList() {
+        return mercanciaList;
+    }
+
+    public void setMercanciaList(List<Mercancia> mercanciaList) {
+        this.mercanciaList = mercanciaList;
     }
 
     @Override

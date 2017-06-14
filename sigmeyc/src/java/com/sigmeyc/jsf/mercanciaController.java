@@ -10,11 +10,10 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 
 /**
  *
- * @author juanc
+ * @author ivan
  */
 @Named(value = "mercanciaController")
 @SessionScoped
@@ -80,6 +79,15 @@ public class mercanciaController implements Serializable {
     public String GuardarEdicion() {
         MercanciaFacade.edit(mercancia);
         return "/app/crud/mercancia/List.xthml?faces-redirect=true";
+    }
+
+    public void modal(Mercancia l) {
+        this.mercancia = l;
+    }
+
+    public String detalle(Mercancia mer) {
+        this.mercancia = mer;
+        return "/app/operador/detalledeguia.xthml?faces-redirect=true";
     }
 
 }

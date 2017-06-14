@@ -16,7 +16,7 @@
             </h:panelGroup>
             <h:form id="createMercancia" class="box-body form-horizontal" prependId="false">
                 <div class="container">
-                    <section class="content-header">
+                    <section class="vehiculoController.placaVehiculocontent-header">
                         <h1>
                             CREAR
                             <small>Mercancia</small>
@@ -42,7 +42,7 @@
                                     <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="codigoMercancia" for="codigoMercancia" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="codigoMercancia" value="#{mercanciaController.mercancia.idMercancia}"  required="true" requiredMessage="#{bundle.CreateMercanciaRequiredMessage_codigoMercancia}"/>
+                                            <h:inputText class="form-control" id="codigoMercancia" value="#{mercanciaController.mercancia.idMercancia}"  required="true"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -104,29 +104,33 @@
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="embalaje" for="embalaje" />
-
                                         <div class="col-xs-6">
-
-                                            <h:inputText class="form-control" id="embalaje" value="#{mercanciaController.mercancia.embalaje}" />
+                                            <h:inputText class="form-control" id="embalaje" value="#{mercanciaController.mercancia.embalaje}" required="true"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="Iddepartamento" for="departamentosIddepartamento" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Estado" for="estado" />
+                                        <div class="col-xs-6">
+                                            <h:inputText class="form-control" id="estado" value="#{mercanciaController.mercancia.estadoMercancia}" required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="Localidades" for="localidades" />
 
                                         <div class="col-xs-6">
 
-                                            <h:selectOneMenu  class="form-control" id="departamentosIddepartamento" value="#{mercanciaController.mercancia.departamentosidDepartamento}"  required="true" requiredMessage="#{bundle.CreateMercanciaRequiredMessage_departamentosIddepartamento}">
-                                                <f:selectItems value="#{departamentoController.departamentos}"/>
+                                            <h:selectOneMenu  class="form-control" id="localidades" value="#{mercanciaController.mercancia.localidadesidLocalidad}" converter="localidadConverter" required="true" >
+                                                <f:selectItems value="#{localidadController.localidades}" var="l" itemLabel="#{l.nombreLocalidad}"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="codigoBarras" for="guiacodigoBarras" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Guias" for="guiacodigoBarras" />
 
                                         <div class="col-xs-6">
 
-                                            <h:selectOneMenu class="form-control" id="guiacodigoBarras" value="#{mercanciaController.mercancia.guiaidGuia}"  required="true" requiredMessage="#{bundle.CreateMercanciaRequiredMessage_guiacodigoBarras}">
-                                                <f:selectItems value="#{guiaController.guias}"/>
+                                            <h:selectOneMenu class="form-control" id="guiacodigoBarras" value="#{mercanciaController.mercancia.guiaidGuia}" converter="guiaConverter" required="true" >
+                                                <f:selectItems value="#{guiaController.guias}" var="s" itemLabel="#{s.nueroGuia}"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
@@ -135,18 +139,25 @@
 
                                         <div class="col-xs-6">
 
-                                            <h:selectOneMenu id="solicitudescodigoSolicitud" value="#{mercanciaController.mercancia.solicitudesidSolicitud}"  required="true" requiredMessage="#{bundle.CreateMercanciaRequiredMessage_solicitudescodigoSolicitud}">
-                                                <f:selectItems value="#{solicitudController.solicitudes}"/>
+                                            <h:selectOneMenu id="solicitudescodigoSolicitud" value="#{mercanciaController.mercancia.solicitudesidSolicitud}" converter="solicitudConverter"  required="true">
+                                                <f:selectItems value="#{solicitudController.solicitudes}" var="s" itemLabel="#{s.idSolicitud}"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="placaVehiculo" for="vehiculosplacaVehiculo" />
-
                                         <div class="col-xs-6">
-
-                                            <h:selectOneMenu id="vehiculosplacaVehiculo" value="#{mercanciaController.mercancia.vehiculosidVehiculo}"  required="true" requiredMessage="#{bundle.CreateMercanciaRequiredMessage_vehiculosplacaVehiculo}">
-                                                <f:selectItems value="#{vehiculoController.placaVehiculo}"/>
+                                            <h:selectOneMenu id="vehiculosplacaVehiculo" value="#{mercanciaController.mercancia.vehiculosidVehiculo}" converter="vehiculoConverter" required="true">
+                                                <f:selectItems value="#{vehiculoController.vehiculos}" var="v" itemLabel="#{v.placaVehiculo}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    
+                                     <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="Precios" for="Precios" />
+                                        <div class="col-xs-6">
+                                            <h:selectOneMenu id="Precios" value="#{mercanciaController.mercancia.preciosIdprecios}" converter="precioConverter" required="true">
+                                                <f:selectItems value="#{precioController.precios}" var="p" itemLabel="#{p.valor}"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>

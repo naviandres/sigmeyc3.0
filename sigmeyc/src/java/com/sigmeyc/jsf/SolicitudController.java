@@ -51,8 +51,8 @@ public class SolicitudController implements Serializable {
             Date fechaActual = new Date();
             DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
 
-            String hora1 = "00:00:00";
-            String hora2 = "13:00:00";
+            String hora1 = "24:00:00";
+            String hora2 = "09:00:00";
             String horaNueva = dateFormat.format(fechaActual);
             Date date1, date2, dateNueva;
             date1 = dateFormat.parse(hora1);
@@ -64,21 +64,20 @@ public class SolicitudController implements Serializable {
             if ((date1.compareTo(dateNueva) <= 0) && (date2.compareTo(dateNueva) >= 0)) {
                 Usuario us = sc.getUsuarioSesion();
                 solicitud.setUsuariosDocumento(us);
-                System.out.println("dfdf"+horaNueva);
                 solicitud.setHora(horaNueva);
                 solicitud.setFechaSolicitud(fechaActual);
                 this.solicitudFacade.create(solicitud);
                 init();
-                return "/crud/solicitud/List.xhtml?faces-redirect=true";
+                return "/app/crud/solicitud/List.xhtml?faces-redirect=true";
             } else {
                 System.out.println("Tiene que realizar la solicitud antes de" + hora2);
 //                MessageUtil.enviarMensajeErrorGlobal("No puede realizar la solicitud","Tiene que realizar la solicitud antes de" + hora2);
-                MessageUtil.enviarMensajeError("createSolici", "No puede realizar la solicitud", "Tiene que realizar la solicitud antes de" + hora2);
+                MessageUtil.enviarMensajeInformacion("createSolici", "No puede realizar la solicitud.", "Tiene que realizar la solicitud antes de: " + hora2);
             }
         } catch (ParseException parseException) {
             parseException.printStackTrace();
         }
-        return "/crud/solicitud/Create.xhtml?faces-redirect=true";
+        return "";
     }
 
 //    public void foraneaUsuario(){

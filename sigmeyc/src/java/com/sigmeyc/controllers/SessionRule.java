@@ -25,7 +25,7 @@ public class SessionRule {
     public Usuario loginUsuario(String email,String clave){
         Usuario u = null;
         if (email != null && email.length() >0 && 
-                clave != null && clave.length()>0) {
+                clave != null && clave.length() >0) {
             u = usuarioFacade.login(email, clave);
             if (u != null) {
                 if (u.getEstado()==2) {

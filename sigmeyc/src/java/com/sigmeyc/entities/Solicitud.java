@@ -39,7 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Solicitud.findAll", query = "SELECT s FROM Solicitud s")
     , @NamedQuery(name = "Solicitud.findByIdSolicitud", query = "SELECT s FROM Solicitud s WHERE s.idSolicitud = :idSolicitud")
-    , @NamedQuery(name = "Solicitud.findByTiempoEntrega", query = "SELECT s FROM Solicitud s WHERE s.tiempoEntrega = :tiempoEntrega")
     , @NamedQuery(name = "Solicitud.findByTipoServicio", query = "SELECT s FROM Solicitud s WHERE s.tipoServicio = :tipoServicio")
     , @NamedQuery(name = "Solicitud.findByDireccionOrigen", query = "SELECT s FROM Solicitud s WHERE s.direccionOrigen = :direccionOrigen")
     , @NamedQuery(name = "Solicitud.findByDireccionDestino", query = "SELECT s FROM Solicitud s WHERE s.direccionDestino = :direccionDestino")
@@ -57,9 +56,6 @@ public class Solicitud implements Serializable {
     @Basic(optional = false)
     @Column(name = "idSolicitud")
     private Integer idSolicitud;
-    @Size(max = 15)
-    @Column(name = "tiempoEntrega")
-    private String tiempoEntrega;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -131,14 +127,6 @@ public class Solicitud implements Serializable {
 
     public void setIdSolicitud(Integer idSolicitud) {
         this.idSolicitud = idSolicitud;
-    }
-
-    public String getTiempoEntrega() {
-        return tiempoEntrega;
-    }
-
-    public void setTiempoEntrega(String tiempoEntrega) {
-        this.tiempoEntrega = tiempoEntrega;
     }
 
     public String getTipoServicio() {

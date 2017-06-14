@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sigmeyc.controllers;
-import com.sigmeyc.beans.EmpresaFacade;
-import com.sigmeyc.entities.Empresa;
+package com.sigmeyc.converter;
+import com.sigmeyc.beans.PrecioFacade;
+import com.sigmeyc.entities.Precio;
 import javax.enterprise.inject.spi.CDI;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -18,29 +18,29 @@ import javax.faces.convert.FacesConverter;
  */
 //@Named("planillaConverterBean")
 //@ManagedBean() 
-@FacesConverter(forClass = Empresa.class, value = "empresaConverter")
-public class EmpresaConverter implements Converter {
+@FacesConverter(forClass = Precio.class, value = "precioConverter")
+public class PreciosConverter implements Converter {
 
-    private EmpresaFacade empresaFacade;
+    private PrecioFacade precioFacade;
 
-    public EmpresaConverter() {
-        empresaFacade = CDI.current().select(EmpresaFacade.class).get();
+    public PreciosConverter() {
+        precioFacade = CDI.current().select(PrecioFacade.class).get();
     }
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component,
             String value) {
         if (value != null && value.length() > 0) {
-            return empresaFacade.find(Integer.valueOf(value));
+            return precioFacade.find(Integer.valueOf(value));
         }
         return null;
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if (value != null && value instanceof Empresa) {
-            Empresa e = (Empresa) value;
-            return e.getNit().toString();
+        if (value != null && value instanceof Precio) {
+            Precio p = (Precio) value;
+            return p.getIdprecios().toString();
         }
         return null;
     }

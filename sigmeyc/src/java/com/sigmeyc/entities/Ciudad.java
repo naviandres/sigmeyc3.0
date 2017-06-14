@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juanc
+ * @author ivan
  */
 @Entity
 @Table(name = "ciudades")
@@ -57,10 +57,10 @@ public class Ciudad implements Serializable {
     @Column(name = "zona")
     private String zona;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudadesidCiudades", fetch = FetchType.LAZY)
-    private List<Departamento> departamentoList;
-    @JoinColumn(name = "localidad_idLocalidad", referencedColumnName = "idLocalidad")
+    private List<Localidad> localidadList;
+    @JoinColumn(name = "departamentos_idDepartamento", referencedColumnName = "idDepartamento")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Localidad localidadidLocalidad;
+    private Departamento departamentosidDepartamento;
 
     public Ciudad() {
     }
@@ -100,20 +100,20 @@ public class Ciudad implements Serializable {
     }
 
     @XmlTransient
-    public List<Departamento> getDepartamentoList() {
-        return departamentoList;
+    public List<Localidad> getLocalidadList() {
+        return localidadList;
     }
 
-    public void setDepartamentoList(List<Departamento> departamentoList) {
-        this.departamentoList = departamentoList;
+    public void setLocalidadList(List<Localidad> localidadList) {
+        this.localidadList = localidadList;
     }
 
-    public Localidad getLocalidadidLocalidad() {
-        return localidadidLocalidad;
+    public Departamento getDepartamentosidDepartamento() {
+        return departamentosidDepartamento;
     }
 
-    public void setLocalidadidLocalidad(Localidad localidadidLocalidad) {
-        this.localidadidLocalidad = localidadidLocalidad;
+    public void setDepartamentosidDepartamento(Departamento departamentosidDepartamento) {
+        this.departamentosidDepartamento = departamentosidDepartamento;
     }
 
     @Override

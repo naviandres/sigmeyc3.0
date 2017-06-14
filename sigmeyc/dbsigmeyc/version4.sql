@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: sigmeyc
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.19-MariaDB
+-- Server version	5.5.5-10.1.21-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -52,12 +52,11 @@ DROP TABLE IF EXISTS `ciudades`;
 CREATE TABLE `ciudades` (
   `idCiudades` int(11) NOT NULL AUTO_INCREMENT,
   `nombreCiudad` varchar(45) NOT NULL,
-  `zona` varchar(45) NOT NULL,
-  `localidad_idLocalidad` int(11) NOT NULL,
+  `departamentos_idDepartamento` int(11) NOT NULL,
   PRIMARY KEY (`idCiudades`),
-  KEY `fk_ciudades_localidad1_idx` (`localidad_idLocalidad`),
-  CONSTRAINT `fk_ciudades_localidad1` FOREIGN KEY (`localidad_idLocalidad`) REFERENCES `localidades` (`idLocalidad`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de la ciudades donde sera recogida o entregada la mercancia';
+  KEY `fk_ciudades_departamentos1_idx` (`departamentos_idDepartamento`),
+  CONSTRAINT `fk_ciudades_departamentos1` FOREIGN KEY (`departamentos_idDepartamento`) REFERENCES `departamentos` (`idDepartamento`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de la ciudades donde sera recogida o entregada la mercancia';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +65,7 @@ CREATE TABLE `ciudades` (
 
 LOCK TABLES `ciudades` WRITE;
 /*!40000 ALTER TABLE `ciudades` DISABLE KEYS */;
+INSERT INTO `ciudades` VALUES (1,'Bogota D.C',1);
 /*!40000 ALTER TABLE `ciudades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,6 +112,7 @@ CREATE TABLE `cotizaciones` (
   `cantidad` int(11) DEFAULT NULL,
   `peso` double DEFAULT NULL,
   `valorDeclarado` double DEFAULT NULL,
+  `fechaCotizacion` date NOT NULL,
   `usuarios_documento` bigint(15) NOT NULL,
   PRIMARY KEY (`idcotizaciones`),
   KEY `fk_cotizaciones_usuarios1_idx` (`usuarios_documento`),
@@ -165,11 +166,8 @@ DROP TABLE IF EXISTS `departamentos`;
 CREATE TABLE `departamentos` (
   `idDepartamento` int(11) NOT NULL AUTO_INCREMENT,
   `nombreDepartamento` varchar(45) NOT NULL,
-  `ciudades_idCiudades` int(11) NOT NULL,
-  PRIMARY KEY (`idDepartamento`),
-  KEY `fk_departamentos_ciudades1_idx` (`ciudades_idCiudades`),
-  CONSTRAINT `fk_departamentos_ciudades1` FOREIGN KEY (`ciudades_idCiudades`) REFERENCES `ciudades` (`idCiudades`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de los departamentos de origen y destino de la mercancia';
+  PRIMARY KEY (`idDepartamento`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de los departamentos de origen y destino de la mercancia';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,6 +176,7 @@ CREATE TABLE `departamentos` (
 
 LOCK TABLES `departamentos` WRITE;
 /*!40000 ALTER TABLE `departamentos` DISABLE KEYS */;
+INSERT INTO `departamentos` VALUES (1,'Cundinamarca');
 /*!40000 ALTER TABLE `departamentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,13 +215,13 @@ DROP TABLE IF EXISTS `guias`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `guias` (
   `idGuia` int(11) NOT NULL AUTO_INCREMENT,
-  `codigoBarras` mediumtext NOT NULL,
+  `nueroGuia` varchar(10) NOT NULL,
   `detalleMercancia` varchar(45) NOT NULL,
   `planillas_idPlanilla` int(11) NOT NULL,
   PRIMARY KEY (`idGuia`),
   KEY `fk_guia_planillas1_idx` (`planillas_idPlanilla`),
   CONSTRAINT `fk_guia_planillas1` FOREIGN KEY (`planillas_idPlanilla`) REFERENCES `planillas` (`idPlanilla`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite registrar las guias con las que se documenta la mercancia.';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite registrar las guias con las que se documenta la mercancia.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,6 +230,7 @@ CREATE TABLE `guias` (
 
 LOCK TABLES `guias` WRITE;
 /*!40000 ALTER TABLE `guias` DISABLE KEYS */;
+INSERT INTO `guias` VALUES (1,'12345678','papel',1);
 /*!40000 ALTER TABLE `guias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,7 +244,10 @@ DROP TABLE IF EXISTS `localidades`;
 CREATE TABLE `localidades` (
   `idLocalidad` int(11) NOT NULL AUTO_INCREMENT,
   `nombreLocalidad` varchar(45) NOT NULL,
-  PRIMARY KEY (`idLocalidad`)
+  `ciudades_idCiudades` int(11) NOT NULL,
+  PRIMARY KEY (`idLocalidad`),
+  KEY `fk_localidades_ciudades1_idx` (`ciudades_idCiudades`),
+  CONSTRAINT `fk_localidades_ciudades1` FOREIGN KEY (`ciudades_idCiudades`) REFERENCES `ciudades` (`idCiudades`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de las localidades donde se zonifica la mercancia.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -254,7 +257,7 @@ CREATE TABLE `localidades` (
 
 LOCK TABLES `localidades` WRITE;
 /*!40000 ALTER TABLE `localidades` DISABLE KEYS */;
-INSERT INTO `localidades` VALUES (1,'bogota');
+INSERT INTO `localidades` VALUES (1,'Chapinero',1);
 /*!40000 ALTER TABLE `localidades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -302,23 +305,23 @@ CREATE TABLE `mercancias` (
   `cantidad` int(11) NOT NULL,
   `embalaje` varchar(30) NOT NULL,
   `estadoMercancia` varchar(45) NOT NULL,
-  `departamentos_idDepartamento` int(11) NOT NULL,
   `guia_idGuia` int(11) NOT NULL,
   `solicitudes_idSolicitud` int(11) NOT NULL,
   `vehiculos_idVehiculo` int(11) NOT NULL,
   `precios_idprecios` int(11) NOT NULL,
+  `localidades_idLocalidad` int(11) NOT NULL,
   PRIMARY KEY (`idMercancia`),
-  KEY `fk_mercancias_departamentos1_idx` (`departamentos_idDepartamento`),
   KEY `fk_mercancias_guia1_idx` (`guia_idGuia`),
   KEY `fk_mercancias_solicitudes1_idx` (`solicitudes_idSolicitud`),
   KEY `fk_mercancias_vehiculos1_idx` (`vehiculos_idVehiculo`),
   KEY `fk_mercancias_precios1_idx` (`precios_idprecios`),
-  CONSTRAINT `fk_mercancias_departamentos1` FOREIGN KEY (`departamentos_idDepartamento`) REFERENCES `departamentos` (`idDepartamento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  KEY `fk_mercancias_localidades1_idx` (`localidades_idLocalidad`),
   CONSTRAINT `fk_mercancias_guia1` FOREIGN KEY (`guia_idGuia`) REFERENCES `guias` (`idGuia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_mercancias_localidades1` FOREIGN KEY (`localidades_idLocalidad`) REFERENCES `localidades` (`idLocalidad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mercancias_precios1` FOREIGN KEY (`precios_idprecios`) REFERENCES `precios` (`idprecios`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mercancias_solicitudes1` FOREIGN KEY (`solicitudes_idSolicitud`) REFERENCES `solicitudes` (`idSolicitud`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mercancias_vehiculos1` FOREIGN KEY (`vehiculos_idVehiculo`) REFERENCES `vehiculos` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de toda la mercancia a entregar';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de toda la mercancia a entregar';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -327,6 +330,7 @@ CREATE TABLE `mercancias` (
 
 LOCK TABLES `mercancias` WRITE;
 /*!40000 ALTER TABLE `mercancias` DISABLE KEYS */;
+INSERT INTO `mercancias` VALUES (1,12,'ss',12,45,45,12,45,1,'sss','dd',1,5,1,1,1),(2,45,'ss',12,45,45,12,45,1,'sss','dd',1,5,1,1,1),(3,12,'ss',12,45,45,12,45,1,'sss','rrre',1,5,1,1,1);
 /*!40000 ALTER TABLE `mercancias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,10 +427,12 @@ DROP TABLE IF EXISTS `planillas`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `planillas` (
   `idPlanilla` int(11) NOT NULL AUTO_INCREMENT,
-  `ruta` varchar(20) NOT NULL,
   `cantidadGuias` int(11) NOT NULL,
-  PRIMARY KEY (`idPlanilla`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registran las planillas o registros de toda la mercancia que es cargada en un vehiculo';
+  `rutas_idRutas` int(11) NOT NULL,
+  PRIMARY KEY (`idPlanilla`),
+  KEY `fk_planillas_rutas1_idx` (`rutas_idRutas`),
+  CONSTRAINT `fk_planillas_rutas1` FOREIGN KEY (`rutas_idRutas`) REFERENCES `rutas` (`idRutas`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registran las planillas o registros de toda la mercancia que es cargada en un vehiculo';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -435,6 +441,7 @@ CREATE TABLE `planillas` (
 
 LOCK TABLES `planillas` WRITE;
 /*!40000 ALTER TABLE `planillas` DISABLE KEYS */;
+INSERT INTO `planillas` VALUES (1,3,1);
 /*!40000 ALTER TABLE `planillas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -449,7 +456,7 @@ CREATE TABLE `precios` (
   `idprecios` int(11) NOT NULL AUTO_INCREMENT,
   `valor` double NOT NULL,
   PRIMARY KEY (`idprecios`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -458,6 +465,7 @@ CREATE TABLE `precios` (
 
 LOCK TABLES `precios` WRITE;
 /*!40000 ALTER TABLE `precios` DISABLE KEYS */;
+INSERT INTO `precios` VALUES (1,27);
 /*!40000 ALTER TABLE `precios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -515,6 +523,30 @@ INSERT INTO `roles_has_permisos` VALUES (2,1),(2,2),(2,11),(2,12),(2,21),(2,22),
 UNLOCK TABLES;
 
 --
+-- Table structure for table `rutas`
+--
+
+DROP TABLE IF EXISTS `rutas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rutas` (
+  `idRutas` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  PRIMARY KEY (`idRutas`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rutas`
+--
+
+LOCK TABLES `rutas` WRITE;
+/*!40000 ALTER TABLE `rutas` DISABLE KEYS */;
+INSERT INTO `rutas` VALUES (1,'Chapinero');
+/*!40000 ALTER TABLE `rutas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `solicitudes`
 --
 
@@ -523,7 +555,6 @@ DROP TABLE IF EXISTS `solicitudes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `solicitudes` (
   `idSolicitud` int(11) NOT NULL AUTO_INCREMENT,
-  `tiempoEntrega` varchar(15) DEFAULT NULL,
   `tipoServicio` varchar(20) NOT NULL,
   `direccionOrigen` varchar(20) NOT NULL,
   `direccionDestino` varchar(10) NOT NULL,
@@ -537,7 +568,7 @@ CREATE TABLE `solicitudes` (
   PRIMARY KEY (`idSolicitud`),
   KEY `fk_solicitudes_usuarios1_idx` (`usuarios_documento`),
   CONSTRAINT `fk_solicitudes_usuarios1` FOREIGN KEY (`usuarios_documento`) REFERENCES `usuarios` (`documento`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registraran las solicitudes que los usuarios o empresas diligencien.';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registraran las solicitudes que los usuarios o empresas diligencien.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -546,7 +577,7 @@ CREATE TABLE `solicitudes` (
 
 LOCK TABLES `solicitudes` WRITE;
 /*!40000 ALTER TABLE `solicitudes` DISABLE KEYS */;
-INSERT INTO `solicitudes` VALUES (1,'245','Mensajeria expresa','gasg','sgsag','safgasf','sgasfg','343411431','dfgsdfg','2017-06-09','08:23:05',123312121);
+INSERT INTO `solicitudes` VALUES (5,'Mercancia terrestre','call 3','carr 4','lond','acsec','343333','media','2017-06-13','03:22:36',123312121);
 /*!40000 ALTER TABLE `solicitudes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -622,10 +653,10 @@ DROP TABLE IF EXISTS `vehiculos`;
 CREATE TABLE `vehiculos` (
   `idVehiculo` int(11) NOT NULL AUTO_INCREMENT,
   `placaVehiculo` varchar(6) NOT NULL,
-  `tipoVehiculo` varchar(20) NOT NULL,
-  `capacidadCarga` varchar(20) NOT NULL,
+  `tipoVehiculo` varchar(40) NOT NULL,
+  `capacidadCarga` varchar(30) NOT NULL,
   PRIMARY KEY (`idVehiculo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite registrar todos los vehiculos de las diferentes rutas.';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite registrar todos los vehiculos de las diferentes rutas.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -634,6 +665,7 @@ CREATE TABLE `vehiculos` (
 
 LOCK TABLES `vehiculos` WRITE;
 /*!40000 ALTER TABLE `vehiculos` DISABLE KEYS */;
+INSERT INTO `vehiculos` VALUES (1,'qwe123','Camion dos ejes','2 toneladas');
 /*!40000 ALTER TABLE `vehiculos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -646,4 +678,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-09 11:36:50
+-- Dump completed on 2017-06-13 20:49:11

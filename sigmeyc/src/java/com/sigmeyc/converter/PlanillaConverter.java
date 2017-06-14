@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sigmeyc.controllers;
-import com.sigmeyc.beans.UsuarioFacade;
-import com.sigmeyc.entities.Usuario;
+package com.sigmeyc.converter;
+
+import com.sigmeyc.beans.PlanillaFacade;
+import com.sigmeyc.entities.Planilla;
 import javax.enterprise.inject.spi.CDI;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -18,29 +19,29 @@ import javax.faces.convert.FacesConverter;
  */
 //@Named("planillaConverterBean")
 //@ManagedBean() 
-@FacesConverter(forClass = Usuario.class, value = "usuarioConverter")
-public class UsuarioConverter implements Converter {
+@FacesConverter(forClass = Planilla.class, value = "planillaConverter")
+public class PlanillaConverter implements Converter {
 
-    private UsuarioFacade usuarioFacade;
+    private PlanillaFacade pf;
 
-    public UsuarioConverter() {
-        usuarioFacade = CDI.current().select(UsuarioFacade.class).get();
+    public PlanillaConverter() {
+        pf = CDI.current().select(PlanillaFacade.class).get();
     }
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component,
             String value) {
         if (value != null && value.length() > 0) {
-            return usuarioFacade.find(Integer.valueOf(value));
+            return pf.find(Integer.valueOf(value));
         }
         return null;
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if (value != null && value instanceof Usuario) {
-            Usuario p = (Usuario) value;
-            return p.getDocumento().toString();
+        if (value != null && value instanceof Planilla) {
+            Planilla p = (Planilla) value;
+            return p.getIdPlanilla().toString();
         }
         return null;
     }
