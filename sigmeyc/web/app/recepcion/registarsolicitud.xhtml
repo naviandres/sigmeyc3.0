@@ -7,7 +7,7 @@
 
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title">
-            <h:outputText value="crear Solicitud"></h:outputText>
+            <h:outputText value="Registrar Solicitud"></h:outputText>
         </ui:define>
         <ui:define name="contenido">
             <h:panelGroup id="messagePanel" layout="block">
@@ -79,7 +79,7 @@
                                         <h:inputText class="form-control" id="telefonoDestinatario" value="#{solicitudController.solicitud.telefonoDestinatario}" required="true" requiredMessage="Ingrese telefono"/>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                 <div class="form-group">
                                     <h:outputLabel class="col-xs-3 control-label" value="priorizacion" for="priorizacion" />
                                     <div class="col-xs-6">
                                         <h:selectOneMenu id="priorizacion" class="form-control" value="#{solicitudController.solicitud.priorizacion}">
@@ -93,10 +93,10 @@
 
                                 <div class="form-group">
                                     <div class="col-lg-2 col-lg-offset-4">
-                                        <h:commandButton class="btn btn-success" action="#{solicitudController.guardar()}" value="Guardar"/>
+                                        <h:commandButton class="btn btn-success" action="#{solicitudController.registroSolicitudRecepcionista()}" value="Guardar"/>
                                     </div>
                                     <div class="col-lg-2 ">
-                                        <h:link styleClass="btn btn-instagram" outcome="/app/crud/solicitud/List.xhtml" value="Ver todos"/>
+                                        <h:link styleClass="btn btn-instagram" outcome="/app/indexrecepcionista.xhtml" value="Atras"/>
                                     </div>                                             
                                 </div>
                             </div>

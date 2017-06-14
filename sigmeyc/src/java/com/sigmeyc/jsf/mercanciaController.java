@@ -2,6 +2,7 @@ package com.sigmeyc.jsf;
 
 import com.sigmeyc.beans.MercanciaFacade;
 import com.sigmeyc.entities.Mercancia;
+import com.sigmeyc.entities.Ruta;
 
 import java.io.Serializable;
 import java.util.List;
@@ -25,6 +26,8 @@ public class mercanciaController implements Serializable {
     @EJB
     private MercanciaFacade MercanciaFacade;
     private Mercancia mercancia;
+    
+    private Ruta ruta;
 
     public mercanciaController() {
     }
@@ -43,7 +46,18 @@ public class mercanciaController implements Serializable {
         this.mercancia = mercancia;
     }
 
+    public Ruta getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(Ruta ruta) {
+        this.ruta = ruta;
+    }
+    
+    
+
     public String guardar() {
+        mercancia.setIdMercancia(null);
         this.MercanciaFacade.create(mercancia);
         init();
         return "/app/crud/mercancia/Create.xthml?faces-redirect=true";

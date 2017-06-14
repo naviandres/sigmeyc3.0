@@ -45,14 +45,20 @@ public class SolicitudController implements Serializable {
     public void setSolicitud(Solicitud solicitud) {
         this.solicitud = solicitud;
     }
+    
+    public String registroSolicitudRecepcionista(){
+        guardar();
+        return "/app/recepcion/registrarmercancia.xhtml";
+        
+    }
 
-    public String guardar() {
+    public void guardar() {
         try {
             Date fechaActual = new Date();
             DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
 
-            String hora1 = "24:00:00";
-            String hora2 = "09:00:00";
+            String hora1 = "12:00:00";
+            String hora2 = "14:00:00";
             String horaNueva = dateFormat.format(fechaActual);
             Date date1, date2, dateNueva;
             date1 = dateFormat.parse(hora1);
@@ -68,7 +74,6 @@ public class SolicitudController implements Serializable {
                 solicitud.setFechaSolicitud(fechaActual);
                 this.solicitudFacade.create(solicitud);
                 init();
-                return "/app/crud/solicitud/List.xhtml?faces-redirect=true";
             } else {
                 System.out.println("Tiene que realizar la solicitud antes de" + hora2);
 //                MessageUtil.enviarMensajeErrorGlobal("No puede realizar la solicitud","Tiene que realizar la solicitud antes de" + hora2);
@@ -77,7 +82,6 @@ public class SolicitudController implements Serializable {
         } catch (ParseException parseException) {
             parseException.printStackTrace();
         }
-        return "";
     }
 
 //    public void foraneaUsuario(){

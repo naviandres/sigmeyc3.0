@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title" >
@@ -40,12 +41,6 @@
                                 </div>
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="codigoMercancia" for="codigoMercancia" />
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="codigoMercancia" value="#{mercanciaController.mercancia.idMercancia}"  required="true"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label"  value="valorDeclarado" for="valorDeclarado" />
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="valorDeclarado" value="#{mercanciaController.mercancia.valorDeclarado}"  />
@@ -55,7 +50,7 @@
                                     <div class="form-group">
                                         <h:outputLabel  class="col-xs-3 control-label" value="tipoMercancia" for="tipoMercancia" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="tipoMercancia" value="#{mercanciaController.mercancia.tipoMercancia}"  />
+                                            <h:inputText class="form-control" id="tipoMercancia" value="#{mercanciaController.mercancia.tipoMercancia}"  p:placeholder="Tipo de mercancía"/>
 
                                         </div>
                                     </div>
@@ -111,7 +106,12 @@
                                     <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="Estado" for="estado" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="estado" value="#{mercanciaController.mercancia.estadoMercancia}" required="true"/>
+                                            <h:selectOneMenu id="estado" class="form-control" value="#{mercanciaController.mercancia.estadoMercancia}" required="true">
+                                                <f:selectItem itemLabel="Seleccione estado" itemDisabled="disabled"/>
+                                                <f:selectItem itemLabel="En bodega" itemValue="En bodega"/>
+                                                <f:selectItem itemLabel="Recepcion" itemValue="Recepcion"/>
+                                                <f:selectItem itemLabel="Entregada" itemValue="Entregada"/>
+                                            </h:selectOneMenu>  
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -139,7 +139,7 @@
 
                                         <div class="col-xs-6">
 
-                                            <h:selectOneMenu id="solicitudescodigoSolicitud" value="#{mercanciaController.mercancia.solicitudesidSolicitud}" converter="solicitudConverter"  required="true">
+                                            <h:selectOneMenu class="form-control" id="solicitudescodigoSolicitud" value="#{mercanciaController.mercancia.solicitudesidSolicitud}" converter="solicitudConverter"  required="true">
                                                 <f:selectItems value="#{solicitudController.solicitudes}" var="s" itemLabel="#{s.idSolicitud}"/>
                                             </h:selectOneMenu>
                                         </div>
@@ -147,16 +147,16 @@
                                     <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="placaVehiculo" for="vehiculosplacaVehiculo" />
                                         <div class="col-xs-6">
-                                            <h:selectOneMenu id="vehiculosplacaVehiculo" value="#{mercanciaController.mercancia.vehiculosidVehiculo}" converter="vehiculoConverter" required="true">
+                                            <h:selectOneMenu class="form-control" id="vehiculosplacaVehiculo" value="#{mercanciaController.mercancia.vehiculosidVehiculo}" converter="vehiculoConverter" required="true">
                                                 <f:selectItems value="#{vehiculoController.vehiculos}" var="v" itemLabel="#{v.placaVehiculo}"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
-                                    
-                                     <div class="form-group">
+
+                                    <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="Precios" for="Precios" />
                                         <div class="col-xs-6">
-                                            <h:selectOneMenu id="Precios" value="#{mercanciaController.mercancia.preciosIdprecios}" converter="precioConverter" required="true">
+                                            <h:selectOneMenu id="Precios" class="form-control" value="#{mercanciaController.mercancia.preciosIdprecios}" converter="precioConverter" required="true">
                                                 <f:selectItems value="#{precioController.precios}" var="p" itemLabel="#{p.valor}"/>
                                             </h:selectOneMenu>
                                         </div>
