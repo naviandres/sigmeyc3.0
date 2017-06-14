@@ -321,7 +321,7 @@ CREATE TABLE `mercancias` (
   CONSTRAINT `fk_mercancias_precios1` FOREIGN KEY (`precios_idprecios`) REFERENCES `precios` (`idprecios`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mercancias_solicitudes1` FOREIGN KEY (`solicitudes_idSolicitud`) REFERENCES `solicitudes` (`idSolicitud`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mercancias_vehiculos1` FOREIGN KEY (`vehiculos_idVehiculo`) REFERENCES `vehiculos` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de toda la mercancia a entregar';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de toda la mercancia a entregar';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -330,7 +330,7 @@ CREATE TABLE `mercancias` (
 
 LOCK TABLES `mercancias` WRITE;
 /*!40000 ALTER TABLE `mercancias` DISABLE KEYS */;
-INSERT INTO `mercancias` VALUES (1,12,'ss',12,45,45,12,45,1,'sss','dd',1,5,1,1,1),(2,45,'ss',12,45,45,12,45,1,'sss','dd',1,5,1,1,1),(3,12,'ss',12,45,45,12,45,1,'sss','rrre',1,5,1,1,1);
+INSERT INTO `mercancias` VALUES (1,12,'ss',12,45,45,12,45,1,'sss','dd',1,5,1,1,1),(2,45,'ss',12,45,45,12,45,1,'sss','dd',1,5,1,1,1),(3,12,'ss',12,45,45,12,45,1,'sss','rrre',1,5,1,1,1),(4,11,'ddd',12,12,12,12,12,12,'sss','En bodega',1,6,1,1,1),(5,12,'ss',12,11,12,12,12,12,'ss','En bodega',1,6,1,1,1);
 /*!40000 ALTER TABLE `mercancias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -405,7 +405,7 @@ CREATE TABLE `permisos` (
   PRIMARY KEY (`idPermisos`),
   KEY `fk_permisos_permisos1_idx` (`permiso_padre`),
   CONSTRAINT `fk_permisos_permisos1` FOREIGN KEY (`permiso_padre`) REFERENCES `permisos` (`idPermisos`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registran los permisos de a los que accederan y que tendra cada usuario';
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registran los permisos de a los que accederan y que tendra cada usuario';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -414,7 +414,7 @@ CREATE TABLE `permisos` (
 
 LOCK TABLES `permisos` WRITE;
 /*!40000 ALTER TABLE `permisos` DISABLE KEYS */;
-INSERT INTO `permisos` VALUES (1,'Diagramas','',NULL,NULL),(2,'Reportes','',NULL,NULL),(11,'Inicio','',NULL,NULL),(12,'Listar ciudad','app/crud/ciudad/List.xhtml',NULL,2),(21,'Listar conductor','app/crud/conductor/List.xhtml',NULL,2),(22,'Listar departamento','app/crud/departamento/List.xhtml',NULL,2),(23,'Listar empresa','app/crud/empresa/List.xhtml',NULL,2),(24,'Listar guia','app/crud/guia/List.xhtml',NULL,2),(25,'Listar localidad','app/crud/localidad/List.xhtml',NULL,2),(26,'Listar mercancia','app/crud/mercancia/List.xhtml',NULL,2),(27,'Listar novedad','app/crud/novedad/List.xhtml',NULL,2),(28,'Listar planilla','app/crud/planilla/List.xhtml',NULL,2),(29,'Listar solicitud','app/crud/solicitud/List.xhtml',NULL,2),(30,'Listar usuario','app/crud/usuario/List.xhtml',NULL,2),(31,'Listar vehiculo','app/crud/vehiculo/List.xhtml',NULL,2),(32,'Añadir Novedad','app/operador/añadirnovedad.xhml',NULL,NULL),(33,'Consultar mercancia','app/operador/consultarmercancia.xhml',NULL,NULL),(34,'Detalle de Guía','app/operador/detalleguia.xhml',NULL,NULL),(35,'Generar guía','app/operador/generarguia.xhml',NULL,NULL),(36,'Mercancía del vehículo','app/operador/mercanciadelvehiculo.xhml',NULL,NULL),(37,'Planillas','app/operador/planillas.xhml',NULL,NULL),(38,'Registrar vehículo','app/operador/registrarvehiculo.xhml',NULL,NULL),(39,'Consultar mercancia','app/recepcion/consultmercancia.xhtml',NULL,NULL),(40,'Cotizar Mercancia','app/recepcion/cotizarmercancia.xhtml',NULL,NULL),(41,'Registrar Mercancía','app/recepcion/registrarmercancia.xhtml',NULL,NULL);
+INSERT INTO `permisos` VALUES (1,'Diagramas','',NULL,NULL),(2,'Reportes','',NULL,NULL),(11,'Inicio','',NULL,NULL),(12,'Listar ciudad','app/crud/ciudad/List.xhtml',NULL,2),(21,'Listar conductor','app/crud/conductor/List.xhtml',NULL,2),(22,'Listar departamento','app/crud/departamento/List.xhtml',NULL,2),(23,'Listar empresa','app/crud/empresa/List.xhtml',NULL,2),(24,'Listar guia','app/crud/guia/List.xhtml',NULL,2),(25,'Listar localidad','app/crud/localidad/List.xhtml',NULL,2),(26,'Listar mercancia','app/crud/mercancia/List.xhtml',NULL,2),(27,'Listar novedad','app/crud/novedad/List.xhtml',NULL,2),(28,'Listar planilla','app/crud/planilla/List.xhtml',NULL,2),(29,'Listar solicitud','app/crud/solicitud/List.xhtml',NULL,2),(30,'Listar usuario','app/crud/usuario/List.xhtml',NULL,2),(31,'Listar vehiculo','app/crud/vehiculo/List.xhtml',NULL,2),(32,'Añadir Novedad','app/operador/añadirnovedad.xhml',NULL,NULL),(33,'Consultar mercancia','app/operador/consultarmercancia.xhml',NULL,NULL),(34,'Detalle de Guía','app/operador/detalleguia.xhml',NULL,NULL),(35,'Generar guía','app/operador/generarguia.xhml',NULL,NULL),(36,'Mercancía del vehículo','app/operador/mercanciadelvehiculo.xhml',NULL,NULL),(37,'Planillas','app/operador/planillas.xhml',NULL,NULL),(38,'Registrar vehículo','app/operador/registrarvehiculo.xhml',NULL,NULL),(39,'Consultar mercancia','app/recepcion/consultmercancia.xhtml',NULL,43),(40,'Cotizar Mercancia','app/recepcion/cotizarmercancia.xhtml',NULL,43),(41,'Registrar Mercancía','app/recepcion/registrarmercancia.xhtml',NULL,43),(42,'Registrar solicitud','app/recepcion/registarsolicitud.xhtml',NULL,43),(43,'Mercancia','',NULL,NULL);
 /*!40000 ALTER TABLE `permisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -518,7 +518,7 @@ CREATE TABLE `roles_has_permisos` (
 
 LOCK TABLES `roles_has_permisos` WRITE;
 /*!40000 ALTER TABLE `roles_has_permisos` DISABLE KEYS */;
-INSERT INTO `roles_has_permisos` VALUES (2,1),(2,2),(2,11),(2,12),(2,21),(2,22),(2,23),(2,24),(2,25),(2,26),(2,27),(2,28),(2,29),(2,30),(2,31),(3,32),(3,33),(3,34),(3,35),(3,36),(3,37),(3,38),(4,39),(4,40),(4,41);
+INSERT INTO `roles_has_permisos` VALUES (2,1),(2,2),(2,11),(2,12),(2,21),(2,22),(2,23),(2,24),(2,25),(2,26),(2,27),(2,28),(2,29),(2,30),(2,31),(3,32),(3,33),(3,34),(3,35),(3,36),(3,37),(3,38),(4,39),(4,40),(4,41),(4,42),(4,43);
 /*!40000 ALTER TABLE `roles_has_permisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -568,7 +568,7 @@ CREATE TABLE `solicitudes` (
   PRIMARY KEY (`idSolicitud`),
   KEY `fk_solicitudes_usuarios1_idx` (`usuarios_documento`),
   CONSTRAINT `fk_solicitudes_usuarios1` FOREIGN KEY (`usuarios_documento`) REFERENCES `usuarios` (`documento`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registraran las solicitudes que los usuarios o empresas diligencien.';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registraran las solicitudes que los usuarios o empresas diligencien.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -577,7 +577,7 @@ CREATE TABLE `solicitudes` (
 
 LOCK TABLES `solicitudes` WRITE;
 /*!40000 ALTER TABLE `solicitudes` DISABLE KEYS */;
-INSERT INTO `solicitudes` VALUES (5,'Mercancia terrestre','call 3','carr 4','lond','acsec','343333','media','2017-06-13','03:22:36',123312121);
+INSERT INTO `solicitudes` VALUES (5,'Mercancia terrestre','call 3','carr 4','lond','acsec','343333','media','2017-06-13','03:22:36',123312121),(6,'Mercancia terrestre','call 3','carr 4','fds','acsec','343333','media','2017-06-14','01:34:46',42462462),(7,'Mensajeria expresa','ccc','carr 4','lond','acsec','343333','mediaas','2017-06-14','01:47:16',42462462);
 /*!40000 ALTER TABLE `solicitudes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -678,4 +678,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-13 20:49:11
+-- Dump completed on 2017-06-14 15:26:24
