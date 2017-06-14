@@ -161,7 +161,7 @@ header {
     background-size: cover;
     -o-background-size: cover;
     background-position: center;
-    background-image: url('#{request.contextPath}/resources/img/headerr.jpg');
+    background-image: url('#{request.contextPath}/resources/img/prin2.jpg');
     text-align: center;
     color: white;
 }
