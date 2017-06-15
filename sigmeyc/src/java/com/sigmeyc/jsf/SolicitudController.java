@@ -2,7 +2,6 @@ package com.sigmeyc.jsf;
 
 import com.sigmeyc.beans.SolicitudFacade;
 import com.sigmeyc.controllers.SessionController;
-import com.sigmeyc.entities.Empresa;
 import com.sigmeyc.entities.Usuario;
 import com.sigmeyc.entities.Solicitud;
 import com.sigmeyc.jsf.util.MessageUtil;
@@ -17,7 +16,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 
 @Named("solicitudController")
 @SessionScoped
@@ -45,20 +43,22 @@ public class SolicitudController implements Serializable {
     public void setSolicitud(Solicitud solicitud) {
         this.solicitud = solicitud;
     }
-    
-    public String registroSolicitudRecepcionista(){
-        guardar();
-        return "/app/recepcion/registrarmercancia.xhtml";
-        
+
+    public String registroSolicitudRecepcionista() {
+        Boolean f = guardar();
+        if (f) {
+            return "/app/crud/mercancia/Create.xhtml";
+        } else {
+            return "/app/recepcion/registarsoliciud.xhtml";
+        }
     }
 
-    public void guardar() {
+    public Boolean guardar() {
         try {
             Date fechaActual = new Date();
             DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
-
-            String hora1 = "12:00:00";
-            String hora2 = "14:00:00";
+            String hora1 = "24:00:00";//tener presente
+            String hora2 = "09:00:00";
             String horaNueva = dateFormat.format(fechaActual);
             Date date1, date2, dateNueva;
             date1 = dateFormat.parse(hora1);
@@ -66,7 +66,7 @@ public class SolicitudController implements Serializable {
             dateNueva = dateFormat.parse(horaNueva);
             //anotadion: si el valor de la cadena es es menor que el valor 
 //            de la cadena pasado como parametro retorna valor negativo y si es al contrario(valor
-//de la cadena es mayor que el parametro retorna valor positivo.si son iguales el valor es 0
+//de la cadena es mayor que el parametro, retorna valor positivo.si son iguales el valor es 0
             if ((date1.compareTo(dateNueva) <= 0) && (date2.compareTo(dateNueva) >= 0)) {
                 Usuario us = sc.getUsuarioSesion();
                 solicitud.setUsuariosDocumento(us);
@@ -74,6 +74,7 @@ public class SolicitudController implements Serializable {
                 solicitud.setFechaSolicitud(fechaActual);
                 this.solicitudFacade.create(solicitud);
                 init();
+                return true;
             } else {
                 System.out.println("Tiene que realizar la solicitud antes de" + hora2);
 //                MessageUtil.enviarMensajeErrorGlobal("No puede realizar la solicitud","Tiene que realizar la solicitud antes de" + hora2);
@@ -82,6 +83,7 @@ public class SolicitudController implements Serializable {
         } catch (ParseException parseException) {
             parseException.printStackTrace();
         }
+        return false;
     }
 
 //    public void foraneaUsuario(){

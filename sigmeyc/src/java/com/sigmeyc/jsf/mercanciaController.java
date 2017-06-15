@@ -54,8 +54,6 @@ public class mercanciaController implements Serializable {
         this.ruta = ruta;
     }
     
-    
-
     public String guardar() {
         mercancia.setIdMercancia(null);
         this.MercanciaFacade.create(mercancia);
