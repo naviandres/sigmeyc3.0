@@ -43,28 +43,25 @@
                                         <p:dataTable id="example2" class="table table-bordered table-hover" value="#{vehiculoController.vehiculos}" var="vehi" >
                                             <p:column>
                                                 <f:facet name="header">
+                                                    <h:outputText value="Identificador del Vehiculo"/>
+                                                </f:facet>
+                                                <h:outputText value="#{vehi.idVehiculo}"/>
+                                            </p:column>
+                                            
+                                            <p:column>
+                                                <f:facet name="header">
                                                     <h:outputText value="placaVehiculo"/>
                                                 </f:facet>
                                                 <h:outputText value="#{vehi.placaVehiculo}"/>
                                             </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="modelo"/>
-                                                </f:facet>
-                                                <h:outputText value="#{vehi.modelo}"/>
-                                            </p:column>
+                                                
                                             <p:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="tipoVehiculo"/>
                                                 </f:facet>
                                                 <h:outputText value="#{vehi.tipoVehiculo}"/>
                                             </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="marca"/>
-                                                </f:facet>
-                                                <h:outputText value="#{vehi.marca}"/>
-                                            </p:column>
+                                            
                                             <p:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="capacidadCarga"/>

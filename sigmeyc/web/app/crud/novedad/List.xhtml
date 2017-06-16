@@ -43,40 +43,35 @@
                                         <p:dataTable id="example2" class="table table-bordered table-hover" value="#{novedadController.novedades}" var="novedad" >
                                             <p:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="codigoNovedad"/>
+                                                    <h:outputText value="Identificador de la mercancia"/>
                                                 </f:facet>
-                                                <h:outputText value="#{novedad.idNovedad}"/>
+                                                <h:outputText value="#{novedad.idMercancia}"/>
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="detalle"/>
+                                                    <h:outputText value="Detalle"/>
                                                 </f:facet>
                                                 <h:outputText value="#{novedad.detalle}"/>
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="tipoNovedad"/>
+                                                    <h:outputText value="Tipo de Novedad"/>
                                                 </f:facet>
                                                 <h:outputText value="#{novedad.tipoNovedad}"/>
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="descripcion"/>
+                                                    <h:outputText value="Descripcion"/>
                                                 </f:facet>
                                                 <h:outputText value="#{novedad.descripcion}"/>
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="prioridad"/>
+                                                    <h:outputText value="Prioridad"/>
                                                 </f:facet>
                                                 <h:outputText value="#{novedad.prioridad}"/>
                                             </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="codigoMercancia"/>
-                                                </f:facet>
-                                                <h:outputText value="#{novedad.mercanciasidMercancia}"/>
-                                            </p:column>
+                                           
                                             <p:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Opciones"/>
