@@ -48,12 +48,7 @@
 
 
                                         <p:dataTable id="example2" class="table table-bordered table-hover" value="#{mercanciaController.mercancias}" var="mer">
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="codigoMercancia"/>
-                                                </f:facet>
-                                                <h:outputText value="#{mer.idMercancia}"/>
-                                            </p:column>
+
                                             <p:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="valorDeclarado"/>
@@ -132,9 +127,9 @@
                                                 </f:facet>
                                                 <h:commandLink action="#{mercanciaController.prepareView(mer)}" value=""><i class="fa fa-eye fa-2x"></i></h:commandLink>
                                                 <h:outputText value=" "/>
-                                                <h:commandLink action="#{mercanciaController.Editar(mer)}" value=""><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></h:commandLink>
+                                                <h:commandLink action="#{mercanciaController.editar(mer)}" value=""><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></h:commandLink>
                                                 <h:outputText value=" "/>
-                                                <h:commandLink action="#{mercanciaController.Eliminar(mer)}" value=""><i class="fa fa-trash fa-2x"  aria-hidden="true"></i></h:commandLink>
+                                                <h:commandLink action="#{mercanciaController.eliminar(mer)}" value=""><i class="fa fa-trash fa-2x"  aria-hidden="true"></i></h:commandLink>
                                             </p:column>
                                         </p:dataTable>
 

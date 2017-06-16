@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juanc
+ * @author ivan
  */
 @Entity
 @Table(name = "solicitudes")
@@ -47,7 +47,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Solicitud.findByTelefonoDestinatario", query = "SELECT s FROM Solicitud s WHERE s.telefonoDestinatario = :telefonoDestinatario")
     , @NamedQuery(name = "Solicitud.findByPriorizacion", query = "SELECT s FROM Solicitud s WHERE s.priorizacion = :priorizacion")
     , @NamedQuery(name = "Solicitud.findByFechaSolicitud", query = "SELECT s FROM Solicitud s WHERE s.fechaSolicitud = :fechaSolicitud")
-    , @NamedQuery(name = "Solicitud.findByHora", query = "SELECT s FROM Solicitud s WHERE s.hora = :hora")})
+    , @NamedQuery(name = "Solicitud.findByHora", query = "SELECT s FROM Solicitud s WHERE s.hora = :hora")
+    , @NamedQuery(name = "Solicitud.findByFechaRecoleccion", query = "SELECT s FROM Solicitud s WHERE s.fechaRecoleccion = :fechaRecoleccion")
+    , @NamedQuery(name = "Solicitud.findByEstadoSolicitud", query = "SELECT s FROM Solicitud s WHERE s.estadoSolicitud = :estadoSolicitud")})
 public class Solicitud implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -97,6 +99,16 @@ public class Solicitud implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "hora")
     private String hora;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "fechaRecoleccion")
+    @Temporal(TemporalType.DATE)
+    private Date fechaRecoleccion;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "estadoSolicitud")
+    private String estadoSolicitud;
     @JoinColumn(name = "usuarios_documento", referencedColumnName = "documento")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario usuariosDocumento;
@@ -110,7 +122,7 @@ public class Solicitud implements Serializable {
         this.idSolicitud = idSolicitud;
     }
 
-    public Solicitud(Integer idSolicitud, String tipoServicio, String direccionOrigen, String direccionDestino, String nombreDestinatario, String apellidoDestinatario, String telefonoDestinatario, String hora) {
+    public Solicitud(Integer idSolicitud, String tipoServicio, String direccionOrigen, String direccionDestino, String nombreDestinatario, String apellidoDestinatario, String telefonoDestinatario, String hora, Date fechaRecoleccion, String estadoSolicitud) {
         this.idSolicitud = idSolicitud;
         this.tipoServicio = tipoServicio;
         this.direccionOrigen = direccionOrigen;
@@ -119,6 +131,8 @@ public class Solicitud implements Serializable {
         this.apellidoDestinatario = apellidoDestinatario;
         this.telefonoDestinatario = telefonoDestinatario;
         this.hora = hora;
+        this.fechaRecoleccion = fechaRecoleccion;
+        this.estadoSolicitud = estadoSolicitud;
     }
 
     public Integer getIdSolicitud() {
@@ -199,6 +213,22 @@ public class Solicitud implements Serializable {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public Date getFechaRecoleccion() {
+        return fechaRecoleccion;
+    }
+
+    public void setFechaRecoleccion(Date fechaRecoleccion) {
+        this.fechaRecoleccion = fechaRecoleccion;
+    }
+
+    public String getEstadoSolicitud() {
+        return estadoSolicitud;
+    }
+
+    public void setEstadoSolicitud(String estadoSolicitud) {
+        this.estadoSolicitud = estadoSolicitud;
     }
 
     public Usuario getUsuariosDocumento() {

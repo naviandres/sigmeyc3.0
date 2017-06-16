@@ -46,18 +46,6 @@ UNLOCK TABLES;
 -- Table structure for table `ciudades`
 --
 
-DROP TABLE IF EXISTS `ciudades`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ciudades` (
-  `idCiudades` int(11) NOT NULL AUTO_INCREMENT,
-  `nombreCiudad` varchar(45) NOT NULL,
-  `departamentos_idDepartamento` int(11) NOT NULL,
-  PRIMARY KEY (`idCiudades`),
-  KEY `fk_ciudades_departamentos1_idx` (`departamentos_idDepartamento`),
-  CONSTRAINT `fk_ciudades_departamentos1` FOREIGN KEY (`departamentos_idDepartamento`) REFERENCES `departamentos` (`idDepartamento`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de la ciudades donde sera recogida o entregada la mercancia';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ciudades`
@@ -73,22 +61,6 @@ UNLOCK TABLES;
 -- Table structure for table `conductores`
 --
 
-DROP TABLE IF EXISTS `conductores`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `conductores` (
-  `documento` bigint(15) NOT NULL,
-  `tipoLicencia` varchar(5) NOT NULL,
-  `numeroLicencia` bigint(20) NOT NULL,
-  `vehiculos_idVehiculo` int(11) NOT NULL,
-  PRIMARY KEY (`documento`),
-  UNIQUE KEY `documento_UNIQUE` (`documento`),
-  KEY `fk_conductores_usuarios1_idx` (`documento`),
-  KEY `fk_conductores_vehiculos1_idx` (`vehiculos_idVehiculo`),
-  CONSTRAINT `fk_conductores_usuarios1` FOREIGN KEY (`documento`) REFERENCES `usuarios` (`documento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_conductores_vehiculos1` FOREIGN KEY (`vehiculos_idVehiculo`) REFERENCES `vehiculos` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite registrar los conductores asignados a cada vehiculo\n';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `conductores`
@@ -103,23 +75,6 @@ UNLOCK TABLES;
 -- Table structure for table `cotizaciones`
 --
 
-DROP TABLE IF EXISTS `cotizaciones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cotizaciones` (
-  `idcotizaciones` int(11) NOT NULL AUTO_INCREMENT,
-  `ciudadDestino` varchar(20) DEFAULT NULL,
-  `cantidad` int(11) DEFAULT NULL,
-  `peso` double DEFAULT NULL,
-  `valorDeclarado` double DEFAULT NULL,
-  `fechaCotizacion` date NOT NULL,
-  `usuarios_documento` bigint(15) NOT NULL,
-  PRIMARY KEY (`idcotizaciones`),
-  KEY `fk_cotizaciones_usuarios1_idx` (`usuarios_documento`),
-  CONSTRAINT `fk_cotizaciones_usuarios1` FOREIGN KEY (`usuarios_documento`) REFERENCES `usuarios` (`documento`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
 -- Dumping data for table `cotizaciones`
 --
@@ -132,20 +87,6 @@ UNLOCK TABLES;
 --
 -- Table structure for table `cubicaciones`
 --
-
-DROP TABLE IF EXISTS `cubicaciones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cubicaciones` (
-  `idcotizaciones` int(11) NOT NULL,
-  `altura` double DEFAULT NULL,
-  `ancho` double DEFAULT NULL,
-  `longitud` double DEFAULT NULL,
-  `volumen` double DEFAULT NULL,
-  KEY `fk_cubicaciones_cotizaciones1_idx` (`idcotizaciones`),
-  CONSTRAINT `fk_cubicaciones_cotizaciones1` FOREIGN KEY (`idcotizaciones`) REFERENCES `cotizaciones` (`idcotizaciones`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `cubicaciones`
@@ -160,15 +101,6 @@ UNLOCK TABLES;
 -- Table structure for table `departamentos`
 --
 
-DROP TABLE IF EXISTS `departamentos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `departamentos` (
-  `idDepartamento` int(11) NOT NULL AUTO_INCREMENT,
-  `nombreDepartamento` varchar(45) NOT NULL,
-  PRIMARY KEY (`idDepartamento`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de los departamentos de origen y destino de la mercancia';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `departamentos`
@@ -184,19 +116,6 @@ UNLOCK TABLES;
 -- Table structure for table `empresas`
 --
 
-DROP TABLE IF EXISTS `empresas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `empresas` (
-  `nit` bigint(15) NOT NULL,
-  `razonSocial` varchar(30) NOT NULL,
-  PRIMARY KEY (`nit`),
-  UNIQUE KEY `nit_UNIQUE` (`nit`),
-  KEY `fk_empresas_usuarios1_idx` (`nit`),
-  CONSTRAINT `fk_empresas_usuarios1` FOREIGN KEY (`nit`) REFERENCES `usuarios` (`documento`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Esta tabla permitira el registro de las empresas y su razon social.';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
 -- Dumping data for table `empresas`
 --
@@ -210,21 +129,6 @@ UNLOCK TABLES;
 --
 -- Table structure for table `guias`
 --
-
-DROP TABLE IF EXISTS `guias`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `guias` (
-  `idGuia` int(11) NOT NULL AUTO_INCREMENT,
-  `nueroGuia` varchar(10) NOT NULL,
-  `detalleMercancia` varchar(45) NOT NULL,
-  `planillas_idPlanilla` int(11) NOT NULL,
-  PRIMARY KEY (`idGuia`),
-  UNIQUE KEY `nueroGuia_UNIQUE` (`nueroGuia`),
-  KEY `fk_guia_planillas1_idx` (`planillas_idPlanilla`),
-  CONSTRAINT `fk_guia_planillas1` FOREIGN KEY (`planillas_idPlanilla`) REFERENCES `planillas` (`idPlanilla`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite registrar las guias con las que se documenta la mercancia.';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `guias`
@@ -240,19 +144,6 @@ UNLOCK TABLES;
 -- Table structure for table `localidades`
 --
 
-DROP TABLE IF EXISTS `localidades`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `localidades` (
-  `idLocalidad` int(11) NOT NULL AUTO_INCREMENT,
-  `nombreLocalidad` varchar(45) NOT NULL,
-  `ciudades_idCiudades` int(11) NOT NULL,
-  PRIMARY KEY (`idLocalidad`),
-  KEY `fk_localidades_ciudades1_idx` (`ciudades_idCiudades`),
-  CONSTRAINT `fk_localidades_ciudades1` FOREIGN KEY (`ciudades_idCiudades`) REFERENCES `ciudades` (`idCiudades`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de las localidades donde se zonifica la mercancia.';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
 -- Dumping data for table `localidades`
 --
@@ -267,18 +158,6 @@ UNLOCK TABLES;
 -- Table structure for table `marcas`
 --
 
-DROP TABLE IF EXISTS `marcas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `marcas` (
-  `idVehiculo` int(11) NOT NULL,
-  `marca` varchar(45) NOT NULL,
-  PRIMARY KEY (`idVehiculo`),
-  KEY `fk_marca_vehiculos1_idx` (`idVehiculo`),
-  CONSTRAINT `fk_marca_vehiculos1` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculos` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
 -- Dumping data for table `marcas`
 --
@@ -291,40 +170,6 @@ UNLOCK TABLES;
 --
 -- Table structure for table `mercancias`
 --
-
-DROP TABLE IF EXISTS `mercancias`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mercancias` (
-  `idMercancia` int(11) NOT NULL AUTO_INCREMENT,
-  `tipoMercancia` varchar(20) NOT NULL,
-  `descripcionMercancia` varchar(45) DEFAULT NULL,
-  `peso` double DEFAULT NULL,
-  `longitud` double NOT NULL,
-  `ancho` double NOT NULL,
-  `altura` double NOT NULL,
-  `volumen` double NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  `embalaje` varchar(30) DEFAULT NULL,
-  `estadoMercancia` varchar(45) NOT NULL,
-  `guia_idGuia` int(11) NOT NULL,
-  `solicitudes_idSolicitud` int(11) NOT NULL,
-  `vehiculos_idVehiculo` int(11) NOT NULL,
-  `precios_idprecios` int(11) NOT NULL,
-  `localidades_idLocalidad` int(11) NOT NULL,
-  PRIMARY KEY (`idMercancia`),
-  KEY `fk_mercancias_guia1_idx` (`guia_idGuia`),
-  KEY `fk_mercancias_solicitudes1_idx` (`solicitudes_idSolicitud`),
-  KEY `fk_mercancias_vehiculos1_idx` (`vehiculos_idVehiculo`),
-  KEY `fk_mercancias_precios1_idx` (`precios_idprecios`),
-  KEY `fk_mercancias_localidades1_idx` (`localidades_idLocalidad`),
-  CONSTRAINT `fk_mercancias_guia1` FOREIGN KEY (`guia_idGuia`) REFERENCES `guias` (`idGuia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_mercancias_localidades1` FOREIGN KEY (`localidades_idLocalidad`) REFERENCES `localidades` (`idLocalidad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_mercancias_precios1` FOREIGN KEY (`precios_idprecios`) REFERENCES `precios` (`idprecios`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_mercancias_solicitudes1` FOREIGN KEY (`solicitudes_idSolicitud`) REFERENCES `solicitudes` (`idSolicitud`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_mercancias_vehiculos1` FOREIGN KEY (`vehiculos_idVehiculo`) REFERENCES `vehiculos` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de toda la mercancia a entregar';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `mercancias`
@@ -339,18 +184,6 @@ UNLOCK TABLES;
 -- Table structure for table `modelos`
 --
 
-DROP TABLE IF EXISTS `modelos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `modelos` (
-  `idVehiculo` int(11) NOT NULL,
-  `modelo` varchar(50) NOT NULL,
-  `year` varchar(4) NOT NULL,
-  PRIMARY KEY (`idVehiculo`),
-  KEY `fk_modelo_marca1_idx` (`idVehiculo`),
-  CONSTRAINT `fk_modelo_marca1` FOREIGN KEY (`idVehiculo`) REFERENCES `marcas` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `modelos`
@@ -365,21 +198,6 @@ UNLOCK TABLES;
 -- Table structure for table `novedades`
 --
 
-DROP TABLE IF EXISTS `novedades`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `novedades` (
-  `idMercancia` int(11) NOT NULL,
-  `tipoNovedad` varchar(20) NOT NULL,
-  `detalle` varchar(40) NOT NULL,
-  `prioridad` varchar(45) NOT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idMercancia`),
-  UNIQUE KEY `idMercancia_UNIQUE` (`idMercancia`),
-  KEY `fk_novedades_mercancias1_idx` (`idMercancia`),
-  CONSTRAINT `fk_novedades_mercancias1` FOREIGN KEY (`idMercancia`) REFERENCES `mercancias` (`idMercancia`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de las novedades que presenta la mercancia en caso de no ser entregadas';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `novedades`
@@ -393,21 +211,6 @@ UNLOCK TABLES;
 --
 -- Table structure for table `permisos`
 --
-
-DROP TABLE IF EXISTS `permisos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `permisos` (
-  `idPermisos` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(40) NOT NULL,
-  `url` varchar(40) NOT NULL,
-  `icon` varchar(45) DEFAULT NULL,
-  `permiso_padre` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idPermisos`),
-  KEY `fk_permisos_permisos1_idx` (`permiso_padre`),
-  CONSTRAINT `fk_permisos_permisos1` FOREIGN KEY (`permiso_padre`) REFERENCES `permisos` (`idPermisos`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registran los permisos de a los que accederan y que tendra cada usuario';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `permisos`
@@ -423,18 +226,6 @@ UNLOCK TABLES;
 -- Table structure for table `planillas`
 --
 
-DROP TABLE IF EXISTS `planillas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `planillas` (
-  `idPlanilla` int(11) NOT NULL AUTO_INCREMENT,
-  `cantidadGuias` int(11) NOT NULL,
-  `rutas_idRutas` int(11) NOT NULL,
-  PRIMARY KEY (`idPlanilla`),
-  KEY `fk_planillas_rutas1_idx` (`rutas_idRutas`),
-  CONSTRAINT `fk_planillas_rutas1` FOREIGN KEY (`rutas_idRutas`) REFERENCES `rutas` (`idRutas`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registran las planillas o registros de toda la mercancia que es cargada en un vehiculo';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `planillas`
@@ -450,17 +241,7 @@ UNLOCK TABLES;
 -- Table structure for table `precios`
 --
 
-DROP TABLE IF EXISTS `precios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `precios` (
-  `idprecios` int(11) NOT NULL AUTO_INCREMENT,
-  `valor` double NOT NULL,
-  PRIMARY KEY (`idprecios`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
 -- Dumping data for table `precios`
 --
 
@@ -474,16 +255,6 @@ UNLOCK TABLES;
 -- Table structure for table `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `roles` (
-  `identificadorRol` int(11) NOT NULL AUTO_INCREMENT,
-  `nombreRol` varchar(20) NOT NULL,
-  `detalleRol` varchar(45) NOT NULL,
-  PRIMARY KEY (`identificadorRol`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registran los roles que puede seleccionar o elegir un usuario.';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `roles`
@@ -550,29 +321,6 @@ UNLOCK TABLES;
 --
 -- Table structure for table `solicitudes`
 --
-
-DROP TABLE IF EXISTS `solicitudes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `solicitudes` (
-  `idSolicitud` int(11) NOT NULL AUTO_INCREMENT,
-  `tipoServicio` varchar(20) NOT NULL,
-  `direccionOrigen` varchar(20) NOT NULL,
-  `direccionDestino` varchar(10) NOT NULL,
-  `nombreDestinatario` varchar(20) NOT NULL,
-  `apellidoDestinatario` varchar(20) NOT NULL,
-  `telefonoDestinatario` varchar(15) NOT NULL,
-  `priorizacion` varchar(20) DEFAULT NULL,
-  `fechaSolicitud` date DEFAULT NULL,
-  `hora` varchar(45) NOT NULL,
-  `fechaRecoleccion` date NOT NULL,
-  `estadoSolicitud` varchar(20) NOT NULL,
-  `usuarios_documento` bigint(15) NOT NULL,
-  PRIMARY KEY (`idSolicitud`),
-  KEY `fk_solicitudes_usuarios1_idx` (`usuarios_documento`),
-  CONSTRAINT `fk_solicitudes_usuarios1` FOREIGN KEY (`usuarios_documento`) REFERENCES `usuarios` (`documento`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registraran las solicitudes que los usuarios o empresas diligencien.';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `solicitudes`
@@ -680,4 +428,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-16 16:16:14
+-- Dump completed on 2017-06-16 14:53:51

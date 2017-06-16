@@ -36,27 +36,21 @@
                                     </div>
                                 </div>
                                 <div class="box-body">
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="idGuia" for="idGuia" />
+                                      <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="numero guia" for="numero" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="idGuia" value="#{guiaController.guia.idGuia}" required="true"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="codigoBarras" for="codigoBarras" />
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="codigoBarras" value="#{guiaController.guia.codigoBarras}" required="true"/>
+                                            <h:inputText class="form-control" id="numero" value="#{guiaController.guia.nueroGuia}" required="true" requiredMessage="Ingrese codigoBarras"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="detalleMercancia" for="detalleMercancia" />
+
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="detalleMercancia" value="#{guiaController.guia.detalleMercancia}" required="true" requiredMessage="Ingrese detalle"/>
                                         </div>
-                                    </div>
+                                    </div>                                 
                                     <div class="form-group">
                                         <h:outputLabel  class="col-xs-3 control-label" value="planillascodigoPlanilla1 " for="planillascodigoPlanilla1" />
-
                                         <div class="col-xs-6">
                                             <h:selectOneMenu id="planillascodigoPlanilla1" value="#{guiaController.guia.planillasidPlanilla}" required="true">
                                                 <f:selectItems value="#{planillaController.planillas}" var="p" itemLabel="#{p.idPlanilla}"/>
@@ -69,7 +63,7 @@
                                             <h:commandButton class="btn btn-success" action="#{guiaController.GuardarEdicion()}" value="Guardar"/>
                                         </div>
                                         <div class="col-lg-2 ">
-                                            <h:link styleClass="btn btn-instagram" outcome="/crud/guia/List.xhtml" value="ver todos"/>
+                                            <h:link styleClass="btn btn-instagram" outcome="/app/crud/guia/List.xhtml" value="ver todos"/>
                                         </div>                                             
                                     </div>
                                 </div>

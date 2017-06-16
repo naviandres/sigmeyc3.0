@@ -34,8 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Mercancia.findAll", query = "SELECT m FROM Mercancia m")
     , @NamedQuery(name = "Mercancia.findByIdMercancia", query = "SELECT m FROM Mercancia m WHERE m.idMercancia = :idMercancia")
-    , @NamedQuery(name = "Mercancia.findByValorDeclarado", query = "SELECT m FROM Mercancia m WHERE m.valorDeclarado = :valorDeclarado")
     , @NamedQuery(name = "Mercancia.findByTipoMercancia", query = "SELECT m FROM Mercancia m WHERE m.tipoMercancia = :tipoMercancia")
+    , @NamedQuery(name = "Mercancia.findByDescripcionMercancia", query = "SELECT m FROM Mercancia m WHERE m.descripcionMercancia = :descripcionMercancia")
     , @NamedQuery(name = "Mercancia.findByPeso", query = "SELECT m FROM Mercancia m WHERE m.peso = :peso")
     , @NamedQuery(name = "Mercancia.findByLongitud", query = "SELECT m FROM Mercancia m WHERE m.longitud = :longitud")
     , @NamedQuery(name = "Mercancia.findByAncho", query = "SELECT m FROM Mercancia m WHERE m.ancho = :ancho")
@@ -54,17 +54,15 @@ public class Mercancia implements Serializable {
     private Integer idMercancia;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "valorDeclarado")
-    private double valorDeclarado;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "tipoMercancia")
     private String tipoMercancia;
-    @Basic(optional = false)
-    @NotNull
+    @Size(max = 45)
+    @Column(name = "descripcionMercancia")
+    private String descripcionMercancia;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "peso")
-    private double peso;
+    private Double peso;
     @Basic(optional = false)
     @NotNull
     @Column(name = "longitud")
@@ -85,9 +83,7 @@ public class Mercancia implements Serializable {
     @NotNull
     @Column(name = "cantidad")
     private int cantidad;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
+    @Size(max = 30)
     @Column(name = "embalaje")
     private String embalaje;
     @Basic(optional = false)
@@ -120,17 +116,14 @@ public class Mercancia implements Serializable {
         this.idMercancia = idMercancia;
     }
 
-    public Mercancia(Integer idMercancia, double valorDeclarado, String tipoMercancia, double peso, double longitud, double ancho, double altura, double volumen, int cantidad, String embalaje, String estadoMercancia) {
+    public Mercancia(Integer idMercancia, String tipoMercancia, double longitud, double ancho, double altura, double volumen, int cantidad, String estadoMercancia) {
         this.idMercancia = idMercancia;
-        this.valorDeclarado = valorDeclarado;
         this.tipoMercancia = tipoMercancia;
-        this.peso = peso;
         this.longitud = longitud;
         this.ancho = ancho;
         this.altura = altura;
         this.volumen = volumen;
         this.cantidad = cantidad;
-        this.embalaje = embalaje;
         this.estadoMercancia = estadoMercancia;
     }
 
@@ -142,14 +135,6 @@ public class Mercancia implements Serializable {
         this.idMercancia = idMercancia;
     }
 
-    public double getValorDeclarado() {
-        return valorDeclarado;
-    }
-
-    public void setValorDeclarado(double valorDeclarado) {
-        this.valorDeclarado = valorDeclarado;
-    }
-
     public String getTipoMercancia() {
         return tipoMercancia;
     }
@@ -158,11 +143,19 @@ public class Mercancia implements Serializable {
         this.tipoMercancia = tipoMercancia;
     }
 
-    public double getPeso() {
+    public String getDescripcionMercancia() {
+        return descripcionMercancia;
+    }
+
+    public void setDescripcionMercancia(String descripcionMercancia) {
+        this.descripcionMercancia = descripcionMercancia;
+    }
+
+    public Double getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(Double peso) {
         this.peso = peso;
     }
 

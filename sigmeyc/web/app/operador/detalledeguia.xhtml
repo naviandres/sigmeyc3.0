@@ -16,7 +16,7 @@
             </div>
             <main class="container">	
                 <h2 class="text-center page-header">Detalle de Guía</h2>
-                <h3 class="text-center">23123</h3>
+               
                 <div class="box-body">		
                     <h:form prependId="false">
                         <h:dataTable id="tablaGuia" class="stripe" value="#{mercanciaController.mercancia}" var="mer">
@@ -26,11 +26,25 @@
                                 </f:facet>
                                 <h:outputText value="Numero guía"/>
                                 <br/>
+                                <h:outputText value="Dirección origen"/>
+                                <br/>
                                 <h:outputText value="Dirección destino"/>
                                 <br/>
-                                <h:outputText value="Tipo vehiculo"/>
+                                <h:outputText value="De"/>
                                 <br/>
-                                <h:outputText value="Estado mercancía"/>
+                                <h:outputText value="Destinatario"/>
+                                <br/>
+                                <h:outputText value="Telefono destinatario"/>
+                                <br/>
+                                <h:outputText value="Contenido"/>
+                                <br/>
+                                <h:outputText value="Cantidad"/>
+                                <br/>
+                                <h:outputText value="Peso"/>
+                                 <br/>
+                                <h:outputText value="Volumen"/>
+                                <br/>
+                                <h:outputText value="Valor"/>
                             </h:column>
                             <h:column class="col-md-6">
                                 <f:facet name="header">
@@ -38,11 +52,25 @@
                                 </f:facet>
                                 <h:outputText value="#{mer.guiaidGuia.nueroGuia}"/>
                                 <br/>
+                                <h:outputText value="#{mer.solicitudesidSolicitud.direccionOrigen}"/>
+                                <br/>
                                 <h:outputText value="#{mer.solicitudesidSolicitud.direccionDestino}"/>
                                 <br/>
-                                <h:outputText value="#{mer.vehiculosidVehiculo.tipoVehiculo}"/>
+                                <h:outputText value="#{mer.solicitudesidSolicitud.usuariosDocumento.primerNombre}  #{mer.solicitudesidSolicitud.usuariosDocumento.primerApellido}"/>
                                 <br/>
-                                <h:outputText value="#{mer.estadoMercancia}"/>
+                                <h:outputText value="#{mer.solicitudesidSolicitud.nombreDestinatario}  #{mer.solicitudesidSolicitud.apellidoDestinatario}"/>
+                                <br/>
+                                 <h:outputText value="#{mer.solicitudesidSolicitud.telefonoDestinatario}"/>
+                                <br/>
+                                <h:outputText value="#{mer.guiaidGuia.detalleMercancia}"/>
+                                <br/>
+                                <h:outputText value="#{mer.cantidad}"/>
+                                <br/>
+                                <h:outputText value="#{mer.peso}"/>
+                                <br/>
+                                <h:outputText value="#{mer.volumen}"/>
+                                 <br/>
+                                <h:outputText value="#{mer.preciosIdprecios.valor}"/>
                             </h:column>
                         </h:dataTable>
                     </h:form>
@@ -60,7 +88,7 @@
                             exportDataType: $(this).val()
                         });
                     });
-                })
+                });
             </script>
         </ui:define>
     </ui:composition>

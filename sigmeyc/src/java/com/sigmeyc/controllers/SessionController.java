@@ -241,6 +241,11 @@ public class SessionController implements Serializable {
         }
         return false;
     }
+    
+    public String bajar(){
+
+return "<a class=\"page-scroll\" href=\"#services\">Servicios</a>";
+    }
 
     public boolean activarBoton() {
         FacesContext fc = FacesContext.getCurrentInstance();
@@ -250,6 +255,7 @@ public class SessionController implements Serializable {
         if (email != null && !email.equals("") && clave != null && !clave.equals("")) {
             if (u != null) {
                 ec.getSessionMap().put("user", u);
+                
                 return true;
             }
 

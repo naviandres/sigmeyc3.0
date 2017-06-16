@@ -30,6 +30,15 @@ public class SolicitudController implements Serializable {
 
     public SolicitudController() {
     }
+    private Date fechaR;
+
+    public Date getFechaR() {
+        return fechaR;
+    }
+
+    public void setFechaR(Date fechaR) {
+        this.fechaR = fechaR;
+    }
 
     @PostConstruct
     public void init() {
@@ -53,12 +62,26 @@ public class SolicitudController implements Serializable {
         }
     }
 
+    public void persistirSolicitud() {
+        Usuario us = sc.getUsuarioSesion();
+        solicitud.setUsuariosDocumento(us);
+        System.out.println(sc.getRol().getNombreRol());
+//        if (sc.getRol().getNombreRol().equals("recepcionista")) {
+//            solicitud.setEstadoSolicitud("En recepcion");
+//        } else {
+            solicitud.setEstadoSolicitud("Sin recoger");
+//        }
+        solicitud.setFechaRecoleccion(fechaR);
+        this.solicitudFacade.create(solicitud);
+        init();
+    }
+
     public Boolean guardar() {
         try {
             Date fechaActual = new Date();
             DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
-            String hora1 = "24:00:00";//tener presente
-            String hora2 = "09:00:00";
+            String hora1 = "01:00:00";//tener presente
+            String hora2 = "13:00:00";
             String horaNueva = dateFormat.format(fechaActual);
             Date date1, date2, dateNueva;
             date1 = dateFormat.parse(hora1);
@@ -67,23 +90,37 @@ public class SolicitudController implements Serializable {
             //anotadion: si el valor de la cadena es es menor que el valor 
 //            de la cadena pasado como parametro retorna valor negativo y si es al contrario(valor
 //de la cadena es mayor que el parametro, retorna valor positivo.si son iguales el valor es 0
-            if ((date1.compareTo(dateNueva) <= 0) && (date2.compareTo(dateNueva) >= 0)) {
-                Usuario us = sc.getUsuarioSesion();
-                solicitud.setUsuariosDocumento(us);
-                solicitud.setHora(horaNueva);
-                solicitud.setFechaSolicitud(fechaActual);
-                this.solicitudFacade.create(solicitud);
-                init();
-                return true;
+            solicitud.setHora(horaNueva);
+            solicitud.setFechaSolicitud(fechaActual);
+            if (fechaR.before(fechaActual)) {
+                System.out.println("Igual");
+                if ((date1.compareTo(dateNueva) <= 0) && (date2.compareTo(dateNueva) >= 0)) {
+                    System.out.println("Reguistro " + horaNueva);
+                    persistirSolicitud();
+                    return true;
+                } else {
+                    System.out.println("Tiene que realizar la solicitud antes de" + hora2);
+                    persistirSolicitud();
+                    MessageUtil.enviarMensajeInformacion("solicindex", "Su solicitud sera recogida al dia siguiente", "La solicitud se debe realizar antes de: " + hora2);
+                    return true;
+                }
             } else {
-                System.out.println("Tiene que realizar la solicitud antes de" + hora2);
-//                MessageUtil.enviarMensajeErrorGlobal("No puede realizar la solicitud","Tiene que realizar la solicitud antes de" + hora2);
-                MessageUtil.enviarMensajeInformacion("createSolici", "No puede realizar la solicitud.", "Tiene que realizar la solicitud antes de: " + hora2);
+                System.out.println("Recoleccion fecha..." + fechaR);
+                persistirSolicitud();
+                MessageUtil.enviarMensajeInformacion("solicindex", "Su solicitud sera recogida al dia siguiente", "Tiene que realizar la solicitud antes de: " + hora2);
+                return true;
             }
         } catch (ParseException parseException) {
             parseException.printStackTrace();
         }
         return false;
+    }
+
+    public String fecha() {
+        Date fechaActual = new Date();
+        DateFormat format = new SimpleDateFormat("dd/MM/yy");
+        String fechaNue = format.format(fechaActual);
+        return fechaNue;
     }
 
 //    public void foraneaUsuario(){

@@ -38,13 +38,7 @@
                                     </div>
                                 </div>
                                  <div class="box-body">
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="codigoMercancia" for="codigoMercancia" />
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="codigoMercancia" value="#{mercanciaController.mercancia.idMercancia}"  required="true"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
+                                     <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label"  value="valorDeclarado" for="valorDeclarado" />
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="valorDeclarado" value="#{mercanciaController.mercancia.valorDeclarado}"  />
@@ -54,7 +48,7 @@
                                     <div class="form-group">
                                         <h:outputLabel  class="col-xs-3 control-label" value="tipoMercancia" for="tipoMercancia" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="tipoMercancia" value="#{mercanciaController.mercancia.tipoMercancia}"  />
+                                            <h:inputText class="form-control" id="tipoMercancia" value="#{mercanciaController.mercancia.tipoMercancia}"/>
 
                                         </div>
                                     </div>
@@ -110,14 +104,18 @@
                                     <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="Estado" for="estado" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="estado" value="#{mercanciaController.mercancia.estadoMercancia}" required="true"/>
+                                            <h:selectOneMenu id="estado" class="form-control" value="#{mercanciaController.mercancia.estadoMercancia}" required="true">
+                                                <f:selectItem itemLabel="Seleccione estado" itemDisabled="disabled"/>
+                                                <f:selectItem itemLabel="En bodega" itemValue="En bodega"/>
+                                                <f:selectItem itemLabel="Recepcion" itemValue="Recepcion"/>
+                                                <f:selectItem itemLabel="Entregada" itemValue="Entregada"/>
+                                            </h:selectOneMenu>  
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="Localidades" for="localidades" />
 
                                         <div class="col-xs-6">
-
                                             <h:selectOneMenu  class="form-control" id="localidades" value="#{mercanciaController.mercancia.localidadesidLocalidad}" converter="localidadConverter" required="true" >
                                                 <f:selectItems value="#{localidadController.localidades}" var="l" itemLabel="#{l.nombreLocalidad}"/>
                                             </h:selectOneMenu>
@@ -125,9 +123,7 @@
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="Guias" for="guiacodigoBarras" />
-
                                         <div class="col-xs-6">
-
                                             <h:selectOneMenu class="form-control" id="guiacodigoBarras" value="#{mercanciaController.mercancia.guiaidGuia}" converter="guiaConverter" required="true" >
                                                 <f:selectItems value="#{guiaController.guias}" var="s" itemLabel="#{s.nueroGuia}"/>
                                             </h:selectOneMenu>
@@ -138,7 +134,7 @@
 
                                         <div class="col-xs-6">
 
-                                            <h:selectOneMenu id="solicitudescodigoSolicitud" value="#{mercanciaController.mercancia.solicitudesidSolicitud}" converter="solicitudConverter"  required="true">
+                                            <h:selectOneMenu class="form-control" id="solicitudescodigoSolicitud" value="#{mercanciaController.mercancia.solicitudesidSolicitud}" converter="solicitudConverter"  required="true">
                                                 <f:selectItems value="#{solicitudController.solicitudes}" var="s" itemLabel="#{s.idSolicitud}"/>
                                             </h:selectOneMenu>
                                         </div>
@@ -146,23 +142,23 @@
                                     <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="placaVehiculo" for="vehiculosplacaVehiculo" />
                                         <div class="col-xs-6">
-                                            <h:selectOneMenu id="vehiculosplacaVehiculo" value="#{mercanciaController.mercancia.vehiculosidVehiculo}" converter="vehiculoConverter" required="true">
+                                            <h:selectOneMenu class="form-control" id="vehiculosplacaVehiculo" value="#{mercanciaController.mercancia.vehiculosidVehiculo}" converter="vehiculoConverter" required="true">
                                                 <f:selectItems value="#{vehiculoController.vehiculos}" var="v" itemLabel="#{v.placaVehiculo}"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
-                                    
-                                     <div class="form-group">
+
+                                    <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="Precios" for="Precios" />
                                         <div class="col-xs-6">
-                                            <h:selectOneMenu id="Precios" value="#{mercanciaController.mercancia.preciosIdprecios}" converter="precioConverter" required="true">
+                                            <h:selectOneMenu id="Precios" class="form-control" value="#{mercanciaController.mercancia.preciosIdprecios}" converter="precioConverter" required="true">
                                                 <f:selectItems value="#{precioController.precios}" var="p" itemLabel="#{p.valor}"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-4">
-                                            <h:commandButton class="btn btn-success" action="#{mercanciaController.guardar()}" value="Guardar"/>
+                                            <h:commandButton class="btn btn-success" action="#{mercanciaController.guardarEdicion()}" value="Guardar"/>
                                         </div>
                                         <div class="col-lg-2 ">
                                             <h:commandButton class="btn btn-instagram" action="#{mercanciaController.prepareList}" immediate="true" value="ver todos"/>

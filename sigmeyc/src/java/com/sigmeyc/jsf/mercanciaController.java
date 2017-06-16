@@ -78,17 +78,17 @@ public class mercanciaController implements Serializable {
         return this.MercanciaFacade.findAll();
     }
 
-    public String Eliminar(Mercancia l) {
+    public String eliminar(Mercancia l) {
         this.MercanciaFacade.remove(l);
         return "/app/crud/mercancia/List.xthml?faces-redirect=true";
     }
 
-    public String Editar(Mercancia l) {
+    public String editar(Mercancia l) {
         setMercancia(l);
         return "/app/crud/mercancia/Edit.xthml?faces-redirect=true";
     }
 
-    public String GuardarEdicion() {
+    public String guardarEdicion() {
         MercanciaFacade.edit(mercancia);
         return "/app/crud/mercancia/List.xthml?faces-redirect=true";
     }

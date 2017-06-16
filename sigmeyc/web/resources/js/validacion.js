@@ -377,6 +377,23 @@ $('#registro').formValidation({
                     message: 'Las contraseñas no coinciden'
                 }
             }
+        },
+        txtRep: {//Validar con los aributos NAME de cada INPUT
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: 'Las contraseñas no coinciden'
+                },
+                regexp: {
+                    regexp: /^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9]+$/,
+                    message: 'No se aceptan carácteres especiales'
+                },
+                identical: {
+                    field: 'claveEmpre',
+                  
+                    message: 'Las contraseñas no coinciden'
+                }
+            }
         }
     }
 });
@@ -435,6 +452,7 @@ function mostrarDatosEmprI() {
     document.registro.selePersI.checked = false;
     //desactiva input y con el la validacion
     document.getElementById("nit").disabled = false;
+
     document.getElementById("txtRazonS").disabled = false;
     document.getElementById("txtNombI").disabled = true;
     document.getElementById("txtApeeI").disabled = true;
@@ -444,6 +462,8 @@ function mostrarDatosEmprI() {
     document.getElementById("txtCelEmpre").disabled = false;
     document.getElementById("txtCelI").disabled = true;
 
+    document.getElementById("btnRegEmpre").style.display = 'block';
+    document.getElementById("btnRegUs").style.display = 'none';
     document.getElementById('divEmailUsuari').style.display = 'none';
     document.getElementById('divClaveUsau').style.display = 'none';
     document.getElementById('divEmailEmpre').style.display = 'block';
@@ -463,8 +483,9 @@ function mostrarDatosEmprI() {
     document.getElementById('divContaEmpre').style.display = 'block';
     document.getElementById('divCorreo').style.display = 'block';
     document.getElementById('divContr').style.display = 'block';
-    document.getElementById('divRepetContra').style.display = 'block';
-
+    document.getElementById('divRepetEmpre').style.display = 'block';
+    document.getElementById('divRepetContra').style.display = 'none';
+    
 }
 function mostrarDatosPersI() {
     document.registro.seleEmpreI.checked = false;
@@ -473,6 +494,7 @@ function mostrarDatosPersI() {
     document.getElementById("txtRazonS").disabled = true;
     document.getElementById("txtNombI").disabled = false;
     document.getElementById("txtApeeI").disabled = false;
+    document.getElementById("segundoApellido").disabled = false;
     document.getElementById("tipoIdentificacion").disabled = false;
     document.getElementById("txtDocume").disabled = false;
     document.getElementById("txtCelI").disabled = false;
@@ -487,6 +509,8 @@ function mostrarDatosPersI() {
     document.getElementById("correoEmpre").disabled = true;
     document.getElementById("claveEmpre").disabled = true;
     //muestra los campos
+        document.getElementById("btnRegEmpre").style.display = 'none';
+    document.getElementById("btnRegUs").style.display = 'block';
     document.getElementById('divRazI').style.display = 'none';
     document.getElementById('divNit').style.display = 'none';
     document.getElementById('divNmbrs').style.display = 'block';
@@ -495,6 +519,7 @@ function mostrarDatosPersI() {
     document.getElementById('divDocume').style.display = 'block';
     document.getElementById('divContac').style.display = 'block';
     document.getElementById('divContaEmpre').style.display = 'none';
+    document.getElementById('divRepetEmpre').style.display = 'none';
     document.getElementById('divRepetContra').style.display = 'block';
     
 }
@@ -519,3 +544,7 @@ window.onload = function () {
     };
 };
 
+$('#myTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})

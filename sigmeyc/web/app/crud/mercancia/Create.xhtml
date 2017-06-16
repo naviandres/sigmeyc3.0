@@ -108,8 +108,9 @@
                                         <div class="col-xs-6">
                                             <h:selectOneMenu id="estado" class="form-control" value="#{mercanciaController.mercancia.estadoMercancia}" required="true">
                                                 <f:selectItem itemLabel="Seleccione estado" itemDisabled="disabled"/>
+                                                <f:selectItem itemLabel="Sin recoger" itemValue="Sin recoger"/>
                                                 <f:selectItem itemLabel="En bodega" itemValue="En bodega"/>
-                                                <f:selectItem itemLabel="Recepcion" itemValue="Recepcion"/>
+                                                <f:selectItem itemLabel="En Recepcion" itemValue="En Recepcion"/>
                                                 <f:selectItem itemLabel="Entregada" itemValue="Entregada"/>
                                             </h:selectOneMenu>  
                                         </div>
@@ -118,7 +119,6 @@
                                         <h:outputLabel class="col-xs-3 control-label" value="Localidades" for="localidades" />
 
                                         <div class="col-xs-6">
-
                                             <h:selectOneMenu  class="form-control" id="localidades" value="#{mercanciaController.mercancia.localidadesidLocalidad}" converter="localidadConverter" required="true" >
                                                 <f:selectItems value="#{localidadController.localidades}" var="l" itemLabel="#{l.nombreLocalidad}"/>
                                             </h:selectOneMenu>
@@ -126,9 +126,7 @@
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="Guias" for="guiacodigoBarras" />
-
                                         <div class="col-xs-6">
-
                                             <h:selectOneMenu class="form-control" id="guiacodigoBarras" value="#{mercanciaController.mercancia.guiaidGuia}" converter="guiaConverter" required="true" >
                                                 <f:selectItems value="#{guiaController.guias}" var="s" itemLabel="#{s.nueroGuia}"/>
                                             </h:selectOneMenu>

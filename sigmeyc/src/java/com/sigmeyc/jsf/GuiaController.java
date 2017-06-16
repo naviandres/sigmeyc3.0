@@ -85,6 +85,7 @@ public class GuiaController implements Serializable {
 //        return "Create";
 //    }
     public String guardar() {
+        guia.setIdGuia(null);
         this.guiaFacade.create(guia);
         init();
         return "/app/crud/guia/Create.xhtml?faces-redirect=true";
@@ -123,11 +124,6 @@ public class GuiaController implements Serializable {
 
     public String GuardarEdicion() {
         guiaFacade.edit(guia);
-        return "/app/crud/guia/Edit.xhtml?faces-redirect=true";
-    }
-
-    public String DestruirVer(Guia g) {
-        this.guiaFacade.remove(g);
         return "/app/crud/guia/List.xhtml?faces-redirect=true";
     }
 

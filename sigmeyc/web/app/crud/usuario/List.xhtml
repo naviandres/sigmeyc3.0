@@ -39,10 +39,12 @@
 
                                 <div class="box-body">
                                     <h:form >
-                                      
 
+                                        <h:panelGroup id="messagePanel" layout="block">
+                                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                                        </h:panelGroup>
                                         <p:dataTable class="table table-bordered table-hover" id="example2" value="#{usuarioController.usuarios}" var="usua" >
-                                            
+
                                             <p:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="tipoIdentificacion"/>
@@ -111,7 +113,7 @@
                                                 <h:outputText value=" "/>
                                                 <h:commandLink action="#{usuarioController.editar(Usuario)}" value=""><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></h:commandLink>
                                                 <h:outputText value=" "/>
-                                                <h:commandLink action="#{usuarioController.eliminar(Usuario)}" value=""><i class="fa fa-trash fa-2x"  aria-hidden="true"></i></h:commandLink>
+                                                <h:commandLink action="#{usuarioController.eliminar()}" value=""><i class="fa fa-trash fa-2x"  aria-hidden="true"></i></h:commandLink>
                                             </p:column>
                                         </p:dataTable>
 
