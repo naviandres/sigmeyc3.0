@@ -228,7 +228,7 @@
                     </div>
                 </div>
             </section>
-
+            <!--SERVICIOS-->
             <section id="services">
                 <div class="container">
                     <div class="row">
@@ -382,10 +382,11 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="solicitud">
-                                    <h:panelGroup id="messagePanel" layout="block">
-                                        <h:message class="alert alert-info" for="solicindex" showSummary="true"/>
-                                    </h:panelGroup>
-                                    <h:form  id="solicindex" prependId="false">       
+
+                                    <h:form  id="solicindex" prependId="false"> 
+                                        <h:panelGroup id="messagePanel" layout="block">
+                                            <h:message class="alert alert-info" for="solicindex" showSummary="true"/>
+                                        </h:panelGroup>
                                         <h2 class="page-header text-center">Solicitud</h2>
                                         <div class="form-group">
                                             <h:outputLabel id="lblSelTipoIden" class="sr-only" for="tipoServicio" value="tipoServicio"/>
@@ -425,18 +426,13 @@
                                             <h:outputLabel class="sr-only" value="Fecha recoleccion" for="fechaRecoleccion" />
                                             <pr:calendar id="fechaRecoleccion" mindate="#{solicitudController.fecha()}"  value="#{solicitudController.fechaR}" showOn="button" />
                                         </div>
-                                        <div class="form-group">
-                                            <h:outputLabel class="sr-only" value="priorizacion" for="priorizacion" />
-                                            <h:selectOneMenu id="priorizacion" class="form-control" value="#{solicitudController.solicitud.priorizacion}">
-                                                <f:selectItem id="selPrio" itemLabel="Seleccione prioridad" itemDisabled="disabled"/>
-                                                <f:selectItem itemLabel="Alta" itemValue="alta"/>
-                                                <f:selectItem itemLabel="Media" itemValue="media"/>
-                                                <f:selectItem itemLabel="Baja" itemValue="baja"/>
-                                            </h:selectOneMenu>
-                                        </div>
+
                                         <div class="form-group">
                                             <div class="col-lg-2 col-lg-offset-4">
-                                                <h:commandButton class="btn btn-success" action="#{solicitudController.guardar()}" value="Guardar s"/>
+                                                <h:commandButton id="btnSolc" class="btn btn-success" action="#{solicitudController.guardar()}" value="Guardar">
+                                                    <f:ajax execute="tipoServicio direccionOrigen direccionDestino nombreDestinatario apellidoDestinatario telefonoDestinatario fechaRecoleccion" render="tipoServicio direccionOrigen direccionDestino nombreDestinatario apellidoDestinatario telefonoDestinatario fechaRecoleccion"/>
+                                                    <a href="#mercancia" aria-controls="profile" role="tab" data-toggle="tab"/>
+                                                </h:commandButton>
                                             </div>                                           
                                         </div>
                                     </h:form>
@@ -449,6 +445,12 @@
                                         <div class="form-group col-lg-6">
                                             <h:outputLabel  class="sr-only" value="tipoMercancia" for="tipoMercancia" />
                                             <h:inputText class="form-control" p:placeholder="Tipo Mercancia" id="tipoMercancia" value="#{mercanciaController.mercancia.tipoMercancia}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel class="col-xs-3 control-label"  value="Descripción mercancía" for="descripcion" />
+                                            <div class="col-xs-6">
+                                                <h:inputTextarea class="form-control" id="descripcion" value="#{mercanciaController.mercancia.descripcionMercancia}"  p:placeholder="Descripcion mercancía" />
+                                            </div>
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <h:outputLabel class="sr-only" value="peso" for="peso" />
@@ -496,7 +498,7 @@
                                         <div class="form-group col-lg-6">
                                             <h:outputLabel class="sr-only" value="Guias" for="guiacodigoBarras" />
                                             <h:selectOneMenu class="form-control" p:placeholder="Guias" id="guiacodigoBarras" value="#{mercanciaController.mercancia.guiaidGuia}" converter="guiaConverter" required="true" >
-                                                <f:selectItems value="#{guiaController.guias}" var="s" itemLabel="#{s.nueroGuia}"/>
+                                                <f:selectItems value="#{guiaController.guias}" var="g" itemLabel="#{g.nueroGuia}"/>
                                             </h:selectOneMenu>
                                         </div>
                                         <div class="form-group col-lg-6">

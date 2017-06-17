@@ -26,7 +26,7 @@ public class SolicitudController implements Serializable {
 
     private Solicitud solicitud;
 
-    private SessionController sc = new SessionController();
+    private SessionController sc;
 
     public SolicitudController() {
     }
@@ -43,6 +43,7 @@ public class SolicitudController implements Serializable {
     @PostConstruct
     public void init() {
         solicitud = new Solicitud();
+        sc = new SessionController();
     }
 
     public Solicitud getSolicitud() {
@@ -65,12 +66,12 @@ public class SolicitudController implements Serializable {
     public void persistirSolicitud() {
         Usuario us = sc.getUsuarioSesion();
         solicitud.setUsuariosDocumento(us);
-        System.out.println(sc.getRol().getNombreRol());
-//        if (sc.getRol().getNombreRol().equals("recepcionista")) {
-//            solicitud.setEstadoSolicitud("En recepcion");
-//        } else {
+        String nRol = sc.getUsuarioSesion().getRoles().get(0).getNombreRol();
+        if (nRol.equals("cliente")) {
             solicitud.setEstadoSolicitud("Sin recoger");
-//        }
+        } else {
+            solicitud.setEstadoSolicitud("En recepcion");
+        }
         solicitud.setFechaRecoleccion(fechaR);
         this.solicitudFacade.create(solicitud);
         init();
@@ -81,33 +82,36 @@ public class SolicitudController implements Serializable {
             Date fechaActual = new Date();
             DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
             String hora1 = "01:00:00";//tener presente
-            String hora2 = "13:00:00";
+            String hora2 = "09:00:00";
             String horaNueva = dateFormat.format(fechaActual);
             Date date1, date2, dateNueva;
             date1 = dateFormat.parse(hora1);
             date2 = dateFormat.parse(hora2);
             dateNueva = dateFormat.parse(horaNueva);
-            //anotadion: si el valor de la cadena es es menor que el valor 
-//            de la cadena pasado como parametro retorna valor negativo y si es al contrario(valor
-//de la cadena es mayor que el parametro, retorna valor positivo.si son iguales el valor es 0
+
             solicitud.setHora(horaNueva);
             solicitud.setFechaSolicitud(fechaActual);
             if (fechaR.before(fechaActual)) {
                 System.out.println("Igual");
+//anotadion: si el valor de la cadena es es menor que el valor de la cadena pasado como parametro retorna valor negativo y si es al contrario(valor
+//de la cadena es mayor que el parametro, retorna valor positivo.si son iguales el valor es 0
                 if ((date1.compareTo(dateNueva) <= 0) && (date2.compareTo(dateNueva) >= 0)) {
-                    System.out.println("Reguistro " + horaNueva);
+                    System.out.println("Registro " + horaNueva);
+                    solicitud.setPriorizacion("alta");
                     persistirSolicitud();
                     return true;
                 } else {
                     System.out.println("Tiene que realizar la solicitud antes de" + hora2);
+                    solicitud.setPriorizacion("media");
                     persistirSolicitud();
-                    MessageUtil.enviarMensajeInformacion("solicindex", "Su solicitud sera recogida al dia siguiente", "La solicitud se debe realizar antes de: " + hora2);
+                    MessageUtil.enviarMensajeInformacion("solicindex", "Su solicitud sera recogida al dia siguiente", "<br/>Recogemos su mercancia el mismo dia cuando la solicitud se realiza antes de: " + hora2);
                     return true;
                 }
             } else {
                 System.out.println("Recoleccion fecha..." + fechaR);
+                solicitud.setPriorizacion("baja");
                 persistirSolicitud();
-                MessageUtil.enviarMensajeInformacion("solicindex", "Su solicitud sera recogida al dia siguiente", "Tiene que realizar la solicitud antes de: " + hora2);
+                MessageUtil.enviarMensajeInformacion("solicindex", "Gracias por confiar en nosotros", "Su solicitud sera recogida: " + fechaR);
                 return true;
             }
         } catch (ParseException parseException) {

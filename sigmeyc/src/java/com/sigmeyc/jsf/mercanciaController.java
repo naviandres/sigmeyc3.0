@@ -56,6 +56,7 @@ public class mercanciaController implements Serializable {
     
     public String guardar() {
         mercancia.setIdMercancia(null);
+        
         this.MercanciaFacade.create(mercancia);
         init();
         return "/app/crud/mercancia/Create.xthml?faces-redirect=true";

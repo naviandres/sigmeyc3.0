@@ -308,7 +308,7 @@ $('#registro').formValidation({
                 }
             }
         },
-         claveEmpre: {
+        claveEmpre: {
             validators: {
                 notEmpty: {
                     message: 'La contraseña es obligatoria'
@@ -373,7 +373,7 @@ $('#registro').formValidation({
                 },
                 identical: {
                     field: 'clave',
-                  
+
                     message: 'Las contraseñas no coinciden'
                 }
             }
@@ -390,7 +390,7 @@ $('#registro').formValidation({
                 },
                 identical: {
                     field: 'claveEmpre',
-                  
+
                     message: 'Las contraseñas no coinciden'
                 }
             }
@@ -485,7 +485,7 @@ function mostrarDatosEmprI() {
     document.getElementById('divContr').style.display = 'block';
     document.getElementById('divRepetEmpre').style.display = 'block';
     document.getElementById('divRepetContra').style.display = 'none';
-    
+
 }
 function mostrarDatosPersI() {
     document.registro.seleEmpreI.checked = false;
@@ -499,7 +499,7 @@ function mostrarDatosPersI() {
     document.getElementById("txtDocume").disabled = false;
     document.getElementById("txtCelI").disabled = false;
     document.getElementById("txtCelEmpre").disabled = true;
-    
+
     document.getElementById('divEmailUsuari').style.display = 'block';
     document.getElementById('divClaveUsau').style.display = 'block';
     document.getElementById('divEmailEmpre').style.display = 'none';
@@ -509,7 +509,7 @@ function mostrarDatosPersI() {
     document.getElementById("correoEmpre").disabled = true;
     document.getElementById("claveEmpre").disabled = true;
     //muestra los campos
-        document.getElementById("btnRegEmpre").style.display = 'none';
+    document.getElementById("btnRegEmpre").style.display = 'none';
     document.getElementById("btnRegUs").style.display = 'block';
     document.getElementById('divRazI').style.display = 'none';
     document.getElementById('divNit').style.display = 'none';
@@ -521,7 +521,7 @@ function mostrarDatosPersI() {
     document.getElementById('divContaEmpre').style.display = 'none';
     document.getElementById('divRepetEmpre').style.display = 'none';
     document.getElementById('divRepetContra').style.display = 'block';
-    
+
 }
 
 function pregunta() {
@@ -544,7 +544,21 @@ window.onload = function () {
     };
 };
 
+//Tabss
 $('#myTabs a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
+    e.preventDefault()
+    $(this).tab('show')
 })
+$(document).ready(function () {
+    $(".nav-tabs a").click(function () {
+        $(this).tab('show');
+    });
+    $('.nav-tabs a').on('show.bs.tab', function () {
+        alert('Debe registrar solicitud');
+    });
+
+});
+function mostrarTab() {
+    $('#mercancia').tab('show');
+}
+

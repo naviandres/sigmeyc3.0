@@ -176,6 +176,7 @@ public class SessionController implements Serializable {
         this.telefono = getUsuarioSesion().getTelefono();
         this.celular = getUsuarioSesion().getCelular();
         this.email = getUsuarioSesion().getEmail();
+        this.rol = getUsuarioSesion().getRoles().get(0);
     }
 
     public String iniciarSession() {
