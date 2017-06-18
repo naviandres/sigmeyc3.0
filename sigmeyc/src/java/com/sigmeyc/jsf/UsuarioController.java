@@ -2,7 +2,7 @@ package com.sigmeyc.jsf;
 
 import com.sigmeyc.beans.RolFacade;
 import com.sigmeyc.beans.UsuarioFacade;
-import com.sigmeyc.controllers.SessionController;
+import com.sigmeyc.controllers.session.SessionController;
 import com.sigmeyc.entities.Rol;
 import com.sigmeyc.entities.Usuario;
 import com.sigmeyc.jsf.util.MessageUtil;
@@ -56,11 +56,14 @@ public class UsuarioController implements Serializable {
                 usuarioFacade.create(usuario);
                 init();
                 MessageUtil.enviarMensajeInformacion("createUsuario", "Registro satisfactorio", "El usuario se registro correctamente");
+                MessageUtil.enviarMensajeInformacion("formPer", "Registro satisfactorio", "El usuario se registro correctamente");
             } else {
                 MessageUtil.enviarMensajeError("createUsuario", "No se han dilingenciado los campos", "Complete campos");
+                MessageUtil.enviarMensajeError("formPer", "No se han dilingenciado los campos", "Complete campos");
             }
         } catch (Exception e) {
-            MessageUtil.enviarMensajeError("createUsuario", "Documento no se puede registrar", "El documento debe ser unico");
+            MessageUtil.enviarMensajeError("createUsuario", "No se puede registrar", "Ya existe un usuario con ese documento");
+            MessageUtil.enviarMensajeError("formPer", "No se puede registrar", "Ya existe un usuario con ese documento");
         }
     }
 

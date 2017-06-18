@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sigmeyc.controllers;
+package com.sigmeyc.controllers.session;
 
 import com.sigmeyc.beans.UsuarioFacade;
 import com.sigmeyc.entities.Rol;

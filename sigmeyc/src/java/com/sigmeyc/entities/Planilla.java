@@ -66,6 +66,12 @@ public class Planilla implements Serializable {
         this.cantidadGuias = cantidadGuias;
     }
 
+    public Planilla(Integer idPlanilla, int cantidadGuias,Ruta rutasidRutas) {
+        this.idPlanilla = idPlanilla;
+        this.cantidadGuias = cantidadGuias;
+        this.rutasidRutas = rutasidRutas;
+    }
+
     public Integer getIdPlanilla() {
         return idPlanilla;
     }
@@ -123,5 +129,5 @@ public class Planilla implements Serializable {
     public String toString() {
         return "com.sigmeyc.entities.Planilla[ idPlanilla=" + idPlanilla + " ]";
     }
-    
+
 }

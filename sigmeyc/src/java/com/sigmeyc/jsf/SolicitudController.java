@@ -1,7 +1,7 @@
 package com.sigmeyc.jsf;
 
 import com.sigmeyc.beans.SolicitudFacade;
-import com.sigmeyc.controllers.SessionController;
+import com.sigmeyc.controllers.session.SessionController;
 import com.sigmeyc.entities.Usuario;
 import com.sigmeyc.entities.Solicitud;
 import com.sigmeyc.jsf.util.MessageUtil;
@@ -16,6 +16,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 @Named("solicitudController")
 @SessionScoped
@@ -80,7 +82,7 @@ public class SolicitudController implements Serializable {
     public Boolean guardar() {
         try {
             Date fechaActual = new Date();
-            DateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+            DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
             String hora1 = "01:00:00";//tener presente
             String hora2 = "09:00:00";
             String horaNueva = dateFormat.format(fechaActual);
@@ -104,7 +106,7 @@ public class SolicitudController implements Serializable {
                     System.out.println("Tiene que realizar la solicitud antes de" + hora2);
                     solicitud.setPriorizacion("media");
                     persistirSolicitud();
-                    MessageUtil.enviarMensajeInformacion("solicindex", "Su solicitud sera recogida al dia siguiente", "<br/>Recogemos su mercancia el mismo dia cuando la solicitud se realiza antes de: " + hora2);
+                    MessageUtil.enviarMensajeInformacion("solicindex", "Su solicitud sera recogida al dia siguiente", "Recogemos su mercancia el mismo dia cuando la solicitud se realiza antes de: " + hora2);
                     return true;
                 }
             } else {
@@ -118,6 +120,20 @@ public class SolicitudController implements Serializable {
             parseException.printStackTrace();
         }
         return false;
+    }
+
+    public void tomarDatos() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        ExternalContext ec = fc.getExternalContext();
+        ec.getSessionMap().put("solicitud", solicitud);
+        getSolicitudContex().getIdSolicitud();
+
+    }
+
+    public Solicitud getSolicitudContex() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        ExternalContext ec = fc.getExternalContext();
+        return (Solicitud) ec.getSessionMap().get("solicitud");
     }
 
     public String fecha() {

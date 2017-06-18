@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-4">
-                                            <h:commandButton class="btn btn-success" action="#{empresaController.guardar()}" value="Guardar"/>
+                                            <h:commandButton class="btn btn-success" actionListener="#{empresaController.guardar()}" value="Guardar"/>
                                         </div>
                                         <div class="col-lg-2 ">
                                             <h:commandButton class="btn btn-instagram" action="#{empresaController.prepareList}" immediate="true" value="ver todos"/>

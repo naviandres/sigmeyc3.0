@@ -6,6 +6,7 @@ import com.sigmeyc.beans.UsuarioFacade;
 import com.sigmeyc.entities.Empresa;
 import com.sigmeyc.entities.Rol;
 import com.sigmeyc.entities.Usuario;
+import com.sigmeyc.jsf.util.MessageUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -60,25 +61,27 @@ public class EmpresaController implements Serializable {
         this.usuario = usuario;
     }
 
-    public String guardar() {
+    public void guardar() {
 
-        usuario.setRoles(new ArrayList<Rol>());
-        usuario.getRoles().add(rolFacade.find(1));
-        usuario.setEstado(1);
-        usuario.setTipoIdentificacion("empresa");
-        usuario.setPrimerNombre("empresa");
-        usuario.setPrimerApellido("empresa");
+        try {
+            usuario.setRoles(new ArrayList<Rol>());
+            usuario.getRoles().add(rolFacade.find(1));
+            usuario.setEstado(1);
+            usuario.setTipoIdentificacion("empresa");
+            usuario.setPrimerNombre("empresa");
+            usuario.setPrimerApellido("empresa");
+            empresa.setNit(usuario.getDocumento());
+            System.out.println("Usuario" + usuario);
+            empresa.setUsuario(usuario);
 
-        empresa.setNit(usuario.getDocumento());
-        System.out.println("Usuario" + usuario);
-        empresa.setUsuario(usuario);
+            this.usuarioFacade.create(usuario);
+            this.empresaFacade.create(empresa);
+            MessageUtil.enviarMensajeInformacion("formEmp", "Registro satisfactorio.", "El usuario se registro correctamente.");
+            init();
+        } catch (Exception e) {
+            MessageUtil.enviarMensajeError("formEmp", "No se puede registrar.", "Ya existe un usuario con ese nit.");
+        }
 
-        this.usuarioFacade.create(usuario);
-        this.empresaFacade.create(empresa);
-
-        init();
-
-        return "/app/crud/empresa/Create.xthml?faces-redirect=true";
     }
 
     public String prepareCreate() {

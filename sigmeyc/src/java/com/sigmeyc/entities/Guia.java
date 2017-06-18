@@ -75,6 +75,13 @@ public class Guia implements Serializable {
         this.detalleMercancia = detalleMercancia;
     }
 
+    public Guia(Integer idGuia, String nueroGuia, String detalleMercancia,Planilla planillasidPlanilla) {
+        this.idGuia = idGuia;
+        this.nueroGuia = nueroGuia;
+        this.detalleMercancia = detalleMercancia;
+        this.planillasidPlanilla = planillasidPlanilla;
+    }
+
     public Integer getIdGuia() {
         return idGuia;
     }
@@ -140,5 +147,5 @@ public class Guia implements Serializable {
     public String toString() {
         return "com.sigmeyc.entities.Guia[ idGuia=" + idGuia + " ]";
     }
-    
+
 }

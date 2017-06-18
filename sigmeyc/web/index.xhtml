@@ -57,7 +57,9 @@
                                     <h:inputSecret id="txtClv" value="#{sessionController.clave}" class="form-control"/>
                                 </div>
                                 <div class=" text-center">
-                                    <h:commandButton id="btnIngresar" action="#{sessionController.iniciarSession()}" value="Ingresar" class="btn btn-primary"/> 
+                                    <h:commandButton id="btnIngresar" action="#{sessionController.iniciarSession()}" value="Ingresar" class="btn btn-primary">
+                                        <f:ajax execute="txtCorreo txtClv mensa" render="txtCorreo txtClv mensa"/>
+                                    </h:commandButton>
                                     <br/>
                                     <h:outputLabel id="lblRecIng" for="lblRecIng" value="Recordar "/>
                                     <br/>
@@ -84,118 +86,145 @@
                             <h4 class="modal-title text-center" id="myModalLabel" >Registrarse</h4>
                         </div>
                         <div class="modal-body">
-                            <h:form id="registro" prependId="false">
-                                <div class="form-group col-xs-offset-4 col-xs-3">
-                                    <h:outputLabel id="lblChEmpreI" for="lblChEmpreI" value="Empresa?"/><br/>
-                                    <h:selectBooleanCheckbox id="seleEmpreI" label="Es empresa?" onclick="mostrarDatosEmprI()"/>  
-                                </div>
-                                <div class="form-group">
-                                    <h:outputLabel id="lblChPersI" for="lblChPersI" value="Persona?"/><br/>
-                                    <h:selectBooleanCheckbox id="selePersI" label="Es persona?" onclick="mostrarDatosPersI()"/>    
-                                </div>
-                                <div id="divNit" class="md-form form-group" style="display: none">    
-                                    <h:outputLabel value="nit" for="nit" />
-                                    <h:inputText id="nit" disabled="true" class="form-control" value="#{empresaController.usuario.documento}"/>
-                                </div>
-                                <div id="divRazI" class="md-form form-group" style="display: none" >    
-                                    <h:outputLabel value="razonSocial" for="txtRazonS" />
-                                    <h:inputText disabled="true" class="form-control" id="txtRazonS" value="#{empresaController.empresa.razonSocial}" />
-                                </div>
+                            <div>
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#persona" aria-controls="persona" role="tab" data-toggle="tab">Persona</a></li>
+                                    <li role="presentation"><a href="#empresa" aria-controls="empresa" role="tab" data-toggle="tab">Empresa</a></li>
+                                </ul>
 
-                                <div id="divNmbrs" class="form-group row">
-                                    <div class="md-form col-lg-6">    
-                                        <h:outputLabel value="primerNombre" id="lblNombI" for="txtNombI"/>
-                                        <h:inputText class="form-control" id="txtNombI" value="#{usuarioController.usuario.primerNombre}" />
-                                    </div>
-                                    <div class="form-group col-lg-6" >    
-                                        <h:outputLabel value="segundoNombre" for="segundoNombre" />
-                                        <h:inputText class="form-control" id="segundoNombre" value="#{usuarioController.usuario.segundoNombre}"/>
-                                    </div>
-                                </div>
-                                <div id="divApell" class="form-group row">
-                                    <div class="md-form col-lg-6">    
-                                        <h:outputLabel value="primerApellido" id="lblApeeI" for="txtApeeI" />                  
-                                        <h:inputText class="form-control" id="txtApeeI" value="#{usuarioController.usuario.primerApellido}"/>
-                                    </div>
-                                    <div class="form-group col-lg-6">    
-                                        <h:outputLabel value="segundoApellido" for="segundoApellido" />                       
-                                        <h:inputText class="form-control" id="segundoApellido" value="#{usuarioController.usuario.segundoApellido}" />
-                                    </div>
-                                </div>
-                                <!--numeros de contacto cliente-->
-                                <div id="divContac" class="form-group row"> 
-                                    <div class="md-form col-lg-6"> 
-                                        <h:outputLabel value="telefóno" id="lblTelefono" for="telefono" />
-                                        <h:inputText class="form-control" id="telefono" value="#{usuarioController.usuario.telefono}"/>
-                                    </div>
-                                    <div class="md-form col-lg-6"> 
-                                        <h:outputLabel value="celular" id="lblCelI" for="txtCelI" />
-                                        <h:inputText class="form-control" id="txtCelI" value="#{usuarioController.usuario.celular}"/>
-                                    </div>
-                                </div>        
-                                <!--numeros de contacto empresa-->
-                                <div id="divContaEmpre" class="md-form form-group" style="display: none"> 
-                                    <h:outputLabel value="celular" id="lblCelEmpre" for="txtCelEmpre" />
-                                    <h:inputText class="form-control" id="txtCelEmpre" value="#{empresaController.usuario.celular}"/>
-                                </div>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="persona">
+                                        <h:panelGroup id="messageFormPer" layout="block">
+                                            <h:message class="alert alert-info" for="formPer" showSummary="true"/>
+                                        </h:panelGroup>
+                                        <h:form id="formPer" prependId="false">   
+                                            <div id="divNmbrs" class="form-group row">
+                                                <div class="md-form col-lg-6">    
+                                                    <h:outputLabel value="primerNombre" id="lblNombI" for="txtNombI"/>
+                                                    <h:inputText class="form-control" id="txtNombI" value="#{usuarioController.usuario.primerNombre}" />
+                                                </div>
+                                                <div class="form-group col-lg-6" >    
+                                                    <h:outputLabel value="segundoNombre" for="segundoNombre" />
+                                                    <h:inputText class="form-control" id="segundoNombre" value="#{usuarioController.usuario.segundoNombre}"/>
+                                                </div>
+                                            </div>
+                                            <div id="divApell" class="form-group row">
+                                                <div class="md-form col-lg-6">    
+                                                    <h:outputLabel value="primerApellido" id="lblApeeI" for="txtApeeI" />                  
+                                                    <h:inputText class="form-control" id="txtApeeI" value="#{usuarioController.usuario.primerApellido}"/>
+                                                </div>
+                                                <div class="form-group col-lg-6">    
+                                                    <h:outputLabel value="segundoApellido" for="segundoApellido" />                       
+                                                    <h:inputText class="form-control" id="segundoApellido" value="#{usuarioController.usuario.segundoApellido}" />
+                                                </div>
+                                            </div>
+                                            <!--numeros de contacto cliente-->
+                                            <div id="divContac" class="form-group row"> 
+                                                <div class="md-form col-lg-6"> 
+                                                    <h:outputLabel value="telefóno" id="lblTelefono" for="telefono" />
+                                                    <h:inputText class="form-control" id="telefono" value="#{usuarioController.usuario.telefono}"/>
+                                                </div>
+                                                <div class="md-form col-lg-6"> 
+                                                    <h:outputLabel value="celular" id="lblCelI" for="txtCelI" />
+                                                    <h:inputText class="form-control" id="txtCelI" value="#{usuarioController.usuario.celular}"/>
+                                                </div>
+                                            </div>   
+                                            <div id="divTipoIde" class="form-group">    
+                                                <h:outputLabel id="tipoIdentificacion" for="tipoIdentificacion" value="tipoIdentificacion"/>
+                                                <h:selectOneMenu id="selTipoIden" class="form-control" value="#{usuarioController.usuario.tipoIdentificacion}">
+                                                    <f:selectItem id="selTipoDocum" itemLabel="Seleccione tipo de documento" itemDisabled="disabled"/>
+                                                    <f:selectItem id="cc" itemLabel="Cédula de ciudadanía" itemValue="CC"/>
+                                                    <f:selectItem id="ti" itemLabel="Targeta de identidad" itemValue="TI"/>
+                                                    <f:selectItem id="ce" itemLabel="Céluda extrangería" itemValue="CE"/>
+                                                    <f:selectItem id="pa" itemLabel="Pasaporte" itemValue="PAS"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                            <div id="divDocume" class="md-form form-group">    
+                                                <h:outputLabel value="documento" id="lblDocume" for="txtDocume" />
+                                                <h:inputText id="txtDocume" class="form-control" value="#{usuarioController.usuario.documento}"/>
+                                            </div>
+                                            <!--email y clave cliente comun-->
+                                            <div id="divEmailUsuari" class="form-group">     
+                                                <h:outputLabel value="email" id="lblCorre" for="correo" />
+                                                <h:inputText class="form-control" id="correo" value="#{usuarioController.usuario.email}"/>
+                                            </div>     
+                                            <div id="divClaveUsau" class="form-group">    
+                                                <h:outputLabel value="clave" id="lblClave" for="clave" />
+                                                <h:inputSecret class="form-control" id="clave" value="#{usuarioController.usuario.clave}"/>
+                                                <div class="progress password-progress">
+                                                    <div id="strengthBar" class="progress-bar" role="progressbar" style="width: 0;"></div>
+                                                </div>
+                                            </div>
+                                            <div id="divRepetContra" class=" form-group">
+                                                <i class="fa fa-lock prefix"></i>
+                                                <h:outputLabel id="lblReco" for="repetirContraseña" value="Repita clave"/>
+                                                <h:inputSecret id="repetirContraseña" class="form-control" />
+                                            </div>
+                                            <div class="text-center">                               
+                                                <h:commandButton id="btnRegs" class="btn btn-success" action="#{usuarioController.guardar}" value="Registrarse">
+                                                    <f:ajax execute="txtNombI segundoNombre txtApeeI segundoApellido telefono txtCelI selTipoIden txtDocume correo clave messageFormPer" 
+                                                            render="txtNombI segundoNombre txtApeeI segundoApellido telefono txtCelI selTipoIden txtDocume correo clave messageFormPer"/>
+                                                </h:commandButton>
+                                                <br/>
+                                                <h:outputLabel id="lblRe" for="lblRe" value="Recordar "/>
+                                                <br/>
+                                                <h:selectBooleanCheckbox id="selBoolRecd" label="Recordar" />    
+                                            </div> 
+                                        </h:form>
 
-                                <div id="divTipoIde" class="form-group">    
-                                    <h:outputLabel id="tipoIdentificacion" for="tipoIdentificacion" value="tipoIdentificacion"/>
-                                    <h:selectOneMenu id="selTipoIden" class="form-control" value="#{usuarioController.usuario.tipoIdentificacion}">
-                                        <f:selectItem id="selTipoDocum" itemLabel="Seleccione tipo de documento" itemDisabled="disabled"/>
-                                        <f:selectItem id="cc" itemLabel="Cédula de ciudadanía" itemValue="CC"/>
-                                        <f:selectItem id="ti" itemLabel="Targeta de identidad" itemValue="TI"/>
-                                        <f:selectItem id="ce" itemLabel="Céluda extrangería" itemValue="CE"/>
-                                        <f:selectItem id="pa" itemLabel="Pasaporte" itemValue="PAS"/>
-                                    </h:selectOneMenu>
-                                </div>
-                                <div id="divDocume" class="md-form form-group">    
-                                    <h:outputLabel value="documento" id="lblDocume" for="txtDocume" />
-                                    <h:inputText id="txtDocume" class="form-control" value="#{usuarioController.usuario.documento}"/>
-                                </div>
-                                <!--email y clave cliente comun-->
-                                <div id="divEmailUsuari" class="form-group">     
-                                    <h:outputLabel value="email" id="lblCorre" for="correo" />
-                                    <h:inputText class="form-control" id="correo" value="#{usuarioController.usuario.email}"/>
-                                </div>     
-                                <div id="divClaveUsau" class="form-group">    
-                                    <h:outputLabel value="clave" id="lblClave" for="clave" />
-                                    <h:inputSecret class="form-control" id="clave" value="#{usuarioController.usuario.clave}"/>
-                                    <div class="progress password-progress">
-                                        <div id="strengthBar" class="progress-bar" role="progressbar" style="width: 0;"></div>
                                     </div>
+                                    <div role="tabpanel" class="tab-pane" id="empresa">
+                                        <h:panelGroup id="messageFormEmp" layout="block">
+                                            <h:message class="alert alert-info" for="formEmp" showSummary="true"/>
+                                        </h:panelGroup>
+                                        <h:form id="formEmp" prependId="false">
+                                            <div id="divNit" class="md-form form-group">    
+                                                <h:outputLabel value="nit" for="nit" />
+                                                <h:inputText id="nit" class="form-control" value="#{empresaController.usuario.documento}"/>
+                                            </div>
+                                            <div id="divRazI" class="md-form form-group">    
+                                                <h:outputLabel value="razonSocial" for="txtRazonS" />
+                                                <h:inputText class="form-control" id="txtRazonS" value="#{empresaController.empresa.razonSocial}" />
+                                            </div>
+                                            <!--numeros de contacto empresa-->
+                                            <div id="divContaEmpre" class="md-form form-group"> 
+                                                <h:outputLabel value="celular" id="lblCelEmpre" for="txtCelEmpre" />
+                                                <h:inputText class="form-control" id="txtCelEmpre" value="#{empresaController.usuario.celular}"/>
+                                            </div>
+                                            <!--email y clave para empresa-->
+                                            <div id="divEmailEmpre" class="form-group">     
+                                                <h:outputLabel value="email" id="lblCorreEmpre" for="correoEmpre" />
+                                                <h:inputText class="form-control" id="correoEmpre" value="#{empresaController.usuario.email}"/>
+                                            </div>
+                                            <div id="divClaveEmpre" class="form-group">    
+                                                <h:outputLabel value="clave em" id="lblClaveEmpre" for="claveEmpre" />
+                                                <h:inputSecret class="form-control" id="claveEmpre" value="#{empresaController.usuario.clave}"/>
+                                                <div class="progress password-progress">
+                                                    <div id="strengthBar" class="progress-bar" role="progressbar" style="width: 0;"></div>
+                                                </div>
+                                            </div>
+                                            <div id="divRepetEmpre" class=" form-group">
+                                                <i class="fa fa-lock prefix"></i>
+                                                <h:outputLabel id="lblRep" for="txtRep" value="Repita clave em"/>
+                                                <h:inputSecret id="txtRep" class="form-control" />
+                                            </div>
+                                            <div class="text-center">                               
+                                                <h:commandButton id="btnRegEmpr" class="btn btn-primary " actionListener="#{empresaController.guardar()}" value="Registrar em">
+                                                    <f:ajax execute="nit txtRazonS txtCelEmpre correoEmpre claveEmpre messageFormEmp"
+                                                            render="nit txtRazonS txtCelEmpre correoEmpre claveEmpre messageFormEmp"/>
+
+                                                </h:commandButton>
+                                                <br/>
+                                                <h:outputLabel id="lblRc" for="lblRc" value="Recordar "/>
+                                                <br/>
+                                                <h:selectBooleanCheckbox id="selBoolRecor" label="Recordar" />    
+                                            </div>
+                                        </h:form>
+                                    </div>                                
                                 </div>
-                                <!--email y clave para empresa-->
-                                <div id="divEmailEmpre" class="form-group" style="display: none">     
-                                    <h:outputLabel value="email" id="lblCorreEmpre" for="correoEmpre" />
-                                    <h:inputText class="form-control" disabled="true" id="correoEmpre" value="#{empresaController.usuario.email}"/>
-                                </div>
-                                <div id="divClaveEmpre" class="form-group" style="display: none">    
-                                    <h:outputLabel value="clave em" id="lblClaveEmpre" for="claveEmpre" />
-                                    <h:inputSecret class="form-control" disabled="true" id="claveEmpre" value="#{empresaController.usuario.clave}"/>
-                                    <div class="progress password-progress">
-                                        <div id="strengthBar" class="progress-bar" role="progressbar" style="width: 0;"></div>
-                                    </div>
-                                </div>
-                                <div id="divRepetContra" class=" form-group">
-                                    <i class="fa fa-lock prefix"></i>
-                                    <h:outputLabel id="lblRecon" for="repetirContraseña" value="Repita clave"/>
-                                    <h:inputSecret id="repetirContraseña" class="form-control" />
-                                </div>
-                                <div id="divRepetEmpre" class=" form-group" style="display: none">
-                                    <i class="fa fa-lock prefix"></i>
-                                    <h:outputLabel id="lblRep" for="txtRep" value="Repita clave em"/>
-                                    <h:inputSecret id="txtRep" class="form-control" />
-                                </div>
-                                <div class="text-center">                               
-                                    <h:commandButton id="btnRegUs" class="btn btn-success" action="#{usuarioController.guardar}" value="Registrarse"/>
-                                    <h:commandButton id="btnRegEmpre" class="btn btn-primary " action="#{empresaController.guardar()}" value="Registrar em" style="display: none"/>
-                                    <br/>
-                                    <h:outputLabel id="lblRec" for="lblRec" value="Recordar "/>
-                                    <br/>
-                                    <h:selectBooleanCheckbox id="selBoolRecord" label="Recordar" />    
-                                </div>
-                            </h:form>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <div class="options">
@@ -262,7 +291,6 @@
                                 <h:form id="formBS" rendered="#{sessionController.activarBoton()}" prependId="false">
                                     <h:commandButton id="btnSolicitar" class="btn btn-primary" value="Solicitar"></h:commandButton>                                
                                 </h:form>
-
                                 <!--<h:commandButton id="btnSolicitar" value="Solicitar" class="btn btn-primary" onclick="mostrarSolicitar()" disabled="true"/>-->
                                 <!--<p:tooltip id="totSol" for="btnSolicitar" value="This tooltip tracks mouse position" trackMouse="true" />-->
                             </div>
@@ -277,7 +305,6 @@
                                 <h:form id="formBCo" rendered="#{sessionController.activarBoton()}" prependId="false">
                                     <h:commandButton id="btnCotizar" class="btn btn-primary" value="Cotizar"></h:commandButton>                                
                                 </h:form>
-
                                 <!--<h:commandButton id="btnCotiza" value="ejemplo" class="btn btn-primary" onclick="mostrarCotizar()" disabled="true"/>-->
                                 <!--<p:tooltip id="totCoti" for="btnCotiza" value="This tooltip tracks mouse position" trackMouse="true" />-->
                             </div>
@@ -371,178 +398,160 @@
 
             <section class="no-padding" id="solicitar" style="display:none">
                 <div class="container-fluid" >
-                    <h:form  id="formSol" prependId="false">              
-                        <div>
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#solicitud" aria-controls="home" role="tab" data-toggle="tab">Solicitud</a></li>
-                                <li role="presentation"><a href="#mercancia" aria-controls="profile" role="tab" data-toggle="tab">Mercancia</a></li>
-                            </ul>
+                    <div>
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#solicitud" aria-controls="home" role="tab" data-toggle="tab">Solicitud</a></li>
+                            <li role="presentation"><a href="#mercancia" aria-controls="profile" role="tab" data-toggle="tab">Mercancia</a></li>
+                        </ul>
 
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="solicitud">
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="solicitud">
 
-                                    <h:form  id="solicindex" prependId="false"> 
-                                        <h:panelGroup id="messagePanel" layout="block">
-                                            <h:message class="alert alert-info" for="solicindex" showSummary="true"/>
-                                        </h:panelGroup>
-                                        <h2 class="page-header text-center">Solicitud</h2>
-                                        <div class="form-group">
-                                            <h:outputLabel id="lblSelTipoIden" class="sr-only" for="tipoServicio" value="tipoServicio"/>
-                                            <h:selectOneMenu id="tipoServicio" class="form-control" value="#{solicitudController.solicitud.tipoServicio}">
-                                                <f:selectItem itemLabel="Seleccione tipo de servicio" itemDisabled="disabled"/>
-                                                <f:selectItem itemLabel="Mensajeria expresa" itemValue="Mensajeria expresa"/>
-                                                <f:selectItem itemLabel="Mercancia via terrestre" itemValue="Mercancia terrestre"/>
-                                                <f:selectItem itemLabel="Mensajeria masiva" itemValue="Mensajeria masiva"/>
-                                                <f:selectItem itemLabel="General" itemValue="General"/>
-                                            </h:selectOneMenu>
+                                <h:form  id="solicindex" prependId="false"> 
+                                    <h:panelGroup id="messagePanel" layout="block">
+                                        <h:message class="alert alert-info" for="solicindex" showSummary="true"/>
+                                    </h:panelGroup>
+                                    <h2 class="page-header text-center">Solicitud</h2>
+                                    <div class="form-group">
+                                        <h:outputLabel id="lblSelTipoIden" class="sr-only" for="tipoServicio" value="tipoServicio"/>
+                                        <h:selectOneMenu id="tipoServicio" class="form-control" value="#{solicitudController.solicitud.tipoServicio}">
+                                            <f:selectItem itemLabel="Seleccione tipo de servicio" itemDisabled="disabled"/>
+                                            <f:selectItem itemLabel="Mensajeria expresa" itemValue="Mensajeria expresa"/>
+                                            <f:selectItem itemLabel="Mercancia via terrestre" itemValue="Mercancia terrestre"/>
+                                            <f:selectItem itemLabel="Mensajeria masiva" itemValue="Mensajeria masiva"/>
+                                            <f:selectItem itemLabel="General" itemValue="General"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            <h:outputLabel class="sr-only" value="direccionOrigen" for="direccionOrigen" />
+                                            <h:inputText class="form-control" id="direccionOrigen" p:placeholder="Dirección Origen" value="#{solicitudController.solicitud.direccionOrigen}" required="true"/>
                                         </div>
-                                        <div class="row">
-                                            <div class="form-group col-lg-6">
-                                                <h:outputLabel class="sr-only" value="direccionOrigen" for="direccionOrigen" />
-                                                <h:inputText class="form-control" id="direccionOrigen" p:placeholder="Dirección Origen" value="#{solicitudController.solicitud.direccionOrigen}" required="true"/>
-                                            </div>
-                                            <div class="form-group col-lg-6">
-                                                <h:outputLabel class="sr-only" value="direccionDestino" for="direccionDestino" />
-                                                <h:inputText class="form-control" id="direccionDestino" p:placeholder="Dirección Destino" value="#{solicitudController.solicitud.direccionDestino}" required="true"/>
-                                            </div>
+                                        <div class="form-group col-lg-6">
+                                            <h:outputLabel class="sr-only" value="direccionDestino" for="direccionDestino" />
+                                            <h:inputText class="form-control" id="direccionDestino" p:placeholder="Dirección Destino" value="#{solicitudController.solicitud.direccionDestino}" required="true"/>
                                         </div>
-                                        <div class="row">
-                                            <div class="form-group col-lg-6">
-                                                <h:outputLabel class="sr-only" value="nombreDestinatario" for="nombreDestinatario" />
-                                                <h:inputText class="form-control" id="nombreDestinatario" p:placeholder="Nombre Destinatario" value="#{solicitudController.solicitud.nombreDestinatario}" required="true" requiredMessage="Ingrese nombre destino" />
-                                            </div>
-                                            <div class="form-group col-lg-6">
-                                                <h:outputLabel class="sr-only" value="apellidoDestinatario" for="apellidoDestinatario" />
-                                                <h:inputText class="form-control" id="apellidoDestinatario" p:placeholder="Apellido Destinatario" value="#{solicitudController.solicitud.apellidoDestinatario}" required="true" requiredMessage="Ingrese apellido"/>
-                                            </div>
-                                        </div>                    
-                                        <div class="form-group">
-                                            <h:outputLabel class="sr-only" value="telefonoDestinatario" for="telefonoDestinatario" />
-                                            <h:inputText class="form-control" id="telefonoDestinatario" p:placeholder="Teléfono Destinatario" value="#{solicitudController.solicitud.telefonoDestinatario}" required="true" requiredMessage="Ingrese telefono"/>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            <h:outputLabel class="sr-only" value="nombreDestinatario" for="nombreDestinatario" />
+                                            <h:inputText class="form-control" id="nombreDestinatario" p:placeholder="Nombre Destinatario" value="#{solicitudController.solicitud.nombreDestinatario}" required="true" requiredMessage="Ingrese nombre destino" />
                                         </div>
-                                        <div class="form-group ">
-                                            <h:outputLabel class="sr-only" value="Fecha recoleccion" for="fechaRecoleccion" />
-                                            <pr:calendar id="fechaRecoleccion" mindate="#{solicitudController.fecha()}"  value="#{solicitudController.fechaR}" showOn="button" />
+                                        <div class="form-group col-lg-6">
+                                            <h:outputLabel class="sr-only" value="apellidoDestinatario" for="apellidoDestinatario" />
+                                            <h:inputText class="form-control" id="apellidoDestinatario" p:placeholder="Apellido Destinatario" value="#{solicitudController.solicitud.apellidoDestinatario}" required="true" requiredMessage="Ingrese apellido"/>
                                         </div>
+                                    </div>                    
+                                    <div class="form-group">
+                                        <h:outputLabel class="sr-only" value="telefonoDestinatario" for="telefonoDestinatario" />
+                                        <h:inputText class="form-control" id="telefonoDestinatario" p:placeholder="Teléfono Destinatario" value="#{solicitudController.solicitud.telefonoDestinatario}" required="true" requiredMessage="Ingrese telefono"/>
+                                    </div>
+                                    <div class="form-group ">
+                                        <h:outputLabel class="sr-only" value="Fecha recoleccion" for="fechaRecoleccion" />
+                                        <pr:calendar id="fechaRecoleccion" mindate="#{solicitudController.fecha()}"  value="#{solicitudController.fechaR}" showOn="button" />
+                                    </div>
 
-                                        <div class="form-group">
-                                            <div class="col-lg-2 col-lg-offset-4">
-                                                <h:commandButton id="btnSolc" class="btn btn-success" action="#{solicitudController.guardar()}" value="Guardar">
-                                                    <f:ajax execute="tipoServicio direccionOrigen direccionDestino nombreDestinatario apellidoDestinatario telefonoDestinatario fechaRecoleccion" render="tipoServicio direccionOrigen direccionDestino nombreDestinatario apellidoDestinatario telefonoDestinatario fechaRecoleccion"/>
-                                                    <a href="#mercancia" aria-controls="profile" role="tab" data-toggle="tab"/>
-                                                </h:commandButton>
-                                            </div>                                           
-                                        </div>
-                                    </h:form>
-                                </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-2 col-lg-offset-4">
+                                            <h:commandButton id="btnSolc" class="btn btn-success" action="#{solicitudController.guardar()}" value="Guardar">
+                                                <f:ajax execute="tipoServicio direccionOrigen direccionDestino nombreDestinatario apellidoDestinatario telefonoDestinatario fechaRecoleccion messagePanel" render="tipoServicio direccionOrigen direccionDestino nombreDestinatario apellidoDestinatario telefonoDestinatario fechaRecoleccion messagePanel"/>
+                                                <a href="#mercancia" aria-controls="profile" role="tab" data-toggle="tab"/>
+                                            </h:commandButton>
+                                        </div>                                           
+                                    </div>
+                                </h:form>
+                            </div>
 
-                                <div role="tabpanel" class="tab-pane" id="mercancia">
-                                    <h:form  id="mercans" prependId="false">
-                                        <h2 class="page-header text-center">Mercancía</h2>
+                            <div role="tabpanel" class="tab-pane" id="mercancia">
+                                <h:form  id="mercans" prependId="false">
+                                    <h2 class="page-header text-center">Mercancía</h2>
 
-                                        <div class="form-group col-lg-6">
-                                            <h:outputLabel  class="sr-only" value="tipoMercancia" for="tipoMercancia" />
-                                            <h:inputText class="form-control" p:placeholder="Tipo Mercancia" id="tipoMercancia" value="#{mercanciaController.mercancia.tipoMercancia}"/>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel  class="sr-only" value="tipoMercancia" for="tipoMercancia" />
+                                        <h:inputText class="form-control" p:placeholder="Tipo Mercancia" id="tipoMercancia" value="#{mercanciaController.mercancia.tipoMercancia}"/>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="sr-only"  value="Descripción mercancía" for="descripcion" />
+                                        <h:inputTextarea class="form-control" id="descripcion" value="#{mercanciaController.mercancia.descripcionMercancia}"  p:placeholder="Descripcion mercancía" />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="sr-only" value="peso" for="peso" />
+                                        <h:inputText class="form-control" p:placeholder="Peso" id="peso" value="#{mercanciaController.mercancia.peso}"  />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel  class="sr-only" value="longitud" for="longitud" />
+                                        <h:inputText class="form-control" p:placeholder="Longitud" id="longitud" value="#{mercanciaController.mercancia.longitud}"  />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="sr-only" value="ancho" for="ancho" />
+                                        <h:inputText class="form-control" p:placeholder="Ancho" id="ancho" value="#{mercanciaController.mercancia.ancho}"  />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="sr-only" value="altura" for="altura" />
+                                        <h:inputText class="form-control" p:placeholder="Altura" id="altura" value="#{mercanciaController.mercancia.altura}"  />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="sr-only" value="volumen" for="volumen" />
+                                        <h:inputText class="form-control" p:placeholder="Volumen" id="volumen" value="#{mercanciaController.mercancia.volumen}"  />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel  class="sr-only" value="cantidad" for="cantidad" />
+                                        <h:inputText class="form-control" p:placeholder="Cantidad" id="cantidad" value="#{mercanciaController.mercancia.cantidad}"  />
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="sr-only" value="embalaje" for="embalaje" />
+                                        <h:inputText class="form-control" p:placeholder="Embalaje" id="embalaje" value="#{mercanciaController.mercancia.embalaje}" required="true"/>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="sr-only" value="Estado" for="estado" />
+                                        <h:selectOneMenu id="estado" class="form-control" value="#{mercanciaController.mercancia.estadoMercancia}" required="true">
+                                            <f:selectItem itemLabel="Seleccione estado" itemDisabled="disabled"/>
+                                            <f:selectItem itemLabel="En bodega" itemValue="En bodega"/>
+                                            <f:selectItem itemLabel="Recepcion" itemValue="Recepcion"/>
+                                            <f:selectItem itemLabel="Entregada" itemValue="Entregada"/>
+                                        </h:selectOneMenu>  
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="sr-only" value="Localidades" for="localidades" />
+                                        <h:selectOneMenu  class="form-control" id="localidades" p:placeholder="Localidades" value="#{mercanciaController.mercancia.localidadesidLocalidad}" converter="localidadConverter" required="true" >
+                                            <f:selectItem itemLabel="Seleccione Localidad" itemDisabled="disabled"/>
+                                            <f:selectItems value="#{localidadController.localidades}" var="l" itemLabel="#{l.nombreLocalidad}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="sr-only" value="codigoSolicitud" p:placeholder="Embalaje" for="solicitudescodigoSolicitud" />
+                                        <h:selectOneMenu class="form-control" id="solicitudescodigoSolicitud" value="#{mercanciaController.mercancia.solicitudesidSolicitud}" converter="solicitudConverter"  required="true">
+                                            <f:selectItem itemLabel="Solicitud" itemDisabled="disabled"/>
+                                            <f:selectItems value="#{solicitudController.solicitudes}" var="s" itemLabel="#{s.idSolicitud}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="sr-only" value="placaVehiculo" for="vehiculosplacaVehiculo" />
+                                        <h:selectOneMenu class="form-control" p:placeholder="Placa Vehiculo" id="vehiculosplacaVehiculo" value="#{mercanciaController.mercancia.vehiculosidVehiculo}" converter="vehiculoConverter" required="true">
+                                            <f:selectItem itemLabel="Placa vehiculo" itemDisabled="disabled"/>
+                                            <f:selectItems value="#{vehiculoController.vehiculos}" var="v" itemLabel="#{v.placaVehiculo}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="sr-only" value="Precios" for="Precios" />
+                                        <h:selectOneMenu id="Precios" p:placeholder="Precios" class="form-control" value="#{mercanciaController.mercancia.preciosIdprecios}" converter="precioConverter" required="true">
+                                            <f:selectItem itemLabel="Precio" itemDisabled="disabled"/>
+                                            <f:selectItems value="#{precioController.precios}" var="p" itemLabel="#{p.valor}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2 col-lg-offset-4">
+                                            <h:commandButton class="btn btn-success" action="#{mercanciaController.guardar()}" value="Guardar"/>
                                         </div>
-                                        <div class="form-group">
-                                            <h:outputLabel class="col-xs-3 control-label"  value="Descripción mercancía" for="descripcion" />
-                                            <div class="col-xs-6">
-                                                <h:inputTextarea class="form-control" id="descripcion" value="#{mercanciaController.mercancia.descripcionMercancia}"  p:placeholder="Descripcion mercancía" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <h:outputLabel class="sr-only" value="peso" for="peso" />
-                                            <h:inputText class="form-control" p:placeholder="Peso" id="peso" value="#{mercanciaController.mercancia.peso}"  />
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <h:outputLabel  class="sr-only" value="longitud" for="longitud" />
-                                            <h:inputText class="form-control" p:placeholder="Longitud" id="longitud" value="#{mercanciaController.mercancia.longitud}"  />
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <h:outputLabel class="sr-only" value="ancho" for="ancho" />
-                                            <h:inputText class="form-control" p:placeholder="Ancho" id="ancho" value="#{mercanciaController.mercancia.ancho}"  />
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <h:outputLabel class="sr-only" value="altura" for="altura" />
-                                            <h:inputText class="form-control" p:placeholder="Altura" id="altura" value="#{mercanciaController.mercancia.altura}"  />
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <h:outputLabel class="sr-only" value="volumen" for="volumen" />
-                                            <h:inputText class="form-control" p:placeholder="Volumen" id="volumen" value="#{mercanciaController.mercancia.volumen}"  />
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <h:outputLabel  class="sr-only" value="cantidad" for="cantidad" />
-                                            <h:inputText class="form-control" p:placeholder="Cantidad" id="cantidad" value="#{mercanciaController.mercancia.cantidad}"  />
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <h:outputLabel class="sr-only" value="embalaje" for="embalaje" />
-                                            <h:inputText class="form-control" p:placeholder="Embalaje" id="embalaje" value="#{mercanciaController.mercancia.embalaje}" required="true"/>
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <h:outputLabel class="sr-only" value="Estado" for="estado" />
-                                            <h:selectOneMenu id="estado" class="form-control" value="#{mercanciaController.mercancia.estadoMercancia}" required="true">
-                                                <f:selectItem itemLabel="Seleccione estado" itemDisabled="disabled"/>
-                                                <f:selectItem itemLabel="En bodega" itemValue="En bodega"/>
-                                                <f:selectItem itemLabel="Recepcion" itemValue="Recepcion"/>
-                                                <f:selectItem itemLabel="Entregada" itemValue="Entregada"/>
-                                            </h:selectOneMenu>  
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <h:outputLabel class="sr-only" value="Localidades" for="localidades" />
-                                            <h:selectOneMenu  class="form-control" id="localidades" p:placeholder="Localidades" value="#{mercanciaController.mercancia.localidadesidLocalidad}" converter="localidadConverter" required="true" >
-                                                <f:selectItems value="#{localidadController.localidades}" var="l" itemLabel="#{l.nombreLocalidad}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <h:outputLabel class="sr-only" value="Guias" for="guiacodigoBarras" />
-                                            <h:selectOneMenu class="form-control" p:placeholder="Guias" id="guiacodigoBarras" value="#{mercanciaController.mercancia.guiaidGuia}" converter="guiaConverter" required="true" >
-                                                <f:selectItems value="#{guiaController.guias}" var="g" itemLabel="#{g.nueroGuia}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <h:outputLabel class="sr-only" value="codigoSolicitud" p:placeholder="Embalaje" for="solicitudescodigoSolicitud" />
-                                            <h:selectOneMenu class="form-control" id="solicitudescodigoSolicitud" value="#{mercanciaController.mercancia.solicitudesidSolicitud}" converter="solicitudConverter"  required="true">
-                                                <f:selectItems value="#{solicitudController.solicitudes}" var="s" itemLabel="#{s.idSolicitud}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <h:outputLabel class="sr-only" value="placaVehiculo" for="vehiculosplacaVehiculo" />
-                                            <h:selectOneMenu class="form-control" p:placeholder="Placa Vehiculo" id="vehiculosplacaVehiculo" value="#{mercanciaController.mercancia.vehiculosidVehiculo}" converter="vehiculoConverter" required="true">
-                                                <f:selectItems value="#{vehiculoController.vehiculos}" var="v" itemLabel="#{v.placaVehiculo}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <h:outputLabel class="sr-only" value="Precios" for="Precios" />
-                                            <h:selectOneMenu id="Precios" p:placeholder="Precios" class="form-control" value="#{mercanciaController.mercancia.preciosIdprecios}" converter="precioConverter" required="true">
-                                                <f:selectItems value="#{precioController.precios}" var="p" itemLabel="#{p.valor}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-2 col-lg-offset-4">
-                                                <h:commandButton class="btn btn-success" action="#{mercanciaController.guardar()}" value="Guardar"/>
-                                            </div>
-                                        </div> 
-                                    </h:form>
-                                </div>
+                                    </div> 
+                                </h:form>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-danger" id="btnCerrarSolicitd" onclick="ocultar()">Cancelar</button>
-                    </h:form>
-                    <!--                                    <f:selectItem id="conEm" itemLabel="Carga Con Embalaje" itemValue="1"/>
-                                                        <f:selectItem id="sinEm" itemLabel="Carga Sin Embalaje" itemValue="2"/>
-                                                        <f:selectItem id="Unitarizada" itemLabel="Carga Unitarizada" itemValue="3"/>
-                                                        <f:selectItem id="Paletizada" itemLabel="Carga Paletizada" itemValue="4"/>
-                                                        <f:selectItem id="Masiva" itemLabel="Carga Masiva" itemValue="5"/>
-                                                        <f:selectItem id="Solida" itemLabel="Carga Solida" itemValue="6"/>
-                                                        <f:selectItem id="Liquida" itemLabel="Carga Liquida" itemValue="7"/>
-                                                        <f:selectItem id="Gaseosa" itemLabel="Carga Gaseosa" itemValue="8"/>
-                                                        <f:selectItem id="Extradimensionada" itemLabel="Carga Extradimensionada" itemValue="10"/>
-                                                        <f:selectItem id="Refrigerada" itemLabel="Carga Refrigerada" itemValue="11"/>
-                                                        <f:selectItem id="Peligrosa" itemLabel="Carga Peligrosa" itemValue="12"/>
-                                                        <f:selectItem id="Delicada" itemLabel="Carga Delicada" itemValue="13"/>
-                                                        <f:selectItem id="Correo" itemLabel="Correo" itemValue="14"/>-->
+                    </div>
+                    <button type="button" class="btn btn-danger" id="btnCerrarSolicitd" onclick="ocultar()">Cancelar</button> 
                 </div>
             </section>
             <!--COTIZAR ENVIO-->

@@ -1,7 +1,12 @@
 package com.sigmeyc.jsf;
 
+import com.sigmeyc.beans.GuiaFacade;
 import com.sigmeyc.beans.MercanciaFacade;
+import com.sigmeyc.beans.PlanillaFacade;
+import com.sigmeyc.beans.RutaFacade;
+import com.sigmeyc.entities.Guia;
 import com.sigmeyc.entities.Mercancia;
+import com.sigmeyc.entities.Planilla;
 import com.sigmeyc.entities.Ruta;
 
 import java.io.Serializable;
@@ -11,6 +16,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -25,9 +31,16 @@ public class mercanciaController implements Serializable {
      */
     @EJB
     private MercanciaFacade MercanciaFacade;
+    @EJB
+    private PlanillaFacade planillaFacade;
+    @EJB
+    private GuiaFacade guiaFacade;
+
     private Mercancia mercancia;
-    
+
     private Ruta ruta;
+
+    private SolicitudController sc;
 
     public mercanciaController() {
     }
@@ -53,13 +66,25 @@ public class mercanciaController implements Serializable {
     public void setRuta(Ruta ruta) {
         this.ruta = ruta;
     }
-    
-    public String guardar() {
+
+    public void guardar() {
         mercancia.setIdMercancia(null);
-        
+//        System.out.println("iddd"+ sc.getSolicitudContex().getIdSolicitud());
+
+        String loca = mercancia.getLocalidadesidLocalidad().getNombreLocalidad();
+        Planilla planillaid = null;
+        System.out.println("locas"+loca);
+        if (loca.equals("chapinero")) {
+             planillaid = planillaFacade.find(1);
+        }else if (loca.equals("bosa")) {
+            planillaid = planillaFacade.find(2);
+        }
+
+        Guia guiaidGuia = new Guia(null, "778", mercancia.getTipoMercancia() + " " + mercancia.getDescripcionMercancia(), planillaid);//cambiar id
+        mercancia.setGuiaidGuia(guiaidGuia);
+        this.guiaFacade.create(guiaidGuia);
         this.MercanciaFacade.create(mercancia);
         init();
-        return "/app/crud/mercancia/Create.xthml?faces-redirect=true";
     }
 
     public String prepareCreate() {
