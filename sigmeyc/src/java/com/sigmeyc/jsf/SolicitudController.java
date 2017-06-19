@@ -30,6 +30,8 @@ public class SolicitudController implements Serializable {
 
     private SessionController sc;
 
+    private SolicitudController soliC;
+
     public SolicitudController() {
     }
     private Date fechaR;
@@ -59,13 +61,14 @@ public class SolicitudController implements Serializable {
     public String registroSolicitudRecepcionista() {
         Boolean f = guardar();
         if (f) {
-            return "/app/crud/mercancia/Create.xhtml";
+            return "/app/crud/mercancia/Create.xhtml?faces-redirect=true";
         } else {
-            return "/app/recepcion/registarsoliciud.xhtml";
+            return "/app/recepcion/registarsoliciud.xhtml?faces-redirect=true";
         }
     }
 
     public void persistirSolicitud() {
+        solicitud.setIdSolicitud(null);
         Usuario us = sc.getUsuarioSesion();
         solicitud.setUsuariosDocumento(us);
         String nRol = sc.getUsuarioSesion().getRoles().get(0).getNombreRol();
@@ -75,7 +78,7 @@ public class SolicitudController implements Serializable {
             solicitud.setEstadoSolicitud("En recepcion");
         }
         solicitud.setFechaRecoleccion(fechaR);
-        this.solicitudFacade.create(solicitud);
+//        this.solicitudFacade.create(solicitud);
         init();
     }
 
@@ -100,18 +103,23 @@ public class SolicitudController implements Serializable {
                 if ((date1.compareTo(dateNueva) <= 0) && (date2.compareTo(dateNueva) >= 0)) {
                     System.out.println("Registro " + horaNueva);
                     solicitud.setPriorizacion("alta");
+                    putSolicitud();
                     persistirSolicitud();
+                    MessageUtil.enviarMensajeInformacion("solicindex", "Ingrese los datos de mercancia para completar la solicitud", "Dírijase a la pestaña mercancia");
+
                     return true;
                 } else {
                     System.out.println("Tiene que realizar la solicitud antes de" + hora2);
                     solicitud.setPriorizacion("media");
+                    putSolicitud();
                     persistirSolicitud();
-                    MessageUtil.enviarMensajeInformacion("solicindex", "Su solicitud sera recogida al dia siguiente", "Recogemos su mercancia el mismo dia cuando la solicitud se realiza antes de: " + hora2);
+                    MessageUtil.enviarMensajeInformacion("solicindex", "Ingrese los datos de mercancia para completar la solicitud", "Dírijase a la pestaña mercancia");
                     return true;
                 }
             } else {
                 System.out.println("Recoleccion fecha..." + fechaR);
                 solicitud.setPriorizacion("baja");
+                putSolicitud();
                 persistirSolicitud();
                 MessageUtil.enviarMensajeInformacion("solicindex", "Gracias por confiar en nosotros", "Su solicitud sera recogida: " + fechaR);
                 return true;
@@ -122,12 +130,10 @@ public class SolicitudController implements Serializable {
         return false;
     }
 
-    public void tomarDatos() {
+    public void putSolicitud() {
         FacesContext fc = FacesContext.getCurrentInstance();
         ExternalContext ec = fc.getExternalContext();
         ec.getSessionMap().put("solicitud", solicitud);
-        getSolicitudContex().getIdSolicitud();
-
     }
 
     public Solicitud getSolicitudContex() {
@@ -143,11 +149,6 @@ public class SolicitudController implements Serializable {
         return fechaNue;
     }
 
-//    public void foraneaUsuario(){
-//        FacesContext context = FacesContext.getCurrentInstance();
-//        UsuarioController uc = context.getApplication().evaluateExpressionGet(context, "#{usuarioController}", UsuarioController.class);
-//        usuarioscodigoUsuario = (Usuario) uc.getUsuarios();
-//    }
     public String prepareCreate() {
         return "/app/crud/solicitud/Create.xhtml?faces-redirect=true";
     }

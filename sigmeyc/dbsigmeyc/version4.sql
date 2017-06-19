@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.13, for linux-glibc2.5 (x86_64)
 --
 -- Host: 127.0.0.1    Database: sigmeyc
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.21-MariaDB
+-- Server version	5.5.5-10.1.19-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -221,7 +221,7 @@ CREATE TABLE `guias` (
   PRIMARY KEY (`numeroGuia`),
   KEY `fk_guia_planillas1_idx` (`planillas_idPlanilla`),
   CONSTRAINT `fk_guia_planillas1` FOREIGN KEY (`planillas_idPlanilla`) REFERENCES `planillas` (`idPlanilla`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite registrar las guias con las que se documenta la mercancia.';
+) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite registrar las guias con las que se documenta la mercancia.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -230,7 +230,7 @@ CREATE TABLE `guias` (
 
 LOCK TABLES `guias` WRITE;
 /*!40000 ALTER TABLE `guias` DISABLE KEYS */;
-INSERT INTO `guias` VALUES (101,'papel',1),(102,'televisor dfg',1);
+INSERT INTO `guias` VALUES (101,'papel',1);
 /*!40000 ALTER TABLE `guias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,19 +309,16 @@ CREATE TABLE `mercancias` (
   `solicitudes_idSolicitud` int(11) NOT NULL,
   `vehiculos_idVehiculo` int(11) NOT NULL,
   `precios_idprecios` int(11) NOT NULL,
-  `localidades_idLocalidad` int(11) NOT NULL,
   PRIMARY KEY (`idMercancia`),
   KEY `fk_mercancias_solicitudes1_idx` (`solicitudes_idSolicitud`),
   KEY `fk_mercancias_vehiculos1_idx` (`vehiculos_idVehiculo`),
   KEY `fk_mercancias_precios1_idx` (`precios_idprecios`),
-  KEY `fk_mercancias_localidades1_idx` (`localidades_idLocalidad`),
   KEY `fk_mercancias_guias1_idx` (`guias_numeroGuia`),
   CONSTRAINT `fk_mercancias_guias1` FOREIGN KEY (`guias_numeroGuia`) REFERENCES `guias` (`numeroGuia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_mercancias_localidades1` FOREIGN KEY (`localidades_idLocalidad`) REFERENCES `localidades` (`idLocalidad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mercancias_precios1` FOREIGN KEY (`precios_idprecios`) REFERENCES `precios` (`idprecios`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mercancias_solicitudes1` FOREIGN KEY (`solicitudes_idSolicitud`) REFERENCES `solicitudes` (`idSolicitud`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mercancias_vehiculos1` FOREIGN KEY (`vehiculos_idVehiculo`) REFERENCES `vehiculos` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de toda la mercancia a entregar';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de toda la mercancia a entregar';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -330,7 +327,6 @@ CREATE TABLE `mercancias` (
 
 LOCK TABLES `mercancias` WRITE;
 /*!40000 ALTER TABLE `mercancias` DISABLE KEYS */;
-INSERT INTO `mercancias` VALUES (1,'televisor','dfg',12,12,12,12,12,12,'sds','En bodega',102,1,1,1,1);
 /*!40000 ALTER TABLE `mercancias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -428,11 +424,8 @@ DROP TABLE IF EXISTS `planillas`;
 CREATE TABLE `planillas` (
   `idPlanilla` int(11) NOT NULL AUTO_INCREMENT,
   `cantidadGuias` int(11) NOT NULL,
-  `rutas_idRutas` int(11) NOT NULL,
-  PRIMARY KEY (`idPlanilla`),
-  KEY `fk_planillas_rutas1_idx` (`rutas_idRutas`),
-  CONSTRAINT `fk_planillas_rutas1` FOREIGN KEY (`rutas_idRutas`) REFERENCES `rutas` (`idRutas`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registran las planillas o registros de toda la mercancia que es cargada en un vehiculo';
+  PRIMARY KEY (`idPlanilla`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registran las planillas o registros de toda la mercancia que es cargada en un vehiculo';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -441,7 +434,7 @@ CREATE TABLE `planillas` (
 
 LOCK TABLES `planillas` WRITE;
 /*!40000 ALTER TABLE `planillas` DISABLE KEYS */;
-INSERT INTO `planillas` VALUES (1,3,1);
+INSERT INTO `planillas` VALUES (1,3),(2,3);
 /*!40000 ALTER TABLE `planillas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -532,7 +525,13 @@ DROP TABLE IF EXISTS `rutas`;
 CREATE TABLE `rutas` (
   `idRutas` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
-  PRIMARY KEY (`idRutas`)
+  `planillas_idPlanilla` int(11) NOT NULL,
+  `vehiculos_idVehiculo` int(11) NOT NULL,
+  PRIMARY KEY (`idRutas`),
+  KEY `fk_rutas_planillas1_idx` (`planillas_idPlanilla`),
+  KEY `fk_rutas_vehiculos1_idx` (`vehiculos_idVehiculo`),
+  CONSTRAINT `fk_rutas_planillas1` FOREIGN KEY (`planillas_idPlanilla`) REFERENCES `planillas` (`idPlanilla`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_rutas_vehiculos1` FOREIGN KEY (`vehiculos_idVehiculo`) REFERENCES `vehiculos` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -542,7 +541,7 @@ CREATE TABLE `rutas` (
 
 LOCK TABLES `rutas` WRITE;
 /*!40000 ALTER TABLE `rutas` DISABLE KEYS */;
-INSERT INTO `rutas` VALUES (1,'chapinero'),(2,'bosa');
+INSERT INTO `rutas` VALUES (1,'chapinero',1,1),(2,'bosa',2,2);
 /*!40000 ALTER TABLE `rutas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -567,10 +566,13 @@ CREATE TABLE `solicitudes` (
   `fechaRecoleccion` date NOT NULL,
   `estadoSolicitud` varchar(20) NOT NULL,
   `usuarios_documento` bigint(15) NOT NULL,
+  `localidades_idLocalidad` int(11) NOT NULL,
   PRIMARY KEY (`idSolicitud`),
   KEY `fk_solicitudes_usuarios1_idx` (`usuarios_documento`),
+  KEY `fk_solicitudes_localidades1_idx` (`localidades_idLocalidad`),
+  CONSTRAINT `fk_solicitudes_localidades1` FOREIGN KEY (`localidades_idLocalidad`) REFERENCES `localidades` (`idLocalidad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_solicitudes_usuarios1` FOREIGN KEY (`usuarios_documento`) REFERENCES `usuarios` (`documento`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registraran las solicitudes que los usuarios o empresas diligencien.';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registraran las solicitudes que los usuarios o empresas diligencien.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -579,7 +581,6 @@ CREATE TABLE `solicitudes` (
 
 LOCK TABLES `solicitudes` WRITE;
 /*!40000 ALTER TABLE `solicitudes` DISABLE KEYS */;
-INSERT INTO `solicitudes` VALUES (1,'Mensajeria expresa','Origen','destino','nombre','apellido','567890','baja','2017-06-18','20:23:58','2017-06-19','Sin recoger',12312312);
 /*!40000 ALTER TABLE `solicitudes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -658,7 +659,7 @@ CREATE TABLE `vehiculos` (
   `tipoVehiculo` varchar(40) NOT NULL,
   `capacidadCarga` varchar(30) NOT NULL,
   PRIMARY KEY (`idVehiculo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite registrar todos los vehiculos de las diferentes rutas.';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite registrar todos los vehiculos de las diferentes rutas.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -667,7 +668,7 @@ CREATE TABLE `vehiculos` (
 
 LOCK TABLES `vehiculos` WRITE;
 /*!40000 ALTER TABLE `vehiculos` DISABLE KEYS */;
-INSERT INTO `vehiculos` VALUES (1,'qwe123','Camion dos ejes','2 toneladas');
+INSERT INTO `vehiculos` VALUES (1,'qwe123','Camion dos ejes','2 toneladas'),(2,'123ewq','Camion cuatro ejes','4 toneladas');
 /*!40000 ALTER TABLE `vehiculos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -680,4 +681,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-18 20:26:53
+-- Dump completed on 2017-06-19 12:40:16

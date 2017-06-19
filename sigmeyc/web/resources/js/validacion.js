@@ -328,7 +328,7 @@ $('#formEmp').formValidation({
                 }
             }
         },
-         correoEmpre: {//Validar con los aributos NAME de cada INPUT
+        correoEmpre: {//Validar con los aributos NAME de cada INPUT
             row: '.form-group',
             validators: {
                 notEmpty: {
@@ -481,27 +481,12 @@ function ocultar() {
     document.getElementById('solicitar').style.display = 'none';
     document.getElementById('cotizar').style.display = 'none';
 }
-function mostrarDatosEmpr() {
-    document.formSol.selePers.checked = false;
-    document.getElementById('txtNom').style.display = 'none';
-    document.getElementById('txtApe').style.display = 'none';
-    document.getElementById('txtCel').style.display = 'none';
-    document.getElementById('selTDoc').style.display = 'none';
-    document.getElementById('h1EnvioP').style.display = 'none';
-    document.getElementById('h1EnvioE').style.display = 'block';
-    document.getElementById('txtRazon').style.display = 'block';
 
+function ocultarInicio() {
+    document.getElementById('inic').style.display = "none";
+    document.getElementById('btnRgis').style.display = "none";
 }
-function mostrarDatosPers() {
-    document.formSol.seleEmpre.checked = false;
-    document.getElementById('txtNom').style.display = 'block';
-    document.getElementById('txtApe').style.display = 'block';
-    document.getElementById('txtCel').style.display = 'block';
-    document.getElementById('selTDoc').style.display = 'block';
-    document.getElementById('h1EnvioP').style.display = 'block';
-    document.getElementById('h1EnvioE').style.display = 'none';
-    document.getElementById('txtRazon').style.display = 'none';
-}
+
 //function mostrarDatosEmprI() {
 //    document.registro.selePersI.checked = false;
 //    //desactiva input y con el la validacion
@@ -605,15 +590,15 @@ $('#myTabs a').click(function (e) {
 })
 
 
-$(document).ready(function () {
-    $(".nav-tabs a").click(function () {
-        $(this).tab('show');
-    });
-    $('.nav-tabs a').on('show.bs.tab', function () {
-        alert('Debe registrar solicitud');
-    });
-
-});
+//$(document).ready(function () {
+//    $(".nav-tabs a").click(function () {
+//        $(this).tab('show');
+//    });
+//    $('.nav-tabs a').on('show.bs.tab', function () {
+//        alert('Debe registrar solicitud');
+//    });
+//
+//});
 function mostrarTab() {
     $('#mercancia').tab('show');
 }

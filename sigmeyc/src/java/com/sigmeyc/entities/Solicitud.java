@@ -109,6 +109,9 @@ public class Solicitud implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "estadoSolicitud")
     private String estadoSolicitud;
+    @JoinColumn(name = "localidades_idLocalidad", referencedColumnName = "idLocalidad")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Localidad localidadesidLocalidad;
     @JoinColumn(name = "usuarios_documento", referencedColumnName = "documento")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario usuariosDocumento;
@@ -229,6 +232,14 @@ public class Solicitud implements Serializable {
 
     public void setEstadoSolicitud(String estadoSolicitud) {
         this.estadoSolicitud = estadoSolicitud;
+    }
+
+    public Localidad getLocalidadesidLocalidad() {
+        return localidadesidLocalidad;
+    }
+
+    public void setLocalidadesidLocalidad(Localidad localidadesidLocalidad) {
+        this.localidadesidLocalidad = localidadesidLocalidad;
     }
 
     public Usuario getUsuariosDocumento() {

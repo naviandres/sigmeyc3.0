@@ -1,21 +1,27 @@
 package com.sigmeyc.jsf;
 
 import com.sigmeyc.beans.GuiaFacade;
+import com.sigmeyc.beans.LocalidadFacade;
 import com.sigmeyc.beans.MercanciaFacade;
 import com.sigmeyc.beans.PlanillaFacade;
 import com.sigmeyc.beans.RutaFacade;
+import com.sigmeyc.beans.SolicitudFacade;
 import com.sigmeyc.entities.Guia;
 import com.sigmeyc.entities.Mercancia;
 import com.sigmeyc.entities.Planilla;
 import com.sigmeyc.entities.Ruta;
-
+import com.sigmeyc.entities.Solicitud;
+import com.sigmeyc.entities.Vehiculo;
+import com.sigmeyc.jsf.util.MessageUtil;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 /**
@@ -31,16 +37,19 @@ public class mercanciaController implements Serializable {
      */
     @EJB
     private MercanciaFacade MercanciaFacade;
-    @EJB
-    private PlanillaFacade planillaFacade;
+
     @EJB
     private GuiaFacade guiaFacade;
+
+    @EJB
+    private RutaFacade rutaFacade;
+    
+    @EJB
+    private SolicitudFacade solicitudFacade;
 
     private Mercancia mercancia;
 
     private Ruta ruta;
-
-    private SolicitudController sc;
 
     public mercanciaController() {
     }
@@ -67,24 +76,59 @@ public class mercanciaController implements Serializable {
         this.ruta = ruta;
     }
 
+    public Solicitud getSolicitudContex() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        ExternalContext ec = fc.getExternalContext();
+        return (Solicitud) ec.getSessionMap().get("solicitud");
+    }
+
     public void guardar() {
         mercancia.setIdMercancia(null);
-//        System.out.println("iddd"+ sc.getSolicitudContex().getIdSolicitud());
 
-        String loca = mercancia.getLocalidadesidLocalidad().getNombreLocalidad();
         Planilla planillaid = null;
-        System.out.println("locas"+loca);
-        if (loca.equals("chapinero")) {
-             planillaid = planillaFacade.find(1);
-        }else if (loca.equals("bosa")) {
-            planillaid = planillaFacade.find(2);
+        Vehiculo idVehiculo = null;
+        String nombreLoc = getSolicitudContex().getLocalidadesidLocalidad().getNombreLocalidad();
+        List<Ruta> rutas = new ArrayList<>();
+        for (Ruta ruta1 : rutaFacade.findAll()) {
+            rutas.add(ruta1);
+        }
+        for (Ruta ruta1 : rutas) {
+            System.out.println(ruta1.getNombre());
+            if (ruta1.getNombre().equals(nombreLoc)) {
+                planillaid = ruta1.getPlanillasidPlanilla();
+                idVehiculo = ruta1.getVehiculosidVehiculo();
+            }
+        }
+        Solicitud solicitudesidSolicitud = getSolicitudContex();
+        if (solicitudesidSolicitud != null) {
+            mercancia.setSolicitudesidSolicitud(solicitudesidSolicitud);
+            mercancia.setVehiculosidVehiculo(idVehiculo);
+            Guia guiaidGuia = new Guia(null, mercancia.getTipoMercancia() + " " + mercancia.getDescripcionMercancia(), planillaid);
+            mercancia.setVolumen(mercancia.getLongitud() * mercancia.getAncho() * mercancia.getAltura());
+            mercancia.setGuiasnumeroGuia(guiaidGuia);
+            this.guiaFacade.create(guiaidGuia);
+            this.solicitudFacade.create(solicitudesidSolicitud);
+            this.MercanciaFacade.create(mercancia);
+            
+            
+            System.out.println("solici" + solicitudesidSolicitud);
+            MessageUtil.enviarMensajeInformacion("mercaIndex", "Registro exitoso.", "Su solicitud sera recogida: "+solicitudesidSolicitud.getFechaRecoleccion());
+            init();
+            solicitudesidSolicitud = null;
+        } else {
+            MessageUtil.enviarMensajeInformacion("mercaIndex", "Necesita realizar la solicitud.", "Ingrese en el formulario de solicitud. ");
         }
 
-        Guia guiaidGuia = new Guia(null, mercancia.getTipoMercancia() + " " + mercancia.getDescripcionMercancia(), planillaid);//cambiar id
-        mercancia.setGuiasnumeroGuia(guiaidGuia);
-        this.guiaFacade.create(guiaidGuia);
-        this.MercanciaFacade.create(mercancia);
-        init();
+    }
+
+    public void killSolicitud(Solicitud solicitud) {
+//        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+//        FacesContext fc = FacesContext.getCurrentInstance();
+//        ExternalContext ec = fc.getExternalContext();
+//        ec.getSessionMap().get("solicitud");
+//                fc.getELContext().
+        solicitud = null;
+
     }
 
     public String prepareCreate() {

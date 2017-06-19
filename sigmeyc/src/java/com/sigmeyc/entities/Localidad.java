@@ -54,7 +54,7 @@ public class Localidad implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Ciudad ciudadesidCiudades;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "localidadesidLocalidad", fetch = FetchType.LAZY)
-    private List<Mercancia> mercanciaList;
+    private List<Solicitud> solicitudList;
 
     public Localidad() {
     }
@@ -93,12 +93,12 @@ public class Localidad implements Serializable {
     }
 
     @XmlTransient
-    public List<Mercancia> getMercanciaList() {
-        return mercanciaList;
+    public List<Solicitud> getSolicitudList() {
+        return solicitudList;
     }
 
-    public void setMercanciaList(List<Mercancia> mercanciaList) {
-        this.mercanciaList = mercanciaList;
+    public void setSolicitudList(List<Solicitud> solicitudList) {
+        this.solicitudList = solicitudList;
     }
 
     @Override

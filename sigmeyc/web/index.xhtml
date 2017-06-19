@@ -22,7 +22,7 @@
                         <!--<a href="#about" class="btn btn-primary btn-xl page-scroll">Iniciar Sesión</a>-->
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#inicio">
+                        <button type="button" id="inic" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#inicio">
                             Iniciar Sesión
                         </button>
                         <button type="button" id="btnRgis" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registrar">
@@ -443,20 +443,32 @@
                                             <h:outputLabel class="sr-only" value="apellidoDestinatario" for="apellidoDestinatario" />
                                             <h:inputText class="form-control" id="apellidoDestinatario" p:placeholder="Apellido Destinatario" value="#{solicitudController.solicitud.apellidoDestinatario}" required="true" requiredMessage="Ingrese apellido"/>
                                         </div>
-                                    </div>                    
-                                    <div class="form-group">
-                                        <h:outputLabel class="sr-only" value="telefonoDestinatario" for="telefonoDestinatario" />
-                                        <h:inputText class="form-control" id="telefonoDestinatario" p:placeholder="Teléfono Destinatario" value="#{solicitudController.solicitud.telefonoDestinatario}" required="true" requiredMessage="Ingrese telefono"/>
+                                    </div>   
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            <h:outputLabel class="sr-only" value="telefonoDestinatario" for="telefonoDestinatario" />
+                                            <h:inputText class="form-control" id="telefonoDestinatario" p:placeholder="Teléfono Destinatario" value="#{solicitudController.solicitud.telefonoDestinatario}" required="true" requiredMessage="Ingrese telefono"/>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <h:outputLabel class="sr-only" value="Fecha recolección" for="fechaRecoleccion" />
+                                            <pr:calendar id="fechaRecoleccion" mindate="#{solicitudController.fecha()}" p:placeholder="Fecha de recolección" value="#{solicitudController.fechaR}" showOn="button" />
+                                        </div>
                                     </div>
-                                    <div class="form-group ">
-                                        <h:outputLabel class="sr-only" value="Fecha recoleccion" for="fechaRecoleccion" />
-                                        <pr:calendar id="fechaRecoleccion" mindate="#{solicitudController.fecha()}"  value="#{solicitudController.fechaR}" showOn="button" />
+
+
+                                    <div class="form-group text-center">
+                                        <h:outputLabel class="sr-only" value="Localidad destino" for="localidades" />
+                                        <h:selectOneMenu  class="form-control" id="localidades" p:placeholder="Localidades" value="#{solicitudController.solicitud.localidadesidLocalidad}" converter="localidadConverter" required="true" >
+                                            <f:selectItem itemLabel="Seleccione Localidad" itemDisabled="disabled"/>
+                                            <f:selectItems value="#{localidadController.localidades}" var="l" itemLabel="#{l.nombreLocalidad}"/>
+                                        </h:selectOneMenu>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="col-lg-2 col-lg-offset-4">
                                             <h:commandButton id="btnSolc" class="btn btn-success" action="#{solicitudController.guardar()}" value="Guardar">
-                                                <f:ajax execute="tipoServicio direccionOrigen direccionDestino nombreDestinatario apellidoDestinatario telefonoDestinatario fechaRecoleccion messagePanel" render="tipoServicio direccionOrigen direccionDestino nombreDestinatario apellidoDestinatario telefonoDestinatario fechaRecoleccion messagePanel"/>
+                                                <f:ajax execute="tipoServicio direccionOrigen direccionDestino nombreDestinatario apellidoDestinatario telefonoDestinatario fechaRecoleccion localidades messagePanel" 
+                                                        render="tipoServicio direccionOrigen direccionDestino nombreDestinatario apellidoDestinatario telefonoDestinatario fechaRecoleccion localidades messagePanel"/>
                                                 <a href="#mercancia" aria-controls="profile" role="tab" data-toggle="tab"/>
                                             </h:commandButton>
                                         </div>                                           
@@ -465,7 +477,10 @@
                             </div>
 
                             <div role="tabpanel" class="tab-pane" id="mercancia">
-                                <h:form  id="mercans" prependId="false">
+                                <h:panelGroup id="messageMerca" layout="block">
+                                    <h:message class="alert alert-info" for="mercaIndex" showSummary="true"/>
+                                </h:panelGroup>
+                                <h:form  id="mercaIndex" prependId="false">
                                     <h2 class="page-header text-center">Mercancía</h2>
 
                                     <div class="form-group col-lg-6">
@@ -476,29 +491,28 @@
                                         <h:outputLabel class="sr-only"  value="Descripción mercancía" for="descripcion" />
                                         <h:inputTextarea class="form-control" id="descripcion" value="#{mercanciaController.mercancia.descripcionMercancia}"  p:placeholder="Descripcion mercancía" />
                                     </div>
+                                    <div class="row">
+                                        <div class="form-group col-lg-3">
+                                            <h:outputLabel  class="sr-only" value="longitud" for="longitud" />
+                                            <h:inputText class="form-control" p:placeholder="Longitud" id="longitud" value="#{mercanciaController.mercancia.longitud}"  />
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <h:outputLabel class="sr-only" value="ancho" for="ancho" />
+                                            <h:inputText class="form-control" p:placeholder="Ancho" id="ancho" value="#{mercanciaController.mercancia.ancho}"  />
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <h:outputLabel class="sr-only" value="altura" for="altura" />
+                                            <h:inputText class="form-control" p:placeholder="Altura" id="altura" value="#{mercanciaController.mercancia.altura}"  />
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <h:outputLabel  class="sr-only" value="cantidad" for="cantidad" />
+                                            <h:inputText class="form-control" p:placeholder="Cantidad" id="cantidad" value="#{mercanciaController.mercancia.cantidad}"  />
+                                        </div>
+
+                                    </div>
                                     <div class="form-group col-lg-6">
                                         <h:outputLabel class="sr-only" value="peso" for="peso" />
                                         <h:inputText class="form-control" p:placeholder="Peso" id="peso" value="#{mercanciaController.mercancia.peso}"  />
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <h:outputLabel  class="sr-only" value="longitud" for="longitud" />
-                                        <h:inputText class="form-control" p:placeholder="Longitud" id="longitud" value="#{mercanciaController.mercancia.longitud}"  />
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <h:outputLabel class="sr-only" value="ancho" for="ancho" />
-                                        <h:inputText class="form-control" p:placeholder="Ancho" id="ancho" value="#{mercanciaController.mercancia.ancho}"  />
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <h:outputLabel class="sr-only" value="altura" for="altura" />
-                                        <h:inputText class="form-control" p:placeholder="Altura" id="altura" value="#{mercanciaController.mercancia.altura}"  />
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <h:outputLabel class="sr-only" value="volumen" for="volumen" />
-                                        <h:inputText class="form-control" p:placeholder="Volumen" id="volumen" value="#{mercanciaController.mercancia.volumen}"  />
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <h:outputLabel  class="sr-only" value="cantidad" for="cantidad" />
-                                        <h:inputText class="form-control" p:placeholder="Cantidad" id="cantidad" value="#{mercanciaController.mercancia.cantidad}"  />
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <h:outputLabel class="sr-only" value="embalaje" for="embalaje" />
@@ -508,33 +522,11 @@
                                         <h:outputLabel class="sr-only" value="Estado" for="estado" />
                                         <h:selectOneMenu id="estado" class="form-control" value="#{mercanciaController.mercancia.estadoMercancia}" required="true">
                                             <f:selectItem itemLabel="Seleccione estado" itemDisabled="disabled"/>
-                                            <f:selectItem itemLabel="En bodega" itemValue="En bodega"/>
-                                            <f:selectItem itemLabel="Recepcion" itemValue="Recepcion"/>
-                                            <f:selectItem itemLabel="Entregada" itemValue="Entregada"/>
+                                            <f:selectItem itemLabel="Buen estado" itemValue="Buen estado"/>
+                                            <f:selectItem itemLabel="Regular" itemValue="Regular"/>
+                                            <f:selectItem itemLabel="En mal estado" itemValue="En mal estado"/>
                                         </h:selectOneMenu>  
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <h:outputLabel class="sr-only" value="Localidades" for="localidades" />
-                                        <h:selectOneMenu  class="form-control" id="localidades" p:placeholder="Localidades" value="#{mercanciaController.mercancia.localidadesidLocalidad}" converter="localidadConverter" required="true" >
-                                            <f:selectItem itemLabel="Seleccione Localidad" itemDisabled="disabled"/>
-                                            <f:selectItems value="#{localidadController.localidades}" var="l" itemLabel="#{l.nombreLocalidad}"/>
-                                        </h:selectOneMenu>
-                                    </div>
-
-                                    <div class="form-group col-lg-6">
-                                        <h:outputLabel class="sr-only" value="codigoSolicitud" p:placeholder="Embalaje" for="solicitudescodigoSolicitud" />
-                                        <h:selectOneMenu class="form-control" id="solicitudescodigoSolicitud" value="#{mercanciaController.mercancia.solicitudesidSolicitud}" converter="solicitudConverter"  required="true">
-                                            <f:selectItem itemLabel="Solicitud" itemDisabled="disabled"/>
-                                            <f:selectItems value="#{solicitudController.solicitudes}" var="s" itemLabel="#{s.idSolicitud}"/>
-                                        </h:selectOneMenu>
-                                    </div>
-                                    <div class="form-group col-lg-6">
-                                        <h:outputLabel class="sr-only" value="placaVehiculo" for="vehiculosplacaVehiculo" />
-                                        <h:selectOneMenu class="form-control" p:placeholder="Placa Vehiculo" id="vehiculosplacaVehiculo" value="#{mercanciaController.mercancia.vehiculosidVehiculo}" converter="vehiculoConverter" required="true">
-                                            <f:selectItem itemLabel="Placa vehiculo" itemDisabled="disabled"/>
-                                            <f:selectItems value="#{vehiculoController.vehiculos}" var="v" itemLabel="#{v.placaVehiculo}"/>
-                                        </h:selectOneMenu>
-                                    </div>
+                                    </div>   
                                     <div class="form-group col-lg-6">
                                         <h:outputLabel class="sr-only" value="Precios" for="Precios" />
                                         <h:selectOneMenu id="Precios" p:placeholder="Precios" class="form-control" value="#{mercanciaController.mercancia.preciosIdprecios}" converter="precioConverter" required="true">
@@ -542,9 +534,13 @@
                                             <f:selectItems value="#{precioController.precios}" var="p" itemLabel="#{p.valor}"/>
                                         </h:selectOneMenu>
                                     </div>
+                                   
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-4">
-                                            <h:commandButton class="btn btn-success" action="#{mercanciaController.guardar()}" value="Guardar"/>
+                                            <h:commandButton class="btn btn-success" action="#{mercanciaController.guardar()}" value="Guardar">
+                                                <f:ajax execute="messageMerca tipoMercancia descripcion peso longitud ancho altura volumen cantidad embalaje estado vehiculosplacaVehiculo Precios" 
+                                                        render="messageMerca tipoMercancia descripcion peso longitud ancho altura volumen cantidad embalaje estado vehiculosplacaVehiculo Precios"/>
+                                            </h:commandButton>
                                         </div>
                                     </div> 
                                 </h:form>

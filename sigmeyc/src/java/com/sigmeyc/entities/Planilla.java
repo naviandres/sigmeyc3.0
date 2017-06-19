@@ -15,8 +15,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -48,11 +46,10 @@ public class Planilla implements Serializable {
     @NotNull
     @Column(name = "cantidadGuias")
     private int cantidadGuias;
-    @JoinColumn(name = "rutas_idRutas", referencedColumnName = "idRutas")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Ruta rutasidRutas;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "planillasidPlanilla", fetch = FetchType.LAZY)
     private List<Guia> guiaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "planillasidPlanilla", fetch = FetchType.LAZY)
+    private List<Ruta> rutaList;
 
     public Planilla() {
     }
@@ -64,12 +61,6 @@ public class Planilla implements Serializable {
     public Planilla(Integer idPlanilla, int cantidadGuias) {
         this.idPlanilla = idPlanilla;
         this.cantidadGuias = cantidadGuias;
-    }
-
-    public Planilla(Integer idPlanilla, int cantidadGuias,Ruta rutasidRutas) {
-        this.idPlanilla = idPlanilla;
-        this.cantidadGuias = cantidadGuias;
-        this.rutasidRutas = rutasidRutas;
     }
 
     public Integer getIdPlanilla() {
@@ -88,14 +79,6 @@ public class Planilla implements Serializable {
         this.cantidadGuias = cantidadGuias;
     }
 
-    public Ruta getRutasidRutas() {
-        return rutasidRutas;
-    }
-
-    public void setRutasidRutas(Ruta rutasidRutas) {
-        this.rutasidRutas = rutasidRutas;
-    }
-
     @XmlTransient
     public List<Guia> getGuiaList() {
         return guiaList;
@@ -103,6 +86,15 @@ public class Planilla implements Serializable {
 
     public void setGuiaList(List<Guia> guiaList) {
         this.guiaList = guiaList;
+    }
+
+    @XmlTransient
+    public List<Ruta> getRutaList() {
+        return rutaList;
+    }
+
+    public void setRutaList(List<Ruta> rutaList) {
+        this.rutaList = rutaList;
     }
 
     @Override
@@ -129,5 +121,5 @@ public class Planilla implements Serializable {
     public String toString() {
         return "com.sigmeyc.entities.Planilla[ idPlanilla=" + idPlanilla + " ]";
     }
-
+    
 }

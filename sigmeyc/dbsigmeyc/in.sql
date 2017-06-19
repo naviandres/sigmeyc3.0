@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
+	-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: sigmeyc
 -- ------------------------------------------------------
@@ -233,7 +233,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `planillas` WRITE;
 /*!40000 ALTER TABLE `planillas` DISABLE KEYS */;
-INSERT INTO `planillas` VALUES (1,3,1);
+INSERT INTO `planillas` VALUES (1,3),(2,3);
 /*!40000 ALTER TABLE `planillas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -289,7 +289,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `rutas` WRITE;
 /*!40000 ALTER TABLE `rutas` DISABLE KEYS */;
-INSERT INTO `rutas` VALUES (1,'chapinero'),(2,'bosa');
+INSERT INTO `rutas` VALUES (1,'chapinero',1,1),(2,'bosa',2,2);
 /*!40000 ALTER TABLE `rutas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,25 +338,13 @@ UNLOCK TABLES;
 -- Table structure for table `vehiculos`
 --
 
-DROP TABLE IF EXISTS `vehiculos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `vehiculos` (
-  `idVehiculo` int(11) NOT NULL AUTO_INCREMENT,
-  `placaVehiculo` varchar(6) NOT NULL,
-  `tipoVehiculo` varchar(40) NOT NULL,
-  `capacidadCarga` varchar(30) NOT NULL,
-  PRIMARY KEY (`idVehiculo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite registrar todos los vehiculos de las diferentes rutas.';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
 -- Dumping data for table `vehiculos`
 --
 
 LOCK TABLES `vehiculos` WRITE;
 /*!40000 ALTER TABLE `vehiculos` DISABLE KEYS */;
-INSERT INTO `vehiculos` VALUES (1,'qwe123','Camion dos ejes','2 toneladas');
+INSERT INTO `vehiculos` VALUES (1,'qwe123','Camion dos ejes','2 toneladas'),(2,'123ewq','Camion cuatro ejes','4 toneladas');
 /*!40000 ALTER TABLE `vehiculos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

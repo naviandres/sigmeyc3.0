@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author juanc
+ * @author ivan
  */
 @Entity
 @Table(name = "vehiculos")
@@ -53,12 +53,12 @@ public class Vehiculo implements Serializable {
     private String placaVehiculo;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 40)
     @Column(name = "tipoVehiculo")
     private String tipoVehiculo;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 30)
     @Column(name = "capacidadCarga")
     private String capacidadCarga;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculosidVehiculo", fetch = FetchType.LAZY)
@@ -67,6 +67,8 @@ public class Vehiculo implements Serializable {
     private List<Mercancia> mercanciaList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "vehiculo", fetch = FetchType.LAZY)
     private Marca marca;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculosidVehiculo", fetch = FetchType.LAZY)
+    private List<Ruta> rutaList;
 
     public Vehiculo() {
     }
@@ -138,6 +140,15 @@ public class Vehiculo implements Serializable {
 
     public void setMarca(Marca marca) {
         this.marca = marca;
+    }
+
+    @XmlTransient
+    public List<Ruta> getRutaList() {
+        return rutaList;
+    }
+
+    public void setRutaList(List<Ruta> rutaList) {
+        this.rutaList = rutaList;
     }
 
     @Override

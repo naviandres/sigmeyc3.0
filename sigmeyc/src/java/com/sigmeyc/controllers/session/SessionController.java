@@ -242,11 +242,6 @@ public class SessionController implements Serializable {
         }
         return false;
     }
-    
-    public String bajar(){
-
-return "<a class=\"page-scroll\" href=\"#services\">Servicios</a>";
-    }
 
     public boolean activarBoton() {
         FacesContext fc = FacesContext.getCurrentInstance();

@@ -96,9 +96,6 @@ public class Mercancia implements Serializable {
     @JoinColumn(name = "guias_numeroGuia", referencedColumnName = "numeroGuia")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Guia guiasnumeroGuia;
-    @JoinColumn(name = "localidades_idLocalidad", referencedColumnName = "idLocalidad")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Localidad localidadesidLocalidad;
     @JoinColumn(name = "precios_idprecios", referencedColumnName = "idprecios")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Precio preciosIdprecios;
@@ -229,14 +226,6 @@ public class Mercancia implements Serializable {
 
     public void setGuiasnumeroGuia(Guia guiasnumeroGuia) {
         this.guiasnumeroGuia = guiasnumeroGuia;
-    }
-
-    public Localidad getLocalidadesidLocalidad() {
-        return localidadesidLocalidad;
-    }
-
-    public void setLocalidadesidLocalidad(Localidad localidadesidLocalidad) {
-        this.localidadesidLocalidad = localidadesidLocalidad;
     }
 
     public Precio getPreciosIdprecios() {

@@ -6,21 +6,19 @@
 package com.sigmeyc.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -46,8 +44,12 @@ public class Ruta implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rutasidRutas", fetch = FetchType.LAZY)
-    private List<Planilla> planillaList;
+    @JoinColumn(name = "planillas_idPlanilla", referencedColumnName = "idPlanilla")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Planilla planillasidPlanilla;
+    @JoinColumn(name = "vehiculos_idVehiculo", referencedColumnName = "idVehiculo")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Vehiculo vehiculosidVehiculo;
 
     public Ruta() {
     }
@@ -77,13 +79,20 @@ public class Ruta implements Serializable {
         this.nombre = nombre;
     }
 
-    @XmlTransient
-    public List<Planilla> getPlanillaList() {
-        return planillaList;
+    public Planilla getPlanillasidPlanilla() {
+        return planillasidPlanilla;
     }
 
-    public void setPlanillaList(List<Planilla> planillaList) {
-        this.planillaList = planillaList;
+    public void setPlanillasidPlanilla(Planilla planillasidPlanilla) {
+        this.planillasidPlanilla = planillasidPlanilla;
+    }
+
+    public Vehiculo getVehiculosidVehiculo() {
+        return vehiculosidVehiculo;
+    }
+
+    public void setVehiculosidVehiculo(Vehiculo vehiculosidVehiculo) {
+        this.vehiculosidVehiculo = vehiculosidVehiculo;
     }
 
     @Override
