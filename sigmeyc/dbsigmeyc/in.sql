@@ -136,7 +136,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `guias` WRITE;
 /*!40000 ALTER TABLE `guias` DISABLE KEYS */;
-INSERT INTO `guias` VALUES (1,'12345678','papel',1),(2,'987456','televisor',1);
+INSERT INTO `guias` VALUES (101,'papel',1);
 /*!40000 ALTER TABLE `guias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `localidades` WRITE;
 /*!40000 ALTER TABLE `localidades` DISABLE KEYS */;
-INSERT INTO `localidades` VALUES (1,'Chapinero',1);
+INSERT INTO `localidades` VALUES (1,'chapinero',1),(2,'bosa',1);
 /*!40000 ALTER TABLE `localidades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,20 +270,6 @@ UNLOCK TABLES;
 -- Table structure for table `roles_has_permisos`
 --
 
-DROP TABLE IF EXISTS `roles_has_permisos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `roles_has_permisos` (
-  `roles_identificadorRol` int(11) NOT NULL,
-  `permisos_idPermisos` int(11) NOT NULL,
-  PRIMARY KEY (`roles_identificadorRol`,`permisos_idPermisos`),
-  KEY `fk_roles_has_permisos_permisos1_idx` (`permisos_idPermisos`),
-  KEY `fk_roles_has_permisos_roles1_idx` (`roles_identificadorRol`),
-  CONSTRAINT `fk_roles_has_permisos_permisos1` FOREIGN KEY (`permisos_idPermisos`) REFERENCES `permisos` (`idPermisos`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_roles_has_permisos_roles1` FOREIGN KEY (`roles_identificadorRol`) REFERENCES `roles` (`identificadorRol`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
 -- Dumping data for table `roles_has_permisos`
 --
@@ -297,24 +283,13 @@ UNLOCK TABLES;
 --
 -- Table structure for table `rutas`
 --
-
-DROP TABLE IF EXISTS `rutas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `rutas` (
-  `idRutas` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  PRIMARY KEY (`idRutas`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
 -- Dumping data for table `rutas`
 --
 
 LOCK TABLES `rutas` WRITE;
 /*!40000 ALTER TABLE `rutas` DISABLE KEYS */;
-INSERT INTO `rutas` VALUES (1,'Chapinero');
+INSERT INTO `rutas` VALUES (1,'chapinero'),(2,'bosa');
 /*!40000 ALTER TABLE `rutas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -335,26 +310,6 @@ UNLOCK TABLES;
 -- Table structure for table `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuarios` (
-  `documento` bigint(15) NOT NULL COMMENT '\n\n\n',
-  `tipoIdentificacion` varchar(10) NOT NULL,
-  `primerNombre` varchar(45) NOT NULL,
-  `segundoNombre` varchar(45) DEFAULT NULL,
-  `primerApellido` varchar(45) NOT NULL,
-  `segundoApellido` varchar(45) DEFAULT NULL,
-  `telefono` varchar(15) DEFAULT NULL,
-  `celular` varchar(15) NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `clave` varchar(20) NOT NULL,
-  `estado` int(11) DEFAULT NULL,
-  PRIMARY KEY (`documento`),
-  UNIQUE KEY `documento_UNIQUE` (`documento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de usuarios como el cliente, administrador,operador y funcionario.';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 --
 -- Dumping data for table `usuarios`
 --
@@ -368,20 +323,6 @@ UNLOCK TABLES;
 --
 -- Table structure for table `usuarios_has_roles`
 --
-
-DROP TABLE IF EXISTS `usuarios_has_roles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuarios_has_roles` (
-  `usuarios_documento` bigint(15) NOT NULL,
-  `roles_identificadorRol` int(11) NOT NULL,
-  PRIMARY KEY (`usuarios_documento`,`roles_identificadorRol`),
-  KEY `fk_usuarios_has_roles_roles1_idx` (`roles_identificadorRol`),
-  KEY `fk_usuarios_has_roles_usuarios1_idx` (`usuarios_documento`),
-  CONSTRAINT `fk_usuarios_has_roles_roles1` FOREIGN KEY (`roles_identificadorRol`) REFERENCES `roles` (`identificadorRol`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuarios_has_roles_usuarios1` FOREIGN KEY (`usuarios_documento`) REFERENCES `usuarios` (`documento`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `usuarios_has_roles`

@@ -215,15 +215,13 @@ DROP TABLE IF EXISTS `guias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `guias` (
-  `idGuia` int(11) NOT NULL AUTO_INCREMENT,
-  `nueroGuia` varchar(10) NOT NULL,
+  `numeroGuia` int(11) NOT NULL AUTO_INCREMENT,
   `detalleMercancia` varchar(45) NOT NULL,
   `planillas_idPlanilla` int(11) NOT NULL,
-  PRIMARY KEY (`idGuia`),
-  UNIQUE KEY `nueroGuia_UNIQUE` (`nueroGuia`),
+  PRIMARY KEY (`numeroGuia`),
   KEY `fk_guia_planillas1_idx` (`planillas_idPlanilla`),
   CONSTRAINT `fk_guia_planillas1` FOREIGN KEY (`planillas_idPlanilla`) REFERENCES `planillas` (`idPlanilla`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite registrar las guias con las que se documenta la mercancia.';
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite registrar las guias con las que se documenta la mercancia.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,7 +230,7 @@ CREATE TABLE `guias` (
 
 LOCK TABLES `guias` WRITE;
 /*!40000 ALTER TABLE `guias` DISABLE KEYS */;
-INSERT INTO `guias` VALUES (1,'12345678','papel',1),(2,'987456','televisor',1);
+INSERT INTO `guias` VALUES (101,'papel',1),(102,'televisor dfg',1);
 /*!40000 ALTER TABLE `guias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,7 +248,7 @@ CREATE TABLE `localidades` (
   PRIMARY KEY (`idLocalidad`),
   KEY `fk_localidades_ciudades1_idx` (`ciudades_idCiudades`),
   CONSTRAINT `fk_localidades_ciudades1` FOREIGN KEY (`ciudades_idCiudades`) REFERENCES `ciudades` (`idCiudades`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de las localidades donde se zonifica la mercancia.';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de las localidades donde se zonifica la mercancia.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,7 +257,7 @@ CREATE TABLE `localidades` (
 
 LOCK TABLES `localidades` WRITE;
 /*!40000 ALTER TABLE `localidades` DISABLE KEYS */;
-INSERT INTO `localidades` VALUES (1,'Chapinero',1);
+INSERT INTO `localidades` VALUES (1,'chapinero',1),(2,'bosa',1);
 /*!40000 ALTER TABLE `localidades` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -307,23 +305,23 @@ CREATE TABLE `mercancias` (
   `cantidad` int(11) NOT NULL,
   `embalaje` varchar(30) DEFAULT NULL,
   `estadoMercancia` varchar(45) NOT NULL,
-  `guia_idGuia` int(11) NOT NULL,
+  `guias_numeroGuia` int(11) NOT NULL,
   `solicitudes_idSolicitud` int(11) NOT NULL,
   `vehiculos_idVehiculo` int(11) NOT NULL,
   `precios_idprecios` int(11) NOT NULL,
   `localidades_idLocalidad` int(11) NOT NULL,
   PRIMARY KEY (`idMercancia`),
-  KEY `fk_mercancias_guia1_idx` (`guia_idGuia`),
   KEY `fk_mercancias_solicitudes1_idx` (`solicitudes_idSolicitud`),
   KEY `fk_mercancias_vehiculos1_idx` (`vehiculos_idVehiculo`),
   KEY `fk_mercancias_precios1_idx` (`precios_idprecios`),
   KEY `fk_mercancias_localidades1_idx` (`localidades_idLocalidad`),
-  CONSTRAINT `fk_mercancias_guia1` FOREIGN KEY (`guia_idGuia`) REFERENCES `guias` (`idGuia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  KEY `fk_mercancias_guias1_idx` (`guias_numeroGuia`),
+  CONSTRAINT `fk_mercancias_guias1` FOREIGN KEY (`guias_numeroGuia`) REFERENCES `guias` (`numeroGuia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mercancias_localidades1` FOREIGN KEY (`localidades_idLocalidad`) REFERENCES `localidades` (`idLocalidad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mercancias_precios1` FOREIGN KEY (`precios_idprecios`) REFERENCES `precios` (`idprecios`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mercancias_solicitudes1` FOREIGN KEY (`solicitudes_idSolicitud`) REFERENCES `solicitudes` (`idSolicitud`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mercancias_vehiculos1` FOREIGN KEY (`vehiculos_idVehiculo`) REFERENCES `vehiculos` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de toda la mercancia a entregar';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Esta tabla permite el registro de toda la mercancia a entregar';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,6 +330,7 @@ CREATE TABLE `mercancias` (
 
 LOCK TABLES `mercancias` WRITE;
 /*!40000 ALTER TABLE `mercancias` DISABLE KEYS */;
+INSERT INTO `mercancias` VALUES (1,'televisor','dfg',12,12,12,12,12,12,'sds','En bodega',102,1,1,1,1);
 /*!40000 ALTER TABLE `mercancias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -543,7 +542,7 @@ CREATE TABLE `rutas` (
 
 LOCK TABLES `rutas` WRITE;
 /*!40000 ALTER TABLE `rutas` DISABLE KEYS */;
-INSERT INTO `rutas` VALUES (1,'Chapinero');
+INSERT INTO `rutas` VALUES (1,'chapinero'),(2,'bosa');
 /*!40000 ALTER TABLE `rutas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -571,7 +570,7 @@ CREATE TABLE `solicitudes` (
   PRIMARY KEY (`idSolicitud`),
   KEY `fk_solicitudes_usuarios1_idx` (`usuarios_documento`),
   CONSTRAINT `fk_solicitudes_usuarios1` FOREIGN KEY (`usuarios_documento`) REFERENCES `usuarios` (`documento`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registraran las solicitudes que los usuarios o empresas diligencien.';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='En esta tabla se registraran las solicitudes que los usuarios o empresas diligencien.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -580,6 +579,7 @@ CREATE TABLE `solicitudes` (
 
 LOCK TABLES `solicitudes` WRITE;
 /*!40000 ALTER TABLE `solicitudes` DISABLE KEYS */;
+INSERT INTO `solicitudes` VALUES (1,'Mensajeria expresa','Origen','destino','nombre','apellido','567890','baja','2017-06-18','20:23:58','2017-06-19','Sin recoger',12312312);
 /*!40000 ALTER TABLE `solicitudes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -680,4 +680,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-16 16:16:14
+-- Dump completed on 2017-06-18 20:26:53

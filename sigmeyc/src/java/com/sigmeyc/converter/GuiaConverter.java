@@ -40,7 +40,7 @@ public class GuiaConverter implements Converter {
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if (value != null && value instanceof Guia) {
             Guia g = (Guia) value;
-            return g.getIdGuia().toString();
+            return g.getNumeroGuia().toString();
         }
         return null;
     }

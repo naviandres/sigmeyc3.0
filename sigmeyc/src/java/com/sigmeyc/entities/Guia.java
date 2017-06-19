@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Guia.findAll", query = "SELECT g FROM Guia g")
-    , @NamedQuery(name = "Guia.findByIdGuia", query = "SELECT g FROM Guia g WHERE g.idGuia = :idGuia")
-    , @NamedQuery(name = "Guia.findByNueroGuia", query = "SELECT g FROM Guia g WHERE g.nueroGuia = :nueroGuia")
+    , @NamedQuery(name = "Guia.findByNumeroGuia", query = "SELECT g FROM Guia g WHERE g.numeroGuia = :numeroGuia")
     , @NamedQuery(name = "Guia.findByDetalleMercancia", query = "SELECT g FROM Guia g WHERE g.detalleMercancia = :detalleMercancia")})
 public class Guia implements Serializable {
 
@@ -44,13 +43,8 @@ public class Guia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idGuia")
-    private Integer idGuia;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "nueroGuia")
-    private String nueroGuia;
+    @Column(name = "numeroGuia")
+    private Integer numeroGuia;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -59,43 +53,33 @@ public class Guia implements Serializable {
     @JoinColumn(name = "planillas_idPlanilla", referencedColumnName = "idPlanilla")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Planilla planillasidPlanilla;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "guiaidGuia", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "guiasnumeroGuia", fetch = FetchType.LAZY)
     private List<Mercancia> mercanciaList;
 
     public Guia() {
     }
 
-    public Guia(Integer idGuia) {
-        this.idGuia = idGuia;
+    public Guia(Integer numeroGuia) {
+        this.numeroGuia = numeroGuia;
     }
 
-    public Guia(Integer idGuia, String nueroGuia, String detalleMercancia) {
-        this.idGuia = idGuia;
-        this.nueroGuia = nueroGuia;
+    public Guia(Integer numeroGuia, String detalleMercancia) {
+        this.numeroGuia = numeroGuia;
         this.detalleMercancia = detalleMercancia;
     }
 
-    public Guia(Integer idGuia, String nueroGuia, String detalleMercancia,Planilla planillasidPlanilla) {
-        this.idGuia = idGuia;
-        this.nueroGuia = nueroGuia;
+    public Guia(Integer numeroGuia, String detalleMercancia, Planilla planillasidPlanilla) {
+        this.numeroGuia = numeroGuia;
         this.detalleMercancia = detalleMercancia;
         this.planillasidPlanilla = planillasidPlanilla;
     }
 
-    public Integer getIdGuia() {
-        return idGuia;
+    public Integer getNumeroGuia() {
+        return numeroGuia;
     }
 
-    public void setIdGuia(Integer idGuia) {
-        this.idGuia = idGuia;
-    }
-
-    public String getNueroGuia() {
-        return nueroGuia;
-    }
-
-    public void setNueroGuia(String nueroGuia) {
-        this.nueroGuia = nueroGuia;
+    public void setNumeroGuia(Integer numeroGuia) {
+        this.numeroGuia = numeroGuia;
     }
 
     public String getDetalleMercancia() {
@@ -126,7 +110,7 @@ public class Guia implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idGuia != null ? idGuia.hashCode() : 0);
+        hash += (numeroGuia != null ? numeroGuia.hashCode() : 0);
         return hash;
     }
 
@@ -137,7 +121,7 @@ public class Guia implements Serializable {
             return false;
         }
         Guia other = (Guia) object;
-        if ((this.idGuia == null && other.idGuia != null) || (this.idGuia != null && !this.idGuia.equals(other.idGuia))) {
+        if ((this.numeroGuia == null && other.numeroGuia != null) || (this.numeroGuia != null && !this.numeroGuia.equals(other.numeroGuia))) {
             return false;
         }
         return true;
@@ -145,7 +129,7 @@ public class Guia implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sigmeyc.entities.Guia[ idGuia=" + idGuia + " ]";
+        return "com.sigmeyc.entities.Guia[ numeroGuia=" + numeroGuia + " ]";
     }
 
 }

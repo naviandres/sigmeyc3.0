@@ -93,9 +93,9 @@ public class Mercancia implements Serializable {
     private String estadoMercancia;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "mercancia", fetch = FetchType.LAZY)
     private Novedad novedad;
-    @JoinColumn(name = "guia_idGuia", referencedColumnName = "idGuia")
+    @JoinColumn(name = "guias_numeroGuia", referencedColumnName = "numeroGuia")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Guia guiaidGuia;
+    private Guia guiasnumeroGuia;
     @JoinColumn(name = "localidades_idLocalidad", referencedColumnName = "idLocalidad")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Localidad localidadesidLocalidad;
@@ -223,12 +223,12 @@ public class Mercancia implements Serializable {
         this.novedad = novedad;
     }
 
-    public Guia getGuiaidGuia() {
-        return guiaidGuia;
+    public Guia getGuiasnumeroGuia() {
+        return guiasnumeroGuia;
     }
 
-    public void setGuiaidGuia(Guia guiaidGuia) {
-        this.guiaidGuia = guiaidGuia;
+    public void setGuiasnumeroGuia(Guia guiasnumeroGuia) {
+        this.guiasnumeroGuia = guiasnumeroGuia;
     }
 
     public Localidad getLocalidadesidLocalidad() {

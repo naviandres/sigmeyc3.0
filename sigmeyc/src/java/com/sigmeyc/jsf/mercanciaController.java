@@ -80,8 +80,8 @@ public class mercanciaController implements Serializable {
             planillaid = planillaFacade.find(2);
         }
 
-        Guia guiaidGuia = new Guia(null, "778", mercancia.getTipoMercancia() + " " + mercancia.getDescripcionMercancia(), planillaid);//cambiar id
-        mercancia.setGuiaidGuia(guiaidGuia);
+        Guia guiaidGuia = new Guia(null, mercancia.getTipoMercancia() + " " + mercancia.getDescripcionMercancia(), planillaid);//cambiar id
+        mercancia.setGuiasnumeroGuia(guiaidGuia);
         this.guiaFacade.create(guiaidGuia);
         this.MercanciaFacade.create(mercancia);
         init();

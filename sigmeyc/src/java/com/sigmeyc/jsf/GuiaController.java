@@ -85,7 +85,7 @@ public class GuiaController implements Serializable {
 //        return "Create";
 //    }
     public String guardar() {
-        guia.setIdGuia(null);
+        guia.setNumeroGuia(null);
         this.guiaFacade.create(guia);
         init();
         return "/app/crud/guia/Create.xhtml?faces-redirect=true";
