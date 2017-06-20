@@ -24,11 +24,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ivan
+ * @author juanc
  */
 @Entity
 @Table(name = "ciudades")
@@ -36,8 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Ciudad.findAll", query = "SELECT c FROM Ciudad c")
     , @NamedQuery(name = "Ciudad.findByIdCiudades", query = "SELECT c FROM Ciudad c WHERE c.idCiudades = :idCiudades")
-    , @NamedQuery(name = "Ciudad.findByNombreCiudad", query = "SELECT c FROM Ciudad c WHERE c.nombreCiudad = :nombreCiudad")
-    , @NamedQuery(name = "Ciudad.findByZona", query = "SELECT c FROM Ciudad c WHERE c.zona = :zona")})
+    , @NamedQuery(name = "Ciudad.findByNombreCiudad", query = "SELECT c FROM Ciudad c WHERE c.nombreCiudad = :nombreCiudad")})
 public class Ciudad implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,11 +49,6 @@ public class Ciudad implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombreCiudad")
     private String nombreCiudad;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "zona")
-    private String zona;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciudadesidCiudades", fetch = FetchType.LAZY)
     private List<Localidad> localidadList;
     @JoinColumn(name = "departamentos_idDepartamento", referencedColumnName = "idDepartamento")
@@ -69,10 +62,9 @@ public class Ciudad implements Serializable {
         this.idCiudades = idCiudades;
     }
 
-    public Ciudad(Integer idCiudades, String nombreCiudad, String zona) {
+    public Ciudad(Integer idCiudades, String nombreCiudad) {
         this.idCiudades = idCiudades;
         this.nombreCiudad = nombreCiudad;
-        this.zona = zona;
     }
 
     public Integer getIdCiudades() {
@@ -89,23 +81,6 @@ public class Ciudad implements Serializable {
 
     public void setNombreCiudad(String nombreCiudad) {
         this.nombreCiudad = nombreCiudad;
-    }
-
-    public String getZona() {
-        return zona;
-    }
-
-    public void setZona(String zona) {
-        this.zona = zona;
-    }
-
-    @XmlTransient
-    public List<Localidad> getLocalidadList() {
-        return localidadList;
-    }
-
-    public void setLocalidadList(List<Localidad> localidadList) {
-        this.localidadList = localidadList;
     }
 
     public Departamento getDepartamentosidDepartamento() {

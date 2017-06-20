@@ -40,29 +40,21 @@
                                 </div>
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label"  value="idDepartamento" for="idDepartamento" />
+                                        <h:outputLabel class="col-xs-3 control-label"  value="Identificador del Departamento" for="Identificador del Departamento" />
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="idDepartamento" value="#{departamentoController.departamento.idDepartamento}"  required="true" requiredMessage="#{bundle.CreateDepartamentoRequiredMessage_idDepartamento}"/>
 
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="nombreDepartamento" for="nombreDepartamento" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Nombre del Departamento" for="Nombre del Departamento" />
 
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="nombreDepartamento" value="#{departamentoController.departamento.nombreDepartamento}"  />
 
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="ciudadesIdciudades" for="ciudadesIdciudades" />
-
-                                        <div class="col-xs-6">
-                                            <h:selectOneMenu class="form-control" id="ciudadesIdciudades" value="#{departamentoController.departamento.ciudadesidCiudades}" required="true" >
-                                                <f:selectItems value="#{ciudadController.ciudad.idCiudades}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-4">
                                             <h:commandButton class="btn btn-success" action="#{departamentoController.guardar()}" value="Crear"/>

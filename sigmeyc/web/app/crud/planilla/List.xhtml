@@ -36,21 +36,30 @@
                                         
                                         <p:column>
                                             <f:facet name="header">
-                                                <h:outputText value="ruta"/>
+                                                <h:outputText value="Identificador de la planilla"/>
                                             </f:facet>
-                                            <h:outputText value="#{pla.ruta}"/>
+                                            <h:outputText value="#{pla.idPlanilla}"/>
                                         </p:column>
                                         <p:column>
                                             <f:facet name="header">
-                                                <h:outputText value="cantidadGuias"/>
+                                                <h:outputText value="Cantidad de Guias"/>
                                             </f:facet>
                                             <h:outputText value="#{pla.cantidadGuias}"/>
+                                        </p:column>
+
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Identificador de la Ruta"/>
+                                            </f:facet>
+                                            <h:outputText value="#{pla.rutasidRutas}">
+                                                 <f:converter converterId="rutaConverter"/>
+                                                </h:outputText>
                                         </p:column>
                                         <p:column>
                                             <f:facet name="header">
                                                 <h:outputText value="Opciones"/>
                                             </f:facet>
-                                            <h:commandLink action="#{planillaController.prepareView(pla)}"><i class="fa fa-eye fa-2x"></i></h:commandLink>
+<!--                                            <h:commandLink action="#{planillaController.prepareView(pla)}"><i class="fa fa-eye fa-2x"></i></h:commandLink>-->
                                             <h:outputText value=" "/>
                                             <h:commandLink action="#{planillaController.Editar(pla)}"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></h:commandLink>
                                             <h:outputText value=" "/>

@@ -40,26 +40,27 @@
                                 </div>
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="ID" for="id" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Identificador de la planilla" for="Identificador de la planilla" />
 
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="id" value="#{planillaController.planilla.idPlanilla}" />
                                         </div>
                                     </div>
+                                    
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="ruta" for="ruta" />
-
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="ruta" value="#{planillaController.planilla.ruta}" required="true" requiredMessage="Ingrese ruta" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="cantidadGuias" for="cantidadGuias" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Cantidad de Guias" for="Cantidad de Guias" />
 
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="cantidadGuias" value="#{planillaController.planilla.cantidadGuias}" required="true" requiredMessage="Ingrese cantidad guias" />
                                         </div>
                                     </div>
+<!--                                    <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="Identificador de la Ruta" for="Identificador de la Ruta" />
+
+                                        <div class="col-xs-6">
+                                            <h:inputText class="form-control" id="ruta" value="#{planillaController.planilla.ruta}" required="true" requiredMessage="Ingrese ruta" />
+                                        </div>
+                                    </div>-->
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-4">
                                             <h:commandButton class="btn btn-success" action="#{planillaController.GuardarEdicion()}" value="Guardar"/>

@@ -43,7 +43,7 @@
                                         <p:dataTable id="example2" class="table table-bordered table-hover" value="#{novedadController.novedades}" var="novedad" >
                                             <p:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Identificador de la mercancia"/>
+                                                    <h:outputText value="Identificador de la Mercancia"/>
                                                 </f:facet>
                                                 <h:outputText value="#{novedad.idMercancia}"/>
                                             </p:column>
@@ -59,18 +59,7 @@
                                                 </f:facet>
                                                 <h:outputText value="#{novedad.tipoNovedad}"/>
                                             </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Descripcion"/>
-                                                </f:facet>
-                                                <h:outputText value="#{novedad.descripcion}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Prioridad"/>
-                                                </f:facet>
-                                                <h:outputText value="#{novedad.prioridad}"/>
-                                            </p:column>
+                                       
                                            
                                             <p:column>
                                                 <f:facet name="header">

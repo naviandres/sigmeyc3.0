@@ -12,10 +12,10 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author daniel
+ * @author juanc
  */
 @Stateless
-public class ConductorFacade extends AbstractFacade<Conductor> {
+public class ConductorFacade extends AbstractFacade<Conductor> implements ConductorFacadeLocal {
 
     @PersistenceContext(unitName = "sigmeycPU")
     private EntityManager em;

@@ -40,28 +40,28 @@
                                 </div>
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="identificacionConductor" for="identificacionConductor" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Documento del Conductor" for="Documento del Conductor" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="identificacionConductor" value="#{conductorController.conductor.identificacionConductor}"  required="true" requiredMessage="#{bundle.EditConductorRequiredMessage_identificacionConductor}"/>
+                                            <h:inputText class="form-control" id="identificacionConductor" value="#{conductorController.conductor.documento}"  required="true" requiredMessage="#{bundle.EditConductorRequiredMessage_identificacionConductor}"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="tipoLicencia" for="tipoLicencia" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Tipo de Licencia" for="Tipo de Licencia" />
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="tipoLicencia" value="#{conductorController.conductor.tipoLicencia}"  />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="numeroLicencia" for="numeroLicencia" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Numero de Licencia" for="Numero de Licencia" />
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="tipoLicencia" value="#{conductorController.conductor.numeroLicencia}"  />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="vehiculosplacaVehiculo" for="vehiculosplacaVehiculo" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Placa del Vehiculo" for="Placa del Vehiculo" />
                                         <div class="col-xs-6">
                                             <h:selectOneMenu class="form-control" id="vehiculosplacaVehiculo" value="#{conductorController.conductor.vehiculosidVehiculo}"  required="true" requiredMessage="#{bundle.EditConductorRequiredMessage_vehiculosplacaVehiculo}">
-                                                <f:selectItems value="#{vehiculoController.placaVehiculo}"/>
+                                                <f:selectItems value="#{vehiculoController.vehiculos}" var="v" itemLabel="#{v.placaVehiculo}"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>

@@ -40,29 +40,24 @@
                                 </div>
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <h:outputLabel  class="col-xs-3 control-label" value="idCiudades" for="idCiudades" />
+                                        <h:outputLabel  class="col-xs-3 control-label" value="Identificador de la Ciudad" for="Identificador de la Ciudad" />
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="idCiudades" value="#{ciudadController.ciudad.idCiudades}"   required="true" requiredMessage="#{bundle.EditCiudadRequiredMessage_idCiudades}"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="nombreCiudad" for="nombreCiudad" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Nombre de la Ciudad" for="Nombre de la Ciudad" />
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="nombreCiudad" value="#{ciudadController.ciudad.nombreCiudad}"  />
                                         </div>
                                     </div>
+                                    
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="zona" for="zona" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Identificador del Departamento" for="Identificador del Departamento" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="zona" value="#{ciudadController.ciudad.zona}"   />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="idLocalidad" for="localidadidLocalidad" />
-                                        <div class="col-xs-6">
-                                            <h:selectOneMenu id="localidadidLocalidad" value="#{ciudadController.ciudad.localidadidLocalidad}"  required="true" requiredMessage="#{bundle.EditCiudadRequiredMessage_localidadidLocalidad}">
-                                                <f:selectItems value="#{localidadController.localidad.idLocalidad}"/>
-                                            </h:selectOneMenu>
+                                            <h:selectOneMenu id="localidadidLocalidad" value="#{ciudadController.ciudad.departamentosidDepartamento}"  >
+                                                    <f:selectItems value="#{departamentoController.departamentos}" var="m" itemLabel="#{m.idDepartamento}"/>
+                                                </h:selectOneMenu>
                                         </div>
                                     </div>
                                     <div class="row">

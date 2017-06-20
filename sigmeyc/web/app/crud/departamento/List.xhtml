@@ -49,28 +49,23 @@
                                         <p:dataTable id="example2" class="table table-bordered table-hover" value="#{departamentoController.departamentos}" var="depa"  >
                                             <p:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="idDepartamento"/>
+                                                    <h:outputText value="Identificador del Departamento"/>
                                                 </f:facet>
                                                 <h:outputText value="#{depa.idDepartamento}"/>
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="nombreDepartamento"/>
+                                                    <h:outputText value="Nombre del Departamento"/>
                                                 </f:facet>
                                                 <h:outputText value="#{depa.nombreDepartamento}"/>
                                             </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="ciudadesIdciudades"/>
-                                                </f:facet>
-                                                <h:outputText value="#{depa.ciudadesidCiudades}"/>
-                                            </p:column>
+                                           
                                             <p:column exportable="false">
                                                 <f:facet name="header" >
                                                     <h:outputText value="Opciones"/>
                                                 </f:facet>
 
-                                                <h:commandLink action="#{departamentoController.prepareView(depa)}" value=""> <i class="fa fa-eye fa-2x"></i></h:commandLink> 
+<!--                                                <h:commandLink action="#{departamentoController.prepareView(depa)}" value=""> <i class="fa fa-eye fa-2x"></i></h:commandLink> -->
 
 
                                                 <h:outputText value=" "/>

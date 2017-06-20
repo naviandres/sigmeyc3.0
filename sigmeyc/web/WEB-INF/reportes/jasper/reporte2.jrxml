@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteMercancia" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1edc0d5f-b673-4efa-ae61-25d23c066f73">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFCC">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#DC143C">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table" style="table_TH">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="NombreUsuario" class="java.lang.String"/>
+	<parameter name="fecha" class="java.util.Date"/>
+	<field name="ValorDeclarado" class="java.lang.Double"/>
+	<field name="tipoMercancia" class="java.lang.String"/>
+	<field name="peso" class="java.lang.Double"/>
+	<field name="longitud" class="java.lang.Double"/>
+	<field name="ancho" class="java.lang.Double"/>
+	<field name="altura" class="java.lang.Double"/>
+	<field name="volumen" class="java.lang.Double"/>
+	<field name="estadoMercancia" class="java.lang.String"/>
+	<background>
+		<band height="555" splitType="Stretch">
+			<image scaleImage="Clip">
+				<reportElement style="table" positionType="FixRelativeToBottom" mode="Opaque" x="0" y="0" width="802" height="555" backcolor="#CC0000" uuid="f1c9d43a-711d-46e0-a385-e0fb7c2910f5"/>
+				<imageExpression><![CDATA["imagenes\\vector.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement x="143" y="0" width="483" height="102" uuid="db4c6d6f-cf47-4d2b-8938-8b7c45f267b2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="48"/>
+				</textElement>
+				<text><![CDATA[SIGMEYC]]></text>
+			</staticText>
+			<image>
+				<reportElement x="625" y="0" width="177" height="102" uuid="2c3b5433-851a-4ccb-b8a4-a7410798bc46"/>
+				<imageExpression><![CDATA["imagenes\\activacel3.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="580" y="0" width="100" height="22" uuid="5ab8b28d-e551-4f9d-821f-c011ba2a1314"/>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="326" y="0" width="254" height="22" uuid="4a5547bb-75c6-41c1-996a-bd6a47ff334c"/>
+				<textFieldExpression><![CDATA[$P{NombreUsuario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="213" y="0" width="113" height="22" uuid="6da9187d-5c11-4c1a-b8a0-97252b9f4eb0"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="680" y="0" width="123" height="22" uuid="ba96a493-8985-4801-b4b0-763672387dfc"/>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement style="table_TD" mode="Transparent" x="0" y="0" width="100" height="31" uuid="b883ba40-3616-4b02-87d4-3695e70f146f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Valor Declarado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" mode="Transparent" x="100" y="0" width="100" height="31" uuid="13fe0d00-edec-4aba-ac90-a3eeee34ed16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Tipo Mercancia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" mode="Transparent" x="200" y="0" width="89" height="31" uuid="91692031-1e0c-415f-a0eb-1e694306773b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Peso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" mode="Transparent" x="289" y="0" width="99" height="31" uuid="21e2f136-7e7c-465f-a512-183c6dd9f0b2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Longitud]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" mode="Transparent" x="388" y="0" width="100" height="31" uuid="2f125b46-92f4-4d0d-bdff-0a64eba01693"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Ancho]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" mode="Transparent" x="488" y="0" width="100" height="31" uuid="09bc6624-026b-417f-a4b1-7a5733f2ba1d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Altura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" mode="Transparent" x="588" y="0" width="100" height="31" uuid="ba9d1175-af38-4d27-bf61-e86cc43d096f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Volumen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" mode="Transparent" x="688" y="0" width="115" height="31" uuid="9178cf4d-4ace-4d2f-b706-8d573954c8f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Estado  de la Mercancia]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement style="table_TD" mode="Transparent" x="0" y="0" width="100" height="20" uuid="d3e260da-dea0-4783-b02d-112d9a9f8108"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ValorDeclarado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" mode="Transparent" x="100" y="0" width="100" height="20" uuid="18f999f0-0433-4d96-9748-bcf7318fe1c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoMercancia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" mode="Transparent" x="200" y="0" width="89" height="20" uuid="c23f6475-77f7-4adb-8ec8-b246f2a6bdfd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{peso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" mode="Transparent" x="289" y="0" width="99" height="20" uuid="acb111f8-3435-404e-8adf-1931f5053203"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{longitud}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" mode="Transparent" x="388" y="0" width="100" height="20" uuid="b203ba19-c044-4194-8dc4-e8267a4058fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ancho}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" mode="Transparent" x="488" y="0" width="100" height="20" uuid="265c41aa-ce48-43ab-b248-0315b94eb361"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{altura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" mode="Transparent" x="588" y="0" width="100" height="20" uuid="c985e5a8-d47c-422c-a8ec-90da8b191e17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{volumen}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" mode="Transparent" x="688" y="0" width="115" height="20" uuid="27bc8be2-5193-43d5-9da4-99745cd1ac43"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estadoMercancia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="18" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="15" splitType="Stretch"/>
+	</summary>
+</jasperReport>

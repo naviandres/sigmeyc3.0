@@ -44,7 +44,7 @@
                                         <p:dataTable id="example2" class="table table-bordered table-hover"  value="#{conductorController.conductores}" var="con"  >
                                             <p:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="identificacion conductor"/>
+                                                    <h:outputText value="Documento del conductor"/>
                                                 </f:facet>
                                                 <h:outputText value="#{con.documento}"/>
                                             </p:column>
@@ -70,7 +70,7 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="Opciones"/>
                                                 </f:facet>
-                                                <h:commandLink action="#{conductorController.prepareView(con)}" value=""><i class="fa fa-eye fa-2x"></i></h:commandLink>
+<!--                                                <h:commandLink action="#{conductorController.prepareView(con)}" value=""><i class="fa fa-eye fa-2x"></i></h:commandLink>-->
                                                 <h:outputText value=" "/>
                                                 <h:commandLink action="#{conductorController.Editar(con)}" value=""><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></h:commandLink>
                                                 <h:outputText value=" "/>

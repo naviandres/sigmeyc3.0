@@ -40,49 +40,41 @@
                                 </div>
                                 <div class="box-body">
                                     <div class="form-group ">
-                                        <h:outputLabel class="col-xs-3 control-label" value="codigoNovedad" for="codigoNovedad" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Identificador de la Mercancia" for="Identificador de la Mercancia" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="codigoNovedad" value="#{novedadController.novedad.idNovedad}"  required="true" />
+                                            <h:inputText class="form-control" id="codigoNovedad" value="#{novedadController.novedad.idMercancia}"  required="true" />
 
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="detalle" for="detalle" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Detalle" for="Detalle" />
 
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="detalle" value="#{novedadController.novedad.detalle}"  />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="tipoNovedad" for="tipoNovedad" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Tipo de Novedad" for="Tipo de Novedad" />
 
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="tipoNovedad" value="#{novedadController.novedad.tipoNovedad}"  />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="descripcion" for="descripcion" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Descripcion" for="Descripcion" />
 
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="descripcion" value="#{novedadController.novedad.descripcion}"  />
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="prioridad" for="prioridad" />
+                                        <h:outputLabel class="col-xs-3 control-label" value="Prioridad" for="Prioridad" />
 
                                         <div class="col-xs-6">
                                             <h:inputText class="form-control" id="prioridad" value="#{novedadController.novedad.prioridad}"  />
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="mercanciascodigoMercancia" for="mercanciascodigoMercancia" />
-
-                                        <div class="col-xs-6">
-                                            <h:selectOneMenu class="form-control" id="mercanciascodigoMercancia" value="#{novedadController.novedad.mercanciasidMercancia}" >
-                                                <f:selectItems value="#{mercanciaController.mercancias}"/>
-                                            </h:selectOneMenu>                                      
-                                        </div>
-                                    </div>
+               
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-4">
                                             <h:commandButton class="btn btn-success" action="#{novedadController.guardar()}" value="Guardar"/>

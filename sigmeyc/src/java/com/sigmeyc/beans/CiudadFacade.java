@@ -12,10 +12,10 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author daniel
+ * @author juanc
  */
 @Stateless
-public class CiudadFacade extends AbstractFacade<Ciudad> {
+public class CiudadFacade extends AbstractFacade<Ciudad> implements CiudadFacadeLocal {
 
     @PersistenceContext(unitName = "sigmeycPU")
     private EntityManager em;
