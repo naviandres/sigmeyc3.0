@@ -5,28 +5,28 @@
  */
 package com.sigmeyc.beans;
 
-import com.sigmeyc.entities.Mercancia;
+import com.sigmeyc.entities.Email;
 import java.util.List;
 import javax.ejb.Local;
 
 /**
  *
- * @author juanc
+ * @author Nick
  */
 @Local
-public interface MercanciaFacadeLocal {
+public interface EmailFacadeLocal {
 
-    void create(Mercancia mercancia);
+    void create(Email email);
 
-    void edit(Mercancia mercancia);
+    void edit(Email email);
 
-    void remove(Mercancia mercancia);
+    void remove(Email email);
 
-    Mercancia find(Object id);
+    Email find(Object id);
 
-    List<Mercancia> findAll();
+    List<Email> findAll();
 
-    List<Mercancia> findRange(int[] range);
+    List<Email> findRange(int[] range);
 
     int count();
     

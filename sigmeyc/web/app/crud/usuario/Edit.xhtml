@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title">
@@ -14,7 +15,7 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form id="createLocalidad" class="box-body form-horizontal">
+            <h:form id="createLocalidad" class="box-body form-horizontal" enctype="multipart/form-data">
                 <div class="container">
                     <section class="content-header">
                         <h1>
@@ -39,10 +40,11 @@
                                     </div>
                                 </div>
                                 <div class="box-body">
-                                    <div class="form-group">
-                                        <h:outputLabel class="col-xs-3 control-label" value="codigoUsuario" for="codigoUsuario" />
+                                    
+                                    <div class="form-group">    
+                                        <h:outputLabel class="col-xs-3 control-label" value="documento" for="documento" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="codigoUsuario" value="#{usuarioController.usuario.idUsuario}" />
+                                            <h:inputText class="form-control" id="documento" value="#{usuarioController.usuario.documento}" required="true" requiredMessage="Ingrese documento" />
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -55,12 +57,6 @@
                                                     <f:selectItem id="pa" itemLabel="Pasaporte" itemValue="PAS"/>
                                                 </h:selectOneMenu>
                                             </div>
-                                    </div>
-                                    <div class="form-group">    
-                                        <h:outputLabel class="col-xs-3 control-label" value="documento" for="documento" />
-                                        <div class="col-xs-6">
-                                            <h:inputText class="form-control" id="documento" value="#{usuarioController.usuario.documento}" required="true" requiredMessage="Ingrese documento" />
-                                        </div>
                                     </div>
                                     <div class="form-group">    
                                         <h:outputLabel class="col-xs-3 control-label" value="primerNombre" for="primerNombre" />
@@ -110,6 +106,10 @@
                                             <h:inputText class="form-control" id="clave" value="#{usuarioController.usuario.clave}" required="true" requiredMessage="Ingrese clave"/>
                                         </div>
                                     </div>
+                                     <h:outputLabel for="file" value="Archivo"/>
+            <h:inputFile id="file"
+                        a:multiple="true" />
+            <h:commandButton value="Enviar" actionListener="#{fileUploadController.upload()}"/>
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-4">
                                             <h:commandButton class="btn btn-success" action="#{usuarioController.guardarEdicion()}" value="Guardar"/>

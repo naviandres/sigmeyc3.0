@@ -64,6 +64,7 @@ public class UsuarioController implements Serializable {
         } catch (Exception e) {
             MessageUtil.enviarMensajeError("createUsuario", "No se puede registrar", "Ya existe un usuario con ese documento");
             MessageUtil.enviarMensajeError("formPer", "No se puede registrar", "Ya existe un usuario con ese documento");
+            
         }
     }
 

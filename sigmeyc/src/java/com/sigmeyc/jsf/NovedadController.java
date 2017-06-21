@@ -2,6 +2,7 @@ package com.sigmeyc.jsf;
 
 import com.sigmeyc.beans.NovedadFacade;
 import com.sigmeyc.entities.Novedad;
+import com.sigmeyc.jsf.util.MessageUtil;
 
 
 import java.io.Serializable;
@@ -20,7 +21,7 @@ public class NovedadController implements Serializable {
   
 
     @EJB
-    private NovedadFacade NovedadFacade;
+    private NovedadFacade novedadFacade;
     private Novedad novedad;
 
     public NovedadController() {
@@ -41,10 +42,17 @@ public class NovedadController implements Serializable {
         this.novedad = novedad;
     }
     
- public String guardar() {
-        this.NovedadFacade.create(novedad);
-        init();
-        return "/app/crud/novedad/Create.xthml?faces-redirect=true";
+ public void guardar() {
+         try {
+            if (novedad != null) {
+                novedad.setIdMercancia(null);
+                novedadFacade.create(novedad);
+            } else {
+                MessageUtil.enviarMensajeError("createNovedad", "Los campos no fueron diligenciados", "Complete los campos requeridos");
+            }
+        } catch (Exception e) {
+            MessageUtil.enviarMensajeError("createNovedad", "No se puede registrar", "Ya existe una novedad");
+        }
     }
     
     public String prepareCreate() {
@@ -61,11 +69,11 @@ public class NovedadController implements Serializable {
     }
 
     public List<Novedad> getNovedades() {
-        return this.NovedadFacade.findAll();
+        return this.novedadFacade.findAll();
     }
 
     public String Eliminar(Novedad l) {
-        this.NovedadFacade.remove(l);
+        this.novedadFacade.remove(l);
         return "/app/crud/novedad/List.xthml?faces-redirect=true";
     }
     public String Editar(Novedad l) {
@@ -74,7 +82,7 @@ public class NovedadController implements Serializable {
     }
 
     public String GuardarEdicion() {
-        NovedadFacade.edit(novedad);
+        novedadFacade.edit(novedad);
         return "/app/crud/novedad/List.xthml?faces-redirect=true";
     }
    

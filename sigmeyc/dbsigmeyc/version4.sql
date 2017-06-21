@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.13, for linux-glibc2.5 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: sigmeyc
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.19-MariaDB
+-- Server version	5.5.5-10.1.21-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -178,6 +178,38 @@ LOCK TABLES `departamentos` WRITE;
 /*!40000 ALTER TABLE `departamentos` DISABLE KEYS */;
 INSERT INTO `departamentos` VALUES (1,'Cundinamarca');
 /*!40000 ALTER TABLE `departamentos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `emails`
+--
+
+DROP TABLE IF EXISTS `emails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `emails` (
+  `idemails` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) DEFAULT NULL,
+  `apellido` varchar(45) DEFAULT NULL,
+  `correo` varchar(45) DEFAULT NULL,
+  `correoDestinatario` varchar(45) DEFAULT NULL,
+  `asunto` varchar(45) DEFAULT NULL,
+  `mensaje` varchar(400) DEFAULT NULL,
+  `usuarios_documento` bigint(15) DEFAULT NULL,
+  PRIMARY KEY (`idemails`),
+  KEY `fk_emails_usuarios1_idx` (`usuarios_documento`),
+  CONSTRAINT `fk_emails_usuarios1` FOREIGN KEY (`usuarios_documento`) REFERENCES `usuarios` (`documento`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `emails`
+--
+
+LOCK TABLES `emails` WRITE;
+/*!40000 ALTER TABLE `emails` DISABLE KEYS */;
+INSERT INTO `emails` VALUES (1,'nick','rubiano','nicksealer@gmail.com','sigmeyc@gmail.com','añsdhfdaksjfhsañlfksaf','lskdjfñlsdfjowiejweoirjusat',NULL),(2,'nick','rubiano','nicksealer@gmail.com','sigmeyc@gmail.com','añsdhfdaksjfhsañlfksaf','lskdjfñlsdfjowiejweoirjusat',NULL);
+/*!40000 ALTER TABLE `emails` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -681,4 +713,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-19 12:40:16
+-- Dump completed on 2017-06-21  7:12:45

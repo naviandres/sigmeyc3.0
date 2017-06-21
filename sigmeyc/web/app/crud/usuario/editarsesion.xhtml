@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:composition template="/WEB-INF/template/template.xhtml">
         <ui:define name="title">
@@ -14,7 +15,7 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form id="editarUsuarioSesion" class="box-body form-horizontal" prependId="false">
+            <h:form id="editarUsuarioSesion" class="box-body form-horizontal" prependId="false" enctype="multipart/form-data">
                 <div class="container">
                     <div class="content-header">
                         <h1>
@@ -90,6 +91,12 @@
                                             <h:inputText class="form-control" id="clave" value="#{sessionController.clave}" required="true" requiredMessage="Ingrese clave"/>
                                         </div>
                                     </div>
+                                    <div id="form-group">
+                                        <h:outputLabel for="fileUpload" value="Archivo: "/>
+                                        <h:inputFile id="fileUpload" a:multiple="true"/>
+                                    </div>
+                                    <h:commandButton value="update progres" id="upload" actionListener="#{fileUploadController.upload}">
+                                    </h:commandButton>
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-3">
                                             <h:commandButton class="btn btn-success" action="#{sessionController.actualizar()}" value="Guardar"/>
