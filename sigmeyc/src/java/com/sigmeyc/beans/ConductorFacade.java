@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author juanc
  */
 @Stateless
-public class ConductorFacade extends AbstractFacade<Conductor> implements ConductorFacadeLocal {
+public class ConductorFacade extends AbstractFacade<Conductor>  {
 
     @PersistenceContext(unitName = "sigmeycPU")
     private EntityManager em;

@@ -103,25 +103,7 @@
                                                 </f:facet>
                                                 <h:outputText value="#{mer.estadoMercancia}"/>
                                             </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="idDepartamento"/>
-                                                </f:facet>
-                                                <h:outputText value="#{mer.localidadesidLocalidad.nombreLocalidad}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="codigoBarras"/>
-                                                </f:facet>
-                                                <h:outputText value="#{mer.guiaidGuia.nueroGuia}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="codigoSolicitud"/>
-                                                </f:facet>
-                                                <h:outputText value="#{mer.solicitudesidSolicitud}" converter="solicitudConverter"/>
-                                            </p:column>
-                                            <p:column exportable="false">
+                                                                                       <p:column exportable="false">
                                                 <f:facet name="header">
                                                     <h:outputText value="Opciones"/>
                                                 </f:facet>
@@ -149,6 +131,9 @@
                                                 <p:button class="btn btn-success" value="pdf"/>
                                                 <p:dataExporter type="pdf" target="example2" fileName="mercancias" />
                                             </h:commandLink>
+                                            
+                                            <h:commandButton id="btn-reporte-usuarios" value="Exportar PDF"
+                                                              actionListener="#{jasperReportController.exportarPDF()}"/>
 
                                         </div>
                                         <br />

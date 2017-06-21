@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author juanc
  */
 @Stateless
-public class CiudadFacade extends AbstractFacade<Ciudad> implements CiudadFacadeLocal {
+public class CiudadFacade extends AbstractFacade<Ciudad> {
 
     @PersistenceContext(unitName = "sigmeycPU")
     private EntityManager em;

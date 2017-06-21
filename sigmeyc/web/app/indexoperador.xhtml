@@ -105,12 +105,7 @@
                                                         </f:facet>
                                                         <h:outputText value="#{mer.idMercancia}"/>
                                                     </p:column>
-                                                    <p:column>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="valor Declarado"/>
-                                                        </f:facet>
-                                                        <h:outputText value="#{mer.valorDeclarado}"/>
-                                                    </p:column>
+                                               
                                                     <p:column>
                                                         <f:facet name="header">
                                                             <h:outputText value="tipo de Mercancia"/>
@@ -194,12 +189,7 @@
 
                                                 <p:dataTable id="example2" class="table table-bordered table-hover" value="#{planillaController.planillas}" var="pla">
 
-                                                    <p:column>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Ruta"/>
-                                                        </f:facet>
-                                                        <h:outputText value="#{pla.rutasidRutas}" converter="rutaConverter"/>
-                                                    </p:column>
+                                                    
                                                     <p:column>
                                                         <f:facet name="header">
                                                             <h:outputText value="Cantidad de Guias"/>
@@ -239,7 +229,7 @@
                                                         <f:facet name="header">
                                                             <h:outputText value="Numero de Guia"/>
                                                         </f:facet>
-                                                        <h:outputText value="#{guia.nueroGuia}"/>
+                                                        <h:outputText value="#{guia.numeroGuia}"/>
                                                     </p:column>
                                                     <p:column>
                                                         <f:facet name="header">
