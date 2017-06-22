@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:pr="http://primefaces.org/ui">
 
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title" >
@@ -55,25 +56,27 @@
                                     <div class="form-group">
                                         <h:outputLabel  class="col-xs-3 control-label" value="longitud" for="longitud" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" p:placeholder="Longitud" id="longitud" value="#{mercanciaController.mercancia.longitud}"  />
+                                            <pr:spinner id="longitud" class="form-control"
+                                                        
+                                                        value="#{mercanciaController.mercancia.longitud}" prefix="cm "  min="1" max="300"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="ancho" for="ancho" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" p:placeholder="Ancho" id="ancho" value="#{mercanciaController.mercancia.ancho}"  />
+                                            <pr:spinner id="ancho" class="form-control" value="#{mercanciaController.mercancia.ancho}" prefix="cm " min="1" max="300"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel class="col-xs-3 control-label" value="altura" for="altura" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" p:placeholder="Altura" id="altura" value="#{mercanciaController.mercancia.altura}"  />
+                                            <pr:spinner id="altura" class="form-control" value="#{mercanciaController.mercancia.altura}" prefix="cm " min="1" max="300"/>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <h:outputLabel  class="col-xs-3 control-label" value="cantidad" for="cantidad" />
                                         <div class="col-xs-6">
-                                            <h:inputText class="form-control" p:placeholder="Cantidad" id="cantidad" value="#{mercanciaController.mercancia.cantidad}"  />
+                                            <pr:spinner  id="cantidad" class="form-control" value="#{mercanciaController.mercancia.cantidad}" min="1" max="5"/>
                                         </div>
                                     </div>
                                     <div class="form-group ">
@@ -99,15 +102,6 @@
                                             </h:selectOneMenu>  
                                         </div>
                                     </div>   
-                                    <div class="form-group ">
-                                        <h:outputLabel class="col-xs-3 control-label" value="Precios" for="Precios" />
-                                        <div class="col-xs-6">
-                                            <h:selectOneMenu id="Precios" p:placeholder="Precios" class="form-control" value="#{mercanciaController.mercancia.preciosIdprecios}" converter="precioConverter" required="true">
-                                                <f:selectItem itemLabel="Precio" itemDisabled="disabled"/>
-                                                <f:selectItems value="#{precioController.precios}" var="p" itemLabel="#{p.valor}"/>
-                                            </h:selectOneMenu>
-                                        </div>
-                                    </div>
                                     <div class="row">
                                         <div class="col-lg-2 col-lg-offset-4">
                                             <h:commandButton class="btn btn-success" action="#{mercanciaController.guardar()}" value="Guardar"/>

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title">
@@ -37,28 +38,19 @@
                                 </div>
                             </div>
                             <div class="box-body">
-                                
+
                                 <div class="form-group">
                                     <h:outputLabel class="col-xs-3 control-label" value="placaVehiculo" for="placaVehiculo" />
                                     <div class="col-xs-6">
-                                        <h:inputText class="form-control" id="placaVehiculo" value="#{vehiculoController.placaVehiculo}" required="true" requiredMessage="Ingrese placa">
+                                        <h:inputText class="form-control" id="placaVehiculo" value="#{vehiculoController.vehiculo.placaVehiculo}" required="true" requiredMessage="Ingrese placa">
                                             <!--<f:validateRegex id="placaVehiculo" pattern="[A-Za-z]{3}[0-9]{3}"/>--> 
-                                        </h:inputText>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <h:outputLabel class="col-xs-3 control-label" value="modelo" for="modelo" />
-                                    <div class="col-xs-6">
-                                        <h:inputText class="form-control" id="modelo" value="#{vehiculoController.modelo}" required="true" requiredMessage="Ingrese modelo">
-                                            <!--                                            <f:validateRegex id="modelor" pattern="((?=.*[a-z]).{10,})"/> 
-                                                                                        <h:message for="modelor" class="alert alert-danger"></h:message>-->
                                         </h:inputText>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel id="lblTipoVeh" for="lblTipoVeh" value="Tipo de vehiculo:" class="col-xs-3 control-label"/>
                                     <div class="col-xs-6" >
-                                        <h:selectOneMenu id="selTipoVe" class="form-control" value="#{vehiculoController.tipoVehiculo}" required="true" requiredMessage="Ingrese tipo vehiculo">
+                                        <h:selectOneMenu id="selTipoVe" class="form-control" value="#{vehiculoController.vehiculo.tipoVehiculo}" required="true" requiredMessage="Ingrese tipo vehiculo">
                                             <f:selectItem id="opcSele" itemLabel="Seleccione Tipo De Vehiculo" itemDisabled="disabled"/>
                                             <f:selectItem id="vehicTu" itemLabel="Vehiculo turbo" itemValue="Vehiculo turbo"/>
                                             <f:selectItem id="dosEje" itemLabel="Camion dos ejes" itemValue="Camion dos ejes"/>
@@ -70,17 +62,22 @@
 
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <h:outputLabel class="col-xs-3 control-label" value="marca" for="marca" />
-
-                                    <div class="col-xs-6">
-                                        <h:inputText class="form-control" id="marca" value="#{vehiculoController.marca}" required="true" requiredMessage="Ingrese marca"/>
-                                    </div>
-                                </div>
+<!--                                 <div class="form-group">
+                                        <h:outputLabel class="col-xs-3 control-label" value="Marca" for="Marca" />
+                                        <div class="col-xs-6">
+                                            <h:selectOneMenu value="#{modeloController.modelo.marcasidMarca}" id="marcas" converter="MarcaConverter" p:placeholder="Marcas" required="true">
+                                            <f:selectItem itemLabel="Seleccione una marca" itemDisabled="disabled"/>
+                                            <f:selectItems value="#{marcaController.marcas}" var="m" itemLabel="#{m.marca}" />
+                                        </h:selectOneMenu> 
+                                            
+                                            
+                                        </div> 
+                                 </div>-->
+                            
                                 <div class="form-group">
                                     <h:outputLabel id="lblCapCarga" for="lblCapCarga" value="Capacidad de carga:" class="col-xs-3 control-label"/>
                                     <div class="col-xs-6">
-                                        <h:selectOneMenu id="selCapCarga" class="form-control" value="#{vehiculoController.capacidadCarga}" required="true" requiredMessage="Ingrese capacidad carga">
+                                        <h:selectOneMenu id="selCapCarga" class="form-control" value="#{vehiculoController.vehiculo.capacidadCarga}" required="true" requiredMessage="Ingrese capacidad carga">
                                             <f:selectItem id="opcSeleC" itemLabel="Seleccione Capacidad de Carga" itemDisabled="disabled"/>
                                             <f:selectItem id="t1" itemLabel="4.5 Toneladas" itemValue="4.5 Toneladas"/>
                                             <f:selectItem id="t2" itemLabel="8.5 Toneladas" itemValue="8.5 Toneladas"/>

@@ -19,28 +19,9 @@
 -- Table structure for table `bitacoraplanillas`
 --
 
-DROP TABLE IF EXISTS `bitacoraplanillas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bitacoraplanillas` (
-  `idbitacora` int(11) NOT NULL AUTO_INCREMENT,
-  `movimiento` varchar(20) NOT NULL,
-  `codigoPlanilla` int(11) NOT NULL,
-  `ruta` varchar(20) NOT NULL,
-  `cantidadGuias` int(11) NOT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idbitacora`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla de soporte Triggers\n																																																								';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
 -- Dumping data for table `bitacoraplanillas`
 --
-
-LOCK TABLES `bitacoraplanillas` WRITE;
-/*!40000 ALTER TABLE `bitacoraplanillas` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bitacoraplanillas` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `ciudades`
@@ -51,11 +32,9 @@ UNLOCK TABLES;
 -- Dumping data for table `ciudades`
 --
 
-LOCK TABLES `ciudades` WRITE;
 /*!40000 ALTER TABLE `ciudades` DISABLE KEYS */;
 INSERT INTO `ciudades` VALUES (1,'Bogota D.C',1);
 /*!40000 ALTER TABLE `ciudades` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `conductores`
@@ -66,10 +45,8 @@ UNLOCK TABLES;
 -- Dumping data for table `conductores`
 --
 
-LOCK TABLES `conductores` WRITE;
 /*!40000 ALTER TABLE `conductores` DISABLE KEYS */;
 /*!40000 ALTER TABLE `conductores` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `cotizaciones`
@@ -79,10 +56,8 @@ UNLOCK TABLES;
 -- Dumping data for table `cotizaciones`
 --
 
-LOCK TABLES `cotizaciones` WRITE;
 /*!40000 ALTER TABLE `cotizaciones` DISABLE KEYS */;
 /*!40000 ALTER TABLE `cotizaciones` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `cubicaciones`
@@ -92,10 +67,8 @@ UNLOCK TABLES;
 -- Dumping data for table `cubicaciones`
 --
 
-LOCK TABLES `cubicaciones` WRITE;
 /*!40000 ALTER TABLE `cubicaciones` DISABLE KEYS */;
 /*!40000 ALTER TABLE `cubicaciones` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `departamentos`
@@ -106,11 +79,9 @@ UNLOCK TABLES;
 -- Dumping data for table `departamentos`
 --
 
-LOCK TABLES `departamentos` WRITE;
 /*!40000 ALTER TABLE `departamentos` DISABLE KEYS */;
 INSERT INTO `departamentos` VALUES (1,'Cundinamarca');
 /*!40000 ALTER TABLE `departamentos` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `empresas`
@@ -120,11 +91,9 @@ UNLOCK TABLES;
 -- Dumping data for table `empresas`
 --
 
-LOCK TABLES `empresas` WRITE;
 /*!40000 ALTER TABLE `empresas` DISABLE KEYS */;
 INSERT INTO `empresas` VALUES (123456789,'Empresa s.a');
 /*!40000 ALTER TABLE `empresas` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `guias`
@@ -134,11 +103,9 @@ UNLOCK TABLES;
 -- Dumping data for table `guias`
 --
 
-LOCK TABLES `guias` WRITE;
 /*!40000 ALTER TABLE `guias` DISABLE KEYS */;
 INSERT INTO `guias` VALUES (101,'papel',1);
 /*!40000 ALTER TABLE `guias` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `localidades`
@@ -148,11 +115,9 @@ UNLOCK TABLES;
 -- Dumping data for table `localidades`
 --
 
-LOCK TABLES `localidades` WRITE;
 /*!40000 ALTER TABLE `localidades` DISABLE KEYS */;
 INSERT INTO `localidades` VALUES (1,'chapinero',1),(2,'bosa',1);
 /*!40000 ALTER TABLE `localidades` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `marcas`
@@ -162,10 +127,8 @@ UNLOCK TABLES;
 -- Dumping data for table `marcas`
 --
 
-LOCK TABLES `marcas` WRITE;
 /*!40000 ALTER TABLE `marcas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `marcas` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `mercancias`
@@ -175,10 +138,8 @@ UNLOCK TABLES;
 -- Dumping data for table `mercancias`
 --
 
-LOCK TABLES `mercancias` WRITE;
 /*!40000 ALTER TABLE `mercancias` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mercancias` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `modelos`
@@ -189,10 +150,8 @@ UNLOCK TABLES;
 -- Dumping data for table `modelos`
 --
 
-LOCK TABLES `modelos` WRITE;
 /*!40000 ALTER TABLE `modelos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `modelos` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `novedades`
@@ -203,10 +162,8 @@ UNLOCK TABLES;
 -- Dumping data for table `novedades`
 --
 
-LOCK TABLES `novedades` WRITE;
 /*!40000 ALTER TABLE `novedades` DISABLE KEYS */;
 /*!40000 ALTER TABLE `novedades` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `permisos`
@@ -216,11 +173,9 @@ UNLOCK TABLES;
 -- Dumping data for table `permisos`
 --
 
-LOCK TABLES `permisos` WRITE;
 /*!40000 ALTER TABLE `permisos` DISABLE KEYS */;
 INSERT INTO `permisos` VALUES (1,'Diagramas','',NULL,NULL),(2,'Reportes','',NULL,NULL),(11,'Inicio','',NULL,NULL),(12,'Listar ciudad','app/crud/ciudad/List.xhtml',NULL,2),(21,'Listar conductor','app/crud/conductor/List.xhtml',NULL,2),(22,'Listar departamento','app/crud/departamento/List.xhtml',NULL,2),(23,'Listar empresa','app/crud/empresa/List.xhtml',NULL,2),(24,'Listar guia','app/crud/guia/List.xhtml',NULL,2),(25,'Listar localidad','app/crud/localidad/List.xhtml',NULL,2),(26,'Listar mercancia','app/crud/mercancia/List.xhtml',NULL,2),(27,'Listar novedad','app/crud/novedad/List.xhtml',NULL,2),(28,'Listar planilla','app/crud/planilla/List.xhtml',NULL,2),(29,'Listar solicitud','app/crud/solicitud/List.xhtml',NULL,2),(30,'Listar usuario','app/crud/usuario/List.xhtml',NULL,2),(31,'Listar vehiculo','app/crud/vehiculo/List.xhtml',NULL,2),(32,'Añadir Novedad','app/operador/añadirnovedad.xhml',NULL,NULL),(33,'Consultar mercancia','app/operador/consultarmercancia.xhml',NULL,NULL),(34,'Detalle de Guía','app/operador/detalleguia.xhml',NULL,NULL),(35,'Generar guía','app/operador/generarguia.xhml',NULL,NULL),(36,'Mercancía del vehículo','app/operador/mercanciadelvehiculo.xhml',NULL,NULL),(37,'Planillas','app/operador/planillas.xhml',NULL,NULL),(38,'Registrar vehículo','app/operador/registrarvehiculo.xhml',NULL,NULL),(39,'Consultar mercancia','app/recepcion/consultmercancia.xhtml',NULL,43),(40,'Cotizar Mercancia','app/recepcion/cotizarmercancia.xhtml',NULL,43),(42,'Registrar solicitud','app/recepcion/registarsolicitud.xhtml',NULL,43),(43,'Mercancia','',NULL,NULL);
 /*!40000 ALTER TABLE `permisos` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `planillas`
@@ -231,11 +186,9 @@ UNLOCK TABLES;
 -- Dumping data for table `planillas`
 --
 
-LOCK TABLES `planillas` WRITE;
 /*!40000 ALTER TABLE `planillas` DISABLE KEYS */;
 INSERT INTO `planillas` VALUES (1,3),(2,3);
 /*!40000 ALTER TABLE `planillas` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `precios`
@@ -245,11 +198,9 @@ UNLOCK TABLES;
 -- Dumping data for table `precios`
 --
 
-LOCK TABLES `precios` WRITE;
 /*!40000 ALTER TABLE `precios` DISABLE KEYS */;
 INSERT INTO `precios` VALUES (1,27);
 /*!40000 ALTER TABLE `precios` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `roles`
@@ -260,11 +211,9 @@ UNLOCK TABLES;
 -- Dumping data for table `roles`
 --
 
-LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 INSERT INTO `roles` VALUES (1,'cliente',''),(2,'administrador',''),(3,'operador',''),(4,'recepcionista','');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `roles_has_permisos`
@@ -274,11 +223,9 @@ UNLOCK TABLES;
 -- Dumping data for table `roles_has_permisos`
 --
 
-LOCK TABLES `roles_has_permisos` WRITE;
 /*!40000 ALTER TABLE `roles_has_permisos` DISABLE KEYS */;
 INSERT INTO `roles_has_permisos` VALUES (2,1),(2,2),(2,11),(2,12),(2,21),(2,22),(2,23),(2,24),(2,25),(2,26),(2,27),(2,28),(2,29),(2,30),(2,31),(3,32),(3,33),(3,34),(3,35),(3,36),(3,37),(3,38),(4,39),(4,40),(4,42),(4,43);
 /*!40000 ALTER TABLE `roles_has_permisos` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `rutas`
@@ -287,11 +234,9 @@ UNLOCK TABLES;
 -- Dumping data for table `rutas`
 --
 
-LOCK TABLES `rutas` WRITE;
 /*!40000 ALTER TABLE `rutas` DISABLE KEYS */;
 INSERT INTO `rutas` VALUES (1,'chapinero',1,1),(2,'bosa',2,2);
 /*!40000 ALTER TABLE `rutas` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `solicitudes`
@@ -301,10 +246,8 @@ UNLOCK TABLES;
 -- Dumping data for table `solicitudes`
 --
 
-LOCK TABLES `solicitudes` WRITE;
 /*!40000 ALTER TABLE `solicitudes` DISABLE KEYS */;
 /*!40000 ALTER TABLE `solicitudes` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `usuarios`
@@ -314,11 +257,9 @@ UNLOCK TABLES;
 -- Dumping data for table `usuarios`
 --
 
-LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` VALUES (123123,'CC','daniel','dvd','salazar','efae','325246','46246246','da@gmail.com','54321',1),(12312312,'CC','juan ','camilo','jajaja','neita','123312413','3413413413','juancamilo@gmail.com','1234',1),(42462462,'CC','nick','andersson','fontecha','dgsgf','134134','525245245','nick@gmail.com','98765',1),(123312121,'CC','ivan','andres','venegas','gadf','12124','4134134444','ivan@gmail.com','juancamilo123',1),(123456789,'empresa','empresa',NULL,'empresa',NULL,NULL,'302147864','empresa@gmail.com','aple',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `usuarios_has_roles`
@@ -328,11 +269,9 @@ UNLOCK TABLES;
 -- Dumping data for table `usuarios_has_roles`
 --
 
-LOCK TABLES `usuarios_has_roles` WRITE;
 /*!40000 ALTER TABLE `usuarios_has_roles` DISABLE KEYS */;
 INSERT INTO `usuarios_has_roles` VALUES (123123,3),(12312312,1),(42462462,4),(123312121,2),(123456789,1);
 /*!40000 ALTER TABLE `usuarios_has_roles` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `vehiculos`
@@ -342,11 +281,9 @@ UNLOCK TABLES;
 -- Dumping data for table `vehiculos`
 --
 
-LOCK TABLES `vehiculos` WRITE;
 /*!40000 ALTER TABLE `vehiculos` DISABLE KEYS */;
 INSERT INTO `vehiculos` VALUES (1,'qwe123','Camion dos ejes','2 toneladas'),(2,'123ewq','Camion cuatro ejes','4 toneladas');
 /*!40000 ALTER TABLE `vehiculos` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

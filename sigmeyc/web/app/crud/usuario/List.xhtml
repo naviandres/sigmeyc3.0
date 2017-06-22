@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title">
@@ -40,10 +41,10 @@
                                 <div class="box-body">
                                     <h:form >
 
-                                        <h:panelGroup id="messagePanel" layout="block">
-                                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                                        <h:panelGroup id="listUsua" layout="block">
+                                            <h:message class="alert alert-danger" for="listUsuario" showSummary="true"/>
                                         </h:panelGroup>
-                                        <p:dataTable class="table table-bordered table-hover" id="example2" value="#{usuarioController.usuarios}" var="usua" >
+                                        <p:dataTable class="table table-bordered table-hover" id="listUsuario" value="#{usuarioController.usuarios}" var="usua" >
 
                                             <p:column>
                                                 <f:facet name="header">
@@ -65,27 +66,9 @@
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="segundoNombre"/>
-                                                </f:facet>
-                                                <h:outputText value="#{usua.segundoNombre}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
                                                     <h:outputText value="primerApellido"/>
                                                 </f:facet>
                                                 <h:outputText value="#{usua.primerApellido}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="segundoApellido"/>
-                                                </f:facet>
-                                                <h:outputText value="#{usua.segundoApellido}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="telefono"/>
-                                                </f:facet>
-                                                <h:outputText value="#{usua.telefono}"/>
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
@@ -101,19 +84,20 @@
                                             </p:column>                                         
                                             <p:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="clave"/>
-                                                </f:facet>
-                                                <h:outputText value="#{usua.clave}"/>
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
                                                     <h:outputText value="Opciones"/>
                                                 </f:facet>
-                                                <h:commandLink action="#{usuarioController.prepareView(Usuario)}" value=""><i class="fa fa-eye fa-2x"></i></h:commandLink>
+                                                <h:commandLink action="#{usuarioController.prepareView(usua)}" value=""><i class="fa fa-eye fa-2x"></i></h:commandLink>
                                                 <h:outputText value=" "/>
-                                                <h:commandLink action="#{usuarioController.editar(Usuario)}" value=""><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></h:commandLink>
+                                                <h:commandLink action="#{usuarioController.editar(usua)}" value=""><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></h:commandLink>
                                                 <h:outputText value=" "/>
-                                                <h:commandLink action="#{usuarioController.eliminar()}" value=""><i class="fa fa-trash fa-2x"  aria-hidden="true"></i></h:commandLink>
+                                                <b:commandButton look="danger" value=""
+                                                                 iconAwesome="trash" tooltip="Eliminar"
+                                                                 onclick="$('.modalPseudoClass').modal();">
+                                                    <f:ajax event="click" render=":message-modal-confirm"
+                                                            listener="#{usuarioController.setUsuario(usua)}"/>
+                                                </b:commandButton>
+                                                <b:commandButton look="default" value="" iconAwesome="#{usuarioController.getIconUsuarioBloqueo(usua)}" action="#{usuarioController.cambioDeEstado(usua)}"/>
+
                                             </p:column>
                                         </p:dataTable>
 
@@ -124,14 +108,14 @@
                                         <div class="col-lg-1">
                                             <h:commandLink>
                                                 <p:button class="btn btn-success" value="excel"/>
-                                                <p:dataExporter type="xls" target="example2" fileName="Usuario" />
+                                                <p:dataExporter type="xls" target="listUsuario" fileName="Usuario" />
                                             </h:commandLink>
 
                                         </div>
                                         <div class="col-lg-1">
                                             <h:commandLink>
                                                 <p:button class="btn btn-success" value="pdf"/>
-                                                <p:dataExporter type="pdf" target="example2" fileName="Usuario" />
+                                                <p:dataExporter type="pdf" target="listUsuario" fileName="Usuario" />
                                             </h:commandLink>
 
                                         </div>
@@ -145,6 +129,19 @@
                     </div>
                 </div>
             </section>
+            <b:modal id="amodal" title="Eliminar usuario" styleClass="modalPseudoClass">
+                <h:panelGroup id="message-modal-confirm" layout="block">
+                    <p>¿Está seguro de eliminar el usuario #{usuarioController.usuario.primerNombre} #{usuarioController.usuario.primerApellido} ?
+                    </p>
+                </h:panelGroup>
+                <f:facet name="footer">
+                    <h:form id="form-eliminar" prependId="false">
+                        <b:button value="Close" dismiss="modal" />
+                        <b:commandButton value="Ok" look="primary"
+                                         actionListener="#{usuarioController.eliminar()}"/>
+                    </h:form>
+                </f:facet>
+            </b:modal>
         </ui:define>
     </ui:composition>
 

@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:jsf="http://xmlns.jcp.org/jsf">
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:b="http://bootsfaces.net/ui">
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title">Generar guía</ui:define>
         <ui:define name="contenido">
@@ -21,12 +22,6 @@
                 <div class="box-body">
                     <h:form prependId="false">
                         <h:dataTable id="tablaGuia" class="stripe" width="100%" cellspacing="0" value="#{mercanciaController.mercancias}" var="mer">
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Numero guía"/>
-                                </f:facet>
-                                <h:outputText value="#{mer.guiaidGuia.nueroGuia}"/>
-                            </h:column>
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Direccion origen"/>
@@ -53,97 +48,42 @@
 
                             </h:column>
                             <h:column>
-                                <f:facet name="header">Cambiar estado</f:facet>
-                                <h:commandButton actionListener="#{mercanciaController.modal(mer)}">
-                                    <button type="button" class="btn btn-md btn1" data-toggle="modal" data-target="#myModal" >
-                                        #{mer.estadoMercancia}
-                                    </button>
-                                </h:commandButton>
+                                <f:facet name="header">Cambiar estado mercancía</f:facet>
+                                <b:commandButton look="default" value="#{mer.estadoMercancia}"
+                                                 tooltip="Cambiar estado"
+                                                 onclick="$('.modalPseudoClass').modal();"> 
+                                    <f:ajax event="click" render=":message-modal-confirm1"
+                                            listener="#{mercanciaController.setMercancia(mer)}"/>
+                                </b:commandButton>
                             </h:column>
+                            
                         </h:dataTable>
                     </h:form>
-                </div>
-                <div class="col-xs-1">
-                    <a href="#{request.contextPath}/app/indexoperador.xhtml" class="btn btn-danger" role="button">Cancelar</a>
-                </div>                
+                </div>             
             </main>
-
-            <!-- MODAL ESTADO -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title text-center" id="myModalLabel">Acualizar estado de mercancía</h4>
+            <b:modal id="amodal1" title="Eliminar usuario" styleClass="modalPseudoClass">
+                <h:form id="message-modal-confirm1" prependId="false">
+                   
+                    <div class="form-group">
+                        <h:outputLabel class="col-xs-6" value="Estado mercancia"/>
+                        <div class="col-xs-6">
+                            <h:selectOneMenu id="estadomer" value="#{mercanciaController.mercancia.estadoMercancia}" required="true">
+                                <f:selectItem itemLabel="Seleccione estado mercancia" itemDisabled="disabled"/>
+                                <f:selectItem itemLabel="Buen estado" itemValue="Buen estado"/>
+                                <f:selectItem itemLabel="Regular" itemValue="Regular"/>
+                                <f:selectItem itemLabel="En mal estado" itemValue="En mal estado"/>
+                            </h:selectOneMenu>  
                         </div>
-                        <div class="modal-body">
-                            <div class="row ">
-                                <h:form prependId="false">
-                                    <div class="form-group">
-                                        <h:outputText class="col-xs-6" value="valorDeclarado"/>
-                                        <div class="col-xs-6">
-                                            <h:outputText value="#{mercanciaController.mercancia.guiaidGuia.nueroGuia}" />
-
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputText class="col-xs-6" value="valorDeclarado"/>
-                                        <div class="col-xs-6">
-                                            <h:outputText value="#{mercanciaController.mercancia.estadoMercancia}" />
-
-                                        </div>
-                                    </div>
-
-
-                                </h:form>
-                                <!--                                <table class="table table-hover" >
-                                                                    <tbody>
-                                                                        <tr >
-                                                                            <th valign="bottom">Producto</th>
-                                                                            <td valign="bottom">Televisor</td>									
-                                                                        </tr>
-                                
-                                                                        <tr >
-                                                                            <th valign="bottom">Origen</th>
-                                                                            <td valign="bottom">Call 123 89-32</td>										
-                                                                        </tr>
-                                                                        <tr >
-                                                                            <th valign="bottom">Destino</th>
-                                                                            <td valign="bottom">Car 32 22-32</td>										
-                                                                        </tr>
-                                                                        <tr >
-                                                                            <th valign="bottom">Volumen</th>
-                                                                            <td valign="bottom">12mt²</td>										
-                                                                        </tr>
-                                                                        <tr >
-                                                                            <th valign="bottom">Peso</th>
-                                                                            <td valign="bottom">15Kg</td>										
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <th>Estado</th>
-                                                                            <td>
-                                                                                <div class="col-xs-8 col-sm-9 col-md-6 col-lg-6" >
-                                                                                    <select class="form-control">
-                                                                                        <option>En recepción</option>
-                                                                                        <option>Registrada</option>
-                                                                                        <option>Almacenada</option>
-                                                                                        <option>Planillada</option>
-                                                                                        <option>Entregada</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>-->
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-" data-dismiss="modal">Cancelar</button>
-                            <a href="#{request.contextPath}/app/operador/generarguia.xhtml" class="btn btn-primary" role="button">Guardar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    </div>  
+                </h:form>
+                <f:facet name="footer">
+                    <h:form id="form-merEs" prependId="false">
+                        <b:button value="Close" dismiss="modal" />
+                        <b:commandButton value="Cambiar" look="primary"
+                                         actionListener="#{mercanciaController.guardarEdicion()}"/>
+                    </h:form>
+                </f:facet>
+            </b:modal>
         </ui:define>
     </ui:composition>
 </html>

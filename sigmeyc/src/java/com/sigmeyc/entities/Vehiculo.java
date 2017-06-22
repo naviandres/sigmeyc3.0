@@ -6,28 +6,25 @@
 package com.sigmeyc.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ivan
+ * @author danie
  */
 @Entity
 @Table(name = "vehiculos")
@@ -61,14 +58,9 @@ public class Vehiculo implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "capacidadCarga")
     private String capacidadCarga;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculosidVehiculo", fetch = FetchType.LAZY)
-    private List<Conductor> conductorList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculosidVehiculo", fetch = FetchType.LAZY)
-    private List<Mercancia> mercanciaList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "vehiculo", fetch = FetchType.LAZY)
-    private Marca marca;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculosidVehiculo", fetch = FetchType.LAZY)
-    private List<Ruta> rutaList;
+    @JoinColumn(name = "marcas_idMarca", referencedColumnName = "idMarca")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Marca marcasidMarca;
 
     public Vehiculo() {
     }
@@ -116,39 +108,12 @@ public class Vehiculo implements Serializable {
         this.capacidadCarga = capacidadCarga;
     }
 
-    @XmlTransient
-    public List<Conductor> getConductorList() {
-        return conductorList;
+    public Marca getMarcasidMarca() {
+        return marcasidMarca;
     }
 
-    public void setConductorList(List<Conductor> conductorList) {
-        this.conductorList = conductorList;
-    }
-
-    @XmlTransient
-    public List<Mercancia> getMercanciaList() {
-        return mercanciaList;
-    }
-
-    public void setMercanciaList(List<Mercancia> mercanciaList) {
-        this.mercanciaList = mercanciaList;
-    }
-
-    public Marca getMarca() {
-        return marca;
-    }
-
-    public void setMarca(Marca marca) {
-        this.marca = marca;
-    }
-
-    @XmlTransient
-    public List<Ruta> getRutaList() {
-        return rutaList;
-    }
-
-    public void setRutaList(List<Ruta> rutaList) {
-        this.rutaList = rutaList;
+    public void setMarcasidMarca(Marca marcasidMarca) {
+        this.marcasidMarca = marcasidMarca;
     }
 
     @Override

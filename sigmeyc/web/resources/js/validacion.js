@@ -452,6 +452,199 @@ $('#formEmp').formValidation({
     }
 });
 
+$('#solicindex').formValidation({
+    framework: 'bootstrap',
+    excluded: ':disabled',
+    icon: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        tipoServicio: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: ' requerido'
+                },
+                // Using a custom validator named 'placeholder' created above
+                placeholder: {
+                    message: 'Debe ser diferente a la opción pre-establecida'
+                }
+            }
+        },
+        nombreDestinatario: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: ' requerido'
+                },
+                regexp: {
+                    regexp: /^[a-zA-ZñÑáéíóúÁÉÍÓÚ/\s/a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/,
+                    message: 'Solo letras, sin números o carácteres especiales'
+                },
+                // Using a custom validator named 'placeholder' created above
+                placeholder: {
+                    message: 'Debe ser diferente a la opción pre-establecida'
+                }
+            }
+        },
+        apellidoDestinatario: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: 'Celular requerido (Si no poseé de lo contrario de lo contrario ingrese 031+Teléfono)'
+                },
+                regexp: {
+                    regexp: /^[a-zA-ZñÑáéíóúÁÉÍÓÚ/\s/a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/,
+                    message: 'Solo letras, sin números o carácteres especiales'
+                },
+                // Using a custom validator named 'placeholder' created above
+                placeholder: {
+                    message: 'Debe ser diferente a la opción pre-establecida'
+                }
+            }
+        },
+        telefonoDestinatario: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: ' requerido'
+                },
+                // Using a custom validator named 'placeholder' created above
+                placeholder: {
+                    message: 'Debe ser diferente a la opción pre-establecida'
+                }
+            }
+        },
+        fechaRecoleccion: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: ' requerido'
+                },
+                // Using a custom validator named 'placeholder' created above
+            }
+        },
+        localidades: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: 'Tipo de servicio requerido'
+                },
+                // Using a custom validator named 'placeholder' created above
+                placeholder: {
+                    message: 'Debe ser diferente a la opción pre-establecida'
+                }
+            }
+        }
+    }
+});
+
+
+$('#mercaIndex').formValidation({
+    framework: 'bootstrap',
+    icon: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+        tipoMercancia: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: ' requerido'
+                },
+                // Using a custom validator named 'placeholder' created above
+                placeholder: {
+                    message: 'Debe ser diferente a la opción pre-establecida'
+                }
+            }
+        },
+        descripcion: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: ' requerido'
+                },
+                // Using a custom validator named 'placeholder' created above
+                placeholder: {
+                    message: 'Debe ser diferente a la opción pre-establecida'
+                }
+            }
+        },
+        longitud: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: 'requeridoo '
+                }
+                // Using a custom validator named 'placeholder' created above
+
+            }
+        },
+        ancho: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: ' requerido '
+                }
+                // Using a custom validator named 'placeholder' created above
+
+            }
+        },
+        altura: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: ' requerido'
+                }
+                // Using a custom validator named 'placeholder' created above
+            }
+        },
+        cantidad: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: ' requerido'
+                }
+                // Using a custom validator named 'placeholder' created above
+
+            }
+        },
+        peso: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: 'Tipo de servicio requerido'
+                }
+                // Using a custom validator named 'placeholder' created above
+
+            }
+        },
+        embalaje: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: ' requerido'
+                }
+                // Using a custom validator named 'placeholder' created above
+
+            }
+        },
+        estado: {
+            row: '.form-group',
+            validators: {
+                notEmpty: {
+                    message: ' requerido'
+                }
+                // Using a custom validator named 'placeholder' created above
+
+            }
+        }
+    }
+});
 //MostrarFormConsulta
 $("#formBC").on('submit', function (evt) {
     evt.preventDefault();
@@ -603,3 +796,12 @@ function mostrarTab() {
     $('#mercancia').tab('show');
 }
 
+//function literal() { 
+//  var m = document.getElementById("direccionDestino").value;
+//  var expreg = /^([a-zA-Z]{1,4}\s\d{1,4}\s)*#(\d{1,4})*-(\d{1,4})$/;
+//  
+//  if(expreg.test(m))
+//	alert("Direccion correcta"); 
+//  else 
+//    alert("Direccion incorrecta"); 
+//} 

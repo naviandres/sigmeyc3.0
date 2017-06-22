@@ -37,14 +37,9 @@
                                             <f:facet name="header">
                                                 <h:outputText value="codigoBarras"/>
                                             </f:facet>
-                                            <h:outputText value="#{guia.idGuia}"/>
+                                            <h:outputText value="#{guia.numeroGuia}"/>
                                         </p:column>
-                                           <p:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="numero guia"/>
-                                            </f:facet>
-                                               <h:outputText value="#{guia.nueroGuia}"/>
-                                        </p:column>
+
                                         <p:column>
                                             <f:facet name="header">
                                                 <h:outputText value="detalleMercancia"/>
@@ -75,20 +70,20 @@
                                         <p:commandButton class="btn btn-success" action="#{guiaController.prepareCreate}" value="Crear"></p:commandButton>
                                     </div>
                                     <div class="col-lg-1">
-                                            <h:commandLink>
-                                                <p:button class="btn btn-success" value="excel"/>
-                                                <p:dataExporter type="xls" target="example2" fileName="guia" />
-                                            </h:commandLink>
+                                        <h:commandLink>
+                                            <p:button class="btn btn-success" value="excel"/>
+                                            <p:dataExporter type="xls" target="example2" fileName="guia" />
+                                        </h:commandLink>
 
-                                        </div>
-                                        <div class="col-lg-1">
-                                            <h:commandLink>
-                                                <p:button class="btn btn-success" value="pdf"/>
-                                                <p:dataExporter type="pdf" target="example2" fileName="guia" />
-                                            </h:commandLink>
-                                        </div>
-                                        <br />
-                                        <br />
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <h:commandLink>
+                                            <p:button class="btn btn-success" value="pdf"/>
+                                            <p:dataExporter type="pdf" target="example2" fileName="guia" />
+                                        </h:commandLink>
+                                    </div>
+                                    <br />
+                                    <br />
 
                                 </h:form>
 

@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition template="/WEB-INF/templateAd/template.xhtml">
         <ui:define name="title">
@@ -24,16 +25,16 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="box">
-                               <div class="box-header with-border">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                            <div class="box-header with-border">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
 
-                                    <h3 class="box-title">conductor</h3>
+                                <h3 class="box-title">conductor</h3>
 
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                        </button>                                             
-                                    </div>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>                                             
                                 </div>
+                            </div>
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <h:form styleClass="jsfcrud_list_form">
@@ -94,32 +95,55 @@
                                             <h:outputText value=" "/>
                                             <h:commandLink action="#{solicitudController.eliminar(solicitud)}"><i class="fa fa-trash fa-2x"  aria-hidden="true"></i></h:commandLink>
                                         </p:column>
+<!--                                        <p:column>
+                                            <p:commandButton value="{solicitud.estadoSolicitud}" type="button" onclick="PF('dlg1').show();" />
+                                        </p:column>-->
                                     </p:dataTable>
                                     <br />
                                     <div class="col-lg-1">
                                         <h:commandButton class="btn btn-success" action="#{solicitudController.prepareCreate()}" value="Crear"></h:commandButton>
                                     </div> 
                                     <div class="col-lg-1">
-                                            <h:commandLink>
-                                                <p:button class="btn btn-success" value="excel"/>
-                                                <p:dataExporter type="xls" target="example2" fileName="novedad" />
-                                            </h:commandLink>
+                                        <h:commandLink>
+                                            <p:button class="btn btn-success" value="excel"/>
+                                            <p:dataExporter type="xls" target="example2" fileName="novedad" />
+                                        </h:commandLink>
 
-                                        </div>
-                                        <div class="col-lg-1">
-                                            <h:commandLink>
-                                                <p:button class="btn btn-success" value="pdf"/>
-                                                <p:dataExporter type="pdf" target="example2" fileName="novedad" />
-                                            </h:commandLink>
-                                        </div>
-                                        <br />
-                                        <br />
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <h:commandLink>
+                                            <p:button class="btn btn-success" value="pdf"/>
+                                            <p:dataExporter type="pdf" target="example2" fileName="novedad" />
+                                        </h:commandLink>
+                                    </div>
+                                    <br />
+                                    <br />
                                 </h:form>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+            <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+                <h:form prependId="false">
+                    <div class="form-group">
+                        <h:outputLabel class="col-xs-3" value="Estado solicitud"/>
+                        <div class="col-xs-6">
+                            <h:selectOneMenu id="estado" value="#{solicitudController.solicitud.estadoSolicitud}" required="true">
+                                <f:selectItem itemLabel="Seleccione estado solicitud" itemDisabled="disabled"/>
+                                <f:selectItem itemLabel="Sin recoger" itemValue="Sin recoger"/>
+                                <f:selectItem itemLabel="En recepcion" itemValue="En recepcion"/>
+                                <f:selectItem itemLabel="En bodega" itemValue="En bodega"/>
+                                <f:selectItem itemLabel="Entregada" itemValue="Entregada"/>
+                            </h:selectOneMenu>  
+                        </div>
+                    </div>  
+                    <p:button class="btn btn-success" value="Cambiar"/>
+                    <h:commandButton class="btn btn-success" action="#{solicitudController.guardarEdicion()}" value="Crear"></h:commandButton>
+
+                </h:form>
+            </p:dialog>
+
         </ui:define>
     </ui:composition>
 

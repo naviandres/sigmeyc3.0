@@ -19,7 +19,7 @@ import javax.inject.Inject;
 @Named("usuarioController")
 @SessionScoped
 public class UsuarioController implements Serializable {
-    
+
     @Inject
     private SessionController sc;
 
@@ -33,11 +33,16 @@ public class UsuarioController implements Serializable {
     public UsuarioController() {
     }
 
+//    private List<Usuario> usuarios;
+
     @PostConstruct
     public void init() {
         usuario = new Usuario();
     }
 
+//    private void recargarUsuarios() {
+//        usuarios = usuarioFacade.findAll();
+//    }
     public Usuario getUsuario() {
         return usuario;
     }
@@ -49,7 +54,7 @@ public class UsuarioController implements Serializable {
     public void guardar() {
         try {
             if (usuario != null) {
-                
+
                 usuario.setRoles(new ArrayList<Rol>());
                 usuario.getRoles().add(rolFacade.find(1));
                 usuario.setEstado(1);
@@ -64,7 +69,6 @@ public class UsuarioController implements Serializable {
         } catch (Exception e) {
             MessageUtil.enviarMensajeError("createUsuario", "No se puede registrar", "Ya existe un usuario con ese documento");
             MessageUtil.enviarMensajeError("formPer", "No se puede registrar", "Ya existe un usuario con ese documento");
-            
         }
     }
 
@@ -78,6 +82,7 @@ public class UsuarioController implements Serializable {
     }
 
     public String prepareList() {
+        this.usuario = null;
         return "/app/crud/usuario/List.xhtml?faces-redirect=true";
     }
 
@@ -85,16 +90,16 @@ public class UsuarioController implements Serializable {
         return this.usuarioFacade.findAll();
     }
 
-    public String eliminar(){
+    public void eliminar() {
         Usuario u = sc.getUsuarioSesion();
-        System.out.println("Usuario inicio"+u.getPrimerNombre());
-        System.out.println("Eliminar"+usuario.getPrimerNombre());
+        System.out.println("Usuario inicio" + u.getPrimerNombre());
+        System.out.println("Eliminar" + usuario.getPrimerNombre());
         if (u.getDocumento().intValue() != usuario.getDocumento()) {
             usuarioFacade.remove(usuario);
-        }else{
-            MessageUtil.enviarMensajeError(null, "Error al eliminar", "No puede eliminarse ud mismo");
+        } else {
+            MessageUtil.enviarMensajeError("listUsuario", "Error al eliminar.", "No puede eliminarse ud mismo");
         }
-        return "/app/crud/usuario/List.xhtml?faces-redirect=true";
+//        return "/app/crud/usuario/List.xhtml?faces-redirect=true";
     }
 
     public String editar(Usuario u) {
@@ -102,12 +107,28 @@ public class UsuarioController implements Serializable {
         return "/app/crud/usuario/Edit.xhtml?faces-redirect=true";
     }
 
-    public void guardarEdicion() {
+    public String guardarEdicion() {
+        this.usuarioFacade.edit(usuario);
+        return "/app/crud/usuario/List.xhtml?faces-redirect=true";
+    }
+
+    public void cambioDeEstado(Usuario u) {
         try {
-            this.usuarioFacade.edit(usuario);
-//            MessageUtil.enviarMensajeInformacion(idClient, summary, detail);
+            if (u.getEstado() == 1) {
+                u.setEstado(2);
+            } else {
+                u.setEstado(1);
+            }
+            usuarioFacade.edit(u);
+            MessageUtil.enviarMensajeInformacion("listUsuario", "Actualización", "Se ha cambiado el estado del usuario.");
         } catch (Exception e) {
-//            MessageUtil.enviarMensajeErrorGlobal(summary, detail);
+            e.printStackTrace();
+            MessageUtil.enviarMensajeErrorGlobal("Error al cambiar el estado del usuario", e.getStackTrace().toString());
         }
+
+    }
+
+    public String getIconUsuarioBloqueo(Usuario u) {
+        return (u.getEstado() == 1) ? "unlock" : "lock";
     }
 }

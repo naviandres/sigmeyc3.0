@@ -12,9 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,14 +22,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author juanc
+ * @author danie
  */
 @Entity
 @Table(name = "modelos")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Modelo.findAll", query = "SELECT m FROM Modelo m")
-    , @NamedQuery(name = "Modelo.findByIdVehiculo", query = "SELECT m FROM Modelo m WHERE m.idVehiculo = :idVehiculo")
+    , @NamedQuery(name = "Modelo.findByIdModelo", query = "SELECT m FROM Modelo m WHERE m.idModelo = :idModelo")
     , @NamedQuery(name = "Modelo.findByModelo", query = "SELECT m FROM Modelo m WHERE m.modelo = :modelo")
     , @NamedQuery(name = "Modelo.findByYear", query = "SELECT m FROM Modelo m WHERE m.year = :year")})
 public class Modelo implements Serializable {
@@ -38,8 +38,9 @@ public class Modelo implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "idVehiculo")
-    private Integer idVehiculo;
+    @Size(min = 1, max = 45)
+    @Column(name = "idModelo")
+    private String idModelo;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -50,29 +51,29 @@ public class Modelo implements Serializable {
     @Size(min = 1, max = 4)
     @Column(name = "year")
     private String year;
-    @JoinColumn(name = "idVehiculo", referencedColumnName = "idVehiculo", insertable = false, updatable = false)
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
-    private Marca marca;
+    @JoinColumn(name = "marcas_idMarca", referencedColumnName = "idMarca")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Marca marcasidMarca;
 
     public Modelo() {
     }
 
-    public Modelo(Integer idVehiculo) {
-        this.idVehiculo = idVehiculo;
+    public Modelo(String idModelo) {
+        this.idModelo = idModelo;
     }
 
-    public Modelo(Integer idVehiculo, String modelo, String year) {
-        this.idVehiculo = idVehiculo;
+    public Modelo(String idModelo, String modelo, String year) {
+        this.idModelo = idModelo;
         this.modelo = modelo;
         this.year = year;
     }
 
-    public Integer getIdVehiculo() {
-        return idVehiculo;
+    public String getIdModelo() {
+        return idModelo;
     }
 
-    public void setIdVehiculo(Integer idVehiculo) {
-        this.idVehiculo = idVehiculo;
+    public void setIdModelo(String idModelo) {
+        this.idModelo = idModelo;
     }
 
     public String getModelo() {
@@ -91,18 +92,18 @@ public class Modelo implements Serializable {
         this.year = year;
     }
 
-    public Marca getMarca() {
-        return marca;
+    public Marca getMarcasidMarca() {
+        return marcasidMarca;
     }
 
-    public void setMarca(Marca marca) {
-        this.marca = marca;
+    public void setMarcasidMarca(Marca marcasidMarca) {
+        this.marcasidMarca = marcasidMarca;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idVehiculo != null ? idVehiculo.hashCode() : 0);
+        hash += (idModelo != null ? idModelo.hashCode() : 0);
         return hash;
     }
 
@@ -113,7 +114,7 @@ public class Modelo implements Serializable {
             return false;
         }
         Modelo other = (Modelo) object;
-        if ((this.idVehiculo == null && other.idVehiculo != null) || (this.idVehiculo != null && !this.idVehiculo.equals(other.idVehiculo))) {
+        if ((this.idModelo == null && other.idModelo != null) || (this.idModelo != null && !this.idModelo.equals(other.idModelo))) {
             return false;
         }
         return true;
@@ -121,7 +122,7 @@ public class Modelo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sigmeyc.entities.Modelo[ idVehiculo=" + idVehiculo + " ]";
+        return "com.sigmeyc.entities.Modelo[ idModelo=" + idModelo + " ]";
     }
     
 }

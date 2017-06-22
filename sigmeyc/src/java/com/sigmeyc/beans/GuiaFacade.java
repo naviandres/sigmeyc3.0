@@ -9,6 +9,7 @@ import com.sigmeyc.entities.Guia;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -29,4 +30,13 @@ public class GuiaFacade extends AbstractFacade<Guia> {
         super(Guia.class);
     }
     
+    public Guia buscarGuia(int numeroGuia){
+       try {
+            TypedQuery<Guia> q = getEntityManager().createNamedQuery("Guia.findByNumeroGuia", Guia.class);
+            q.setParameter("numeroGuia", numeroGuia);
+            return q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

@@ -3,6 +3,7 @@ package com.sigmeyc.jsf;
 import com.sigmeyc.beans.GuiaFacade;
 import com.sigmeyc.entities.Guia;
 import com.sigmeyc.entities.Planilla;
+import com.sigmeyc.jsf.util.MessageUtil;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,14 +17,12 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class GuiaController implements Serializable {
 
-//    private Integer idGuia;
-//    private String codigoBarras;
-//    private String detalleMercancia;
-//    private Planilla planillasidPlanilla;
     @EJB
     private GuiaFacade guiaFacade;
 
     private Guia guia;
+
+    private int numeroGuiaB;
 
     public GuiaController() {
     }
@@ -41,49 +40,31 @@ public class GuiaController implements Serializable {
         this.guia = guia;
     }
 
-//    public GuiaController(Integer idGuia, String codigoBarras, String detalleMercancia, Planilla planillasidPlanilla) {
-//        this.idGuia = idGuia;
-//        this.codigoBarras = codigoBarras;
-//        this.detalleMercancia = detalleMercancia;
-//        this.planillasidPlanilla = planillasidPlanilla;
-//    }
-//    public Integer getIdGuia() {
-//        return idGuia;
-//    }
-//
-//    public void setIdGuia(Integer idGuia) {
-//        this.idGuia = idGuia;
-//    }
-//
-//    public String getCodigoBarras() {
-//        return codigoBarras;
-//    }
-//
-//    public void setCodigoBarras(String codigoBarras) {
-//        this.codigoBarras = codigoBarras;
-//    }
-//
-//    public String getDetalleMercancia() {
-//        return detalleMercancia;
-//    }
-//
-//    public Planilla getPlanillasidPlanilla() {
-//        return planillasidPlanilla;
-//    }
-//
-//    public void setPlanillasidPlanilla(Planilla planillasidPlanilla) {
-//        this.planillasidPlanilla = planillasidPlanilla;
-//    }
-//
-//    public void setDetalleMercancia(String detalleMercancia) {
-//        this.detalleMercancia = detalleMercancia;
-//    }
-//    public String guardar() {
-//        Guia g = new Guia(null, codigoBarras, detalleMercancia, planillasidPlanilla);
-//        this.guiaFacade.create(g);
-////        planillasidPlanilla = new Planilla(null, "333", 212, "fdsd");
-//        return "Create";
-//    }
+    public int getNumeroGuiaB() {
+        return numeroGuiaB;
+    }
+
+    public void setNumeroGuiaB(int numeroGuiaB) {
+        this.numeroGuiaB = numeroGuiaB;
+    }
+
+    public String buscarGuia() {
+
+        try {
+            if (numeroGuiaB != 0) {
+                guia = guiaFacade.find(numeroGuiaB);
+                return "/app/crud/guia/detallenvio.xhtml?faces-redirect=true";
+            } else {
+                MessageUtil.enviarMensajeInformacion("formConsul", "Dato incorrecto", "No se encuentra");
+
+            }
+        } catch (Exception e) {
+            MessageUtil.enviarMensajeInformacion("formConsul", "guia no encontrada", "");
+
+        }
+        return "";
+    }
+
     public String guardar() {
         guia.setNumeroGuia(null);
         this.guiaFacade.create(guia);
@@ -91,10 +72,6 @@ public class GuiaController implements Serializable {
         return "/app/crud/guia/Create.xhtml?faces-redirect=true";
     }
 
-//    public void foraneaGuia() {
-//        FacesContext fc = FacesContext.getCurrentInstance();
-//
-//    }
     public String prepareCreate() {
         return "/app/crud/guia/Create.xhtml?faces-redirect=true";
     }
