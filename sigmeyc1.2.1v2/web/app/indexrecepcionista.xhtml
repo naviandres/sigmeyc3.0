@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">Recepción</ui:define>
+        <ui:define name="contenido">
+          
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    Bienvenido
+                    <small>Panel de Control </small>
+                </h1>
+
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <!-- Small boxes (Stat box) -->
+                <div class="row">
+                     <section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">Mercancias</h3>
+                                </div>
+                                <div class="box-body">
+
+
+
+                                    <h:form styleClass="jsfcrud_list_form">
+                                        <h:panelGroup id="messagePanel" layout="block">
+                                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                                        </h:panelGroup>
+
+
+                                        <p:dataTable id="example2" class="table table-bordered table-hover" value="#{mercanciaController.mercancias}" var="mer"  >
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Codigo de la Mercancia"/>
+                                                </f:facet>
+                                                <h:outputText value="#{mer.idMercancia}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="tipo de Mercancia"/>
+                                                </f:facet>
+                                                <h:outputText value="#{mer.tipoMercancia}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Peso"/>
+                                                </f:facet>
+                                                <h:outputText value="#{mer.peso}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Longitud"/>
+                                                </f:facet>
+                                                <h:outputText value="#{mer.longitud}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Ancho"/>
+                                                </f:facet>
+                                                <h:outputText value="#{mer.ancho}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Altura"/>
+                                                </f:facet>
+                                                <h:outputText value="#{mer.altura}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Volumen"/>
+                                                </f:facet>
+                                                <h:outputText value="#{mer.volumen}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Cantidad"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.cantidad}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Embalaje"/>
+                                                </f:facet>
+                                                <h:outputText value="#{mer.embalaje}"/>
+                                            </p:column>
+
+
+                                        </p:dataTable>
+
+
+
+
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+                </div><!-- /.row -->
+                
+            </section><!-- /.content -->
+        </ui:define>
+    </ui:composition>
+</html> 

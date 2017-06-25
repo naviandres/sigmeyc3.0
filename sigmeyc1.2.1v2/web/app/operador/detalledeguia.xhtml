@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">Detalle de Guía</ui:define>
+        <ui:define name="contenido">
+            <div>
+                <ol class="breadcrumb">
+                    <li><a href="#{request.contextPath}/app/indexoperador.html">Inicio</a></li>
+                    <li><a href="#{request.contextPath}/app/generarguia.xhtml">Guías</a></li>
+                    <li><strong>Detalle de guía</strong></li>
+                </ol>
+            </div>
+            <main class="container">	
+                <h2 class="text-center page-header">Detalle de Guía</h2>
+               
+                <div class="box-body">		
+                    <h:form prependId="false">
+                        <h:dataTable id="tablaGuia" class="stripe" value="#{mercanciaController.mercancia}" var="mer">
+                            <h:column class="col-md-6">
+                                <f:facet name="header">
+                                    <h:outputText value="Items"/>
+                                </f:facet>
+                                <h:outputText value="Numero guía"/>
+                                <br/>
+                                <h:outputText value="Dirección origen"/>
+                                <br/>
+                                <h:outputText value="Dirección destino"/>
+                                <br/>
+                                <h:outputText value="De"/>
+                                <br/>
+                                <h:outputText value="Destinatario"/>
+                                <br/>
+                                <h:outputText value="Telefono destinatario"/>
+                                <br/>
+                                <h:outputText value="Contenido"/>
+                                <br/>
+                                <h:outputText value="Cantidad"/>
+                                <br/>
+                                <h:outputText value="Peso"/>
+                                 <br/>
+                                <h:outputText value="Volumen"/>
+                                <br/>
+                                <h:outputText value="Valor"/>
+                            </h:column>
+                            <h:column class="col-md-6">
+                                <f:facet name="header">
+                                    <h:outputText value="Datos"/>
+                                </f:facet>
+                                <h:outputText value="#{mer.guiasnumeroGuia.numeroGuia}"/>
+                                <br/>
+                                <h:outputText value="#{mer.solicitudesidSolicitud.direccionOrigen}"/>
+                                <br/>
+                                <h:outputText value="#{mer.solicitudesidSolicitud.direccionDestino}"/>
+                                <br/>
+                                <h:outputText value="#{mer.solicitudesidSolicitud.usuariosDocumento.primerNombre}  #{mer.solicitudesidSolicitud.usuariosDocumento.primerApellido}"/>
+                                <br/>
+                                <h:outputText value="#{mer.solicitudesidSolicitud.nombreDestinatario}  #{mer.solicitudesidSolicitud.apellidoDestinatario}"/>
+                                <br/>
+                                 <h:outputText value="#{mer.solicitudesidSolicitud.telefonoDestinatario}"/>
+                                <br/>
+                                <h:outputText value="#{mer.guiasnumeroGuia.detalleMercancia}"/>
+                                <br/>
+                                <h:outputText value="#{mer.cantidad}"/>
+                                <br/>
+                                <h:outputText value="#{mer.peso}"/>
+                                <br/>
+                                <h:outputText value="#{mer.volumen}"/>
+                                 <br/>
+                                <h:outputText value="#{mer.preciosIdprecios.valor}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <div class="col-xs-1">
+                    <a href="#{request.contextPath}/app/operador/generarguia.xhtml" class="btn btn-danger active float" role="button">Regresar</a>
+                </div>
+
+            </main>
+            <script>
+                var $table = $('#table');
+                $(function () {
+                    $('#toolbar').find('select').change(function () {
+                        $table.bootstrapTable('destroy').bootstrapTable({
+                            exportDataType: $(this).val()
+                        });
+                    });
+                });
+            </script>
+        </ui:define>
+    </ui:composition>
+</html>
+

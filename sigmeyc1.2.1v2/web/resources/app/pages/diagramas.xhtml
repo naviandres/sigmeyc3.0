@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">SIGMEYC | Diagrama</ui:define>
+        <ui:define name="contenido">
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image">
+
+                            <h:graphicImage library="img" name="usuario1.jpg" class="img-circle" alt="User Image"/>
+                        </div>
+                        <div class="pull-left info">
+                            <p>Carlos Riaño</p>
+
+
+                        </div>
+                    </div>
+                    <!-- search form -->
+                    <form action="#" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                            <span class="input-group-btn">
+                                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                    <!-- /.search form -->
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu">
+                        <li class="header">MENU DE NAVEGACION</li>
+                        <li class="active treeview">
+                            <a href="#{request.contextPath}/index.xhtml">
+                                <i class="fa fa-dashboard"></i> <span>Inicio</span> <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Diagramas</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-laptop"></i>
+                                <span>Guias</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+
+                        </li>
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-table"></i> <span>Tablas</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                              <ul class="treeview-menu">
+                                <li><a href="#{request.contextPath}/app/pages/tablaUsuario.xhtml"><i class="fa fa-circle-o"></i> Usuarios</a></li>
+                                <li><a href="#{request.contextPath}/app/pages/tablaSolicitudes.xhtml"><i class="fa fa-circle-o"></i> Solicitudes</a></li>
+                                <li><a href="#{request.contextPath}/app/pages/tablaMercancías.xhtml"><i class="fa fa-circle-o"></i> Mercancías</a></li>
+                                <li><a href="#{request.contextPath}/app/pages/tablaVehiculos.xhtml"><i class="fa fa-circle-o"></i> Vehiculos</a></li>
+                                <li><a href="#{request.contextPath}/app/pages/tablaConductores.xhtml"><i class="fa fa-circle-o"></i> Conductores</a></li>
+                                <li><a href="#{request.contextPath}/app/pages/tablaGuia.xhtml"><i class="fa fa-circle-o"></i> Guía</a></li>
+                                <li><a href="#{request.contextPath}/app/pages/tablaPlanillas.xhtml"><i class="fa fa-circle-o"></i> Planillas</a></li>
+                                <li><a href="#{request.contextPath}/app/pages/tablaNovedades.xhtml"><i class="fa fa-circle-o"></i> Novedades</a></li>
+                                <li><a href="#{request.contextPath}/app/pages/tablaDepartamentos.xhtml"><i class="fa fa-circle-o"></i> Departamentos</a></li>
+                                <li><a href="#{request.contextPath}/app/pages/tablaCiudades.xhtml"><i class="fa fa-circle-o"></i> Ciudades</a></li>
+                                <li><a href="#{request.contextPath}/app/pages/tablaLocalidad.xhtml"><i class="fa fa-circle-o"></i> Localidad</a></li>
+                            </ul>
+                        </li>
+
+
+                        <li><a href="documentation/index.html"><i class="fa fa-book"></i> Documentación</a></li>
+
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+            
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Reportes
+                        <small>Diagramas</small>
+                    </h1>
+
+                </section>
+                <section class="content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="col-md-12">
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                        <i class="fa fa-bar-chart-o"></i>
+
+                                        <h3 class="box-title">INDICE DE SERVICIOS</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="box-body">
+                                        <div  id="chartdiv" style="height: 300px,"></div>
+                                    </div>
+                                    <!-- /.box-body-->
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                        <i class="fa fa-bar-chart-o"></i>
+
+                                        <h3 class="box-title">NUESTROS SERVICIOS</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="row">
+
+
+
+                                            <div class="col-lg-4">
+
+                                                <div id="chartdiv2"></div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div id="chartdiv3"></div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div id="chartdiv4"></div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <!-- /.box-body-->
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                        <i class="fa fa-bar-chart-o"></i>
+
+                                        <h3 class="box-title">DIAGRAMA ANUAL</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="box-body">
+                                        <div  id="chartdiv6" style="height: 300px;"></div>
+                                    </div>
+                                    <!-- /.box-body-->
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                        <i class="fa fa-bar-chart-o"></i>
+
+                                        <h3 class="box-title">GANANCIAS ANUALES</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="box-body">
+                                        <div  id="chartdiv5" style="height: 300px;"></div>
+                                    </div>
+                                    <!-- /.box-body-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+           
+
+
+
+
+        </ui:define>
+    </ui:composition>
+
+
+</html>
+

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Registrar Solicitud"></h:outputText>
+        </ui:define>
+        <ui:define name="contenido">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:message style = "color:#8a6d3b;background-color: #fcf8e3;border-color: #faebcc;padding: 15px;" for="createSolici" showSummary="true"/>
+            </h:panelGroup>
+            <h:form id="solicindex" class="box-body form-horizontal">
+                <section class="content-header">
+                    <h1>
+                        Registrar
+                        <small>Solicitud</small>
+                    </h1>
+                </section>
+                <br>
+                </br>
+                <div class="container">
+                    <div class="row">
+
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+
+                                <h3 class="box-title"></h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>                                             
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <h:outputLabel id="lblSelTipoIden" class="col-xs-3 control-label" for="tipoServicio" value="tipoServicio"/>
+                                    <div class="col-xs-5    ">
+                                        <h:selectOneMenu id="tipoServicio" class="form-control" value="#{solicitudController.solicitud.tipoServicio}">
+                                            <f:selectItem itemLabel="Seleccione tipo de servicio" itemDisabled="disabled"/>
+                                            <f:selectItem itemLabel="Mensajeria expresa" itemValue="Mensajeria expresa"/>
+                                            <f:selectItem itemLabel="Mercancia via terrestre" itemValue="Mercancia terrestre"/>
+                                            <f:selectItem itemLabel="Mensajeria masiva" itemValue="Mensajeria masiva"/>
+                                            <f:selectItem itemLabel="General" itemValue="General"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="col-xs-3 control-label" value="direccionOrigen" for="direccionOrigen" />
+                                        <div class="col-xs-6">
+                                            <h:inputText class="form-control" id="direccionOrigen" p:placeholder="Dirección Origen" value="#{solicitudController.solicitud.direccionOrigen}" required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="col-xs-3 control-label" value="direccionDestino" for="direccionDestino" />
+                                        <div class="col-xs-6">
+                                            <h:inputText class="form-control" id="direccionDestino" p:placeholder="Dirección Destino" value="#{solicitudController.solicitud.direccionDestino}" required="true"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="col-xs-3 control-label" value="nombreDestinatario" for="nombreDestinatario" />
+                                        <div class="col-xs-6">
+                                            <h:inputText class="form-control" id="nombreDestinatario" p:placeholder="Nombre Destinatario" value="#{solicitudController.solicitud.nombreDestinatario}" required="true" requiredMessage="Ingrese nombre destino" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="col-xs-3 control-label" value="apellidoDestinatario" for="apellidoDestinatario" />
+                                        <div class="col-xs-6">
+                                            <h:inputText class="form-control" id="apellidoDestinatario" p:placeholder="Apellido Destinatario" value="#{solicitudController.solicitud.apellidoDestinatario}" required="true" requiredMessage="Ingrese apellido"/>
+                                        </div>
+                                    </div>
+                                </div>   
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="col-xs-3 control-label" value="telefonoDestinatario" for="telefonoDestinatario" />
+                                        <div class="col-xs-6">
+                                            <h:inputText class="form-control" id="telefonoDestinatario" p:placeholder="Teléfono Destinatario" value="#{solicitudController.solicitud.telefonoDestinatario}" required="true" requiredMessage="Ingrese telefono"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <h:outputLabel class="col-xs-4 control-label" value="Fecha recolección" for="fechaRecoleccion" />
+                                        <div class="col-xs-6">
+                                            <p:calendar id="fechaRecoleccion" mindate="#{solicitudController.fecha()}" p:placeholder="Fecha de recolección" value="#{solicitudController.fechaR}" showOn="button" />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group text-center">
+                                    <h:outputLabel class="col-xs-3 control-label" value="Localidad destino" for="localidades" />
+                                    <div class="col-xs-6">
+                                        <h:selectOneMenu  class="form-control" id="localidades" p:placeholder="Localidades" value="#{solicitudController.solicitud.localidadesidLocalidad}" converter="localidadConverter" required="true" >
+                                            <f:selectItem itemLabel="Seleccione Localidad" itemDisabled="disabled"/>
+                                            <f:selectItems value="#{localidadController.localidades}" var="l" itemLabel="#{l.nombreLocalidad}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-2 col-lg-offset-4">
+                                        <h:commandButton class="btn btn-success" action="#{solicitudController.registroSolicitudRecepcionista()}" value="Guardar"/>
+                                    </div>
+                                    <div class="col-lg-2 ">
+                                        <h:link styleClass="btn btn-instagram" outcome="/app/indexrecepcionista.xhtml" value="Atras"/>
+                                    </div>                                             
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

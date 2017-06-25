@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+       xmlns:pr="http://primefaces.org/ui">
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">Consultar Mercancía</ui:define>
+        <ui:define name="contenido">
+            <div class="container">
+
+               <h:form class="form-group" id="formConsul" prependId="false">
+                        <h1 class="text-center page-header">Consultar Envío</h1>
+                        <h4 class="page-header">Código de guía</h4>
+                        <div class="input-group">
+                            <h:outputLabel id="lblCod" for="lblCod" value="Código del paquete"/> 
+                            <!--<h:inputText id="txtCod" value="{guiaController.numeroGuiaB}" rendered="true"/>-->
+                            <pr:spinner id="guia" value="#{guiaController.numeroGuiaB}" min="0" max="999"/>
+                            <pr:keyFilter for="guia" mask="num" /> 
+
+                        </div>
+                        <br/>
+                        <button id="btnCerrarConsulta" type="button" class="btn btn-danger" onclick="ocultar()">Cancelar</button>
+                        <pr:column>
+                            <!--<pr:commandButton  action="{guiaController.buscarGuia()}" value="Buscar" type="button" onclick="PF('dlg1').show();" >-->
+                            <!--                                <pr:ajax update="@form"/>-->
+
+                            <!--</pr:commandButton>-->
+                            <h:commandButton action="#{guiaController.buscarGuiaRe()}" value="consultar"/>
+
+                        </pr:column>
+                        <!--                        <b:button value="Buscar" look="success" onclick="$('.modalPseudoClass').modal()">
+                        
+                                                    <f:ajax event="click" render=":formBus" listener="{guiaController.buscarGuia()}"/>
+                                                </b:button>-->
+                    </h:form>
+
+                </div>
+            <!-- modal de confirmacion consulta-->
+            <div class="modal fade" id="consultar" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+                <div class="modal-dialog"> 
+                    <div class="modal-content"> 
+                        <div class="modal-header"> 
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+                            <h4 class="modal-title text-center">Mi Envio</h4> 
+                        </div> 
+
+                        <div class="modal-body"> 
+                            <h:form id="loginForm" class="form-horizontal" prependId="false"> 
+                                <div class="form-group"> 
+                                    <div class="col-md-12 col-lg-12 col-sm-12"> 
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Codigo</th>
+                                                        <td>798520</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Guía</th>
+                                                        <td>7000012589313</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Tipo de Mercancía</th>
+                                                        <td>Carga masiva</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Remitente</th>
+                                                        <td>Luis Alberto Conde</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Dirección de Origen</th>
+                                                        <td>Cl 19 # 70 - 20</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Destinatario</th>
+                                                        <td>Tokoto Anime</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Dirección Entrega</th>
+                                                        <td>Cl 100 # 14  - 35</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Estado</th>
+                                                        <td>Entregado</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Medio de Pago</th>
+                                                        <td>Efectivo</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" >Aceptar</button> 
+                                    </div> 
+                                </div> 
+                            </h:form> 
+                        </div> 
+                    </div> 
+                </div> 
+            </div>
+            <h:outputScript library="js" name="validar-operario.js"/>
+        </ui:define>
+    </ui:composition>
+</html>

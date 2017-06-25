@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="ver Mercancias"></h:outputText>
+        </ui:define>
+        <ui:define name="contenido">
+
+
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <div class="container">
+                <section class="content-header">
+                    <h1>
+                        VISTA
+                        <small>Mercancía</small>
+                    </h1>
+                </section>
+                <br>
+                </br>
+                <div class="container">
+                    <div class="row">
+
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+
+                                <h3 class="box-title"></h3>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>                                             
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <h:form id="verLocalidad" class="box-body form-horizontal">
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-6" value="codigoMercancia"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText value="#{mercanciaController.mercancia.idMercancia}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-6" value="valorDeclarado"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText value="#{mercanciaController.mercancia.valorDeclarado}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-6" value="tipoMercancia"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText value="#{mercanciaController.mercancia.tipoMercancia}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-6" value="peso"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText value="#{mercanciaController.mercancia.peso}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-6" value="longitud"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText value="#{mercanciaController.mercancia.longitud}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-6" value="ancho"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText value="#{mercanciaController.mercancia.ancho}" />
+
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-6" value="altura"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText value="#{mercanciaController.mercancia.altura}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-6" value="volumen"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText value="#{mercanciaController.mercancia.volumen}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-6" value="cantidad"/>
+                                        <div class="col-xs-6">
+                                            <h:outputText value="#{mercanciaController.mercancia.cantidad}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-6" value="embalaje"/>
+
+                                        <div class="col-xs-6">
+
+                                            <h:outputText value="#{mercanciaController.mercancia.embalaje}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-6" value="Iddepartamento"/>
+
+                                        <div class="col-xs-6">
+
+                                            <h:outputText value="#{mercanciaController.mercancia.localidadesidLocalidad.nombreLocalidad}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-6" value="codigoSolicitud"/>
+
+                                        <div class="col-xs-6">
+
+                                            <h:outputText value="#{mercanciaController.mercancia.solicitudesidSolicitud.idSolicitud}" />
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputText class="col-xs-6" value="placaVehiculo"/>
+
+                                        <div class="col-xs-6">
+                                            <h:outputText value="#{mercanciaController.mercancia.vehiculosidVehiculo.placaVehiculo}" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <h:commandButton class="btn btn-instagram" action="#{mercanciaController.prepareList()}" value="Ver todos"></h:commandButton>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

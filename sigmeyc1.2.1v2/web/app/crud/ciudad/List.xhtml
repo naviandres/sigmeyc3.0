@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Listar Ciudad"></h:outputText>
+        </ui:define>
+        <ui:define name="contenido">
+            <section class="content-header">
+                <h1>
+                    Datos de la Ciudad
+
+                </h1>
+
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box box-primary">
+                                <div class="box-header with-border">
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+
+                                    <h3 class="box-title">ciudad</h3>
+
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                        </button>                                             
+                                    </div>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+
+
+                                    <h:form styleClass="jsfcrud_list_form">
+                                        <h:panelGroup id="messagePanel" layout="block">
+                                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                                        </h:panelGroup>
+
+                                        <p:dataTable id="example2" class="table table-bordered table-hover" value="#{ciudadController.ciudades}" var="ciu"  >
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Identificador de la Ciudad"/>
+                                                </f:facet>
+                                                <h:outputText value="#{ciu.idCiudades}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Nombre de la Ciudad"/>
+                                                </f:facet>
+                                                <h:outputText value="#{ciu.nombreCiudad}"/>
+                                            </p:column>
+                                            
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Identificador del Departamento"/>
+                                                </f:facet>
+                                                <h:outputText value="#{ciu.departamentosidDepartamento}">
+                                                 <f:converter converterId="departamentoConverter"/>
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Opciones"/>
+                                                </f:facet>
+                                                <h:outputText value=" "/>
+                                                <h:commandLink action="#{ciudadController.Editar(ciu)}" value=""><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></h:commandLink>
+                                                <h:outputText value=" "/>
+                                                <h:commandLink action="#{ciudadController.Eliminar(ciu)}" value=""><i class="fa fa-trash fa-2x"  aria-hidden="true"></i></h:commandLink>
+                                            </p:column>
+                                        </p:dataTable>
+
+                                        <br />
+                                        <div class="col-lg-1">
+                                            <h:commandButton class="btn btn-success" action="#{ciudadController.prepareCreate}"  value="Crear"/>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <h:commandLink>
+                                                <p:button class="btn btn-success" value="excel"/>
+                                                <p:dataExporter type="xls" target="example2" fileName="ciudad" />
+                                            </h:commandLink>
+
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <h:commandLink>
+                                                <p:button class="btn btn-success" value="pdf"/>
+                                                <p:dataExporter type="pdf" target="example2" fileName="ciudad" />
+                                            </h:commandLink>
+                                        </div>
+                                            <br />
+                                            <br />
+
+                                    </h:form>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </ui:define>
+    </ui:composition>
+
+</html>

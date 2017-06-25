@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:b="http://bootsfaces.net/ui">
+    <ui:composition template="/WEB-INF/templateAd/template.xhtml">
+        <ui:define name="title">Generar guía</ui:define>
+        <ui:define name="contenido">
+            <!-- Migas de pan -->
+            <div>
+                <ol class="breadcrumb">
+                    <li><a href="#{request.contextPath}/app/indexoperador.xhtml">Inicio</a></li>
+                    <li><strong>Planillas</strong></li>
+                </ol>
+            </div>
+            <!-- ++ -->
+            <main class="container">	
+                <h2 class="text-center page-header">Planilla</h2>
+                <div class="box-body">
+                    <h:form prependId="false">
+                        <h:dataTable id="tablaGuia" class="stripe" width="100%" cellspacing="0" value="#{mercanciaController.mercancias}" var="mer">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Direccion origen"/>
+                                </f:facet>
+                                <h:outputText value="#{mer.solicitudesidSolicitud.direccionOrigen}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Dirección destino"/>
+                                </f:facet>
+                                <h:outputText value="#{mer.solicitudesidSolicitud.direccionDestino}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Estado mercancía"/>
+                                </f:facet>
+                                <h:outputText value="#{mer.estadoMercancia}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Detalle"/>
+                                </f:facet>
+                                <h:commandLink action="#{mercanciaController.detalle(mer)}" value=""><i class="fa fa-eye fa-2x"></i></h:commandLink>
+
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Cambiar estado mercancía</f:facet>
+                                <b:commandButton look="default" value="#{mer.estadoMercancia}"
+                                                 tooltip="Cambiar estado"
+                                                 onclick="$('.modalPseudoClass').modal();"> 
+                                    <f:ajax event="click" render=":message-modal-confirm1"
+                                            listener="#{mercanciaController.setMercancia(mer)}"/>
+                                </b:commandButton>
+                            </h:column>
+                            
+                        </h:dataTable>
+                    </h:form>
+                </div>             
+            </main>
+            <b:modal id="amodal1" title="Eliminar usuario" styleClass="modalPseudoClass">
+                <h:form id="message-modal-confirm1" prependId="false">
+                   
+                    <div class="form-group">
+                        <h:outputLabel class="col-xs-6" value="Estado mercancia"/>
+                        <div class="col-xs-6">
+                            <h:selectOneMenu id="estadomer" value="#{mercanciaController.mercancia.estadoMercancia}" required="true">
+                                <f:selectItem itemLabel="Seleccione estado mercancia" itemDisabled="disabled"/>
+                                <f:selectItem itemLabel="Buen estado" itemValue="Buen estado"/>
+                                <f:selectItem itemLabel="Regular" itemValue="Regular"/>
+                                <f:selectItem itemLabel="En mal estado" itemValue="En mal estado"/>
+                            </h:selectOneMenu>  
+                        </div>
+                    </div>  
+                </h:form>
+                <f:facet name="footer">
+                    <h:form id="form-merEs" prependId="false">
+                        <b:button value="Close" dismiss="modal" />
+                        <b:commandButton value="Cambiar" look="primary"
+                                         actionListener="#{mercanciaController.guardarEdicion()}"/>
+                    </h:form>
+                </f:facet>
+            </b:modal>
+        </ui:define>
+    </ui:composition>
+</html>
+

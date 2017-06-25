@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitud" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="376e8674-babf-4f49-b8e3-e77aec20c16f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#DC143C">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFCC">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table" style="table_TH">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="NombreUsuario" class="java.lang.String"/>
+	<parameter name="fecha" class="java.util.Date"/>
+	<field name="tipoServicio" class="java.lang.String"/>
+	<field name="direccionOrigen" class="java.lang.String"/>
+	<field name="direccionDestino" class="java.lang.String"/>
+	<field name="nombreDestinatario" class="java.lang.String"/>
+	<field name="apellidoDestinatario" class="java.lang.String"/>
+	<field name="telefonoDestinatario" class="java.lang.String"/>
+	<background>
+		<band height="555" splitType="Stretch">
+			<image scaleImage="Clip">
+				<reportElement style="table" positionType="FixRelativeToBottom" mode="Opaque" x="0" y="0" width="802" height="555" backcolor="#CC0000" uuid="ab263001-4c1b-4286-bf2e-ec8494b3c4ff"/>
+				<imageExpression><![CDATA["imagenes\\vector.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement x="142" y="0" width="483" height="102" uuid="040acd9e-3036-4285-9fe4-9d508c59b824"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="48"/>
+				</textElement>
+				<text><![CDATA[SIGMEYC]]></text>
+			</staticText>
+			<image>
+				<reportElement x="625" y="0" width="177" height="102" uuid="22fe4b5c-1c87-4d3a-9b25-9fbee6c77fa7"/>
+				<imageExpression><![CDATA["imagenes\\activacel3.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="211" y="0" width="113" height="22" uuid="d00b7c19-fd98-4755-bb1a-c27b2fd6507d"/>
+				<text><![CDATA[NOMBRE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="678" y="0" width="123" height="22" uuid="607da9de-c13d-4a68-80c3-6ab29e5d95fd"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="578" y="0" width="100" height="22" uuid="12b40264-f26a-4331-a85e-bc5cb8a20362"/>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="324" y="0" width="254" height="22" uuid="df2e402e-800d-4dc2-b242-7cea08177f2a"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NombreUsuario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement style="table_TD" x="0" y="0" width="136" height="20" uuid="5ad5ba0a-8394-440b-a34d-c8c9a406e764"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Tipo de Servicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="133" y="0" width="136" height="20" uuid="4dba3749-06bf-445d-bb0d-35f527432a19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Direccion de Destino]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="266" y="0" width="136" height="20" uuid="a21e964b-f7e8-4a95-9697-536e415dccb9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Direccion de Origen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="399" y="0" width="136" height="20" uuid="66d86fb3-3b45-4e3e-a3f6-8e918aa2fdcf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[nombre del Destinatario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="532" y="0" width="136" height="20" uuid="87e5bc4d-7188-478e-a66f-e4ca8efbe6bd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Apellido del Destinatario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="table_TD" x="665" y="0" width="136" height="20" uuid="d5987127-b06e-4e71-b92c-16fbe335853f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[telefono]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="table_TD" x="0" y="0" width="136" height="20" uuid="75a6cdb4-d10e-4990-96af-d5ffd51db317"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoServicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="133" y="0" width="136" height="20" uuid="6dbb47a9-83bd-4b6d-af1b-de5a4b6cc292"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccionDestino}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="266" y="0" width="136" height="20" uuid="ba2d6eda-4dde-4907-9e86-b4ad13283fc0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccionOrigen}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="399" y="0" width="136" height="20" uuid="6e49b175-975a-431a-beb2-3dc060089356"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreDestinatario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="532" y="0" width="136" height="20" uuid="4a8a7910-0e4a-4183-bcbc-3e160116b838"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apellidoDestinatario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="table_TD" x="665" y="0" width="136" height="20" uuid="d45182f8-f71f-4d21-9fb9-c3185c7ce69a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefonoDestinatario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="19" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="12" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="18" splitType="Stretch"/>
+	</summary>
+</jasperReport>
